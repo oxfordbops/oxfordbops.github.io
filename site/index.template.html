@@ -298,7 +298,7 @@ footer a { display: inline-block; padding: .6rem 0; }
 
   function renderResult(n) {
     const parts = [];
-    if (college === "none") parts.push("outside the colleges"); else if (college !== "all") parts.push("at " + esc(college));
+    if (college === "none") parts.push("outside the colleges"); else if (college !== "all") parts.push("at " + college);
     if (WHEN_LABEL[when]) parts.push(WHEN_LABEL[when]);
     const active = college !== "all" || when !== "all";
     resultEl.hidden = !n && !active;
@@ -360,7 +360,7 @@ footer a { display: inline-block; padding: .6rem 0; }
       if (knownCollege(e)) { if (!byCollege.has(e.college)) byCollege.set(e.college, []); byCollege.get(e.college).push(e); }
       else elsewhere++;
     }
-    renderMap(byCollege);
+    try { renderMap(byCollege); } catch (e) { /* the list stands even if the map cannot be drawn */ }
     renderChips(byCollege, elsewhere);
 
     const shown = inTime.filter(e => college === "all" || (college === "none" ? !knownCollege(e) : e.college === college));
@@ -428,6 +428,12 @@ footer a { display: inline-block; padding: .6rem 0; }
   }
 
   load();
+  let loadedDay = dayKey.format(new Date()), loadedAt = Date.now();
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState !== "visible") return;
+    const now = new Date();
+    if (dayKey.format(now) !== loadedDay || now - loadedAt > 3600e3) { loadedDay = dayKey.format(now); loadedAt = Date.now(); load(); }
+  });
 })();
 </script>
 </body>

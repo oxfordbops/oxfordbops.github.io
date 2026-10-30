@@ -14,6 +14,10 @@ if [ ! -f "$target/city.json" ]; then
   echo "$target has no city.json; not a bops city repository"
   exit 1
 fi
+if [ "$(cd "$target" && pwd -P)" = "$(pwd -P)" ]; then
+  echo "refusing to sync a repository into itself"
+  exit 1
+fi
 for item in site scripts tests .github LICENSE .gitignore README.md; do
   rm -rf "${target:?}/$item"
   cp -R "$item" "$target/$item"
@@ -23,4 +27,5 @@ if (cd "$target" && python3 -m unittest discover -s tests >/dev/null 2>&1); then
   echo "Template synced into $target; tests pass there."
 else
   echo "Template synced into $target; its tests FAIL, run them there to see why."
+  exit 2
 fi

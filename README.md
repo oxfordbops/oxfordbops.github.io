@@ -48,7 +48,7 @@ To change what the routine does, edit `site/ROUTINE.template.md`, rebuild, and p
 
 ## Analytics
 
-Pageviews, source-link clicks and filter use are counted by [GoatCounter](https://www.goatcounter.com) when `city.json` names a site code under `analytics.goatcounter`: the page loads `gc.zgo.at/count.js`, which sets no cookies and stores no personal data, so no consent banner is needed. The dashboard is at `https://<code>.goatcounter.com`. Pageviews are counted under the path `/<slug>` and events under `<slug>/filter/when/<value>`, `<slug>/filter/college/<name>`, `<slug>/bop/<host>` and `<slug>/source/<host>` for click-throughs, so several cities can share one GoatCounter site and still be told apart by path. Leave the code empty to ship the page with no analytics at all.
+Pageviews, source-link clicks and filter use are counted by [GoatCounter](https://www.goatcounter.com) when `city.json` names a site code under `analytics.goatcounter`: the page loads `gc.zgo.at/count.js`, which sets no cookies and sends the page path, referrer, screen size and the event names below (the page has no query strings or accounts, so nothing identifies a visitor); GoatCounter's own documentation covers what it stores. No consent banner is needed. The dashboard is at `https://<code>.goatcounter.com`. Pageviews are counted under the path `/<slug>` and events under `<slug>/filter/when/<value>`, `<slug>/filter/college/<name>`, `<slug>/bop/<host>` and `<slug>/source/<host>` for click-throughs, so several cities can share one GoatCounter site and still be told apart by path. Leave the code empty to ship the page with no analytics at all.
 
 ## Hosting
 

@@ -40,6 +40,7 @@ class TestShape(unittest.TestCase):
         generated = datetime.fromisoformat(d["generated"].replace("Z", "+00:00"))
         self.assertEqual(checked, generated, "checked_at must equal generated")
         self.assertEqual(checked.utcoffset().total_seconds(), 0, "checked_at is written in UTC")
+        self.assertLess((checked - datetime.now(timezone.utc)).total_seconds(), 3600, "checked_at is in the future")
         self.assertEqual(run["window_from"], checked.astimezone(LONDON).date().isoformat(), "window_from is the run's date in UK time")
         start = date.fromisoformat(run["window_from"])
         self.assertEqual(run["window_to"], (start + timedelta(days=14)).isoformat(), "window_to is 14 days after window_from")
@@ -54,13 +55,24 @@ class TestShape(unittest.TestCase):
         if isinstance(d["sources"], int):
             return
         slugs = set()
+        reg = {r["url"]: r for r in json.loads(SOURCES.read_text())["sources"]}
         for s in d["sources"]:
-            self.assertTrue({"slug", "name", "url"} <= set(s), s)
+            self.assertTrue({"slug", "name", "kind", "url", "ok", "found"} <= set(s), f"source entry missing fields: {s}")
             self.assertNotIn(s["slug"], slugs, "duplicate source slug")
             slugs.add(s["slug"])
             self.assertTrue(s["url"].startswith("https://"), s["url"])
-            self.assertIn(s.get("ok", True), (True, False))
-            self.assertGreaterEqual(int(s.get("found", 0)), 0)
+            self.assertIn(s["ok"], (True, False))
+            self.assertIsInstance(s["found"], int)
+            self.assertGreaterEqual(s["found"], 0)
+            self.assertIn(s["url"], reg, f"{s['url']} is not in the registry")
+            self.assertEqual(s["kind"], reg[s["url"]]["kind"], f"{s['url']}: kind differs from the registry")
+            if s["kind"] in ("Instagram", "Facebook"):
+                self.assertFalse(s["ok"], f"{s['url']}: a social account cannot be marked readable")
+        counted = {}
+        for b in d["bops"]:
+            counted[b["source"]] = counted.get(b["source"], 0) + 1
+        for s in d["sources"]:
+            self.assertEqual(s["found"], counted.get(s["slug"], 0), f"{s['slug']}: found={s['found']} but {counted.get(s['slug'], 0)} bops cite it")
 
     def test_every_bop_is_well_formed(self):
         d = load()
@@ -81,9 +93,13 @@ class TestShape(unittest.TestCase):
                 self.assertTrue(b.get("college") or b.get("venue"), "a bop needs a college or a venue")
                 link = urlparse(b.get("url", ""))
                 self.assertTrue(link.scheme == "https" and link.hostname, "every bop links to its announcement")
-                if link.hostname and link.hostname.endswith("instagram.com"):
-                    # The post when it is known; otherwise the account, so the reader can find the announcement.
-                    self.assertRegex(link.path, r"^/[A-Za-z0-9_.]+/", "an Instagram link needs an account or a post path")
+                if link.hostname in ("instagram.com", "www.instagram.com"):
+                    is_post = re.search(r"/(p|reel|reels)/[A-Za-z0-9_-]+", link.path) is not None
+                    if not is_post:
+                        # An account page is allowed only for an entry a person added from that account.
+                        src = next((s for s in d["sources"] if s["slug"] == b["source"]), {}) if isinstance(d["sources"], list) else {}
+                        self.assertEqual(src.get("kind"), "Instagram", f"{b['title']}: an account-only Instagram link needs an Instagram source")
+                        self.assertRegex(link.path, r"^/[A-Za-z0-9_.]+/?$", "an Instagram account link")
                 self.assertLessEqual(len(b.get("details", "")), 300)
                 self.assertTrue(b.get("source"), "every bop names its source")
                 if slugs is not None:
@@ -94,7 +110,7 @@ class TestShape(unittest.TestCase):
         starts = [b["starts_at"] for b in bops]
         self.assertEqual(starts, sorted(starts, key=lambda s: datetime.fromisoformat(s.replace("Z", "+00:00"))))
         # Two entries are the same bop when college, day and title coincide; a JCR bop and an MCR party on one night are distinct.
-        keys = [(b.get("college"), b["starts_at"][:10], b["title"].strip().lower()) for b in bops]
+        keys = [(b.get("college"), b["starts_at"][:10], b["title"].strip().lower(), (b.get("host") or "").strip().lower()) for b in bops]
         self.assertEqual(len(keys), len(set(keys)), "the same bop is listed twice")
         same_day = {}
         for b in bops:
@@ -110,9 +126,10 @@ class TestShape(unittest.TestCase):
         if not d["bops"] and not d["sources"]:
             self.skipTest("fresh city, no run yet")
         reg = json.loads(SOURCES.read_text())
-        readable = {s["url"] for s in reg["sources"] if s["kind"] not in ("Instagram", "Facebook")}
+        # Every registered source, social ones included (recorded as not readable), so the run record's counts mean something.
+        registered = {s["url"] for s in reg["sources"]}
         tried = {s["url"] for s in d["sources"]} if isinstance(d["sources"], list) else set()
-        missing = sorted(readable - tried)
+        missing = sorted(registered - tried)
         self.assertEqual(missing, [], f"{len(missing)} registered sources were not recorded this run")
 
     def test_uk_offset_matches_the_date(self):

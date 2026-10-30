@@ -24,12 +24,15 @@ jobs:
           gen = datetime.fromisoformat(d["run"]["checked_at"].replace("Z", "+00:00"))
           age_h = (datetime.now(timezone.utc) - gen).total_seconds() / 3600
           print(f"generated {d['generated']}, {age_h:.1f} h ago, {len(d['bops'])} bops, {len(d['sources']) if isinstance(d['sources'], list) else d['sources']} sources")
-          sys.exit(1 if age_h > 30 else 0)
+          sys.exit(1 if age_h > 30 or age_h < -1 else 0)
           PY
       - name: live site serves the committed data
         run: |
           site=$(python3 -c "import json; print(json.load(open('city.json'))['site'])")
-          live=$(curl -fsSL -H 'Cache-Control: no-cache' "${site}events.json" | python3 -c "import json,sys; print(json.load(sys.stdin)['generated'])")
-          here=$(python3 -c "import json; print(json.load(open('docs/events.json'))['generated'])")
-          echo "live $live / committed $here"
-          test "$live" = "$here"
+          curl -fsSL -H 'Cache-Control: no-cache' "${site}events.json" > /tmp/live.json
+          python3 - <<'PY'
+          import json, sys
+          live = json.load(open("/tmp/live.json")); here = json.load(open("docs/events.json"))
+          print("live", live["run"]["checked_at"], "/ committed", here["run"]["checked_at"])
+          sys.exit(0 if json.dumps(live, sort_keys=True) == json.dumps(here, sort_keys=True) else 1)
+          PY
