@@ -41,5 +41,1036 @@
   "Wolfson",
   "Worcester"
  ],
- "sources": []
+ "sources": [
+  {
+   "college": "Balliol",
+   "name": "Balliol JCR",
+   "kind": "JCR site",
+   "url": "https://ballioljcr.org/"
+  },
+  {
+   "college": "Balliol",
+   "name": "Balliol JCR Entz",
+   "kind": "Ents site",
+   "url": "https://ballioljcr.org/prospective/life/entz",
+   "note": "Describes bops; no dated listing"
+  },
+  {
+   "college": "Balliol",
+   "name": "Balliol JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/ballioljcr/"
+  },
+  {
+   "college": "Balliol",
+   "name": "Balliol MCR social events",
+   "kind": "MCR events",
+   "url": "https://balliolmcr.com/student-life/social-events"
+  },
+  {
+   "college": "Balliol",
+   "name": "Balliol MCR",
+   "kind": "MCR site",
+   "url": "https://balliolmcr.com/"
+  },
+  {
+   "college": "Brasenose",
+   "name": "Brasenose JCR",
+   "kind": "JCR site",
+   "url": "https://brasenosejcr.org/"
+  },
+  {
+   "college": "Brasenose",
+   "name": "Brasenose Entz Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/brasenosentz/",
+   "note": "Handle from the JCR Entz freshers guide"
+  },
+  {
+   "college": "Brasenose",
+   "name": "Brasenose HCR term card",
+   "kind": "MCR events",
+   "url": "https://brasenosecollegehcr.weebly.com/term-card.html"
+  },
+  {
+   "college": "Brasenose",
+   "name": "Brasenose HCR",
+   "kind": "MCR site",
+   "url": "https://brasenosecollegehcr.weebly.com/",
+   "note": "Hulme Common Room (graduates)"
+  },
+  {
+   "college": "Brasenose",
+   "name": "Brasenose JCR term card",
+   "kind": "Termcard",
+   "url": "https://brasenosejcr.org/about-the-jcr/term-card/"
+  },
+  {
+   "college": "Christ Church",
+   "name": "Christ Church JCR",
+   "kind": "JCR site",
+   "url": "https://chchjcr.site.ox.ac.uk/"
+  },
+  {
+   "college": "Christ Church",
+   "name": "Christ Church JCR Entz",
+   "kind": "Ents site",
+   "url": "https://chchjcr.site.ox.ac.uk/life/entz",
+   "note": "Two bops a term, Saturdays of weeks 0 and 7"
+  },
+  {
+   "college": "Christ Church",
+   "name": "Christ Church Entz Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/chch.entzstagram/"
+  },
+  {
+   "college": "Christ Church",
+   "name": "Christ Church JCR calendar",
+   "kind": "JCR events",
+   "url": "https://chchjcr.site.ox.ac.uk/calendar"
+  },
+  {
+   "college": "Christ Church",
+   "name": "Christ Church GCR (college page)",
+   "kind": "MCR site",
+   "url": "https://www.chch.ox.ac.uk/college/graduate/life-at-christ-church"
+  },
+  {
+   "college": "Corpus Christi",
+   "name": "Corpus JCR",
+   "kind": "JCR site",
+   "url": "https://www.corpusjcr.org/"
+  },
+  {
+   "college": "Corpus Christi",
+   "name": "Corpus JCR Entz",
+   "kind": "Ents site",
+   "url": "https://www.corpusjcr.org/applying/alternative-prospectus/entz/",
+   "note": "Descriptive; no dated listing"
+  },
+  {
+   "college": "Corpus Christi",
+   "name": "Corpus MCR events",
+   "kind": "MCR events",
+   "url": "https://www.corpusmcr.com/currentstudents/events"
+  },
+  {
+   "college": "Corpus Christi",
+   "name": "Corpus MCR",
+   "kind": "MCR site",
+   "url": "https://www.corpusmcr.com/"
+  },
+  {
+   "college": "Corpus Christi",
+   "name": "Corpus MCR term card",
+   "kind": "Termcard",
+   "url": "https://www.corpusmcr.com/currentstudents/term-card"
+  },
+  {
+   "college": "Exeter",
+   "name": "Exeter JCR (college page)",
+   "kind": "JCR site",
+   "url": "https://www.exeter.ox.ac.uk/applicants/student-life/jcr/",
+   "note": "The JCR's own domain exeterjcr.org does not resolve"
+  },
+  {
+   "college": "Exeter",
+   "name": "Exeter JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/exeterjcr/"
+  },
+  {
+   "college": "Exeter",
+   "name": "Exeter MCR calendar",
+   "kind": "MCR events",
+   "url": "https://exetermcr.org.uk/calendar"
+  },
+  {
+   "college": "Exeter",
+   "name": "Exeter MCR",
+   "kind": "MCR site",
+   "url": "https://exetermcr.org.uk/"
+  },
+  {
+   "college": "Green Templeton",
+   "name": "Green Templeton college events",
+   "kind": "College events",
+   "url": "https://www.gtc.ox.ac.uk/news-and-events/events/"
+  },
+  {
+   "college": "Green Templeton",
+   "name": "Green Templeton GCR",
+   "kind": "MCR site",
+   "url": "https://www.gtc.ox.ac.uk/students/college-life/graduate-common-room/"
+  },
+  {
+   "college": "Harris Manchester",
+   "name": "Harris Manchester JCR",
+   "kind": "JCR site",
+   "url": "https://hmcjcr.co.uk/",
+   "note": "Covers JCR and MCR"
+  },
+  {
+   "college": "Harris Manchester",
+   "name": "Harris Manchester college events",
+   "kind": "College events",
+   "url": "https://www.hmc.ox.ac.uk/events"
+  },
+  {
+   "college": "Harris Manchester",
+   "name": "Harris Manchester JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/hmcjcr/"
+  },
+  {
+   "college": "Harris Manchester",
+   "name": "Harris Manchester JCR events",
+   "kind": "JCR events",
+   "url": "https://hmcjcr.co.uk/events"
+  },
+  {
+   "college": "Harris Manchester",
+   "name": "Harris Manchester JCR this week",
+   "kind": "JCR events",
+   "url": "https://hmcjcr.co.uk/this-week"
+  },
+  {
+   "college": "Hertford",
+   "name": "Hertford JCR",
+   "kind": "JCR site",
+   "url": "https://hertfordjcr.org/"
+  },
+  {
+   "college": "Hertford",
+   "name": "Hertford JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/hertfordjcr/"
+  },
+  {
+   "college": "Hertford",
+   "name": "Hertford MCR events",
+   "kind": "MCR events",
+   "url": "https://www.hertfordmcr.com/general-1"
+  },
+  {
+   "college": "Hertford",
+   "name": "Hertford MCR",
+   "kind": "MCR site",
+   "url": "https://www.hertfordmcr.com/"
+  },
+  {
+   "college": "Jesus",
+   "name": "Jesus JCR",
+   "kind": "JCR site",
+   "url": "https://www.jesusoxfordjcr.com/"
+  },
+  {
+   "college": "Jesus",
+   "name": "Jesus College JCR and MCR page",
+   "kind": "College events",
+   "url": "https://www.jesus.ox.ac.uk/study-here/life-at-jesus/jcr-mcr/"
+  },
+  {
+   "college": "Jesus",
+   "name": "Jesus JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/jesuscollegejcr/"
+  },
+  {
+   "college": "Jesus",
+   "name": "Jesus JCR-wide events",
+   "kind": "JCR events",
+   "url": "https://www.jesusoxfordjcr.com/jcr-wide-events"
+  },
+  {
+   "college": "Jesus",
+   "name": "Jesus MCR",
+   "kind": "MCR site",
+   "url": "https://www.jesuscollegemcr.com/"
+  },
+  {
+   "college": "Keble",
+   "name": "Keble JCR",
+   "kind": "JCR site",
+   "url": "https://jcr.keble.ox.ac.uk/"
+  },
+  {
+   "college": "Keble",
+   "name": "Keble MCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/keblemcr/"
+  },
+  {
+   "college": "Keble",
+   "name": "Keble MCR socials",
+   "kind": "MCR events",
+   "url": "https://mcr.keble.ox.ac.uk/social/"
+  },
+  {
+   "college": "Keble",
+   "name": "Keble MCR",
+   "kind": "MCR site",
+   "url": "https://mcr.keble.ox.ac.uk/"
+  },
+  {
+   "college": "Keble",
+   "name": "Keble MCR term cards",
+   "kind": "Termcard",
+   "url": "https://mcr.keble.ox.ac.uk/social/term-cards/"
+  },
+  {
+   "college": "Kellogg",
+   "name": "Kellogg college events",
+   "kind": "College events",
+   "url": "https://www.kellogg.ox.ac.uk/events/",
+   "note": "iCal feed at /events.ics"
+  },
+  {
+   "college": "Kellogg",
+   "name": "Kellogg MCR",
+   "kind": "MCR site",
+   "url": "https://www.kellogg.ox.ac.uk/middle-common-room/"
+  },
+  {
+   "college": "Kellogg",
+   "name": "Kellogg MCR termcard",
+   "kind": "Termcard",
+   "url": "https://www.kellogg.ox.ac.uk/middle-common-room/termcard/"
+  },
+  {
+   "college": "Lady Margaret Hall",
+   "name": "LMH JCR",
+   "kind": "JCR site",
+   "url": "https://lmhjcr.co.uk/"
+  },
+  {
+   "college": "Lady Margaret Hall",
+   "name": "LMH JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/lmhjcr/"
+  },
+  {
+   "college": "Lady Margaret Hall",
+   "name": "LMH MCR social events",
+   "kind": "MCR events",
+   "url": "https://lmhmcr.co.uk/pages/social-events.html"
+  },
+  {
+   "college": "Lady Margaret Hall",
+   "name": "LMH MCR",
+   "kind": "MCR site",
+   "url": "https://lmhmcr.co.uk/"
+  },
+  {
+   "college": "Linacre",
+   "name": "Linacre college events",
+   "kind": "College events",
+   "url": "https://www.linacre.ox.ac.uk/news-events/events"
+  },
+  {
+   "college": "Linacre",
+   "name": "Linacre Common Room",
+   "kind": "MCR site",
+   "url": "https://www.linacre.ox.ac.uk/college-life/common-room"
+  },
+  {
+   "college": "Linacre",
+   "name": "Linacre Michaelmas 2026 term card",
+   "kind": "Termcard",
+   "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf"
+  },
+  {
+   "college": "Lincoln",
+   "name": "Lincoln JCR",
+   "kind": "JCR site",
+   "url": "https://lincolncollegejcr.co.uk/"
+  },
+  {
+   "college": "Lincoln",
+   "name": "Lincoln College events",
+   "kind": "College events",
+   "url": "https://www.lincoln.ox.ac.uk/events/"
+  },
+  {
+   "college": "Lincoln",
+   "name": "Lincoln JCR Entz",
+   "kind": "Ents site",
+   "url": "https://lincolncollegejcr.co.uk/entz/"
+  },
+  {
+   "college": "Lincoln",
+   "name": "Lincoln JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/lincolnoxfordjcr/"
+  },
+  {
+   "college": "Lincoln",
+   "name": "Lincoln MCR",
+   "kind": "MCR site",
+   "url": "https://lincolnmcr.weebly.com/"
+  },
+  {
+   "college": "Lincoln",
+   "name": "Lincoln MCR term card",
+   "kind": "Termcard",
+   "url": "https://lincolnmcr.weebly.com/term-card.html"
+  },
+  {
+   "college": "Magdalen",
+   "name": "Magdalen JCR",
+   "kind": "JCR site",
+   "url": "https://www.magdjcr.co.uk/",
+   "note": "No events page; Entz officers on the JCR Team page"
+  },
+  {
+   "college": "Magdalen",
+   "name": "Magdalen College events",
+   "kind": "College events",
+   "url": "https://www.magd.ox.ac.uk/events/"
+  },
+  {
+   "college": "Magdalen",
+   "name": "Magdalen MCR",
+   "kind": "MCR site",
+   "url": "https://magdmcr.co.uk/",
+   "note": "Outlook calendar embedded on the homepage"
+  },
+  {
+   "college": "Mansfield",
+   "name": "Mansfield JCR (college page)",
+   "kind": "JCR site",
+   "url": "https://www.mansfield.ox.ac.uk/study-here/college-life/jcr/",
+   "note": "No standalone JCR site found"
+  },
+  {
+   "college": "Mansfield",
+   "name": "Mansfield College events",
+   "kind": "College events",
+   "url": "https://www.mansfield.ox.ac.uk/news-events/events/"
+  },
+  {
+   "college": "Mansfield",
+   "name": "Mansfield College Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/mansfieldoxford/",
+   "note": "College account; no JCR entz handle found"
+  },
+  {
+   "college": "Mansfield",
+   "name": "Mansfield MCR (college page)",
+   "kind": "MCR site",
+   "url": "https://www.mansfield.ox.ac.uk/study-here/college-life/mcr/"
+  },
+  {
+   "college": "Merton",
+   "name": "Merton JCR",
+   "kind": "JCR site",
+   "url": "https://mertonjcr.org/"
+  },
+  {
+   "college": "Merton",
+   "name": "Merton College events",
+   "kind": "College events",
+   "url": "https://www.merton.ox.ac.uk/events"
+  },
+  {
+   "college": "Merton",
+   "name": "Merton MCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/mertonmcr/"
+  },
+  {
+   "college": "Merton",
+   "name": "Merton MCR",
+   "kind": "MCR site",
+   "url": "https://mertonmcr.co.uk/"
+  },
+  {
+   "college": "Merton",
+   "name": "Merton JCR termcard",
+   "kind": "Termcard",
+   "url": "https://mertonjcr.org/termcard/"
+  },
+  {
+   "college": "Merton",
+   "name": "Merton MCR term card",
+   "kind": "Termcard",
+   "url": "https://mertonmcr.co.uk/term-card"
+  },
+  {
+   "college": "New College",
+   "name": "New College students' voice (JCR page)",
+   "kind": "JCR site",
+   "url": "https://www.new.ox.ac.uk/students-voice"
+  },
+  {
+   "college": "New College",
+   "name": "New College events",
+   "kind": "College events",
+   "url": "https://www.new.ox.ac.uk/events"
+  },
+  {
+   "college": "New College",
+   "name": "New College JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/newcollegejcr/",
+   "note": "The JCR site jcr.new.ox.ac.uk refused connections"
+  },
+  {
+   "college": "New College",
+   "name": "New College MCR calendar",
+   "kind": "MCR events",
+   "url": "https://mcr.new.ox.ac.uk/calendar/"
+  },
+  {
+   "college": "New College",
+   "name": "New College MCR",
+   "kind": "MCR site",
+   "url": "https://mcr.new.ox.ac.uk/"
+  },
+  {
+   "college": "Nuffield",
+   "name": "Nuffield JCR (college page)",
+   "kind": "JCR site",
+   "url": "https://www.nuffield.ox.ac.uk/study-here/junior-common-room/",
+   "note": "Nuffield's graduate common room is called the JCR"
+  },
+  {
+   "college": "Nuffield",
+   "name": "Nuffield College events",
+   "kind": "College events",
+   "url": "https://www.nuffield.ox.ac.uk/news-events/events-and-seminars/"
+  },
+  {
+   "college": "Nuffield",
+   "name": "Nuffield JCR about",
+   "kind": "JCR events",
+   "url": "https://www.nuffield.ox.ac.uk/study-here/junior-common-room/jcr-more-about-us/"
+  },
+  {
+   "college": "Oriel",
+   "name": "Oriel JCR",
+   "kind": "JCR site",
+   "url": "https://www.orieljcr.org/"
+  },
+  {
+   "college": "Oriel",
+   "name": "Oriel College events",
+   "kind": "College events",
+   "url": "https://www.oriel.ox.ac.uk/events/"
+  },
+  {
+   "college": "Oriel",
+   "name": "Oriel Entz Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/oriel.entz/"
+  },
+  {
+   "college": "Oriel",
+   "name": "Oriel MCR",
+   "kind": "MCR site",
+   "url": "https://www.orielmcr.org/"
+  },
+  {
+   "college": "Oriel",
+   "name": "Oriel JCR termcard",
+   "kind": "Termcard",
+   "url": "https://www.orieljcr.org/termcard-6/"
+  },
+  {
+   "college": "Oriel",
+   "name": "Oriel MCR termcard",
+   "kind": "Termcard",
+   "url": "https://www.orielmcr.org/?page_id=1041"
+  },
+  {
+   "college": "Pembroke",
+   "name": "Pembroke JCR",
+   "kind": "JCR site",
+   "url": "https://www.pembrokeoxfordjcr.org/"
+  },
+  {
+   "college": "Pembroke",
+   "name": "Pembroke College news and events",
+   "kind": "College events",
+   "url": "https://www.pmb.ox.ac.uk/news-events",
+   "note": "The old MCR domain now redirects to an unrelated site, so no MCR site is listed"
+  },
+  {
+   "college": "Pembroke",
+   "name": "Pembroke Entz Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/pembrokentz/"
+  },
+  {
+   "college": "Pembroke",
+   "name": "Pembroke JCR termcard",
+   "kind": "Termcard",
+   "url": "https://www.pembrokeoxfordjcr.org/termcard"
+  },
+  {
+   "college": "Queen's",
+   "name": "Queen's JCR",
+   "kind": "JCR site",
+   "url": "https://jcr.queens.ox.ac.uk/"
+  },
+  {
+   "college": "Queen's",
+   "name": "Queen's College events",
+   "kind": "College events",
+   "url": "https://www.queens.ox.ac.uk/events/"
+  },
+  {
+   "college": "Queen's",
+   "name": "Queen's Entz Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/queens_entz/"
+  },
+  {
+   "college": "Queen's",
+   "name": "Queen's MCR (college page)",
+   "kind": "MCR site",
+   "url": "https://www.queens.ox.ac.uk/postgraduate-study/the-middle-common-room/"
+  },
+  {
+   "college": "Reuben",
+   "name": "Reuben GCR (college page)",
+   "kind": "JCR site",
+   "url": "https://www.reuben.ox.ac.uk/graduate-common-room",
+   "note": "GCR hub is login-only"
+  },
+  {
+   "college": "Reuben",
+   "name": "Reuben College events",
+   "kind": "College events",
+   "url": "https://www.reuben.ox.ac.uk/events"
+  },
+  {
+   "college": "Reuben",
+   "name": "Reuben College Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/reuben_college/",
+   "note": "College account; no GCR handle found"
+  },
+  {
+   "college": "Reuben",
+   "name": "Reuben termcard",
+   "kind": "Termcard",
+   "url": "https://www.reuben.ox.ac.uk/termcard"
+  },
+  {
+   "college": "St Anne's",
+   "name": "St Anne's JCR page",
+   "kind": "JCR site",
+   "url": "https://www.st-annes.ox.ac.uk/current-students/democracy/",
+   "note": "JCR page on the college site"
+  },
+  {
+   "college": "St Anne's",
+   "name": "St Anne's Entz Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/st_annes_entz/"
+  },
+  {
+   "college": "St Anne's",
+   "name": "St Anne's MCR events",
+   "kind": "MCR events",
+   "url": "https://st-annes-mcr.org.uk/mcr-life/stay-connected/",
+   "note": "Links the term card and ticketed bops"
+  },
+  {
+   "college": "St Anne's",
+   "name": "St Anne's MCR",
+   "kind": "MCR site",
+   "url": "https://st-annes-mcr.org.uk/"
+  },
+  {
+   "college": "St Antony's",
+   "name": "St Antony's College events",
+   "kind": "College events",
+   "url": "https://www.sant.ox.ac.uk/college-events/"
+  },
+  {
+   "college": "St Antony's",
+   "name": "St Antony's GCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/stantonysgcr/"
+  },
+  {
+   "college": "St Antony's",
+   "name": "St Antony's GCR",
+   "kind": "MCR site",
+   "url": "https://www.stantonysgcr.com/"
+  },
+  {
+   "college": "St Antony's",
+   "name": "St Antony's GCR term card",
+   "kind": "Termcard",
+   "url": "https://www.stantonysgcr.com/term-card"
+  },
+  {
+   "college": "St Catherine's",
+   "name": "St Catz JCR",
+   "kind": "JCR site",
+   "url": "https://jcr.stcatz.ox.ac.uk/"
+  },
+  {
+   "college": "St Catherine's",
+   "name": "St Catz College events",
+   "kind": "College events",
+   "url": "https://www.stcatz.ox.ac.uk/category/events/"
+  },
+  {
+   "college": "St Catherine's",
+   "name": "St Catz JCR Entz",
+   "kind": "Ents site",
+   "url": "https://jcr.stcatz.ox.ac.uk/?page_id=72"
+  },
+  {
+   "college": "St Catherine's",
+   "name": "St Catz JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/stcatzjcr/"
+  },
+  {
+   "college": "St Catherine's",
+   "name": "St Catz MCR",
+   "kind": "MCR site",
+   "url": "https://mcr.stcatz.ox.ac.uk/"
+  },
+  {
+   "college": "St Catherine's",
+   "name": "St Catz MCR term card",
+   "kind": "Termcard",
+   "url": "https://mcr.stcatz.ox.ac.uk/term-card/"
+  },
+  {
+   "college": "St Cross",
+   "name": "St Cross SRC",
+   "kind": "JCR site",
+   "url": "https://www.stx.ox.ac.uk/student-representative-committee-src",
+   "note": "Graduate-only; Student Representative Committee"
+  },
+  {
+   "college": "St Cross",
+   "name": "St Cross events",
+   "kind": "College events",
+   "url": "https://www.stx.ox.ac.uk/events"
+  },
+  {
+   "college": "St Cross",
+   "name": "St Cross College Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/stcrosscollege/",
+   "note": "College account; no SRC handle found"
+  },
+  {
+   "college": "St Cross",
+   "name": "St Cross SRC termcard",
+   "kind": "Termcard",
+   "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf"
+  },
+  {
+   "college": "St Edmund Hall",
+   "name": "Teddy Hall JCR",
+   "kind": "JCR site",
+   "url": "https://jcr.seh.ox.ac.uk/"
+  },
+  {
+   "college": "St Edmund Hall",
+   "name": "St Edmund Hall events",
+   "kind": "College events",
+   "url": "https://www.seh.ox.ac.uk/events"
+  },
+  {
+   "college": "St Edmund Hall",
+   "name": "Teddy Hall JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/sehjcr/"
+  },
+  {
+   "college": "St Edmund Hall",
+   "name": "Teddy Hall MCR term card",
+   "kind": "MCR events",
+   "url": "https://mcr.seh.ox.ac.uk/mcr-timetable/"
+  },
+  {
+   "college": "St Edmund Hall",
+   "name": "Teddy Hall MCR",
+   "kind": "MCR site",
+   "url": "https://mcr.seh.ox.ac.uk/"
+  },
+  {
+   "college": "St Hilda's",
+   "name": "St Hilda's JCR",
+   "kind": "JCR site",
+   "url": "https://www.sthildasjcr.com/"
+  },
+  {
+   "college": "St Hilda's",
+   "name": "St Hilda's events",
+   "kind": "College events",
+   "url": "https://www.st-hildas.ox.ac.uk/events"
+  },
+  {
+   "college": "St Hilda's",
+   "name": "St Hilda's JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/sthildasoxfordjcr/"
+  },
+  {
+   "college": "St Hilda's",
+   "name": "St Hilda's MCR (college page)",
+   "kind": "MCR site",
+   "url": "https://www.st-hildas.ox.ac.uk/student-life/mcr"
+  },
+  {
+   "college": "St Hugh's",
+   "name": "St Hugh's JCR",
+   "kind": "JCR site",
+   "url": "https://www.sthughsjcr.org.uk/",
+   "note": "Upcoming events widget loads dynamically"
+  },
+  {
+   "college": "St Hugh's",
+   "name": "St Hugh's events",
+   "kind": "College events",
+   "url": "https://www.st-hughs.ox.ac.uk/news-events/upcoming-events/"
+  },
+  {
+   "college": "St Hugh's",
+   "name": "St Hugh's JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/st.hughsjcr/"
+  },
+  {
+   "college": "St Hugh's",
+   "name": "St Hugh's MCR socials",
+   "kind": "MCR events",
+   "url": "https://sthughsmcr.uk/socials/"
+  },
+  {
+   "college": "St Hugh's",
+   "name": "St Hugh's MCR",
+   "kind": "MCR site",
+   "url": "https://sthughsmcr.uk/"
+  },
+  {
+   "college": "St John's",
+   "name": "St John's JCR",
+   "kind": "JCR site",
+   "url": "https://jcr.sjc.ox.ac.uk/"
+  },
+  {
+   "college": "St John's",
+   "name": "SJC Entz Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/sjc.entz/"
+  },
+  {
+   "college": "St John's",
+   "name": "St John's MCR events",
+   "kind": "MCR events",
+   "url": "https://mcr.sjc.ox.ac.uk/events/"
+  },
+  {
+   "college": "St John's",
+   "name": "St John's MCR",
+   "kind": "MCR site",
+   "url": "https://mcr.sjc.ox.ac.uk/"
+  },
+  {
+   "college": "St Peter's",
+   "name": "St Peter's JCR and MCR (college page)",
+   "kind": "JCR site",
+   "url": "https://www.spc.ox.ac.uk/student-life/jcr-and-mcr"
+  },
+  {
+   "college": "St Peter's",
+   "name": "St Peter's events",
+   "kind": "College events",
+   "url": "https://www.spc.ox.ac.uk/events"
+  },
+  {
+   "college": "St Peter's",
+   "name": "SPC Entz Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/spc.entz/"
+  },
+  {
+   "college": "Somerville",
+   "name": "Somerville JCR",
+   "kind": "JCR site",
+   "url": "https://jcr.some.ox.ac.uk/",
+   "note": "Homepage has an At Somerville This Week section"
+  },
+  {
+   "college": "Somerville",
+   "name": "Somerville events",
+   "kind": "College events",
+   "url": "https://www.some.ox.ac.uk/news-events/events/"
+  },
+  {
+   "college": "Somerville",
+   "name": "Somerville JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/somervillejcr/"
+  },
+  {
+   "college": "Somerville",
+   "name": "Somerville JCR events",
+   "kind": "JCR events",
+   "url": "https://jcr.some.ox.ac.uk/events/"
+  },
+  {
+   "college": "Somerville",
+   "name": "Somerville MCR",
+   "kind": "MCR site",
+   "url": "https://mcr.some.ox.ac.uk/"
+  },
+  {
+   "college": "Trinity",
+   "name": "Trinity JCR",
+   "kind": "JCR site",
+   "url": "https://trinityjcr.site.ox.ac.uk/"
+  },
+  {
+   "college": "Trinity",
+   "name": "Trinity events",
+   "kind": "College events",
+   "url": "https://www.trinity.ox.ac.uk/events"
+  },
+  {
+   "college": "Trinity",
+   "name": "Trinity Entz Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/trintztagram/"
+  },
+  {
+   "college": "Trinity",
+   "name": "Trinity MCR",
+   "kind": "MCR site",
+   "url": "https://www.trinitymcr.com/"
+  },
+  {
+   "college": "University",
+   "name": "Univ JCR",
+   "kind": "JCR site",
+   "url": "https://www.univjcr.com/"
+  },
+  {
+   "college": "University",
+   "name": "Univ events",
+   "kind": "College events",
+   "url": "https://www.univ.ox.ac.uk/events/"
+  },
+  {
+   "college": "University",
+   "name": "Univ Entz Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/univentz_/"
+  },
+  {
+   "college": "University",
+   "name": "Univ WCR events",
+   "kind": "MCR events",
+   "url": "https://wcr.univ.ox.ac.uk/events/"
+  },
+  {
+   "college": "University",
+   "name": "Univ WCR",
+   "kind": "MCR site",
+   "url": "https://wcr.univ.ox.ac.uk/",
+   "note": "Weir Common Room (graduates)"
+  },
+  {
+   "college": "Wadham",
+   "name": "Wadham SU (college page)",
+   "kind": "JCR site",
+   "url": "https://www.wadham.ox.ac.uk/current-students/student-union",
+   "note": "Combined JCR and MCR union; su.wadham.ox.ac.uk did not connect"
+  },
+  {
+   "college": "Wadham",
+   "name": "Wadham events",
+   "kind": "College events",
+   "url": "https://www.wadham.ox.ac.uk/events"
+  },
+  {
+   "college": "Wadham",
+   "name": "Wadham SU Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/wadhamsu/"
+  },
+  {
+   "college": "Wolfson",
+   "name": "Wolfson Common Room",
+   "kind": "JCR site",
+   "url": "https://www.wolfson.ox.ac.uk/the-common-room/",
+   "note": "Graduate-only; single common room"
+  },
+  {
+   "college": "Wolfson",
+   "name": "Wolfson events",
+   "kind": "College events",
+   "url": "https://www.wolfson.ox.ac.uk/event/",
+   "note": "College calendar that has listed bops in past terms"
+  },
+  {
+   "college": "Wolfson",
+   "name": "Wolfson Bar",
+   "kind": "Ents site",
+   "url": "https://www.wolfson.ox.ac.uk/social-life-food-and-drink/the-wolfson-bar/"
+  },
+  {
+   "college": "Wolfson",
+   "name": "Wolfson College Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/wolfsoncollegeoxford/",
+   "note": "College account"
+  },
+  {
+   "college": "Worcester",
+   "name": "Worcester JCR",
+   "kind": "JCR site",
+   "url": "https://jcr.worc.ox.ac.uk/"
+  },
+  {
+   "college": "Worcester",
+   "name": "Worcester events",
+   "kind": "College events",
+   "url": "https://www.worc.ox.ac.uk/news-events/events"
+  },
+  {
+   "college": "Worcester",
+   "name": "Worcester JCR Instagram",
+   "kind": "Instagram",
+   "url": "https://www.instagram.com/worcestercollegejcr/"
+  },
+  {
+   "college": "All",
+   "name": "Oxford SU events",
+   "kind": "SU listings",
+   "url": "https://www.oxfordsu.org/events/"
+  },
+  {
+   "college": "All",
+   "name": "Cherwell",
+   "kind": "Student press",
+   "url": "https://cherwell.org/"
+  },
+  {
+   "college": "All",
+   "name": "The Oxford Student",
+   "kind": "Student press",
+   "url": "https://www.oxfordstudent.com/"
+  },
+  {
+   "college": "All",
+   "name": "The Oxford Blue",
+   "kind": "Student press",
+   "url": "https://theoxfordblue.co.uk/"
+  }
+ ]
 }
