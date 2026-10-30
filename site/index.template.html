@@ -186,7 +186,6 @@ footer a { display: inline-block; padding: .6rem 0; }
 <script>
 (function () {
   const TZ = "Europe/London";
-  const WINDOW_MS = 14 * 864e5;
 
   // College coordinates come from city.json; the names match events.json and sources.json.
   const COLLEGES = {{colleges_js}};
@@ -226,9 +225,13 @@ footer a { display: inline-block; padding: .6rem 0; }
     return key === today ? "Tonight" : key === addDays(today, 1) ? "Tomorrow" : "";
   }
   function inWindow(e) {
+    // Same window as the routine: today and the next 14 London calendar days, with a five-hour grace for a bop under way.
     if (!e || typeof e.title !== "string" || !e.title.trim()) return false;
     const t = Date.parse(e.starts_at);
-    return Number.isFinite(t) && t > Date.now() - 5 * 3600e3 && t < Date.now() + WINDOW_MS;
+    if (!Number.isFinite(t) || t <= Date.now() - 5 * 3600e3) return false;
+    const today = dayKey.format(new Date());
+    const day = dayKey.format(new Date(t));
+    return day >= today && day <= addDays(today, 14);
   }
   function knownCollege(e) { return !!(e.college && COLLEGES[e.college]); }
 
@@ -268,7 +271,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   try {
     map = L.map("map", { scrollWheelZoom: false }).setView({{map_center}}, {{map_zoom}});
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
-  } catch (e) { document.getElementById("map").hidden = true; document.getElementById("mapnote").hidden = true; }
+  } catch (e) { map = null; document.getElementById("map").hidden = true; document.getElementById("mapnote").hidden = true; }
   const markers = new Map();
   let fitted = false;
 
