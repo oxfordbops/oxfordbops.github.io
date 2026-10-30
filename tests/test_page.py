@@ -55,7 +55,9 @@ class TestPage(unittest.TestCase):
             self.assertIn(f'data-goatcounter="https://{code}.goatcounter.com/count"', head)
             self.assertIn('async src="https://gc.zgo.at/count.js"', head)
         else:
-            self.assertNotIn("goatcounter", PAGE.lower())
+            # No code: the counting script is not loaded. The page JS still carries the harmless guarded call.
+            self.assertNotIn("gc.zgo.at", PAGE)
+            self.assertNotIn("data-goatcounter", PAGE)
         self.assertIn("window.goatcounter && window.goatcounter.count", SCRIPT)
         self.assertNotIn("googletagmanager", PAGE.lower())
 
