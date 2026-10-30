@@ -48,7 +48,7 @@ To change what the routine does, edit `site/ROUTINE.template.md`, rebuild, and p
 
 ## Analytics
 
-Pageviews, source-link clicks and filter use are counted by [GoatCounter](https://www.goatcounter.com) when `city.json` names a site code under `analytics.goatcounter`: the page loads `gc.zgo.at/count.js`, which sets no cookies and stores no personal data, so no consent banner is needed. The dashboard is at `https://<code>.goatcounter.com`. Events: `filter/when/<value>`, `filter/college/<name>`, `bop/<host>` and `source/<host>` for click-throughs. Leave the code empty to ship the page with no analytics at all.
+Pageviews, source-link clicks and filter use are counted by [GoatCounter](https://www.goatcounter.com) when `city.json` names a site code under `analytics.goatcounter`: the page loads `gc.zgo.at/count.js`, which sets no cookies and stores no personal data, so no consent banner is needed. The dashboard is at `https://<code>.goatcounter.com`. Pageviews are counted under the path `/<slug>` and events under `<slug>/filter/when/<value>`, `<slug>/filter/college/<name>`, `<slug>/bop/<host>` and `<slug>/source/<host>` for click-throughs, so several cities can share one GoatCounter site and still be told apart by path. Leave the code empty to ship the page with no analytics at all.
 
 ## Hosting
 

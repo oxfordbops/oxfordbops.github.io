@@ -40,7 +40,9 @@ def analytics():
         return ""
     if not __import__("re").fullmatch(r"[a-z0-9-]+", code):
         sys.exit(f"city.json analytics.goatcounter must be a GoatCounter site code (lowercase letters, digits, dashes), got {code!r}")
-    return f'<script data-goatcounter="https://{code}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>'
+    # Pageviews are counted under /<slug> rather than /, so several cities can share one GoatCounter site and still be told apart.
+    settings = json.dumps({"path": "/" + CITY["slug"]})
+    return f'<script data-goatcounter="https://{code}.goatcounter.com/count" data-goatcounter-settings=\'{settings}\' async src="https://gc.zgo.at/count.js"></script>'
 
 
 def colleges_js():
@@ -51,7 +53,7 @@ def colleges_js():
 def render_page():
     t = (ROOT / "site" / "index.template.html").read_text()
     values = {
-        "city": CITY["name"], "tagline": CITY["tagline"], "favicon": favicon(), "colleges_js": colleges_js(),
+        "city": CITY["name"], "slug": CITY["slug"], "tagline": CITY["tagline"], "favicon": favicon(), "colleges_js": colleges_js(),
         "map_center": json.dumps(CITY["map_center"]), "map_zoom": str(CITY.get("map_zoom", 14)), "analytics": analytics(),
         "tokens_light": tokens("light", "  "), "tokens_dark": tokens("dark", "  "), "tokens_dark_indented": tokens("dark", "    "),
     }

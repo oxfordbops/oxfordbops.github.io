@@ -54,6 +54,9 @@ class TestPage(unittest.TestCase):
         if code:
             self.assertIn(f'data-goatcounter="https://{code}.goatcounter.com/count"', head)
             self.assertIn('async src="https://gc.zgo.at/count.js"', head)
+            slug = json.loads((ROOT / "city.json").read_text())["slug"]
+            self.assertIn(f'data-goatcounter-settings=\'{{"path": "/{slug}"}}\'', head)
+            self.assertIn(f'path: "{slug}/" + path', SCRIPT)
         else:
             # No code: the counting script is not loaded. The page JS still carries the harmless guarded call.
             self.assertNotIn("gc.zgo.at", PAGE)

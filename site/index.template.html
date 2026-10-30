@@ -200,9 +200,10 @@ footer a { display: inline-block; padding: .6rem 0; }
   if (!["all", "tonight", "weekend", "nextweek"].includes(when)) when = "all";
 
   // Usage events for the analytics snippet in <head>, if the city has one: which filters people use and which
-  // bops and sources they click through to. Nothing is sent when the snippet is absent or blocked.
+  // bops and sources they click through to. Event paths start with the city's slug, like the pageview path, so
+  // cities sharing one analytics site stay separate. Nothing is sent when the snippet is absent or blocked.
   function track(path, title) {
-    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title || "", event: true }); } catch (e) {}
+    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "{{slug}}/" + path, title: title || "", event: true }); } catch (e) {}
   }
   list.addEventListener("click", e => {
     const a = e.target.closest("a[href]");
