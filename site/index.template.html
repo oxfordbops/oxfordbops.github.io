@@ -58,8 +58,8 @@ h1 em { font-style: italic; padding: 0 .12em; margin: 0 -.06em; background: line
 .filters .chips { flex: 1 1 100%; }
 .chip { flex: 0 0 auto; }
 .filters .lbl { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; min-width: 4.2rem; }
-.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: var(--ctl-radius); padding: 2px; background: var(--field); }
-.seg button { font: inherit; font-size: .9rem; height: calc(var(--ctl-h) - 4px); padding: 0 var(--ctl-pad); border: 0; border-radius: var(--ctl-radius); background: transparent; color: var(--fg); cursor: pointer; white-space: nowrap; }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: var(--ctl-radius); padding: 0; background: var(--field); }
+.seg button { font: inherit; font-size: .9rem; height: var(--ctl-h); padding: 0 var(--ctl-pad); border: 0; border-radius: var(--ctl-radius); background: transparent; color: var(--fg); cursor: pointer; white-space: nowrap; }
 .seg button:hover { background: var(--cam-tint); }
 .seg button[aria-pressed="true"] { background: var(--cam); color: var(--cam-ink); font-weight: 500; }
 .chip { font: inherit; font-size: .9rem; height: var(--ctl-h); padding: 0 .6rem 0 var(--ctl-pad); border: 1px solid var(--rule); border-radius: var(--ctl-radius); background: var(--field); color: var(--fg); cursor: pointer; display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; }
@@ -126,6 +126,7 @@ ul.bops li:last-child { border-bottom: 1px solid var(--rule); }
 .src a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
 
 .empty, .status { color: var(--muted); padding: 1.5rem 0; }
+.empty .alts { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
 .status.error { color: #B4432F; }
 
 footer { margin-top: 3.5rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .85rem; display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1.5rem; }
@@ -135,6 +136,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   h1 { font-size: 2.3rem; }
   .seg { display: grid; grid-template-columns: 1fr 1fr; border-radius: 14px; width: 100%; }
   .seg button { padding: 0 .7rem; font-size: .9rem; border-radius: 11px; }
+  .seg button:last-child:nth-child(odd) { grid-column: 1 / -1; }   /* an odd fifth option spans the row instead of sitting alone */
   #map { height: 220px; }
   ul.bops li { grid-template-columns: 3.8rem minmax(0, 1fr); }
 }
@@ -157,6 +159,7 @@ footer a { display: inline-block; padding: .6rem 0; }
       <div class="seg" role="group" aria-labelledby="when-lbl" id="when">
         <button type="button" data-when="all" aria-pressed="true">Next 14 days</button>
         <button type="button" data-when="tonight" aria-pressed="false">Tonight</button>
+        <button type="button" data-when="tomorrow" aria-pressed="false">Tomorrow</button>
         <button type="button" data-when="weekend" aria-pressed="false">This weekend</button>
         <button type="button" data-when="nextweek" aria-pressed="false">Next week</button>
       </div>
@@ -169,9 +172,9 @@ footer a { display: inline-block; padding: .6rem 0; }
   </div>
 
   <div id="map" role="region" aria-label="Map of {{city}} colleges with bops"></div>
-  <p class="mapnote" id="mapnote">Numbers are bops in the next fortnight. Tap a college to filter the list.</p>
+  <p class="mapnote" id="mapnote">Numbers are bops in the selected period. Tap a college to filter the list.</p>
 
-  <section id="list" aria-live="polite">
+  <section id="list">
     <p class="status" id="loading">Loading…</p>
   </section>
 
@@ -195,8 +198,23 @@ footer a { display: inline-block; padding: .6rem 0; }
   const resultEl = document.getElementById("result");
   let events = [];
   let college = "all", when = "all";
-  try { college = localStorage.getItem("cambops.college") || "all"; when = localStorage.getItem("cambops.when") || "all"; } catch (e) {}
-  if (!["all", "tonight", "weekend", "nextweek"].includes(when)) when = "all";
+  const WHENS = ["all", "tonight", "tomorrow", "weekend", "nextweek"];
+  const KEY = "{{slug}}.";
+  // Filters live in the URL (?when=tonight&college=Jesus) so a link reproduces them; otherwise the remembered
+  // college (across visits) and When (this session only) apply.
+  try { college = localStorage.getItem(KEY + "college") || "all"; } catch (e) {}
+  try { when = sessionStorage.getItem(KEY + "when") || "all"; } catch (e) {}
+  const q = new URLSearchParams(location.search);
+  if (q.has("when") || q.has("college")) { when = q.get("when") || "all"; college = q.get("college") || "all"; }
+  if (!WHENS.includes(when)) when = "all";
+  function remember() {
+    try { localStorage.setItem(KEY + "college", college); sessionStorage.setItem(KEY + "when", when); } catch (e) {}
+    const u = new URL(location.href);
+    u.search = "";
+    if (when !== "all") u.searchParams.set("when", when);
+    if (college !== "all") u.searchParams.set("college", college);
+    try { history.replaceState(null, "", u.pathname + u.search + u.hash); } catch (e) {}
+  }
 
   // Usage events for the analytics snippet in <head>, if the city has one: which filters people use and which
   // bops and sources they click through to. Event paths start with the city's slug, like the pageview path, so
@@ -205,6 +223,8 @@ footer a { display: inline-block; padding: .6rem 0; }
     try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "{{slug}}/" + path, title: title || "", event: true }); } catch (e) {}
   }
   list.addEventListener("click", e => {
+    const alt = e.target.closest("[data-alt]");
+    if (alt) { if (alt.dataset.alt === "college") setCollege("all"); else setWhen("all"); return; }
     const a = e.target.closest("a[href]");
     if (!a || !list.contains(a)) return;
     const li = a.closest("li");
@@ -231,7 +251,12 @@ footer a { display: inline-block; padding: .6rem 0; }
     if (!Number.isFinite(t) || t <= Date.now() - 5 * 3600e3) return false;
     const today = dayKey.format(new Date());
     const day = dayKey.format(new Date(t));
-    return day >= today && day <= addDays(today, 14);
+    // Yesterday's bop stays while it is still running (ends_at in the future, or within the five-hour grace).
+    return (day >= today || (day === addDays(today, -1) && stillOn(e))) && day <= addDays(today, 14);
+  }
+  function stillOn(e) {
+    const end = Date.parse(e.ends_at);
+    return Number.isFinite(end) ? end > Date.now() : Date.parse(e.starts_at) > Date.now() - 5 * 3600e3;
   }
   function knownCollege(e) { return !!(e.college && COLLEGES[e.college]); }
 
@@ -244,14 +269,16 @@ footer a { display: inline-block; padding: .6rem 0; }
     const dow = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].indexOf(WEEKDAY.format(new Date()));
     const toSun = 6 - dow;                                   // days until this Sunday
     if (w === "tonight") return [today, today];
+    if (w === "tomorrow") return [addDays(today, 1), addDays(today, 1)];
     if (w === "weekend") return [addDays(today, Math.max(0, toSun - 2)), addDays(today, toSun)];   // Fri to Sun, or the rest of it
     if (w === "nextweek") return [addDays(today, toSun + 1), addDays(today, toSun + 7)];
     return null;
   }
-  const WHEN_LABEL = { tonight: "tonight", weekend: "this weekend", nextweek: "next week" };
+  const WHEN_LABEL = { tonight: "tonight", tomorrow: "tomorrow", weekend: "this weekend", nextweek: "next week" };
   function inWhen(e) {
     const r = whenRange(when); if (!r) return true;
     const k = dayKey.format(new Date(e.starts_at));
+    if (when === "tonight" && k === addDays(r[0], -1) && stillOn(e)) return true;   // started last night, still going
     return k >= r[0] && k <= r[1];
   }
   document.querySelectorAll("#when button").forEach(b => {
@@ -261,7 +288,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   function setWhen(value) {
     when = value;
     track("filter/when/" + when);
-    try { localStorage.setItem("cambops.when", when); } catch (e) {}
+    remember();
     document.querySelectorAll("#when button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.when === when)));
     render();
   }
@@ -278,7 +305,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   function setCollege(value) {
     college = value;
     track("filter/college/" + college);
-    try { localStorage.setItem("cambops.college", college); } catch (e) {}
+    remember();
     render();
     if (map && COLLEGES[college]) map.panTo(COLLEGES[college]);
   }
@@ -286,13 +313,16 @@ footer a { display: inline-block; padding: .6rem 0; }
   // College chips: only colleges with a bop in the window, most bops first, counts matching the map pins.
   function renderChips(byCollege, elsewhere) {
     const entries = [...byCollege.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
-    document.getElementById("college-group").hidden = !entries.length && !elsewhere;
+    if (COLLEGES[college] && !byCollege.has(college)) entries.push([college, []]);   // keep the chosen college visible at zero
+    document.getElementById("college-group").hidden = !entries.length && !elsewhere && college !== "none";
+    const focused = document.activeElement && chipsEl.contains(document.activeElement) ? document.activeElement.dataset.college : null;
     let html = '<button type="button" class="chip plain" data-college="all" aria-pressed="' + (college === "all") + '">Any college</button>';
     for (const [name, items] of entries) {
       html += '<button type="button" class="chip" data-college="' + esc(name) + '" aria-pressed="' + (college === name) + '">' + esc(name) + '<span class="n">' + items.length + "</span></button>";
     }
-    if (elsewhere) html += '<button type="button" class="chip" data-college="none" aria-pressed="' + (college === "none") + '">Elsewhere<span class="n">' + elsewhere + "</span></button>";
+    if (elsewhere || college === "none") html += '<button type="button" class="chip" data-college="none" aria-pressed="' + (college === "none") + '">Elsewhere<span class="n">' + elsewhere + "</span></button>";
     chipsEl.innerHTML = html;
+    if (focused !== null) { const again = chipsEl.querySelector('[data-college="' + CSS.escape(focused) + '"]'); if (again) again.focus(); }
   }
   chipsEl.addEventListener("click", e => {
     const b = e.target.closest("[data-college]"); if (!b) return;
@@ -308,7 +338,12 @@ footer a { display: inline-block; padding: .6rem 0; }
     resultEl.innerHTML = "<strong>" + n + (n === 1 ? " bop" : " bops") + "</strong> " + esc(parts.join(" ")) +
       (active ? ' <button type="button" id="clear">Clear filters</button>' : "");
     const c = document.getElementById("clear");
-    if (c) c.addEventListener("click", () => { college = "all"; when = "all"; try { localStorage.removeItem("cambops.college"); localStorage.removeItem("cambops.when"); } catch (e) {} document.querySelectorAll("#when button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.when === "all"))); render(); });
+    if (c) c.addEventListener("click", () => { clearFilters(); const w = document.querySelector('#when button[data-when="all"]'); if (w) w.focus(); });
+  }
+  function clearFilters() {
+    college = "all"; when = "all"; remember();
+    document.querySelectorAll("#when button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.when === "all")));
+    render();
   }
 
   function renderMap(byCollege) {
@@ -373,7 +408,10 @@ footer a { display: inline-block; padding: .6rem 0; }
     if (!shown.length) {
       const where = college === "all" ? "" : college === "none" ? " outside the colleges" : " at " + esc(college);
       const whenTxt = WHEN_LABEL[when] ? " " + WHEN_LABEL[when] : " in the next fortnight";
-      list.innerHTML = '<p class="empty">No bops listed' + where + whenTxt + '.</p>';
+      let alts = "";
+      if (college !== "all") alts += '<button type="button" class="chip plain" data-alt="college">Any college' + esc(whenTxt) + '</button>';
+      if (when !== "all") alts += '<button type="button" class="chip plain" data-alt="when">' + (college === "all" ? "Next 14 days" : esc(college === "none" ? "Elsewhere" : college) + " in the next 14 days") + '</button>';
+      list.innerHTML = '<p class="empty">No bops listed' + where + whenTxt + '.' + (alts ? '<span class="alts">' + alts + '</span>' : '') + '</p>';
       return;
     }
     const groups = new Map();
