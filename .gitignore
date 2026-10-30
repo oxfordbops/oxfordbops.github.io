@@ -1,0 +1,20 @@
+# Tool and editor state
+.gstack/
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Secrets
+.env
+.env.*
+
+# Build and dependency caches
+__pycache__/
+*.pyc
+node_modules/
+
+# Scratch files
+*.log
+*.tmp
+scratch/

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{city}} Bops</title>
+<link rel="icon" href="{{favicon}}">
+<meta name="description" content="Every college bop in {{city}} in the next fortnight: when, where, what theme, how much. Updated every morning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* Layout: one narrow column. Tonight first, then the map, then the fortnight day by day. Rows read time, name, where, how much. */
+:root {
+{{tokens_light}}
+  --ctl-h: 44px;            /* every filter control is this tall: the mobile tap-target minimum */
+  --ctl-radius: 999px;
+  --ctl-pad: .85rem;
+  --display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+{{tokens_dark_indented}}
+  }
+}
+:root[data-theme="dark"] {
+{{tokens_dark}}
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 16px; line-height: 1.5;
+  padding-block: 2.25rem 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 42rem; margin: 0 auto; min-width: 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover, a:focus-visible { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+h1 { font-family: var(--display); font-weight: 400; font-size: 2.7rem; line-height: 1; margin: 0; letter-spacing: -0.01em; display: flex; align-items: center; gap: .3em; }
+.ball { width: .72em; height: .72em; flex: 0 0 auto; }
+h1 em { font-style: italic; padding: 0 .12em; margin: 0 -.06em; background: linear-gradient(transparent 60%, var(--hl) 60%, var(--hl) 92%, transparent 92%); box-shadow: inset 0 -0.08em 0 var(--hl-line); }
+.tagline { color: var(--muted); margin: .5rem 0 0; max-width: 34rem; }
+.notice { font-size: .9rem; color: var(--muted); margin: .25rem 0 0; max-width: 34rem; }
+
+
+/* Filter system: one control height, one radius, one set of states (rest, hover, pressed, focus).
+   Segmented "when" control, college chips with counts, and a result line. */
+.filters { padding: .9rem 0 .75rem; margin: 1.25rem 0 1rem; border-bottom: 1px solid var(--rule); display: grid; gap: .6rem; }
+.filters .group { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; min-width: 0; }
+.filters .chips { flex: 1 1 100%; }
+.chip { flex: 0 0 auto; }
+.filters .lbl { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; min-width: 4.2rem; }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: var(--ctl-radius); padding: 2px; background: var(--field); }
+.seg button { font: inherit; font-size: .9rem; height: calc(var(--ctl-h) - 4px); padding: 0 var(--ctl-pad); border: 0; border-radius: var(--ctl-radius); background: transparent; color: var(--fg); cursor: pointer; white-space: nowrap; }
+.seg button:hover { background: var(--cam-tint); }
+.seg button[aria-pressed="true"] { background: var(--cam); color: var(--cam-ink); font-weight: 500; }
+.chip { font: inherit; font-size: .9rem; height: var(--ctl-h); padding: 0 .6rem 0 var(--ctl-pad); border: 1px solid var(--rule); border-radius: var(--ctl-radius); background: var(--field); color: var(--fg); cursor: pointer; display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; }
+.chip:hover { border-color: var(--cam); background: var(--cam-tint); }
+.chip[aria-pressed="true"] { background: var(--cam); border-color: var(--cam); color: var(--cam-ink); font-weight: 500; }
+.chip .n { display: inline-grid; place-items: center; min-width: 1.35rem; height: 1.35rem; padding: 0 .3rem; border-radius: var(--ctl-radius); background: var(--cam-tint); color: var(--fg); font-size: .75rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.chip[aria-pressed="true"] .n { background: var(--on-badge); color: var(--cam-ink); }
+.chip.plain { padding: 0 var(--ctl-pad); }
+.seg button:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.result { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .6rem; font-size: .9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.result strong { color: var(--fg); font-weight: 600; }
+.result button { font: inherit; font-size: .85rem; background: none; border: 0; color: var(--accent); cursor: pointer; padding: .2rem 0; text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 480px) {
+  .filters .lbl { min-width: 100%; }
+}
+
+
+#map { height: 260px; max-width: 100%; border: 1px solid var(--rule); border-radius: 4px; background: var(--field); position: relative; z-index: 0; isolation: isolate; }
+.leaflet-container { font: inherit; }
+.leaflet-tile-pane { filter: var(--tile-filter); }
+.leaflet-tooltip { border: 0; padding: .6rem .8rem; font-size: .9rem; line-height: 1.4; }
+.leaflet-tooltip-top:before { border-top-color: var(--bg); }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip, .leaflet-tooltip { background: var(--bg); color: var(--fg); box-shadow: 0 2px 10px rgba(0,0,0,.18); border-radius: 4px; }
+.leaflet-tooltip strong { font-weight: 600; }
+.leaflet-tooltip .pop { margin-top: .2rem; }
+.leaflet-tooltip .pop .t { color: var(--muted); font-variant-numeric: tabular-nums; margin-right: .4em; }
+.leaflet-control-attribution { background: var(--bg) !important; color: var(--muted) !important; font-size: .65rem !important; }
+.leaflet-control-attribution a { color: var(--muted) !important; }
+.leaflet-bar a { background: var(--field) !important; color: var(--fg) !important; border-color: var(--rule) !important; }
+.pin span {
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--cam); color: var(--cam-ink); font: 600 12px/1 var(--body); font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px var(--pin-ring), 0 1px 3px rgba(0,0,0,.3); cursor: pointer;
+}
+.pin.dim span { opacity: .35; }
+.pin.active span { transform: scale(1.15); box-shadow: 0 0 0 2px var(--pin-ring), 0 0 0 4px var(--cam), 0 1px 3px rgba(0,0,0,.3); }
+.mapnote { color: var(--muted); font-size: .8rem; margin: .4rem 0 0; }
+
+/* Day sections; today's gets the accent wash so the first question is answered first */
+.today { background: var(--cam-tint); border-radius: 6px; margin: 1.75rem -0.9rem 0; padding: .1rem .9rem .6rem; }
+.today h2 { margin-top: .9rem; }
+.today ul.bops li:last-child { border-bottom: 0; }
+h2 { font-family: var(--display); font-weight: 400; font-size: 1.5rem; margin: 2rem 0 .4rem; }
+h2 small { font-family: var(--body); font-size: .68rem; font-weight: 600; color: var(--cam-ink); background: var(--cam); border-radius: 999px; padding: .2em .6em; margin-left: .6rem; vertical-align: .3em; text-transform: uppercase; letter-spacing: .06em; }
+ul.bops { list-style: none; margin: 0; padding: 0; }
+ul.bops li {
+  display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); gap: .15rem 1rem;
+  padding: .75rem 0; border-top: 1px solid var(--rule);
+}
+ul.bops li:last-child { border-bottom: 1px solid var(--rule); }
+.time { font-variant-numeric: tabular-nums; color: var(--muted); padding-top: .1em; }
+.name { font-weight: 600; font-size: 1.05rem; line-height: 1.3; }
+.name a { color: inherit; }
+.name a::after { content: " ↗"; color: var(--muted); font-weight: 400; font-size: .85em; }
+.name a:hover::after { color: var(--accent); }
+.where { color: var(--muted); margin-top: .1rem; }
+.where .college { color: var(--fg); font-weight: 500; }
+.where .sep { margin: 0 .4em; }
+.facts { margin-top: .15rem; display: flex; flex-wrap: wrap; gap: .3rem .5rem; font-size: .85rem; }
+.facts span { border: 1px solid var(--rule); border-radius: 999px; padding: .05em .55em; color: var(--fg); }
+.facts span.price { border-color: var(--cam); background: var(--cam-tint); }
+.details { font-size: .95rem; margin-top: .3rem; color: var(--fg); opacity: .9; }
+.src { font-size: .8rem; color: var(--muted); margin-top: .25rem; }
+.src a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+
+.empty, .status { color: var(--muted); padding: 1.5rem 0; }
+.status.error { color: #B4432F; }
+
+footer { margin-top: 3.5rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .85rem; display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1.5rem; }
+footer a { display: inline-block; padding: .6rem 0; }
+
+@media (max-width: 480px) {
+  h1 { font-size: 2.3rem; }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; border-radius: 14px; width: 100%; }
+  .seg button { padding: 0 .7rem; font-size: .9rem; border-radius: 11px; }
+  #map { height: 220px; }
+  ul.bops li { grid-template-columns: 3.8rem minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pin span { transition: transform .12s ease-out, opacity .12s ease-out; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1><svg class="ball" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><defs><clipPath id="ballclip"><circle cx="20" cy="20" r="18"/></clipPath></defs><circle cx="20" cy="20" r="18" fill="var(--cam)"/><g clip-path="url(#ballclip)" stroke="var(--bg)" stroke-width="1.6"><path d="M2 8h36M2 14h36M2 20h36M2 26h36M2 32h36"/><path d="M8 2v36M14 2v36M20 2v36M26 2v36M32 2v36"/></g><rect x="18.5" y="0" width="3" height="3" fill="var(--cam-ink)"/></svg>{{city}} <em>Bops</em></h1>
+    <p class="tagline">{{tagline}}</p>
+    <p class="notice">Details change. Check the link on each bop before you go.</p>
+  </header>
+
+  <div class="filters" role="region" aria-label="Filters">
+    <div class="group">
+      <span class="lbl" id="when-lbl">When</span>
+      <div class="seg" role="group" aria-labelledby="when-lbl" id="when">
+        <button type="button" data-when="all" aria-pressed="true">Next 14 days</button>
+        <button type="button" data-when="tonight" aria-pressed="false">Tonight</button>
+        <button type="button" data-when="weekend" aria-pressed="false">This weekend</button>
+        <button type="button" data-when="nextweek" aria-pressed="false">Next week</button>
+      </div>
+    </div>
+    <div class="group" id="college-group">
+      <span class="lbl" id="college-lbl">College</span>
+      <div class="group chips" role="group" aria-labelledby="college-lbl" id="chips"></div>
+    </div>
+    <p class="result" id="result" aria-live="polite"></p>
+  </div>
+
+  <div id="map" role="region" aria-label="Map of {{city}} colleges with bops"></div>
+  <p class="mapnote" id="mapnote">Numbers are bops in the next fortnight. Tap a college to filter the list.</p>
+
+  <section id="list" aria-live="polite">
+    <p class="status" id="loading">Loading…</p>
+  </section>
+
+  <footer>
+    <span id="lastrun">Checked every morning against college calendars, ents pages and student press.</span>
+    <span>From public announcements only. Check with the college before you go.</span>
+  </footer>
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function () {
+  const TZ = "Europe/London";
+  const WINDOW_MS = 14 * 864e5;
+
+  // College coordinates come from city.json; the names match events.json and sources.json.
+  const COLLEGES = {{colleges_js}};
+
+  const list = document.getElementById("list");
+  const chipsEl = document.getElementById("chips");
+  const resultEl = document.getElementById("result");
+  let events = [];
+  let college = "all", when = "all";
+  try { college = localStorage.getItem("cambops.college") || "all"; when = localStorage.getItem("cambops.when") || "all"; } catch (e) {}
+  if (!["all", "tonight", "weekend", "nextweek"].includes(when)) when = "all";
+
+  // Every date is shown in UK time, whatever the visitor's zone.
+  const dayKey = new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" });
+  const dayLabel = new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", weekday: "long", day: "numeric", month: "long" }); // fed UTC noon of the London day
+  const shortDay = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, weekday: "short" });
+  const timeLabel = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false });
+  function safeUrl(u) { return typeof u === "string" && /^https?:\/\//i.test(u) ? u : ""; }
+  function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+  function addDays(key, n) { const d = new Date(key + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
+  function relDay(key) {
+    const today = dayKey.format(new Date());
+    return key === today ? "Tonight" : key === addDays(today, 1) ? "Tomorrow" : "";
+  }
+  function inWindow(e) {
+    if (!e || typeof e.title !== "string" || !e.title.trim()) return false;
+    const t = Date.parse(e.starts_at);
+    return Number.isFinite(t) && t > Date.now() - 5 * 3600e3 && t < Date.now() + WINDOW_MS;
+  }
+  function knownCollege(e) { return !!(e.college && COLLEGES[e.college]); }
+
+  if (college !== "all" && college !== "none" && !COLLEGES[college]) college = "all";
+
+  // "When" ranges as London day keys: [from, to] inclusive.
+  const WEEKDAY = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, weekday: "short" });
+  function whenRange(w) {
+    const today = dayKey.format(new Date());
+    const dow = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].indexOf(WEEKDAY.format(new Date()));
+    const toSun = 6 - dow;                                   // days until this Sunday
+    if (w === "tonight") return [today, today];
+    if (w === "weekend") return [addDays(today, Math.max(0, toSun - 2)), addDays(today, toSun)];   // Fri to Sun, or the rest of it
+    if (w === "nextweek") return [addDays(today, toSun + 1), addDays(today, toSun + 7)];
+    return null;
+  }
+  const WHEN_LABEL = { tonight: "tonight", weekend: "this weekend", nextweek: "next week" };
+  function inWhen(e) {
+    const r = whenRange(when); if (!r) return true;
+    const k = dayKey.format(new Date(e.starts_at));
+    return k >= r[0] && k <= r[1];
+  }
+  document.querySelectorAll("#when button").forEach(b => {
+    b.setAttribute("aria-pressed", String(b.dataset.when === when));
+    b.addEventListener("click", () => setWhen(b.dataset.when));
+  });
+  function setWhen(value) {
+    when = value;
+    try { localStorage.setItem("cambops.when", when); } catch (e) {}
+    document.querySelectorAll("#when button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.when === when)));
+    render();
+  }
+
+  // Map, isolated so a tile or script failure never takes the list down with it.
+  let map = null;
+  try {
+    map = L.map("map", { scrollWheelZoom: false }).setView({{map_center}}, {{map_zoom}});
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
+  } catch (e) { document.getElementById("map").hidden = true; document.getElementById("mapnote").hidden = true; }
+  const markers = new Map();
+  let fitted = false;
+
+  function setCollege(value) {
+    college = value;
+    try { localStorage.setItem("cambops.college", college); } catch (e) {}
+    render();
+    if (map && COLLEGES[college]) map.panTo(COLLEGES[college]);
+  }
+
+  // College chips: only colleges with a bop in the window, most bops first, counts matching the map pins.
+  function renderChips(byCollege, elsewhere) {
+    const entries = [...byCollege.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+    document.getElementById("college-group").hidden = !entries.length && !elsewhere;
+    let html = '<button type="button" class="chip plain" data-college="all" aria-pressed="' + (college === "all") + '">Any college</button>';
+    for (const [name, items] of entries) {
+      html += '<button type="button" class="chip" data-college="' + esc(name) + '" aria-pressed="' + (college === name) + '">' + esc(name) + '<span class="n">' + items.length + "</span></button>";
+    }
+    if (elsewhere) html += '<button type="button" class="chip" data-college="none" aria-pressed="' + (college === "none") + '">Elsewhere<span class="n">' + elsewhere + "</span></button>";
+    chipsEl.innerHTML = html;
+  }
+  chipsEl.addEventListener("click", e => {
+    const b = e.target.closest("[data-college]"); if (!b) return;
+    setCollege(b.dataset.college === college ? "all" : b.dataset.college);
+  });
+
+  function renderResult(n) {
+    const parts = [];
+    if (college === "none") parts.push("outside the colleges"); else if (college !== "all") parts.push("at " + esc(college));
+    if (WHEN_LABEL[when]) parts.push(WHEN_LABEL[when]);
+    const active = college !== "all" || when !== "all";
+    resultEl.hidden = !n && !active;
+    resultEl.innerHTML = "<strong>" + n + (n === 1 ? " bop" : " bops") + "</strong> " + esc(parts.join(" ")) +
+      (active ? ' <button type="button" id="clear">Clear filters</button>' : "");
+    const c = document.getElementById("clear");
+    if (c) c.addEventListener("click", () => { college = "all"; when = "all"; try { localStorage.removeItem("cambops.college"); localStorage.removeItem("cambops.when"); } catch (e) {} document.querySelectorAll("#when button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.when === "all"))); render(); });
+  }
+
+  function renderMap(byCollege) {
+    if (!map) return;
+    for (const [name, m] of markers) { if (!byCollege.has(name)) { map.removeLayer(m); markers.delete(name); } }
+    for (const [name, items] of byCollege) {
+      const cls = "pin" + (college !== "all" && college !== name ? " dim" : "") + (college === name ? " active" : "");
+      const icon = L.divIcon({ className: cls, html: "<span>" + items.length + "</span>", iconSize: [28, 28], iconAnchor: [14, 14] });
+      let m = markers.get(name);
+      if (!m) {
+        m = L.marker(COLLEGES[name], { icon, keyboard: true, title: name }).addTo(map);
+        m.on("click", () => setCollege(college === name ? "all" : name));
+        markers.set(name, m);
+      } else { m.setIcon(icon); }
+      const pop = items.slice(0, 4).map(e => '<div class="pop"><span class="t">' + esc(shortDay.format(new Date(e.starts_at))) + " " + timeLabel.format(new Date(e.starts_at)) + "</span>" + esc(e.title) + "</div>").join("") + (items.length > 4 ? '<div class="pop">and ' + (items.length - 4) + " more</div>" : "");
+      m.bindTooltip("<strong>" + esc(name) + "</strong>" + pop, { direction: "top", offset: [0, -14], opacity: 1 });
+    }
+    if (byCollege.size && !fitted) {
+      fitted = true;
+      map.fitBounds(L.latLngBounds([...byCollege.keys()].map(n => COLLEGES[n])), { padding: [36, 36], maxZoom: 15 });
+    }
+  }
+
+  let sourceIndex = new Map(); // slug -> {name, url, kind}
+  function hostOf(u) { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return ""; } }
+  function sourceLine(e) {
+    if (!e.source && !e.url) return "";
+    const src = sourceIndex.get(e.source);
+    const label = src ? src.name : (e.source || "").replace(/-/g, " ");
+    const href = safeUrl(e.url) || safeUrl(src && src.url);
+    const host = hostOf(href || "");
+    const where = /instagram\.com/.test(host) ? "Instagram post" : /facebook\.com/.test(host) ? "Facebook post" : host;
+    const redundant = !where || label.toLowerCase().includes(where.split(" ")[0].toLowerCase());
+    return '<div class="src">' + (href ? 'Announced at <a href="' + esc(href) + '" rel="noopener" target="_blank">' + esc(label) + "</a>" + (redundant ? "" : " (" + esc(where) + ")") : "Source: " + esc(label)) + "</div>";
+  }
+
+  function facts(e) {
+    const f = [];
+    if (e.price) f.push('<span class="price">' + esc(e.price) + "</span>");
+    if (e.guests) f.push("<span>" + esc(e.guests) + "</span>");
+    if (e.dress) f.push("<span>" + esc(e.dress) + "</span>");
+    if (e.ends_at && Number.isFinite(Date.parse(e.ends_at)) && Date.parse(e.ends_at) > Date.parse(e.starts_at)) f.push("<span>until " + timeLabel.format(new Date(e.ends_at)) + "</span>");
+    return f.length ? '<div class="facts">' + f.join("") + "</div>" : "";
+  }
+
+  function render() {
+    // Counts on pins and chips follow the "when" filter, so both always agree with the list.
+    const inTime = events.filter(inWhen);
+    const byCollege = new Map();
+    let elsewhere = 0;
+    for (const e of inTime) {
+      if (knownCollege(e)) { if (!byCollege.has(e.college)) byCollege.set(e.college, []); byCollege.get(e.college).push(e); }
+      else elsewhere++;
+    }
+    renderMap(byCollege);
+    renderChips(byCollege, elsewhere);
+
+    const shown = inTime.filter(e => college === "all" || (college === "none" ? !knownCollege(e) : e.college === college));
+    renderResult(shown.length);
+
+
+    if (!shown.length) {
+      const where = college === "all" ? "" : college === "none" ? " outside the colleges" : " at " + esc(college);
+      const whenTxt = WHEN_LABEL[when] ? " " + WHEN_LABEL[when] : " in the next fortnight";
+      list.innerHTML = '<p class="empty">No bops listed' + where + whenTxt + '.</p>';
+      return;
+    }
+    const groups = new Map();
+    for (const e of shown) {
+      const k = dayKey.format(new Date(e.starts_at));
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(e);
+    }
+    let html = "";
+    for (const [k, items] of groups) {
+      const rel = relDay(k);
+      if (rel === "Tonight") html += '<div class="today">';
+      html += "<h2>" + esc(dayLabel.format(new Date(k + "T12:00:00Z"))) + (rel ? "<small>" + rel + "</small>" : "") + '</h2><ul class="bops">';
+      for (const e of items) {
+        const link = safeUrl(e.url);
+        const name = link ? '<a href="' + esc(link) + '" rel="noopener" target="_blank">' + esc(e.title) + "</a>" : esc(e.title);
+        const where = [];
+        if (knownCollege(e)) where.push('<span class="college">' + esc(e.college) + "</span>");
+        if (e.venue && e.venue !== e.college) where.push(esc(e.venue));
+        if (e.host && e.host !== e.college) where.push(esc(e.host));
+        html += '<li><span class="time">' + timeLabel.format(new Date(e.starts_at)) + '</span><div>' +
+          '<div class="name">' + name + '</div>' +
+          '<div class="where">' + where.join('<span class="sep">·</span>') + "</div>" + facts(e) +
+          (e.details ? '<div class="details">' + esc(e.details) + "</div>" : "") + sourceLine(e) + "</div></li>";
+      }
+      html += "</ul>";
+      if (rel === "Tonight") html += "</div>";
+    }
+    list.innerHTML = html;
+  }
+
+  async function load() {
+    try {
+      const r = await fetch("events.json", { cache: "no-cache" });
+      if (!r.ok) throw new Error(r.status);
+      const data = await r.json();
+      const srcs = Array.isArray(data.sources) ? data.sources : [];
+      sourceIndex = new Map(srcs.filter(x => x.slug).map(x => [x.slug, x]));
+      events = (data.bops || []).filter(inWindow).sort((a, b) => Date.parse(a.starts_at) - Date.parse(b.starts_at));
+      render();
+      if (data.generated) {
+        const when = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, weekday: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(data.generated));
+        const n = srcs.length || (typeof data.sources === "number" ? data.sources : 0);
+        document.getElementById("lastrun").textContent = "Checked " + when + (n ? " across " + n + " sources" : "") + ".";
+      }
+    } catch (err) {
+      list.innerHTML = '<p class="status error">Could not load the listings. Try again in a minute.</p>';
+    }
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>

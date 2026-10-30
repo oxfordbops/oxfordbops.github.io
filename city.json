@@ -1,0 +1,235 @@
+{
+ "name": "Oxford",
+ "slug": "oxfordbops",
+ "org": "oxfordbops",
+ "site": "https://oxfordbops.github.io/",
+ "tagline": "College bops in Oxford for the next fortnight, checked every morning.",
+ "map_center": [
+  51.7553,
+  -1.256
+ ],
+ "map_zoom": 14,
+ "bbox": {
+  "lat": [
+   51.74,
+   51.78
+  ],
+  "lng": [
+   -1.27,
+   -1.24
+  ]
+ },
+ "palette": {
+  "light": {
+   "bg": "#F7F8FA",
+   "fg": "#14181F",
+   "muted": "#646B78",
+   "rule": "#DBDFE6",
+   "cam": "#002147",
+   "cam-ink": "#FFFFFF",
+   "cam-tint": "#E4EAF3",
+   "accent": "#002147",
+   "field": "#FFFFFF",
+   "pin-ring": "#FFFFFF",
+   "hl": "#E4EAF3",
+   "hl-line": "#002147",
+   "on-badge": "rgba(255,255,255,.18)",
+   "tile-filter": "saturate(.4) contrast(.95)"
+  },
+  "dark": {
+   "bg": "#0F1420",
+   "fg": "#E6E9EF",
+   "muted": "#98A1B3",
+   "rule": "#263044",
+   "cam": "#6F93C9",
+   "cam-ink": "#0A1324",
+   "cam-tint": "#1A2740",
+   "accent": "#9DB8E3",
+   "field": "#161D2C",
+   "pin-ring": "#0F1420",
+   "hl": "#1A2740",
+   "hl-line": "#6F93C9",
+   "on-badge": "rgba(0,0,0,.18)",
+   "tile-filter": "invert(1) hue-rotate(180deg) brightness(.8) contrast(.9) saturate(.3)"
+  },
+  "comment": "Oxford blue, Pantone 282, for fills and links; pale blue wash for tints"
+ },
+ "favicon": {
+  "tile": "#002147",
+  "ball": "#F7F8FA",
+  "lines": "#002147"
+ },
+ "colleges": {
+  "Balliol": [
+   51.7543,
+   -1.2574
+  ],
+  "Brasenose": [
+   51.7531,
+   -1.2545
+  ],
+  "Christ Church": [
+   51.7502,
+   -1.2558
+  ],
+  "Corpus Christi": [
+   51.7509,
+   -1.253
+  ],
+  "Exeter": [
+   51.7536,
+   -1.2566
+  ],
+  "Green Templeton": [
+   51.7612,
+   -1.2634
+  ],
+  "Harris Manchester": [
+   51.756,
+   -1.2515
+  ],
+  "Hertford": [
+   51.7541,
+   -1.2537
+  ],
+  "Jesus": [
+   51.7532,
+   -1.2569
+  ],
+  "Keble": [
+   51.7591,
+   -1.2577
+  ],
+  "Kellogg": [
+   51.7633,
+   -1.2638
+  ],
+  "Lady Margaret Hall": [
+   51.7639,
+   -1.2548
+  ],
+  "Linacre": [
+   51.7602,
+   -1.2516
+  ],
+  "Lincoln": [
+   51.7531,
+   -1.256
+  ],
+  "Magdalen": [
+   51.7519,
+   -1.2466
+  ],
+  "Mansfield": [
+   51.7576,
+   -1.254
+  ],
+  "Merton": [
+   51.7508,
+   -1.2516
+  ],
+  "New College": [
+   51.7544,
+   -1.251
+  ],
+  "Nuffield": [
+   51.7528,
+   -1.2641
+  ],
+  "Oriel": [
+   51.7517,
+   -1.2537
+  ],
+  "Pembroke": [
+   51.7503,
+   -1.2574
+  ],
+  "Queen's": [
+   51.753,
+   -1.251
+  ],
+  "Reuben": [
+   51.7585,
+   -1.256
+  ],
+  "St Anne's": [
+   51.7616,
+   -1.2626
+  ],
+  "St Antony's": [
+   51.7636,
+   -1.2626
+  ],
+  "St Catherine's": [
+   51.7563,
+   -1.2437
+  ],
+  "St Cross": [
+   51.7584,
+   -1.25
+  ],
+  "St Edmund Hall": [
+   51.7535,
+   -1.2504
+  ],
+  "St Hilda's": [
+   51.749,
+   -1.244
+  ],
+  "St Hugh's": [
+   51.7678,
+   -1.2612
+  ],
+  "St John's": [
+   51.7559,
+   -1.2576
+  ],
+  "St Peter's": [
+   51.7532,
+   -1.2612
+  ],
+  "Somerville": [
+   51.7596,
+   -1.2626
+  ],
+  "Trinity": [
+   51.7556,
+   -1.2558
+  ],
+  "University": [
+   51.7524,
+   -1.2512
+  ],
+  "Wadham": [
+   51.756,
+   -1.2545
+  ],
+  "Wolfson": [
+   51.7738,
+   -1.2567
+  ],
+  "Worcester": [
+   51.7549,
+   -1.263
+  ]
+ },
+ "routine": {
+  "common_rooms": "JCR, MCR or college entz committee",
+  "su": {
+   "name": "Oxford SU events",
+   "url": "https://www.oxfordsu.org/events/"
+  },
+  "press": [
+   {
+    "name": "Cherwell",
+    "url": "https://cherwell.org"
+   },
+   {
+    "name": "The Oxford Student",
+    "url": "https://www.oxfordstudent.com"
+   }
+  ],
+  "js_rendered_examples": "some JCR sites"
+ },
+ "source_count_hint": 150
+}
