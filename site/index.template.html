@@ -394,10 +394,18 @@ footer a { display: inline-block; padding: .6rem 0; }
       sourceIndex = new Map(srcs.filter(x => x.slug).map(x => [x.slug, x]));
       events = (data.bops || []).filter(inWindow).sort((a, b) => Date.parse(a.starts_at) - Date.parse(b.starts_at));
       render();
-      if (data.generated) {
-        const when = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, weekday: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(data.generated));
-        const n = srcs.length || (typeof data.sources === "number" ? data.sources : 0);
-        document.getElementById("lastrun").textContent = "Checked " + when + (n ? " across " + n + " sources" : "") + ".";
+      const run = data.run && typeof data.run === "object" ? data.run : null;
+      const checkedAt = run && run.checked_at ? run.checked_at : data.generated;
+      if (checkedAt && Number.isFinite(Date.parse(checkedAt))) {
+        const when = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(checkedAt));
+        const checked = run && Number.isFinite(run.sources_checked) ? run.sources_checked : (Array.isArray(data.sources) ? data.sources.length : 0);
+        const okCount = run && Number.isFinite(run.sources_ok) ? run.sources_ok : null;
+        let text = "Checked " + when;
+        if (checked) text += okCount === null ? " across " + checked + " sources" : ", " + okCount + " of " + checked + " sources readable";
+        if (run && run.window_to && /^\d{4}-\d{2}-\d{2}$/.test(run.window_to)) {
+          text += ", listing to " + new Intl.DateTimeFormat("en-GB", { timeZone: TZ, day: "numeric", month: "short" }).format(new Date(run.window_to + "T12:00:00Z"));
+        }
+        document.getElementById("lastrun").textContent = text + ".";
       }
     } catch (err) {
       list.innerHTML = '<p class="status error">Could not load the listings. Try again in a minute.</p>';

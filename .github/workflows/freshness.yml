@@ -15,13 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: events.json was regenerated in the last 30 hours
+      - name: the run record says the sources were checked in the last 30 hours
         run: |
           python3 - <<'PY'
           import json, sys
           from datetime import datetime, timezone
           d = json.load(open("docs/events.json"))
-          gen = datetime.fromisoformat(d["generated"].replace("Z", "+00:00"))
+          gen = datetime.fromisoformat(d["run"]["checked_at"].replace("Z", "+00:00"))
           age_h = (datetime.now(timezone.utc) - gen).total_seconds() / 3600
           print(f"generated {d['generated']}, {age_h:.1f} h ago, {len(d['bops'])} bops, {len(d['sources']) if isinstance(d['sources'], list) else d['sources']} sources")
           sys.exit(1 if age_h > 30 else 0)

@@ -1,6 +1,6 @@
 """events.json is what the routine writes and the page reads. These tests are the contract between them."""
 import json, pathlib, re, unittest
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
@@ -24,10 +24,30 @@ def colleges():
 class TestShape(unittest.TestCase):
     def test_top_level(self):
         d = load()
-        self.assertEqual(set(d) >= {"generated", "sources", "bops"}, True)
+        self.assertEqual(set(d) >= {"generated", "run", "sources", "bops"}, True, "generated, run, sources and bops are required")
         self.assertTrue(ISO.match(d["generated"]), d["generated"])
         self.assertIsInstance(d["bops"], list)
-        self.assertTrue(isinstance(d["sources"], (int, list)))
+        self.assertIsInstance(d["sources"], list)
+
+    def test_run_record_is_fresh_and_consistent(self):
+        # The run block is the "last checked" stamp the page shows. It must be rewritten on every run,
+        # so each field is checked against the rest of the file rather than trusted.
+        d = load()
+        run = d["run"]
+        self.assertEqual(set(run), {"checked_at", "window_from", "window_to", "sources_checked", "sources_ok"}, "run has exactly these five fields")
+        self.assertTrue(ISO.match(run["checked_at"]), run["checked_at"])
+        checked = datetime.fromisoformat(run["checked_at"].replace("Z", "+00:00"))
+        generated = datetime.fromisoformat(d["generated"].replace("Z", "+00:00"))
+        self.assertEqual(checked, generated, "checked_at must equal generated")
+        self.assertEqual(checked.utcoffset().total_seconds(), 0, "checked_at is written in UTC")
+        self.assertEqual(run["window_from"], checked.astimezone(LONDON).date().isoformat(), "window_from is the run's date in UK time")
+        start = date.fromisoformat(run["window_from"])
+        self.assertEqual(run["window_to"], (start + timedelta(days=14)).isoformat(), "window_to is 14 days after window_from")
+        self.assertEqual(run["sources_checked"], len(d["sources"]), "sources_checked must equal the number of source entries")
+        self.assertEqual(run["sources_ok"], sum(1 for s in d["sources"] if s.get("ok") is True), "sources_ok must equal the number of readable sources")
+        for b in d["bops"]:
+            day = datetime.fromisoformat(b["starts_at"].replace("Z", "+00:00")).astimezone(LONDON).date()
+            self.assertTrue(start <= day <= start + timedelta(days=14), f"{b['title']} on {day} is outside the run's window")
 
     def test_sources_entries(self):
         d = load()
@@ -105,14 +125,6 @@ class TestShape(unittest.TestCase):
                 expected = dt.astimezone(LONDON).utcoffset()
                 self.assertEqual(dt.utcoffset(), expected, f"{b['title']} {field}: offset {dt.utcoffset()} but London had {expected}")
 
-    def test_window_is_sane(self):
-        # The routine writes the next 14 days; allow a day of slack either side for runs near midnight.
-        d = load()
-        gen = datetime.fromisoformat(d["generated"].replace("Z", "+00:00"))
-        for b in d["bops"]:
-            dt = datetime.fromisoformat(b["starts_at"].replace("Z", "+00:00"))
-            days = (dt - gen).total_seconds() / 86400
-            self.assertTrue(-1 <= days <= 15, f"{b['title']} is {days:.1f} days from the run")
 
 
 if __name__ == "__main__":
