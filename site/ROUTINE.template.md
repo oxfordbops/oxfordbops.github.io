@@ -28,6 +28,8 @@ Some common-room sites render their content with JavaScript ({{js_rendered_examp
 
 If a registered source has moved or died, do not edit `docs/sources.json` yourself; say so in your summary so a person can fix the registry.
 
+If every source is unreachable (the network returns 403 on connect or hosts do not resolve), the environment's network access is misconfigured: change nothing, commit nothing, and say so in your summary.
+
 ## 2. Write docs/events.json
 
 The file has this shape:
@@ -77,4 +79,4 @@ git pull --rebase origin main
 git push origin main
 ```
 
-If the rebase conflicts on `docs/events.json`, keep your version of the file (`git checkout --theirs docs/events.json` during the rebase, then `git add` and `git rebase --continue`) and push. If the push is still rejected, create a branch `bops/<date>`, push it and open a pull request with `gh pr create --fill`, then say so in your summary. End with a short summary: how many bops are listed, which were added, changed or dropped and on what evidence, and any source that has changed or stopped working. Do not change any other file.
+If the rebase conflicts on `docs/events.json`, keep your version of the file (`git checkout --theirs docs/events.json` during the rebase, then `git add` and `git rebase --continue`) and push. If the push is still rejected, create a branch `bops/<date>`, push it and open a pull request with `gh api repos/{{repo}}/pulls -f title="Bops for <today>" -f head=bops/<date> -f base=main` (the GitHub proxy in this environment does not serve `gh pr`), then say so in your summary. End with a short summary: how many bops are listed, which were added, changed or dropped and on what evidence, and any source that has changed or stopped working. Do not change any other file.
