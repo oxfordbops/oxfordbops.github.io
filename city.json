@@ -4,8 +4,8 @@
  "org": "oxfordbops",
  "site": "https://oxfordbops.github.io/",
  "analytics": {
-  "goatcounter": "",
-  "comment": "GoatCounter site code: pageviews, source-link clicks and filter use are sent to https://<code>.goatcounter.com, cookieless and without personal data. Empty means no analytics; create a GoatCounter site for Oxford and put its code here."
+  "goatcounter": "cambridgebops",
+  "comment": "GoatCounter site code: pageviews, source-link clicks and filter use are sent to https://<code>.goatcounter.com, cookieless and without personal data. Oxford shares the Cambridge site for now; its views are counted under the path /oxfordbops. Set to \"\" to turn analytics off."
  },
  "tagline": "College bops in Oxford for the next fortnight, checked every morning.",
  "map_center": [
