@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-30T19:43:48+00:00",
+  "generated": "2026-10-30T19:46:57+00:00",
   "sources": [
     {
       "slug": "balliol-balliol-jcr",
@@ -563,7 +563,7 @@
       "url": "https://mertonjcr.org/",
       "ok": false,
       "found": 0,
-      "note": "fail"
+      "note": "Remote end closed connection without response"
     },
     {
       "slug": "merton-merton-college-events",
@@ -597,7 +597,7 @@
       "url": "https://mertonjcr.org/termcard/",
       "ok": false,
       "found": 0,
-      "note": "fail"
+      "note": "Remote end closed connection without response"
     },
     {
       "slug": "merton-merton-mcr-term-card",
@@ -1344,8 +1344,9 @@
       "name": "Oxford SU events",
       "kind": "SU listings",
       "url": "https://www.oxfordsu.org/events/",
-      "ok": true,
-      "found": 0
+      "ok": false,
+      "found": 0,
+      "note": "HTTP Error 404: Not Found"
     },
     {
       "slug": "all-cherwell",
@@ -1354,16 +1355,15 @@
       "url": "https://cherwell.org/",
       "ok": false,
       "found": 0,
-      "note": "blocked 403"
+      "note": "HTTP Error 403: Forbidden"
     },
     {
       "slug": "all-the-oxford-student",
       "name": "The Oxford Student",
       "kind": "Student press",
       "url": "https://www.oxfordstudent.com/",
-      "ok": false,
-      "found": 0,
-      "note": "fail 520"
+      "ok": true,
+      "found": 0
     },
     {
       "slug": "all-the-oxford-blue",
