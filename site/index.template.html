@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+{{analytics}}
 <style>
 /* Layout: one narrow column. Tonight first, then the map, then the fortnight day by day. Rows read time, name, where, how much. */
 :root {
@@ -198,6 +199,19 @@ footer a { display: inline-block; padding: .6rem 0; }
   try { college = localStorage.getItem("cambops.college") || "all"; when = localStorage.getItem("cambops.when") || "all"; } catch (e) {}
   if (!["all", "tonight", "weekend", "nextweek"].includes(when)) when = "all";
 
+  // Usage events for the analytics snippet in <head>, if the city has one: which filters people use and which
+  // bops and sources they click through to. Nothing is sent when the snippet is absent or blocked.
+  function track(path, title) {
+    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title || "", event: true }); } catch (e) {}
+  }
+  list.addEventListener("click", e => {
+    const a = e.target.closest("a[href]");
+    if (!a || !list.contains(a)) return;
+    const li = a.closest("li");
+    const title = li ? (li.querySelector(".name") || {}).textContent || "" : "";
+    track((a.closest(".src") ? "source/" : "bop/") + hostOf(a.href), title.trim());
+  });
+
   // Every date is shown in UK time, whatever the visitor's zone.
   const dayKey = new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" });
   const dayLabel = new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", weekday: "long", day: "numeric", month: "long" }); // fed UTC noon of the London day
@@ -242,6 +256,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   });
   function setWhen(value) {
     when = value;
+    track("filter/when/" + when);
     try { localStorage.setItem("cambops.when", when); } catch (e) {}
     document.querySelectorAll("#when button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.when === when)));
     render();
@@ -258,6 +273,7 @@ footer a { display: inline-block; padding: .6rem 0; }
 
   function setCollege(value) {
     college = value;
+    track("filter/college/" + college);
     try { localStorage.setItem("cambops.college", college); } catch (e) {}
     render();
     if (map && COLLEGES[college]) map.panTo(COLLEGES[college]);

@@ -13,7 +13,7 @@ One template, one repository per city. This repository is the city named in `cit
 
 | Path | Role | City-specific? |
 |---|---|---|
-| `city.json` | Name, tagline, palette (light and dark tokens), favicon colours, colleges with coordinates, map centre, student press and SU for the routine. | yes |
+| `city.json` | Name, tagline, palette (light and dark tokens), favicon colours, colleges with coordinates, map centre, student press and SU for the routine, and the GoatCounter site code for analytics (empty for none). | yes |
 | `docs/events.json` | `{generated, sources, bops: [...]}`, rewritten daily by the routine. Fields per bop: title, starts_at, ends_at, college, venue, host, price, guests, dress, url, details, source. | yes |
 | `docs/sources.json` | The registry of verified sources: common-room and ents sites, calendars, termcards, college events pages, SU listings, student press, and each college's Instagram. The routine reads only these. | yes |
 | `site/index.template.html` | The whole page: palette tokens, filter bar (When segmented control, college chips with counts), Leaflet map with a count per college, day-by-day list with the tinted "tonight" section, source link per bop. Placeholders are filled from `city.json`. | shared |
@@ -45,6 +45,10 @@ To change what the routine does, edit `site/ROUTINE.template.md`, rebuild, and p
 2. Copy this repository's shared files there (`scripts/sync_template.sh` into an empty folder that has a `city.json`), write `city.json` with the city's colleges, palette and press, and an empty `docs/events.json` and `docs/sources.json` with the colleges list.
 3. Build the source registry (`docs/sources.json`), run `scripts/check_sources.py` until every college has a readable source, build, test, push.
 4. Enable GitHub Pages with the workflow build, and create the routine from `docs/ROUTINE.md`.
+
+## Analytics
+
+Pageviews, source-link clicks and filter use are counted by [GoatCounter](https://www.goatcounter.com) when `city.json` names a site code under `analytics.goatcounter`: the page loads `gc.zgo.at/count.js`, which sets no cookies and stores no personal data, so no consent banner is needed. The dashboard is at `https://<code>.goatcounter.com`. Events: `filter/when/<value>`, `filter/college/<name>`, `bop/<host>` and `source/<host>` for click-throughs. Leave the code empty to ship the page with no analytics at all.
 
 ## Hosting
 

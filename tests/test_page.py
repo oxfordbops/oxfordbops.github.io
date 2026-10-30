@@ -43,9 +43,21 @@ class TestPage(unittest.TestCase):
     def test_external_resources_are_pinned_and_allowed(self):
         srcs = re.findall(r'(?:src|href)="(https://[^"]+)"', PAGE.split("<script>")[0])
         for u in srcs:
-            self.assertTrue(u.startswith(("https://fonts.googleapis.com", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/")), u)
+            self.assertTrue(u.startswith(("https://fonts.googleapis.com", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/", "https://gc.zgo.at/count.js")), u)
         self.assertIn("tile.openstreetmap.org", SCRIPT)
         self.assertNotIn("cartocdn", SCRIPT)
+
+    def test_analytics_follow_city_json(self):
+        # The GoatCounter snippet is present exactly when city.json names a site code; the page never sends anything else.
+        code = (json.loads((ROOT / "city.json").read_text()).get("analytics") or {}).get("goatcounter", "")
+        head = PAGE.split("<script>")[0]
+        if code:
+            self.assertIn(f'data-goatcounter="https://{code}.goatcounter.com/count"', head)
+            self.assertIn('async src="https://gc.zgo.at/count.js"', head)
+        else:
+            self.assertNotIn("goatcounter", PAGE.lower())
+        self.assertIn("window.goatcounter && window.goatcounter.count", SCRIPT)
+        self.assertNotIn("googletagmanager", PAGE.lower())
 
     def test_theme_tokens_defined_in_both_themes(self):
         tokens = set(re.findall(r"(--[a-z-]+):", PAGE.split("@media")[0]))

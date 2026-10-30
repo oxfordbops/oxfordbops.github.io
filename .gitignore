@@ -1,5 +1,6 @@
 # Tool and editor state
 .gstack/
+.claude/
 .DS_Store
 .vscode/
 .idea/

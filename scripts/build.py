@@ -33,6 +33,16 @@ def favicon():
     return "data:image/svg+xml," + urllib.parse.quote(svg)
 
 
+def analytics():
+    """GoatCounter (gc.zgo.at): cookieless pageview counting, no consent banner needed. Empty code -> no analytics at all."""
+    code = (CITY.get("analytics") or {}).get("goatcounter", "")
+    if not code:
+        return ""
+    if not __import__("re").fullmatch(r"[a-z0-9-]+", code):
+        sys.exit(f"city.json analytics.goatcounter must be a GoatCounter site code (lowercase letters, digits, dashes), got {code!r}")
+    return f'<script data-goatcounter="https://{code}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>'
+
+
 def colleges_js():
     items = [f'    {json.dumps(n, ensure_ascii=False)}: [{lat}, {lng}]' for n, (lat, lng) in CITY["colleges"].items()]
     return "{\n" + ",\n".join(items) + "\n  }"
@@ -42,7 +52,7 @@ def render_page():
     t = (ROOT / "site" / "index.template.html").read_text()
     values = {
         "city": CITY["name"], "tagline": CITY["tagline"], "favicon": favicon(), "colleges_js": colleges_js(),
-        "map_center": json.dumps(CITY["map_center"]), "map_zoom": str(CITY.get("map_zoom", 14)),
+        "map_center": json.dumps(CITY["map_center"]), "map_zoom": str(CITY.get("map_zoom", 14)), "analytics": analytics(),
         "tokens_light": tokens("light", "  "), "tokens_dark": tokens("dark", "  "), "tokens_dark_indented": tokens("dark", "    "),
     }
     for k, v in values.items():
