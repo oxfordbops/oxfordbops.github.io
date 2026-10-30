@@ -83,7 +83,9 @@ If a test fails, fix the formatting or the field in `docs/events.json` that it n
 git add docs/events.json
 git commit -m "Bops for <today>: <n> listed from <k> sources"
 git pull --rebase origin main
-git push origin main
+git push origin HEAD:main
 ```
+
+(`HEAD:main` because the checkout can be a detached HEAD after the rebase.)
 
 If the rebase conflicts on `docs/events.json`, keep your version of the file (`git checkout --theirs docs/events.json` during the rebase, then `git add` and `git rebase --continue`) and push. If the push is still rejected, create a branch `bops/<date>`, push it and open a pull request with `gh api repos/{{repo}}/pulls -f title="Bops for <today>" -f head=bops/<date> -f base=main` (the GitHub proxy in this environment does not serve `gh pr`), then say so in your summary. End with a short summary: how many bops are listed, which were added, changed or dropped and on what evidence, and any source that has changed or stopped working. Do not change any other file.
