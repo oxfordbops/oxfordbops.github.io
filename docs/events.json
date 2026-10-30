@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-30T19:46:57+00:00",
+  "generated": "2026-10-30T19:53:10+00:00",
   "run": {
-    "checked_at": "2026-10-30T19:46:57+00:00",
+    "checked_at": "2026-10-30T19:53:10+00:00",
     "window_from": "2026-10-30",
     "window_to": "2026-11-13",
     "sources_checked": 167,
@@ -511,8 +511,9 @@
       "name": "Magdalen JCR",
       "kind": "JCR site",
       "url": "https://www.magdjcr.co.uk/",
-      "ok": true,
-      "found": 0
+      "ok": false,
+      "found": 0,
+      "note": "HTTP 429"
     },
     {
       "slug": "magdalen-magdalen-college-events",
@@ -570,7 +571,7 @@
       "url": "https://mertonjcr.org/",
       "ok": false,
       "found": 0,
-      "note": "Remote end closed connection without response"
+      "note": "connection failed"
     },
     {
       "slug": "merton-merton-college-events",
@@ -604,7 +605,7 @@
       "url": "https://mertonjcr.org/termcard/",
       "ok": false,
       "found": 0,
-      "note": "Remote end closed connection without response"
+      "note": "connection failed"
     },
     {
       "slug": "merton-merton-mcr-term-card",
@@ -973,7 +974,7 @@
       "kind": "Termcard",
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "ok": true,
-      "found": 0
+      "found": 1
     },
     {
       "slug": "st-edmund-hall-teddy-hall-jcr",
@@ -1353,16 +1354,15 @@
       "url": "https://www.oxfordsu.org/events/",
       "ok": false,
       "found": 0,
-      "note": "HTTP Error 404: Not Found"
+      "note": "HTTP 404; page moved, registry needs updating"
     },
     {
       "slug": "all-cherwell",
       "name": "Cherwell",
       "kind": "Student press",
       "url": "https://cherwell.org/",
-      "ok": false,
-      "found": 0,
-      "note": "HTTP Error 403: Forbidden"
+      "ok": true,
+      "found": 0
     },
     {
       "slug": "all-the-oxford-student",
@@ -1391,6 +1391,16 @@
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Listed on the Keble MCR term-card calendar embedded on the socials page.",
       "source": "keble-keble-mcr-socials"
+    },
+    {
+      "title": "Halloween Bop with Univ",
+      "starts_at": "2026-10-30T21:00:00+00:00",
+      "college": "University",
+      "venue": "University College",
+      "host": "St Cross SRC",
+      "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
+      "details": "Joint bop with St Cross, listed on the St Cross SRC Michaelmas termcard; time TBD so 21:00 is a default. Costumes recommended.",
+      "source": "st-cross-st-cross-src-termcard"
     },
     {
       "title": "Halloween Bop",
