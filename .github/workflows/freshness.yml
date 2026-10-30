@@ -1,0 +1,35 @@
+# Watchdog: fails (and so emails the repository's owner) when the daily routine has not refreshed
+# events.json within the last 30 hours, or when the live site does not serve the committed data.
+name: Daily data freshness
+
+on:
+  schedule:
+    - cron: "30 9 * * *"   # 09:30 UTC, three and a half hours after the routine's 06:00 run
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  freshness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: events.json was regenerated in the last 30 hours
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          from datetime import datetime, timezone
+          d = json.load(open("docs/events.json"))
+          gen = datetime.fromisoformat(d["generated"].replace("Z", "+00:00"))
+          age_h = (datetime.now(timezone.utc) - gen).total_seconds() / 3600
+          print(f"generated {d['generated']}, {age_h:.1f} h ago, {len(d['bops'])} bops, {len(d['sources']) if isinstance(d['sources'], list) else d['sources']} sources")
+          sys.exit(1 if age_h > 30 else 0)
+          PY
+      - name: live site serves the committed data
+        run: |
+          site=$(python3 -c "import json; print(json.load(open('city.json'))['site'])")
+          live=$(curl -fsSL -H 'Cache-Control: no-cache' "${site}events.json" | python3 -c "import json,sys; print(json.load(sys.stdin)['generated'])")
+          here=$(python3 -c "import json; print(json.load(open('docs/events.json'))['generated'])")
+          echo "live $live / committed $here"
+          test "$live" = "$here"
