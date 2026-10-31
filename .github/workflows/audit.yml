@@ -51,8 +51,11 @@ jobs:
           city = json.load(open("city.json"))["name"]
           missing, mism, unread = a["missing"], a["mismatched"], a["unreadable_sources"]
           print(f"sources checked {a['sources_checked']}, missing {len(missing)}, mismatched {len(mism)}, unreadable {len(unread)}, unverifiable {len(a['unverifiable'])}")
-          if not missing and not mism:
-              print("Nothing to report."); raise SystemExit(0)
+          # Low-confidence finds (formals with a DJ, unnamed socials) are logged here but do not raise an issue on their own.
+          for m in missing:
+              print(f"  {m['confidence']}: {m['college']} {m['title']} {m['date']} {m['url']}")
+          if not [m for m in missing if m["confidence"] != "low"] and not mism:
+              print("Nothing certain enough to report."); raise SystemExit(0)
           lines = [f"Codex audit of {city} Bops, window {a['window_from']} to {a['window_to']}, {a['sources_checked']} sources read. [Run log]({os.environ['RUN_URL']})", ""]
           if missing:
               lines += ["## Found on a source but not listed", ""]
