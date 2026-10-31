@@ -21,3 +21,5 @@ node_modules/
 scratch/
 
 .claude/
+audit.json
+audit.log

@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["checked_at", "window_from", "window_to", "sources_checked", "missing", "mismatched", "unverifiable", "unreadable_sources"],
+  "properties": {
+    "checked_at": {"type": "string"},
+    "window_from": {"type": "string"},
+    "window_to": {"type": "string"},
+    "sources_checked": {"type": "integer"},
+    "missing": {"type": "array", "items": {"type": "object", "additionalProperties": false,
+      "required": ["college", "title", "date", "time", "url", "evidence", "confidence"],
+      "properties": {"college": {"type": "string"}, "title": {"type": "string"}, "date": {"type": "string"}, "time": {"type": "string"}, "url": {"type": "string"}, "evidence": {"type": "string"}, "confidence": {"type": "string", "enum": ["high", "medium", "low"]}}}},
+    "mismatched": {"type": "array", "items": {"type": "object", "additionalProperties": false,
+      "required": ["college", "title", "date", "listed", "source_says", "url"],
+      "properties": {"college": {"type": "string"}, "title": {"type": "string"}, "date": {"type": "string"}, "listed": {"type": "string"}, "source_says": {"type": "string"}, "url": {"type": "string"}}}},
+    "unverifiable": {"type": "array", "items": {"type": "object", "additionalProperties": false,
+      "required": ["college", "title", "date"],
+      "properties": {"college": {"type": "string"}, "title": {"type": "string"}, "date": {"type": "string"}}}},
+    "unreadable_sources": {"type": "array", "items": {"type": "object", "additionalProperties": false,
+      "required": ["url", "status"],
+      "properties": {"url": {"type": "string"}, "status": {"type": "string"}}}}
+  }
+}

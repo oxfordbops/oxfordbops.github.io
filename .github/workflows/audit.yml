@@ -1,0 +1,76 @@
+# Second opinion: Codex independently re-reads every registered source and compares with events.json.
+# Runs after the morning routine. Missing or mismatched bops open (or update) a GitHub issue labeled
+# "audit", which notifies the repository's watchers, and fail the job, which emails on its own.
+# Needs the repository secret OPENAI_API_KEY. Codex runs inside its own sandbox (workspace-write, with
+# network access so it can read the sources) and is told never to edit the repository; the job refuses
+# to continue if any tracked file changed.
+name: Audit listings with Codex
+
+on:
+  schedule:
+    - cron: "30 8 * * *"   # 08:30 UTC, after the 06:00 routine and before the 09:30 freshness check
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    if: ${{ vars.AUDIT_ENABLED != 'false' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Codex CLI and pdftotext
+        run: |
+          npm install -g @openai/codex
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Run the audit
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then echo "OPENAI_API_KEY secret is not set"; exit 1; fi
+          codex exec --skip-git-repo-check --ephemeral \
+            -s workspace-write -c sandbox_workspace_write.network_access=true \
+            --output-schema scripts/audit_schema.json -o audit.json \
+            "$(cat scripts/audit_prompt.md)" > audit.log 2>&1 || { tail -40 audit.log; exit 1; }
+          python3 -m json.tool audit.json > /dev/null
+          if git status --porcelain --untracked-files=no | grep -q .; then echo "Codex changed repository files; refusing"; git status --short; exit 1; fi
+      - name: Report
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess, datetime
+          a = json.load(open("audit.json"))
+          city = json.load(open("city.json"))["name"]
+          missing, mism, unread = a["missing"], a["mismatched"], a["unreadable_sources"]
+          print(f"sources checked {a['sources_checked']}, missing {len(missing)}, mismatched {len(mism)}, unreadable {len(unread)}, unverifiable {len(a['unverifiable'])}")
+          if not missing and not mism:
+              print("Nothing to report."); raise SystemExit(0)
+          lines = [f"Codex audit of {city} Bops, window {a['window_from']} to {a['window_to']}, {a['sources_checked']} sources read. [Run log]({os.environ['RUN_URL']})", ""]
+          if missing:
+              lines += ["## Found on a source but not listed", ""]
+              lines += [f"- **{m['college']}**: {m['title']}, {m['date']} {m['time']} ({m['confidence']} confidence) - {m['url']}\n  {m['evidence']}" for m in missing]
+          if mism:
+              lines += ["", "## Listed, but the source says otherwise", ""]
+              lines += [f"- **{m['college']}**: {m['title']}, {m['date']}: listed {m['listed']}; source says {m['source_says']} - {m['url']}" for m in mism]
+          if unread:
+              lines += ["", "## Sources that could not be read", ""] + [f"- {u['url']}: {u['status']}" for u in unread]
+          body = "\n".join(lines)
+          title = f"Audit {datetime.date.today().isoformat()}: {len(missing)} missing, {len(mism)} mismatched"
+          repo = os.environ["REPO"]
+          subprocess.run(["gh", "label", "create", "audit", "-R", repo, "--color", "2A97C9", "--description", "Codex found listings to check"], capture_output=True)
+          existing = subprocess.run(["gh", "issue", "list", "-R", repo, "--label", "audit", "--state", "open", "--json", "number", "--jq", ".[0].number"], capture_output=True, text=True).stdout.strip()
+          if existing:
+              subprocess.run(["gh", "issue", "comment", existing, "-R", repo, "--body", f"### {title}\n\n{body}"], check=True)
+              subprocess.run(["gh", "issue", "edit", existing, "-R", repo, "--title", title], check=True)
+          else:
+              subprocess.run(["gh", "issue", "create", "-R", repo, "--title", title, "--label", "audit", "--body", body], check=True)
+          raise SystemExit(1)   # a failing job sends its own email as well
+          PY

@@ -50,6 +50,14 @@ To change what the routine does, edit `site/ROUTINE.template.md`, rebuild, and p
 
 Pageviews, source-link clicks and filter use are counted by [GoatCounter](https://www.goatcounter.com) when `city.json` names a site code under `analytics.goatcounter`: the page loads `gc.zgo.at/count.js`, which sets no cookies and sends the page path, referrer, screen size and the event names below (the page has no query strings or accounts, so nothing identifies a visitor); GoatCounter's own documentation covers what it stores. No consent banner is needed. The dashboard is at `https://<code>.goatcounter.com`. Pageviews are counted under the path `/<slug>` and events under `<slug>/filter/when/<value>`, `<slug>/filter/college/<name>`, `<slug>/bop/<host>` and `<slug>/source/<host>` for click-throughs, so several cities can share one GoatCounter site and still be told apart by path. Leave the code empty to ship the page with no analytics at all.
 
+## Audit
+
+`.github/workflows/audit.yml` is a second opinion that runs at 08:30 UTC, after the routine: it installs the OpenAI Codex CLI, gives it `scripts/audit_prompt.md`, and Codex independently re-reads every registered source and compares with `docs/events.json`, answering in the shape of `scripts/audit_schema.json`. Missing or mismatched bops open an issue labeled `audit` (or add to the open one), which notifies the repository's watchers, and fail the job, which emails on its own. Codex runs in its own sandbox and never edits the repository. It needs the repository secret `OPENAI_API_KEY`; set the repository variable `AUDIT_ENABLED` to `false` to pause it. To run it by hand:
+
+```bash
+codex exec -s workspace-write -c sandbox_workspace_write.network_access=true --output-schema scripts/audit_schema.json -o audit.json "$(cat scripts/audit_prompt.md)"
+```
+
 ## Hosting
 
 Served by GitHub Pages at the organization address. Pushes to `main` check the build, run the tests and deploy `docs/`. The daily routine commits to the same repository.
