@@ -64,7 +64,7 @@ def render_page():
         "city": CITY["name"], "slug": CITY["slug"], "tagline": CITY["tagline"], "favicon": favicon(), "colleges_js": colleges_js(),
         "map_center": json.dumps(CITY["map_center"]), "map_zoom": str(CITY.get("map_zoom", 14)), "analytics": analytics(),
         "ball_tab": CITY["balls"]["tab"], "ball_one": CITY["balls"]["one"], "ball_many": CITY["balls"]["many"],
-        "tokens_light": tokens("light", "  "), "site": CITY["site"], "verification": verification(),
+        "tokens_light": tokens("light", "  "), "site": CITY["site"], "ball_slug": __import__("re").sub(r"[^a-z0-9]+", "-", CITY["balls"]["many"].lower()).strip("-"), "verification": verification(),
         "ld_site": json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": f"{CITY['name']} Bops", "url": CITY["site"],
                                "alternateName": [f"{CITY['name']} bops", f"{CITY['name']} college bops", f"{CITY['name']} formals"],
                                "description": CITY["tagline"]}, ensure_ascii=False).replace("</", "<\\/"),

@@ -23,6 +23,9 @@ One template, one repository per city. This repository is the city named in `cit
 | `scripts/sync_template.sh` | Copies the shared parts into another city's repository and rebuilds there. | shared |
 | `scripts/collect.py` | What the daily routine runs first: fetches every source once, follows event links, reads Google Calendars and PDFs, renders JavaScript pages, expands registry formal-hall weekdays inside Full Term, and writes a compact digest. Stdlib only. | shared |
 | `scripts/check_sources.py` | Probes every registered URL and reports colleges without a working source. | shared |
+| `scripts/seo.py` | Run by the deploy on the published copy: prerenders the listings into the page and writes the static pages students search for (`/bops/`, `/formals/`, the balls page, `/other-events/`, `/colleges/` and one per college), `sitemap.xml` and `robots.txt`. | shared |
+| `scripts/og_image.py` | Draws the link-preview image `docs/og.png` from `city.json`; run once per city. | shared |
+| `scripts/archive.py` | Moves past listings into `docs/archive/YYYY-MM.json`; the routine runs it daily. | shared |
 | `scripts/stress.py` | Builds stress-test variants of the page (empty, oversized, hostile data, fixed clocks). | shared |
 | `tests/` | Data contract, registry, page and build freshness. All read `city.json`. | shared |
 | `.github/workflows/deploy.yml` | Checks the build, runs the tests, deploys `docs/` to GitHub Pages. | shared |

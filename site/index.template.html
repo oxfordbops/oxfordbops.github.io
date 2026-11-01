@@ -11,7 +11,10 @@
 <meta property="og:title" content="{{city}} Bops">
 <meta property="og:description" content="Every {{city}} college bop, formal and {{ball_one}} in one list, checked every morning.">
 <meta property="og:url" content="{{site}}">
-<meta name="twitter:card" content="summary">{{verification}}
+<meta property="og:image" content="{{site}}og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">{{verification}}
 <script type="application/ld+json">{{ld_site}}</script>
 <link rel="icon" href="{{favicon}}">
 <meta name="description" content="{{city}} bops tonight and this fortnight: every college bop, formal hall and {{ball_one}} in {{city}}, with times, prices and dress codes, checked every morning from the colleges' own pages.">
@@ -140,6 +143,10 @@ ul.bops li:last-child { border-bottom: 1px solid var(--rule); }
 .more:hover { border-color: var(--cam); }
 
 .empty, .status { color: var(--muted); padding: 1.5rem 0; }
+.about { margin-top: 3rem; color: var(--muted); font-size: .9rem; }
+.about strong { color: var(--fg); }
+.seo-nav { display: flex; flex-wrap: wrap; gap: .25rem 1.1rem; }
+.seo-nav a { display: inline-block; padding: .35rem 0; }
 #prerender h2 { font-size: 1.2rem; margin-top: 0; }
 #prerender ul { padding-left: 1.1rem; color: var(--muted); font-size: .9rem; }
 .empty .alts { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
@@ -207,6 +214,11 @@ footer a { display: inline-block; padding: .6rem 0; }
 
   <section id="list">
     <p class="status" id="loading">Loading…</p>
+  </section>
+
+  <section class="about" aria-label="About">
+    <p><strong>What is a bop?</strong> A bop is a college party night run by a JCR, MCR or ents committee: Halloween, Christmas, themed and super bops. Formal hall is the college's gowned dinner, from regular formal nights to themed formals, feasts and swaps. {{city}} Bops lists every one announced on the colleges' own pages for the next fortnight, and the {{ball_many}} once their dates are out.</p>
+    <nav class="seo-nav" aria-label="Browse"><a href="bops/">{{city}} bops</a><a href="formals/">Formals</a><a href="{{ball_slug}}/">{{ball_many}}</a><a href="other-events/">Other events</a><a href="colleges/">By college</a></nav>
   </section>
 
   <footer>
