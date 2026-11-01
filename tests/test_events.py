@@ -52,6 +52,37 @@ class TestShape(unittest.TestCase):
             horizon = 400 if b.get("kind") == "ball" else 14
             self.assertTrue(start <= day <= start + timedelta(days=horizon), f"{b['title']} on {day} is outside the run's window")
 
+    def test_unstated_times_use_the_fallback(self):
+        """An entry whose note says the time is not stated starts at its kind's fallback time, never another kind's."""
+        fallback = {"bop": "21:00", "ball": "21:00", "formal": "19:30", "other": "19:00"}
+        for b in load()["bops"]:
+            if re.search(r"time (?:is )?not (?:stated|given|published)", b.get("details") or "", re.I):
+                start = datetime.fromisoformat(b["starts_at"].replace("Z", "+00:00")).astimezone(LONDON)
+                self.assertEqual(start.strftime("%H:%M"), fallback[b.get("kind", "bop")], f"{b['title']} on {start:%a %d %b}: time not stated, so it starts at the fallback")
+
+    def test_regular_formals_follow_the_registry(self):
+        """A regular formal cited to a formal-hall page falls on one of its days, at its stated time, with no other day's note."""
+        d = load()
+        if isinstance(d["sources"], int):
+            return
+        reg = {r["url"]: r for r in json.loads(SOURCES.read_text())["sources"]}
+        by_slug = {s["slug"]: reg.get(s["url"]) for s in d["sources"]}
+        days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        names = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+        for b in d["bops"]:
+            r = by_slug.get(b.get("source"))
+            if b.get("kind") != "formal" or b.get("special") or not r or r.get("kind") != "Formal hall" or not r.get("formal_days"):
+                continue
+            start = datetime.fromisoformat(b["starts_at"].replace("Z", "+00:00")).astimezone(LONDON)
+            day = days[start.weekday()]
+            self.assertIn(day, r["formal_days"], f"{b['college']} Formal Hall on {start:%a %d %b}: not one of the registry's days")
+            ft = r.get("formal_time")
+            want = ft.get(day) if isinstance(ft, dict) else ft
+            if want:
+                self.assertEqual(start.strftime("%H:%M"), want, f"{b['college']} Formal Hall on {start:%a %d %b}: the page states {want}")
+            other = [n for i, n in enumerate(names) if i != start.weekday() and n in (b.get("details") or "").lower()]
+            self.assertEqual(other, [], f"{b['college']} Formal Hall on {start:%a %d %b}: its note names another day")
+
     def test_sources_entries(self):
         d = load()
         if isinstance(d["sources"], int):

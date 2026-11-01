@@ -600,7 +600,7 @@
       "kind": "Termcard",
       "url": "https://lincolnmcr.weebly.com/term-card.html",
       "ok": true,
-      "found": 0
+      "found": 1
     },
     {
       "slug": "magdalen-magdalen-college-events",
@@ -1550,8 +1550,7 @@
       "college": "New College",
       "host": "New College",
       "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall",
-      "details": "Formal Hall at 19:15."
+      "source": "new-college-new-college-formal-hall"
     },
     {
       "kind": "formal",
@@ -1562,7 +1561,7 @@
       "host": "Trinity College",
       "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
       "source": "trinity-trinity-formal-hall",
-      "details": "Sunday Chapel Formal Hall at 7.15pm; sign-up required."
+      "details": "Sunday Chapel Formal Hall; sign-up required."
     },
     {
       "kind": "formal",
@@ -1573,7 +1572,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -1597,7 +1596,7 @@
       "host": "Hertford College",
       "url": "https://www.hertford.ox.ac.uk/support-us/celebrating-your-generosity/donor-dining-rights/",
       "source": "hertford-hertford-formal-hall",
-      "details": "Sunday Formal Hall. Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -1607,8 +1606,7 @@
       "college": "Lincoln",
       "host": "Lincoln College",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall",
-      "details": "Sunday formal at 7.30pm."
+      "source": "lincoln-lincoln-formal-hall"
     },
     {
       "kind": "formal",
@@ -1619,7 +1617,7 @@
       "host": "Magdalen College",
       "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
       "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -1630,7 +1628,7 @@
       "host": "Merton College",
       "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
       "source": "merton-merton-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -1641,7 +1639,7 @@
       "host": "Exeter College",
       "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
       "source": "exeter-exeter-formal-dinners",
-      "details": "On Exeter's formal hall menus list. Time not published (19:30 is a placeholder)."
+      "details": "On Exeter's formal hall menus list. Time not stated."
     },
     {
       "kind": "formal",
@@ -1664,7 +1662,7 @@
       "host": "Trinity College",
       "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
       "source": "trinity-trinity-formal-hall",
-      "details": "Formal Hall at 7.05pm; sign-up required."
+      "details": "Sign-up required."
     },
     {
       "kind": "formal",
@@ -1675,7 +1673,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -1686,7 +1684,7 @@
       "host": "Harris Manchester College",
       "url": "https://www.hmc.ox.ac.uk/facilities",
       "source": "harris-manchester-harris-manchester-formal-hall",
-      "details": "Monday and Wednesday formal dinner; gowns worn. Time not published (19:30 is a placeholder)."
+      "details": "Gowns worn. Time not stated."
     },
     {
       "kind": "formal",
@@ -1721,8 +1719,7 @@
       "college": "New College",
       "host": "New College",
       "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall",
-      "details": "Formal Hall at 19:15."
+      "source": "new-college-new-college-formal-hall"
     },
     {
       "kind": "formal",
@@ -1733,7 +1730,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -1744,7 +1741,7 @@
       "host": "Lady Margaret Hall",
       "url": "https://www.lmh.ox.ac.uk/alumni/alumni-benefits",
       "source": "lady-margaret-hall-lady-margaret-hall-formal-hall",
-      "details": "Tuesday guest night (three courses). Time not published (19:30 is a placeholder)."
+      "details": "Tuesday guest night (three courses). Time not stated."
     },
     {
       "kind": "formal",
@@ -1755,7 +1752,7 @@
       "host": "Linacre College",
       "url": "https://www.linacre.ox.ac.uk/college-life/college-facilities/college-dining",
       "source": "linacre-linacre-formal-hall",
-      "details": "Formal guest night dinner, weeks 1 to 8. Time not published (19:30 is a placeholder)."
+      "details": "Formal guest night, weeks 1 to 8. Time not stated."
     },
     {
       "kind": "formal",
@@ -1766,7 +1763,7 @@
       "host": "Merton College",
       "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
       "source": "merton-merton-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -1791,7 +1788,7 @@
       "host": "Trinity College",
       "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
       "source": "trinity-trinity-formal-hall",
-      "details": "Formal Hall at 7.05pm; sign-up required."
+      "details": "Sign-up required."
     },
     {
       "kind": "formal",
@@ -1801,8 +1798,7 @@
       "college": "Lincoln",
       "host": "Lincoln College",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall",
-      "details": "Weekday formal at 7.15pm."
+      "source": "lincoln-lincoln-formal-hall"
     },
     {
       "kind": "formal",
@@ -1813,7 +1809,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -1824,7 +1820,7 @@
       "host": "Harris Manchester College",
       "url": "https://www.hmc.ox.ac.uk/facilities",
       "source": "harris-manchester-harris-manchester-formal-hall",
-      "details": "Monday and Wednesday formal dinner; gowns worn. Time not published (19:30 is a placeholder)."
+      "details": "Gowns worn. Time not stated."
     },
     {
       "kind": "formal",
@@ -1835,7 +1831,7 @@
       "host": "Magdalen College",
       "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
       "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -1846,18 +1842,18 @@
       "host": "Exeter College",
       "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
       "source": "exeter-exeter-formal-dinners",
-      "details": "On Exeter's formal hall menus list. Time not published (19:30 is a placeholder)."
+      "details": "On Exeter's formal hall menus list. Time not stated."
     },
     {
       "kind": "formal",
       "title": "Formal exchange with Wadham (Merton MCR away leg)",
-      "starts_at": "2026-11-04T21:00:00+00:00",
+      "starts_at": "2026-11-04T19:30:00+00:00",
       "college": "Wadham",
       "venue": "Wadham College",
       "host": "Merton MCR",
       "guests": "Merton MCR members on the exchange",
       "url": "https://mertonmcr.co.uk/s/MT26.pdf",
-      "details": "Away leg of the Merton MCR exchange with Wadham. Time not given (21:00 is a placeholder).",
+      "details": "Away leg of the Merton MCR exchange with Wadham. Time not stated.",
       "source": "merton-merton-mcr-term-card",
       "special": true
     },
@@ -1895,8 +1891,7 @@
       "college": "Lincoln",
       "host": "Lincoln College",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall",
-      "details": "Weekday formal at 7.15pm."
+      "source": "lincoln-lincoln-formal-hall"
     },
     {
       "kind": "formal",
@@ -1906,8 +1901,7 @@
       "college": "New College",
       "host": "New College",
       "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall",
-      "details": "Formal Hall at 19:15."
+      "source": "new-college-new-college-formal-hall"
     },
     {
       "kind": "formal",
@@ -1918,7 +1912,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -1942,7 +1936,7 @@
       "host": "Green Templeton College",
       "url": "https://www.gtc.ox.ac.uk/students/offerholders/student-college-handbook/domestic-life/",
       "source": "green-templeton-green-templeton-formal-hall",
-      "details": "Thursday formal dinner; smart dress. Time not published (19:30 is a placeholder)."
+      "details": "Smart dress. Time not stated."
     },
     {
       "kind": "formal",
@@ -1953,7 +1947,7 @@
       "host": "Linacre College",
       "url": "https://www.linacre.ox.ac.uk/college-life/college-facilities/college-dining",
       "source": "linacre-linacre-formal-hall",
-      "details": "Formal guest night dinner, weeks 1 to 8. Time not published (19:30 is a placeholder)."
+      "details": "Formal guest night, weeks 1 to 8. Time not stated."
     },
     {
       "kind": "formal",
@@ -1964,7 +1958,7 @@
       "host": "Magdalen College",
       "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
       "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -1975,18 +1969,18 @@
       "host": "Merton College",
       "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
       "source": "merton-merton-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
       "title": "Oriel and St Anne's formal exchange",
-      "starts_at": "2026-11-05T21:00:00+00:00",
+      "starts_at": "2026-11-05T19:30:00+00:00",
       "college": "St Anne's",
       "venue": "St Anne's College",
       "host": "St Anne's MCR",
       "guests": "St Anne's and Oriel MCR members on the exchange",
       "url": "https://fixr.co/event/oriel-and-annes-formal-exchange-tickets-914724148",
-      "details": "MCR formal swap with Oriel, sold out. Time not given on the MCR site (21:00 is a placeholder).",
+      "details": "MCR formal swap with Oriel, sold out. Time not stated.",
       "source": "st-anne-s-st-anne-s-mcr",
       "special": true
     },
@@ -2011,7 +2005,7 @@
       "host": "Trinity College",
       "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
       "source": "trinity-trinity-formal-hall",
-      "details": "JCR & MCR Guest Night at 7.05pm; sign-up required."
+      "details": "JCR & MCR Guest Night; sign-up required."
     },
     {
       "kind": "formal",
@@ -2021,8 +2015,7 @@
       "college": "Lincoln",
       "host": "Lincoln College",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall",
-      "details": "Weekday formal at 7.15pm."
+      "source": "lincoln-lincoln-formal-hall"
     },
     {
       "kind": "formal",
@@ -2033,7 +2026,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -2044,7 +2037,7 @@
       "host": "Lady Margaret Hall",
       "url": "https://www.lmh.ox.ac.uk/alumni/alumni-benefits",
       "source": "lady-margaret-hall-lady-margaret-hall-formal-hall",
-      "details": "Friday special guest night (four courses plus dessert). Time not published (19:30 is a placeholder)."
+      "details": "Friday special guest night (four courses plus dessert). Time not stated."
     },
     {
       "kind": "formal",
@@ -2055,16 +2048,16 @@
       "host": "Magdalen College",
       "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
       "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
       "title": "Formal Dinner",
-      "starts_at": "2026-11-06T21:00:00+00:00",
+      "starts_at": "2026-11-06T19:30:00+00:00",
       "college": "St Cross",
       "host": "St Cross College",
       "url": "https://www.stx.ox.ac.uk/sitefiles/annual-calendar-2026-27-events.pdf",
-      "details": "Friday formal dinner on the St Cross annual events calendar; time not given (21:00 is a placeholder).",
+      "details": "Friday formal dinner on the St Cross annual events calendar; Time not stated.",
       "source": "st-cross-st-cross-events",
       "special": false
     },
@@ -2077,7 +2070,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -2087,8 +2080,7 @@
       "college": "New College",
       "host": "New College",
       "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall",
-      "details": "Formal Hall at 19:15."
+      "source": "new-college-new-college-formal-hall"
     },
     {
       "kind": "formal",
@@ -2099,7 +2091,7 @@
       "host": "Trinity College",
       "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
       "source": "trinity-trinity-formal-hall",
-      "details": "Sunday Chapel Formal Hall at 7.15pm; sign-up required."
+      "details": "Sunday Chapel Formal Hall; sign-up required."
     },
     {
       "kind": "formal",
@@ -2110,7 +2102,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -2135,7 +2127,7 @@
       "host": "Hertford College",
       "url": "https://www.hertford.ox.ac.uk/support-us/celebrating-your-generosity/donor-dining-rights/",
       "source": "hertford-hertford-formal-hall",
-      "details": "Sunday Formal Hall. Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -2145,8 +2137,7 @@
       "college": "Lincoln",
       "host": "Lincoln College",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall",
-      "details": "Sunday formal at 7.30pm."
+      "source": "lincoln-lincoln-formal-hall"
     },
     {
       "kind": "formal",
@@ -2157,7 +2148,7 @@
       "host": "Magdalen College",
       "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
       "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -2168,7 +2159,7 @@
       "host": "Merton College",
       "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
       "source": "merton-merton-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -2179,7 +2170,7 @@
       "host": "Exeter College",
       "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
       "source": "exeter-exeter-formal-dinners",
-      "details": "On Exeter's formal hall menus list. Time not published (19:30 is a placeholder)."
+      "details": "On Exeter's formal hall menus list. Time not stated."
     },
     {
       "kind": "formal",
@@ -2202,7 +2193,7 @@
       "host": "Trinity College",
       "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
       "source": "trinity-trinity-formal-hall",
-      "details": "Formal Hall at 7.05pm; sign-up required."
+      "details": "Sign-up required."
     },
     {
       "kind": "formal",
@@ -2213,7 +2204,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -2224,7 +2215,7 @@
       "host": "Harris Manchester College",
       "url": "https://www.hmc.ox.ac.uk/facilities",
       "source": "harris-manchester-harris-manchester-formal-hall",
-      "details": "Monday and Wednesday formal dinner; gowns worn. Time not published (19:30 is a placeholder)."
+      "details": "Gowns worn. Time not stated."
     },
     {
       "kind": "formal",
@@ -2258,8 +2249,7 @@
       "college": "Lincoln",
       "host": "Lincoln College",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall",
-      "details": "Weekday formal at 7.15pm."
+      "source": "lincoln-lincoln-formal-hall"
     },
     {
       "kind": "formal",
@@ -2269,8 +2259,7 @@
       "college": "New College",
       "host": "New College",
       "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall",
-      "details": "Formal Hall at 19:15."
+      "source": "new-college-new-college-formal-hall"
     },
     {
       "kind": "formal",
@@ -2281,7 +2270,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -2292,7 +2281,7 @@
       "host": "Lady Margaret Hall",
       "url": "https://www.lmh.ox.ac.uk/alumni/alumni-benefits",
       "source": "lady-margaret-hall-lady-margaret-hall-formal-hall",
-      "details": "Tuesday guest night (three courses). Time not published (19:30 is a placeholder)."
+      "details": "Tuesday guest night (three courses). Time not stated."
     },
     {
       "kind": "formal",
@@ -2303,7 +2292,7 @@
       "host": "Linacre College",
       "url": "https://www.linacre.ox.ac.uk/college-life/college-facilities/college-dining",
       "source": "linacre-linacre-formal-hall",
-      "details": "Formal guest night dinner, weeks 1 to 8. Time not published (19:30 is a placeholder)."
+      "details": "Formal guest night, weeks 1 to 8. Time not stated."
     },
     {
       "kind": "formal",
@@ -2314,7 +2303,18 @@
       "host": "Merton College",
       "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
       "source": "merton-merton-formal-hall",
-      "details": "Themed formal on the Merton food and drink page. Time not published (19:30 is a placeholder)."
+      "details": "Themed formal on the Merton food and drink page. Time not stated."
+    },
+    {
+      "kind": "formal",
+      "special": true,
+      "title": "Formal exchange with Kellogg (Lincoln MCR away leg)",
+      "starts_at": "2026-11-11T18:30:00+00:00",
+      "college": "Kellogg",
+      "host": "Lincoln MCR",
+      "url": "https://lincolnmcr.weebly.com/term-card.html",
+      "details": "Away leg of the Lincoln MCR exchange dinner with Kellogg, from the Lincoln MCR calendar.",
+      "source": "lincoln-lincoln-mcr-term-card"
     },
     {
       "kind": "formal",
@@ -2339,7 +2339,7 @@
       "host": "Trinity College",
       "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
       "source": "trinity-trinity-formal-hall",
-      "details": "Formal Hall at 7.05pm; sign-up required."
+      "details": "Sign-up required."
     },
     {
       "kind": "formal",
@@ -2349,8 +2349,7 @@
       "college": "Lincoln",
       "host": "Lincoln College",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall",
-      "details": "Weekday formal at 7.15pm."
+      "source": "lincoln-lincoln-formal-hall"
     },
     {
       "kind": "formal",
@@ -2361,7 +2360,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -2372,7 +2371,7 @@
       "host": "Harris Manchester College",
       "url": "https://www.hmc.ox.ac.uk/facilities",
       "source": "harris-manchester-harris-manchester-formal-hall",
-      "details": "Monday and Wednesday formal dinner; gowns worn. Time not published (19:30 is a placeholder)."
+      "details": "Gowns worn. Time not stated."
     },
     {
       "kind": "formal",
@@ -2383,7 +2382,7 @@
       "host": "Magdalen College",
       "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
       "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -2394,7 +2393,7 @@
       "host": "Exeter College",
       "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
       "source": "exeter-exeter-formal-dinners",
-      "details": "On Exeter's formal hall menus list. Time not published (19:30 is a placeholder)."
+      "details": "On Exeter's formal hall menus list. Time not stated."
     },
     {
       "kind": "formal",
@@ -2471,8 +2470,7 @@
       "college": "Lincoln",
       "host": "Lincoln College",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall",
-      "details": "Weekday formal at 7.15pm."
+      "source": "lincoln-lincoln-formal-hall"
     },
     {
       "kind": "formal",
@@ -2483,7 +2481,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -2507,7 +2505,7 @@
       "host": "Green Templeton College",
       "url": "https://www.gtc.ox.ac.uk/students/offerholders/student-college-handbook/domestic-life/",
       "source": "green-templeton-green-templeton-formal-hall",
-      "details": "Thursday formal dinner; smart dress. Time not published (19:30 is a placeholder)."
+      "details": "Smart dress. Time not stated."
     },
     {
       "kind": "formal",
@@ -2518,7 +2516,7 @@
       "host": "Magdalen College",
       "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
       "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -2529,18 +2527,18 @@
       "host": "Merton College",
       "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
       "source": "merton-merton-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
       "title": "Formal exchange with New College (Merton MCR away leg)",
-      "starts_at": "2026-11-12T21:00:00+00:00",
+      "starts_at": "2026-11-12T19:30:00+00:00",
       "college": "New College",
       "venue": "New College",
       "host": "Merton MCR",
       "guests": "Merton MCR members on the exchange",
       "url": "https://mertonmcr.co.uk/s/MT26.pdf",
-      "details": "Away leg of the Merton MCR exchange with New College MCR. Time not given (21:00 is a placeholder).",
+      "details": "Away leg of the Merton MCR exchange with New College MCR. Time not stated.",
       "source": "merton-merton-mcr-term-card",
       "special": true
     },
@@ -2566,7 +2564,7 @@
       "host": "Trinity College",
       "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
       "source": "trinity-trinity-formal-hall",
-      "details": "JCR & MCR Guest Night at 7.05pm; sign-up required."
+      "details": "JCR & MCR Guest Night; sign-up required."
     },
     {
       "kind": "formal",
@@ -2576,8 +2574,7 @@
       "college": "Lincoln",
       "host": "Lincoln College",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall",
-      "details": "Weekday formal at 7.15pm."
+      "source": "lincoln-lincoln-formal-hall"
     },
     {
       "kind": "formal",
@@ -2588,7 +2585,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -2599,7 +2596,7 @@
       "host": "Lady Margaret Hall",
       "url": "https://www.lmh.ox.ac.uk/alumni/alumni-benefits",
       "source": "lady-margaret-hall-lady-margaret-hall-formal-hall",
-      "details": "Friday special guest night (four courses plus dessert). Time not published (19:30 is a placeholder)."
+      "details": "Friday special guest night (four courses plus dessert). Time not stated."
     },
     {
       "kind": "formal",
@@ -2610,27 +2607,27 @@
       "host": "Magdalen College",
       "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
       "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
       "title": "Charity Formal",
-      "starts_at": "2026-11-13T21:00:00+00:00",
+      "starts_at": "2026-11-13T19:30:00+00:00",
       "college": "Merton",
       "host": "Merton MCR",
       "url": "https://mertonmcr.co.uk/s/MT26.pdf",
-      "details": "On the Merton MCR Michaelmas 2026 term card. Time not given (21:00 is a placeholder).",
+      "details": "On the Merton MCR Michaelmas 2026 term card. Time not stated.",
       "source": "merton-merton-mcr-term-card",
       "special": true
     },
     {
       "kind": "formal",
       "title": "Formal Dinner",
-      "starts_at": "2026-11-13T21:00:00+00:00",
+      "starts_at": "2026-11-13T19:30:00+00:00",
       "college": "St Cross",
       "host": "St Cross College",
       "url": "https://www.stx.ox.ac.uk/sitefiles/annual-calendar-2026-27-events.pdf",
-      "details": "Friday formal dinner on the St Cross annual events calendar; time not given (21:00 is a placeholder).",
+      "details": "Friday formal dinner on the St Cross annual events calendar; Time not stated.",
       "source": "st-cross-st-cross-events",
       "special": false
     },
@@ -2643,7 +2640,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "bop",
@@ -2665,8 +2662,7 @@
       "college": "New College",
       "host": "New College",
       "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall",
-      "details": "Formal Hall at 19:15."
+      "source": "new-college-new-college-formal-hall"
     },
     {
       "kind": "formal",
@@ -2677,7 +2673,7 @@
       "host": "Trinity College",
       "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
       "source": "trinity-trinity-formal-hall",
-      "details": "Sunday Chapel Formal Hall at 7.15pm; sign-up required."
+      "details": "Sunday Chapel Formal Hall; sign-up required."
     },
     {
       "kind": "formal",
@@ -2688,7 +2684,7 @@
       "host": "Christ Church",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
-      "details": "Formal sitting at 7.20pm with gowns; informal at 6.20pm."
+      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "formal",
@@ -2712,7 +2708,7 @@
       "host": "Hertford College",
       "url": "https://www.hertford.ox.ac.uk/support-us/celebrating-your-generosity/donor-dining-rights/",
       "source": "hertford-hertford-formal-hall",
-      "details": "Sunday Formal Hall. Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -2722,8 +2718,7 @@
       "college": "Lincoln",
       "host": "Lincoln College",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall",
-      "details": "Sunday formal at 7.30pm."
+      "source": "lincoln-lincoln-formal-hall"
     },
     {
       "kind": "formal",
@@ -2734,7 +2729,7 @@
       "host": "Magdalen College",
       "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
       "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -2745,7 +2740,7 @@
       "host": "Merton College",
       "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
       "source": "merton-merton-formal-hall",
-      "details": "Time not published (19:30 is a placeholder)."
+      "details": "Time not stated."
     },
     {
       "kind": "formal",
@@ -2756,7 +2751,7 @@
       "host": "Exeter College",
       "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
       "source": "exeter-exeter-formal-dinners",
-      "details": "On Exeter's formal hall menus list. Time not published (19:30 is a placeholder)."
+      "details": "On Exeter's formal hall menus list. Time not stated."
     }
   ]
 }

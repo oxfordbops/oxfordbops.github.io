@@ -314,6 +314,22 @@ FILLER = re.compile(r"\b(?:mon|tues?|wed(?:nes)?|thu(?:rs)?|fri|sat(?:ur)?|sun)(
                     r"|\b(?:location|events?|from|to|until|and|the|am|pm|st|nd|rd|th)\b|[^a-z]+", re.I)
 
 
+DAY_NAMES = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+SUSPENDED = re.compile(r"\bformal(?:s| halls?)?\b[^.\n]{0,80}\b(?:suspended|cancelled|not (?:be )?running|paused)\b"
+                       r"|\b(?:suspended|cancelled|paused)\b[^.\n]{0,40}\bformal|\bno formal halls?\b", re.I)
+
+
+def days_named(text):
+    """Weekdays a page names, with ranges read in full: "Monday to Friday" names all five."""
+    t = text.lower()
+    found = {DAY_NAMES[i][:3].title() for i, n in enumerate(DAY_NAMES) if re.search(rf"\b{n}s?\b", t)}
+    for a, b in re.findall(r"\b(" + "|".join(DAY_NAMES) + r")s?\s*(?:to|-|–|—|until|through)\s*(" + "|".join(DAY_NAMES) + r")s?\b", t):
+        i, j = DAY_NAMES.index(a), DAY_NAMES.index(b)
+        for k in range(i, j + 1 if j >= i else j + 8):
+            found.add(DAY_NAMES[k % 7][:3].title())
+    return found
+
+
 def other_lines(text, window, limit=5):
     """Dated lines without bop, formal or ball words, for the "other" kind: a line naming a date in the window, plus the next line,
     since listings often put the date and the title on separate lines."""
@@ -530,16 +546,31 @@ def main():
             page = (out / r["page_file"]).read_text().lower()
         except Exception:
             page = ""
+        named = days_named(page)
         every = len(days) == 7 and re.search(r"every (evening|night|day)|each (evening|night)|nightly", page)
-        missing = [] if every else [d for d in days if full[d] not in page]
-        if missing or re.search(r"\b(suspended|no formal halls?|not (?:be )?running|cancelled)\b", page):
+        missing = [] if every else [d for d in days if d not in named]
+        if missing or SUSPENDED.search(page):
             lines.append(f"- SCHEDULE CHECK {s['college']}: the registry says {', '.join(days)}; the page "
                          + (f"no longer names {', '.join(missing)}" if missing else "mentions a suspension or cancellation")
                          + f". Read it, list only the nights it states, and report it in REGISTRY | {s['url']}")
             continue
         dates = [d for d in in_term if names[d.weekday()] in days]
         if dates:
-            lines.append(f"- {s['college']} | {', '.join(d.strftime('%a %d %b') for d in dates)} | {s.get('note', '')} | {s['url']}")
+            # The time is the page's own ("stated") or absent; a note belongs only to its own weekday, never to every night.
+            ft = s.get("formal_time")   # "19:30", or one time per weekday: {"Mon": "19:05", "Sun": "19:15"}
+            when = (f"{ft} stated" if isinstance(ft, str) else "times stated per night") if ft else "time not stated"
+            notes = s.get("day_notes") or {}
+            def night(d):
+                k = names[d.weekday()]
+                extra = [f"{ft[k]} stated"] if isinstance(ft, dict) and k in ft else []
+                extra += [notes[k]] if k in notes else []
+                return d.strftime("%a %d %b") + (f" ({'; '.join(extra)})" if extra else "")
+            shared = {notes.get(names[d.weekday()]) for d in dates}
+            if len(shared) == 1 and None not in shared and not isinstance(ft, dict):   # one note for every night: say it once
+                notes = {}
+                when += f"; every night: {shared.pop()}"
+            day_txt = ", ".join(night(d) for d in dates)
+            lines.append(f"- {s['college']} | {when} | {day_txt} | {s['url']}")
 
     lines += ["", "## Calendar events (window, plus balls up to a year ahead; 'date only' means no time was given)", ""]
     shown = set()

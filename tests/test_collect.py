@@ -102,6 +102,13 @@ class TestCollect(unittest.TestCase):
         got = collect.other_lines(text, window)
         self.assertEqual(got, ["05/11/2026 | Pub Quiz in the bar", "Film night on 9 November in the JCR"])
 
+    def test_days_named_reads_ranges(self):
+        self.assertEqual(collect.days_named("Formal hall Monday to Friday, and on Sundays at 7.30pm"), {"Mon", "Tue", "Wed", "Thu", "Fri", "Sun"})
+
+    def test_suspension_needs_formal_nearby(self):
+        self.assertIsNone(collect.SUSPENDED.search("Bookings cannot be cancelled after noon. Formal hall is on Tuesdays."))
+        self.assertIsNotNone(collect.SUSPENDED.search("Formal halls are suspended this week."))
+
     def test_html_to_text_drops_scripts(self):
         self.assertEqual(collect.to_text(b"<p>Bop<script>var x=1</script></p><p>Tonight</p>"), "Bop\nTonight")
 

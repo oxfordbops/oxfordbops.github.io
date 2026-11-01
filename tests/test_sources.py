@@ -25,6 +25,20 @@ class TestRegistry(unittest.TestCase):
                 self.assertNotIn(s["url"], urls, "duplicate url")
                 urls.add(s["url"])
 
+    def test_formal_hall_schedule_fields(self):
+        """formal_time is the page's own start time (HH:MM); day_notes name only the registry's formal days."""
+        for s in self.reg["sources"]:
+            if "formal_time" in s:
+                ft = s["formal_time"]
+                times = ft.values() if isinstance(ft, dict) else [ft]
+                for t in times:
+                    self.assertRegex(t, r"^(1[6-9]|2[0-1]):[0-5][0-9]$", s["url"])
+                self.assertTrue(s.get("formal_days"), f"{s['url']}: formal_time without formal_days")
+                if isinstance(ft, dict):
+                    self.assertTrue(set(ft) <= set(s["formal_days"]), f"{s['url']}: a time for a day without formal hall")
+            if "day_notes" in s:
+                self.assertTrue(set(s["day_notes"]) <= set(s.get("formal_days") or []), f"{s['url']}: a day note for a day without formal hall")
+
     def test_every_college_has_a_source(self):
         have = {s["college"] for s in self.reg["sources"]}
         self.assertEqual([c for c in THE_31 if c not in have], [])

@@ -126,7 +126,17 @@
     "Sat",
     "Sun"
    ],
-   "note": "Formal sitting 7.20pm"
+   "note": "Formal sitting 7.20pm",
+   "formal_time": "19:20",
+   "day_notes": {
+    "Mon": "Gowns worn; informal sitting at 6.20pm.",
+    "Tue": "Gowns worn; informal sitting at 6.20pm.",
+    "Wed": "Gowns worn; informal sitting at 6.20pm.",
+    "Thu": "Gowns worn; informal sitting at 6.20pm.",
+    "Fri": "Gowns worn; informal sitting at 6.20pm.",
+    "Sat": "Gowns worn; informal sitting at 6.20pm.",
+    "Sun": "Gowns worn; informal sitting at 6.20pm."
+   }
   },
   {
    "college": "Christ Church",
@@ -228,7 +238,10 @@
    "url": "https://www.gtc.ox.ac.uk/students/offerholders/student-college-handbook/domestic-life/",
    "formal_days": [
     "Thu"
-   ]
+   ],
+   "day_notes": {
+    "Thu": "Smart dress."
+   }
   },
   {
    "college": "Green Templeton",
@@ -250,7 +263,11 @@
    "formal_days": [
     "Mon",
     "Wed"
-   ]
+   ],
+   "day_notes": {
+    "Mon": "Gowns worn.",
+    "Wed": "Gowns worn."
+   }
   },
   {
    "college": "Harris Manchester",
@@ -415,7 +432,11 @@
     "Tue",
     "Fri"
    ],
-   "note": "Guest nights Tuesdays, special guest nights Fridays"
+   "note": "Guest nights Tuesdays, special guest nights Fridays",
+   "day_notes": {
+    "Tue": "Tuesday guest night (three courses).",
+    "Fri": "Friday special guest night (four courses plus dessert)."
+   }
   },
   {
    "college": "Lady Margaret Hall",
@@ -456,7 +477,11 @@
     "Tue",
     "Thu"
    ],
-   "note": "Formal guest nights"
+   "note": "Formal guest nights",
+   "day_notes": {
+    "Tue": "Formal guest night, weeks 1 to 8.",
+    "Thu": "Formal guest night, weeks 1 to 8."
+   }
   },
   {
    "college": "Linacre",
@@ -494,7 +519,15 @@
     "Thu",
     "Fri",
     "Sun"
-   ]
+   ],
+   "formal_time": {
+    "Mon": "19:15",
+    "Tue": "19:15",
+    "Wed": "19:15",
+    "Thu": "19:15",
+    "Fri": "19:15",
+    "Sun": "19:30"
+   }
   },
   {
    "college": "Lincoln",
@@ -643,7 +676,8 @@
     "Thu",
     "Sun"
    ],
-   "note": "Guest nights on Fridays"
+   "note": "Guest nights on Fridays",
+   "formal_time": "19:15"
   },
   {
    "college": "New College",
@@ -1101,7 +1135,19 @@
     "Fri",
     "Sun"
    ],
-   "note": "Friday is the JCR/MCR guest night"
+   "note": "Friday is the JCR/MCR guest night",
+   "formal_time": {
+    "Mon": "19:05",
+    "Wed": "19:05",
+    "Fri": "19:05",
+    "Sun": "19:15"
+   },
+   "day_notes": {
+    "Mon": "Sign-up required.",
+    "Wed": "Sign-up required.",
+    "Fri": "JCR & MCR Guest Night; sign-up required.",
+    "Sun": "Sunday Chapel Formal Hall; sign-up required."
+   }
   },
   {
    "college": "Trinity",
