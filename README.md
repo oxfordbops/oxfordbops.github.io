@@ -1,6 +1,6 @@
 # Bops
 
-A static page that lists and maps every college bop, and the formals outsiders can go to, in a university city for the next fortnight, in the spirit of talks.cam. Bops and formals are two tabs on one page. No backend and no submission form: a Claude Code cloud routine checks college calendars, ents pages and student press every morning, keeps only what it can verify, rewrites one JSON file and pushes it.
+A static page that lists and maps every college bop and formal in a university city for the next fortnight, in the spirit of talks.cam. Bops and formals are two tabs on one page. No backend and no submission form: a Claude Code cloud routine checks college calendars, ents pages and student press every morning, keeps only what it can verify, rewrites one JSON file and pushes it.
 
 One template, one repository per city. This repository is the city named in `city.json`.
 
