@@ -61,10 +61,3 @@ A second Claude Code cloud routine per city, "<City> Bops audit", runs on the 15
 ## Hosting
 
 Served by GitHub Pages at the organization address. Pushes to `main` check the build, run the tests and deploy `docs/`. The weekly routine commits to the same repository.
-
-## Instagram preview generator
-
-Generate offline carousel PNGs, a deterministic caption and a manifest from the
-verified listings: `python3 scripts/instagram_preview.py --date 2026-11-01`.
-See [setup, artifact review and limitations](docs/INSTAGRAM_PREVIEWS.md).
-This tool only creates previews; it never publishes or needs an Instagram account.
