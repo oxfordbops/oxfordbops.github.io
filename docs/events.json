@@ -1553,7 +1553,8 @@
       "host": "St Edmund Hall",
       "url": "https://www.seh.ox.ac.uk/events/formal-hall-michaelmas-2026?es=20261101",
       "details": "Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
-      "source": "st-edmund-hall-st-edmund-hall-events"
+      "source": "st-edmund-hall-st-edmund-hall-events",
+      "special": false
     },
     {
       "kind": "formal",
@@ -1565,7 +1566,8 @@
       "guests": "Brasenose HCR and Jesus MCR members on the exchange",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "details": "Home leg at Brasenose of the HCR's exchange with Jesus MCR; the Jesus MCR calendar gives 18:30.",
-      "source": "brasenose-brasenose-hcr-term-card"
+      "source": "brasenose-brasenose-hcr-term-card",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1578,7 +1580,8 @@
       "guests": "All college members and their guests; registration required",
       "url": "https://www.kellogg.ox.ac.uk/event/guest-night-dinner-3/",
       "details": "Drinks reception in the college bar at 18:45, dinner in the Dining Hall at 19:15.",
-      "source": "kellogg-kellogg-college-events"
+      "source": "kellogg-kellogg-college-events",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1590,7 +1593,8 @@
       "guests": "Merton MCR members on the exchange",
       "url": "https://mertonmcr.co.uk/s/MT26.pdf",
       "details": "Away leg of the Merton MCR exchange with Wadham. Time not given (21:00 is a placeholder).",
-      "source": "merton-merton-mcr-term-card"
+      "source": "merton-merton-mcr-term-card",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1600,7 +1604,8 @@
       "host": "Jesus MCR",
       "url": "https://www.jesuscollegemcr.com/",
       "details": "From the Jesus MCR Google Calendar.",
-      "source": "jesus-jesus-mcr"
+      "source": "jesus-jesus-mcr",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1614,7 +1619,8 @@
       "dress": "Smart, no gowns",
       "url": "https://www.wolfson.ox.ac.uk/event/guest-night-33/",
       "details": "Pre-dinner drinks 7pm, dinner 7.30pm; drinks included. Book on the Wolfson Gateway.",
-      "source": "wolfson-wolfson-events"
+      "source": "wolfson-wolfson-events",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1626,7 +1632,8 @@
       "host": "St Edmund Hall",
       "url": "https://www.seh.ox.ac.uk/events/green-formal-hall-2026?es=20261105",
       "details": "Themed Thursday formal with locally sourced food and guest speakers from Oxfordshire farming. Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
-      "source": "st-edmund-hall-st-edmund-hall-events"
+      "source": "st-edmund-hall-st-edmund-hall-events",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1638,7 +1645,8 @@
       "guests": "St Anne's and Oriel MCR members on the exchange",
       "url": "https://fixr.co/event/oriel-and-annes-formal-exchange-tickets-914724148",
       "details": "MCR formal swap with Oriel, sold out. Time not given on the MCR site (21:00 is a placeholder).",
-      "source": "st-anne-s-st-anne-s-mcr"
+      "source": "st-anne-s-st-anne-s-mcr",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1649,7 +1657,8 @@
       "host": "Merton MCR",
       "url": "https://mertonmcr.co.uk/s/MT26.pdf",
       "details": "From the Merton MCR Michaelmas 2026 term card.",
-      "source": "merton-merton-mcr-term-card"
+      "source": "merton-merton-mcr-term-card",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1659,7 +1668,8 @@
       "host": "St Cross College",
       "url": "https://www.stx.ox.ac.uk/sitefiles/annual-calendar-2026-27-events.pdf",
       "details": "Friday formal dinner on the St Cross annual events calendar; time not given (21:00 is a placeholder).",
-      "source": "st-cross-st-cross-events"
+      "source": "st-cross-st-cross-events",
+      "special": false
     },
     {
       "kind": "formal",
@@ -1672,7 +1682,8 @@
       "url": "https://www.seh.ox.ac.uk/events/diwali-formal-hall-2026?es=20261108",
       "details": "Themed Sunday formal for Diwali with a vegetarian menu. Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
       "source": "st-edmund-hall-st-edmund-hall-events",
-      "dress": "Traditional dress or as you feel appropriate"
+      "dress": "Traditional dress or as you feel appropriate",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1684,7 +1695,8 @@
       "guests": "Keble MCR members on the exchange; sign-up required",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Away leg of the Keble MCR exchange with Balliol MCR, from the Keble MCR term card calendar.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1694,7 +1706,8 @@
       "host": "Brasenose HCR",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "details": "Diwali formal on the Brasenose HCR term card calendar.",
-      "source": "brasenose-brasenose-hcr-term-card"
+      "source": "brasenose-brasenose-hcr-term-card",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1707,7 +1720,8 @@
       "guests": "All college members and their guests; registration required",
       "url": "https://www.kellogg.ox.ac.uk/event/guest-night-dinner-4/",
       "details": "Drinks reception in the college bar at 18:45, dinner in the Dining Hall at 19:15.",
-      "source": "kellogg-kellogg-college-events"
+      "source": "kellogg-kellogg-college-events",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1719,7 +1733,8 @@
       "guests": "Jesus MCR members on the exchange",
       "url": "https://www.jesuscollegemcr.com/",
       "details": "Away leg of the Jesus MCR formal exchange with Pembroke, from the Jesus MCR calendar.",
-      "source": "jesus-jesus-mcr"
+      "source": "jesus-jesus-mcr",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1732,7 +1747,8 @@
       "guests": "Linacre and Queen's members on the exchange; 15 places, sign-up required",
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "details": "Home leg of the Linacre Common Room's formal exchange with Queen's.",
-      "source": "linacre-linacre-michaelmas-2026-term-card"
+      "source": "linacre-linacre-michaelmas-2026-term-card",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1745,7 +1761,8 @@
       "dress": "Bright colours and traditional attire welcome",
       "url": "https://www.reuben.ox.ac.uk/events/cultural-dinner-diwali",
       "details": "Diwali dinner with shared food and diyas.",
-      "source": "reuben-reuben-college-events"
+      "source": "reuben-reuben-college-events",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1755,7 +1772,8 @@
       "host": "Brasenose HCR",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "details": "Termly graduate dinner on the Brasenose HCR term card calendar.",
-      "source": "brasenose-brasenose-hcr-term-card"
+      "source": "brasenose-brasenose-hcr-term-card",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1769,7 +1787,8 @@
       "dress": "Smart, no gowns",
       "url": "https://www.wolfson.ox.ac.uk/event/guest-night-32/",
       "details": "Pre-dinner drinks 7pm, dinner 7.30pm; drinks included. Book on the Wolfson Gateway.",
-      "source": "wolfson-wolfson-events"
+      "source": "wolfson-wolfson-events",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1781,7 +1800,8 @@
       "host": "St Edmund Hall",
       "url": "https://www.seh.ox.ac.uk/events/formal-hall-michaelmas-2026?es=20261112",
       "details": "Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
-      "source": "st-edmund-hall-st-edmund-hall-events"
+      "source": "st-edmund-hall-st-edmund-hall-events",
+      "special": false
     },
     {
       "kind": "formal",
@@ -1793,7 +1813,8 @@
       "guests": "Merton MCR members on the exchange",
       "url": "https://mertonmcr.co.uk/s/MT26.pdf",
       "details": "Away leg of the Merton MCR exchange with New College MCR. Time not given (21:00 is a placeholder).",
-      "source": "merton-merton-mcr-term-card"
+      "source": "merton-merton-mcr-term-card",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1805,7 +1826,8 @@
       "guests": "Sign-up required",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "On the Keble MCR term card calendar (5th week).",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1815,7 +1837,8 @@
       "host": "Merton MCR",
       "url": "https://mertonmcr.co.uk/s/MT26.pdf",
       "details": "On the Merton MCR Michaelmas 2026 term card. Time not given (21:00 is a placeholder).",
-      "source": "merton-merton-mcr-term-card"
+      "source": "merton-merton-mcr-term-card",
+      "special": true
     },
     {
       "kind": "formal",
@@ -1825,7 +1848,8 @@
       "host": "St Cross College",
       "url": "https://www.stx.ox.ac.uk/sitefiles/annual-calendar-2026-27-events.pdf",
       "details": "Friday formal dinner on the St Cross annual events calendar; time not given (21:00 is a placeholder).",
-      "source": "st-cross-st-cross-events"
+      "source": "st-cross-st-cross-events",
+      "special": false
     },
     {
       "kind": "bop",
@@ -1849,7 +1873,8 @@
       "host": "St Edmund Hall",
       "url": "https://www.seh.ox.ac.uk/events/formal-hall-michaelmas-2026?es=20261115",
       "details": "Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
-      "source": "st-edmund-hall-st-edmund-hall-events"
+      "source": "st-edmund-hall-st-edmund-hall-events",
+      "special": false
     }
   ]
 }

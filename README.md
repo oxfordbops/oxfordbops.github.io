@@ -38,7 +38,7 @@ python3 scripts/check_sources.py           # are every college's sources still r
 
 To change something for every city, edit `site/` or `scripts/` or `tests/` here, then run `scripts/sync_template.sh ../<other-city-repo>` and commit in both. To change one city only, edit its `city.json` or its data files.
 
-To change what the routine does, edit `site/ROUTINE.template.md`, rebuild, and paste the generated `docs/ROUTINE.md` (below the rule) into the routine at https://claude.ai/code/routines.
+To change what the routine does, edit `site/ROUTINE.template.md`, rebuild and push. The routines' stored prompt only tells them to follow `docs/ROUTINE.md` in the checked-out repository, so the next run picks up the change; nothing needs pasting. Each June, add the next year's Full Term dates to `city.json` (the freshness check fails 45 days before they run out).
 
 ## Adding a city
 

@@ -26,6 +26,15 @@ jobs:
           print(f"generated {d['generated']}, {age_h:.1f} h ago, {len(d['bops'])} bops, {len(d['sources']) if isinstance(d['sources'], list) else d['sources']} sources")
           sys.exit(1 if age_h > 30 or age_h < -1 else 0)
           PY
+      - name: Full Term dates in city.json reach at least 45 days ahead
+        run: |
+          python3 - <<'PY'
+          import json, sys, datetime as dt
+          terms = json.load(open("city.json")).get("full_terms", [])
+          last = max((dt.date.fromisoformat(t["to"]) for t in terms), default=None)
+          print("last Full Term ends", last)
+          sys.exit(0 if last and (last - dt.date.today()).days >= 45 else 1)
+          PY
       - name: live site serves the committed data
         run: |
           site=$(python3 -c "import json; print(json.load(open('city.json'))['site'])")

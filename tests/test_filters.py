@@ -5,7 +5,7 @@ For each tab (bops, formals, balls), every When option the tab offers, both form
 it checks that the listed items are exactly the expected ones, that the count line agrees, and that switching tabs
 neither carries filters over nor loses them.
 """
-import datetime as dt, functools, http.server, json, pathlib, socketserver, tempfile, threading, unittest
+import datetime as dt, functools, http.server, json, os, pathlib, socketserver, tempfile, threading, unittest
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 try:
@@ -71,7 +71,7 @@ def expected(data, kind, when, college, ftype):
 WHEN_FOR = {"bop": ["all", "tonight", "tomorrow", "weekend", "nextweek"], "formal": ["all", "today", "tomorrow", "thisweek", "nextweek"], "ball": ["all"]}
 
 
-@unittest.skipIf(sync_playwright is None, "Python Playwright not installed")
+@unittest.skipIf(sync_playwright is None and not os.environ.get("CI"), "Python Playwright not installed")
 class TestFilters(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -93,6 +93,8 @@ class TestFilters(unittest.TestCase):
             cls.browser = cls.pw.chromium.launch()
         except Exception as e:
             cls.pw.stop(); cls.httpd.shutdown(); cls.tmp.cleanup()
+            if os.environ.get("CI"):   # in CI a missing browser is a failure, not a skip
+                raise
             raise unittest.SkipTest(f"Chromium not available: {e}")
         # Map tiles are not needed and must not slow the test down.
         cls.ctx = cls.browser.new_context()
@@ -189,6 +191,21 @@ class TestFilters(unittest.TestCase):
         p3, _ = self.open()
         self.assertEqual(p3.get_attribute('#kind button[data-kind="bop"]', "aria-pressed"), "true", "Bops is the default tab")
         self.assertEqual(errors, [])
+
+
+    def test_running_event_stays_until_its_end(self):
+        """At 02:00 a ball that started at 21:00 and ends at 06:00 is still listed; one that ended at 01:00 is not."""
+        data = {"generated": "2026-11-05T02:00:00Z", "run": {}, "sources": [{"slug": "s", "name": "S", "kind": "JCR site", "url": "https://example.org/", "ok": True, "found": 0}],
+                "bops": [{"kind": "bop", "title": "Late bop", "starts_at": "2026-11-04T21:00:00+00:00", "ends_at": "2026-11-05T06:00:00+00:00", "college": self.colleges[0], "url": "https://example.org/a", "source": "s"},
+                         {"kind": "bop", "title": "Early bop", "starts_at": "2026-11-04T20:00:00+00:00", "ends_at": "2026-11-05T01:00:00+00:00", "college": self.colleges[1], "url": "https://example.org/b", "source": "s"}]}
+        site = pathlib.Path(self.tmp.name)
+        clock = CLOCK.replace(CLOCK_ISO, "2026-11-05T02:00:00Z")
+        (site / "late.html").write_text((ROOT / "docs" / "index.html").read_text().replace("<head>", "<head>\n" + clock, 1).replace('fetch("events.json"', 'fetch("late.json"'))
+        (site / "late.json").write_text(json.dumps(data))
+        p = self.ctx.new_page(); p.goto(self.base + "late.html"); p.wait_for_selector("#list li, #list .empty", timeout=10000)
+        titles = p.eval_on_selector_all("#list li .name", "els => els.map(e => e.textContent)")
+        self.assertTrue(any("Late bop" in t for t in titles), titles)
+        self.assertFalse(any("Early bop" in t for t in titles), titles)
 
 
 if __name__ == "__main__":

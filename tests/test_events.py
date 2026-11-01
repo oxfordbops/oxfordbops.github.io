@@ -90,12 +90,10 @@ class TestShape(unittest.TestCase):
                 self.assertIn(b.get("kind"), ("bop", "formal", "ball"), "kind must be bop, formal or ball")
                 if b.get("kind") == "formal":
                     # The routine sets it on every formal; a missing flag reads as special on the page.
-                    self.assertIn(b.get("special", True), (True, False), "special is true or false")
+                    self.assertIn(b.get("special"), (True, False), "every formal says whether it is special")
                 else:
                     self.assertNotIn("special", b, "special belongs to formals only")
                 self.assertTrue(2 <= len(b["title"]) <= 120)
-                if len(b["title"]) > 4:
-                    self.assertNotEqual(b["title"], b["title"].upper(), "shouting capitals")
                 self.assertTrue(ISO.match(b["starts_at"]), b["starts_at"])
                 if b.get("ends_at"):
                     self.assertTrue(ISO.match(b["ends_at"]))

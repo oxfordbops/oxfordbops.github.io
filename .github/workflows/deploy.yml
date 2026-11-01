@@ -30,7 +30,7 @@ jobs:
       - name: Rendered pages match city.json and the templates
         run: python3 scripts/build.py --check
       - name: Browser for the filter tests
-        run: pip install -q playwright && python3 -m playwright install --with-deps chromium
+        run: pip install -q playwright python-dateutil && python3 -m playwright install --with-deps chromium
       - name: Unit tests (data contract, registry, page, every filter combination in a browser)
         run: python3 -m unittest discover -s tests -v
       - name: Source reachability (report only)

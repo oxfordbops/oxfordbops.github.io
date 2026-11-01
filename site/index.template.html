@@ -298,7 +298,10 @@ footer a { display: inline-block; padding: .6rem 0; }
     // Same window as the routine: today and the next 14 London calendar days, with a five-hour grace for a bop under way.
     if (!e || typeof e.title !== "string" || !e.title.trim()) return false;
     const t = Date.parse(e.starts_at);
-    if (!Number.isFinite(t) || t <= Date.now() - 5 * 3600e3) return false;
+    if (!Number.isFinite(t)) return false;
+    // Over once its stated end has passed; without an end, five hours after it started.
+    const end = Date.parse(e.ends_at);
+    if (Number.isFinite(end) && end > t ? end <= Date.now() : t <= Date.now() - 5 * 3600e3) return false;
     const today = dayKey.format(new Date());
     const day = dayKey.format(new Date(t));
     const horizon = kindOf(e) === "ball" ? 400 : 14;   // balls are listed for the whole season
@@ -563,12 +566,16 @@ footer a { display: inline-block; padding: .6rem 0; }
   }
 
   load();
+  // Keep an open page current: reload on a new London day or after an hour, when visible or coming back into view.
   let loadedDay = dayKey.format(new Date()), loadedAt = Date.now();
-  document.addEventListener("visibilitychange", () => {
+  function refreshIfStale() {
     if (document.visibilityState !== "visible") return;
     const now = new Date();
     if (dayKey.format(now) !== loadedDay || now - loadedAt > 3600e3) { loadedDay = dayKey.format(now); loadedAt = Date.now(); load(); }
-  });
+    else render();   // re-filter so events that just ended drop off and "Tonight" stays right
+  }
+  document.addEventListener("visibilitychange", refreshIfStale);
+  setInterval(refreshIfStale, 5 * 60e3);
 })();
 </script>
 </body>
