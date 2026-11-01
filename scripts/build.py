@@ -65,6 +65,16 @@ def render_page():
         "map_center": json.dumps(CITY["map_center"]), "map_zoom": str(CITY.get("map_zoom", 14)), "analytics": analytics(),
         "ball_tab": CITY["balls"]["tab"], "ball_one": CITY["balls"]["one"], "ball_many": CITY["balls"]["many"],
         "tokens_light": tokens("light", "  "), "site": CITY["site"], "terms_version": TERMS_VERSION, "ball_slug": __import__("re").sub(r"[^a-z0-9]+", "-", CITY["balls"]["many"].lower()).strip("-"), "verification": verification(),
+        "ld_dataset": json.dumps({"@context": "https://schema.org", "@type": "Dataset", "name": f"{CITY['name']} Bops student event listings",
+                                  "description": f"Unofficial, automatically gathered listings of college bops, formal halls, balls, society events and other student events in {CITY['name']}, updated weekly from the organisers' own public pages. Not verified: confirm with the organiser.",
+                                  "url": CITY["site"], "license": "https://creativecommons.org/licenses/by/4.0/", "isAccessibleForFree": True,
+                                  "creditText": f"Source: {CITY['name']} Bops ({CITY['site']})",
+                                  "creator": {"@type": "Organization", "name": f"{CITY['name']} Bops", "url": CITY["site"]},
+                                  "keywords": [f"{CITY['name']} bops", f"{CITY['name']} formal hall", CITY["balls"]["many"], "student events", f"{CITY['name']} societies"],
+                                  "spatialCoverage": {"@type": "Place", "name": f"{CITY['name']}, United Kingdom"},
+                                  "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": CITY["site"] + "events.json"},
+                                                   {"@type": "DataDownload", "encodingFormat": "text/plain", "contentUrl": CITY["site"] + "llms-full.txt"}]},
+                                 ensure_ascii=False).replace("</", "<\\/"),
         "ld_site": json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": f"{CITY['name']} Bops", "url": CITY["site"],
                                "alternateName": [f"{CITY['name']} bops", f"{CITY['name']} college bops", f"{CITY['name']} formals"],
                                "description": CITY["tagline"]}, ensure_ascii=False).replace("</", "<\\/"),
@@ -97,7 +107,7 @@ def render_routine():
     return t
 
 
-TERMS_VERSION = "2026-11-01.2"   # change when the terms change: every visitor is asked to accept the new version
+TERMS_VERSION = "2026-11-01.3"   # change when the terms change: every visitor is asked to accept the new version
 
 
 def render_terms():

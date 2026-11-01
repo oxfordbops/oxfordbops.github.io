@@ -77,7 +77,8 @@ class TestScanner(unittest.TestCase):
         other = next(s for s in REG["sources"] if s["college"] not in (COLLEGE, "All") and s["kind"] not in ("Instagram", "Facebook"))
         sc = scanner_with([{"slug": "o", "name": "o", "kind": other["kind"], "url": other["url"], "ok": True, "found": 0}])
         self.assertIn("organiser", {r for r, _ in sc.check(entry(source="o", url=other["url"]))}, "another college's page, not naming it")
-        self.assertNotIn("organiser", {r for r, _ in sc.check(entry(source="o", url=other["url"], host=other["college"] + " MCR"))})
+        self.assertIn("organiser", {r for r, _ in sc.check(entry(source="o", url=other["url"], title="Formal swap with " + other["college"] + " MCR"))}),
+        self.assertNotIn("organiser", {r for r, _ in sc.check(entry(source="o", url=other["url"], title="Formal exchange (" + other["college"] + " MCR away leg)"))})
         self.assertIn("organiser", {r for r, _ in scanner_with().check(entry(source="missing"))})
 
 

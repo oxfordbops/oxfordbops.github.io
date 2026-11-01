@@ -43,7 +43,7 @@ class TestPage(unittest.TestCase):
     def test_external_resources_are_pinned_and_allowed(self):
         srcs = re.findall(r'(?:src|href)="(https://[^"]+)"', PAGE.split("<script>")[0])
         for u in srcs:
-            self.assertTrue(u.startswith((json.loads((ROOT / "city.json").read_text())["site"], "https://fonts.googleapis.com", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/", "https://gc.zgo.at/count.js")), u)
+            self.assertTrue(u.startswith((json.loads((ROOT / "city.json").read_text())["site"], "https://fonts.googleapis.com", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/", "https://gc.zgo.at/count.js", "https://creativecommons.org/licenses/by/4.0/")), u)
         self.assertIn("tile.openstreetmap.org", SCRIPT)
         self.assertNotIn("cartocdn", SCRIPT)
 

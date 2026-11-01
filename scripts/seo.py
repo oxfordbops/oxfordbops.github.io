@@ -244,6 +244,98 @@ def build(out, city, data, sources, now, societies=()):
     return pages
 
 
+LICENSE = "CC BY 4.0"
+LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/"
+
+
+def credit(city):
+    site = city["site"].rstrip("/") + "/"
+    return f"Source: {city['name']} Bops ({site}), {LICENSE}"
+
+
+def write_discovery(out, city, data, pages, up, now):
+    """sitemap.xml, robots.txt, llms.txt and llms-full.txt for search engines, crawlers and language models."""
+    from xml.sax.saxutils import escape
+    import re as _re
+    site = city["site"].rstrip("/") + "/"
+    name = city["name"]
+    generated = data.get("generated") or now.isoformat(timespec="seconds")
+    build = (ROOT / "scripts" / "build.py").read_text()
+    m = _re.search(r'TERMS_VERSION = "(\d{4}-\d{2}-\d{2})', build)
+    terms_date = m.group(1) if m else generated[:10]
+
+    def prio(path):
+        if path == "":
+            return "1.0"
+        if path.count("/") == 1 and not path.startswith(("colleges/", "societies/", "terms/")):
+            return "0.8"
+        if path in ("colleges/", "societies/"):
+            return "0.7"
+        return "0.2" if path == "terms/" else "0.6"
+
+    def order(path):
+        top = ["", "bops/", "formals/", slug(city["balls"]["many"]) + "/", "societies/", "other-events/", "colleges/"]
+        return (top.index(path), path) if path in top else (len(top) + (1 if path.startswith("societies/") else 0) + (5 if path == "terms/" else 0), path)
+
+    paths = sorted([""] + list(pages) + ["terms/"], key=order)
+    rows = []
+    for path in paths:
+        lastmod = terms_date if path == "terms/" else generated
+        img = (f"\n    <image:image><image:loc>{escape(site)}og.png</image:loc></image:image>" if path == "" and (out / "og.png").exists() else "")
+        rows.append(f"  <url>\n    <loc>{escape(site + path)}</loc>\n    <lastmod>{escape(lastmod)}</lastmod>\n"
+                    f"    <changefreq>{'monthly' if path == 'terms/' else 'weekly'}</changefreq>\n    <priority>{prio(path)}</priority>{img}\n  </url>")
+    (out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
+                                     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
+                                     + "\n".join(rows) + "\n</urlset>\n")
+
+    (out / "robots.txt").write_text(f"""# {name} Bops: an unofficial list of student events in {name}, updated every Sunday.
+# Search engines, AI crawlers and other bots are welcome to read and index this site.
+# Reuse of the listings is allowed under {LICENSE} ({LICENSE_URL}) with credit:
+#   "{credit(city)}", linking to {site}
+# Do not present listings as official or verified; always link to the organiser's page. See {site}llms.txt and {site}terms/.
+User-agent: *
+Allow: /
+Disallow: /ROUTINE.md
+
+Sitemap: {site}sitemap.xml
+""")
+
+    kinds = [("bops/", "Bops: college party nights"), ("formals/", "Formals: college formal hall dinners, regular and special"),
+             (slug(city["balls"]["many"]) + "/", f"{city['balls']['many']}: dates as announced"), ("societies/", "Societies: events of popular student societies"),
+             ("other-events/", "Other college events: socials, quizzes, concerts, talks"), ("colleges/", "One page per college")]
+    (out / "llms.txt").write_text(f"""# {name} Bops
+
+> An unofficial, automatically gathered list of student events in {name}: college bops, formal halls, {city['balls']['many']}, society events and other college events for the next fortnight, updated every Sunday from the colleges', common rooms' and societies' own public pages. Not affiliated with the University of {name}, its colleges or societies.
+
+## Using this information
+
+- You may use, quote, summarise and reuse the listings under {LICENSE} ({LICENSE_URL}).
+- You must credit the source every time, for example: "{credit(city)}", with a link to {site}.
+- Listings are not verified and may be wrong, changed or cancelled. Say so when you use them, link to the organiser's own page (each listing's `url`), and tell people to confirm with the organiser before they go.
+- Do not present listings as official, as tickets or as an invitation. Many events are for members of a college or society only, and events with alcohol are for over-18s only.
+- Do not republish anything a listing does not contain, and never add personal data. Terms: {site}terms/
+
+## Data
+
+- [Listings (JSON)]({site}events.json): `bops` holds every listing (`kind` is bop, formal, ball, society or other; times are ISO 8601 with the UK offset); `run.checked_at` says when the sources were read.
+- [Sources (JSON)]({site}sources.json): the vetted pages the listings come from, and the societies followed with their popularity rank.
+- [Upcoming listings as text]({site}llms-full.txt)
+
+## Pages
+
+""" + "\n".join(f"- [{label}]({site}{path})" for path, label in kinds) + f"""
+- [Terms of use]({site}terms/)
+""")
+
+    lines = [f"# {name} Bops: upcoming listings", "", f"{credit(city)}. Read {generated[:16].replace('T', ' ')} UTC. Unofficial and unverified: confirm with the organiser before you go.", ""]
+    for e in up:
+        s_ = start(e)
+        where = e.get("society") or e.get("college") or name
+        bits = [b for b in (e.get("venue"), e.get("price")) if b]
+        lines.append(f"- {s_:%a %d %b %Y %H:%M} | {e.get('kind', 'bop')} | {e['title']} | {where}" + (f" | {'; '.join(bits)}" if bits else "") + f" | {e.get('url', '')}")
+    (out / "llms-full.txt").write_text("\n".join(lines) + "\n")
+
+
 def prerender(entries, city, limit=60):
     rows = [item(e) for e in entries[:limit]]
     if not rows:
@@ -266,13 +358,8 @@ def main():
     societies = json.loads((ROOT / "docs" / "sources.json").read_text()).get("societies", [])
     pages = build(out, city, data, sources, now, societies)
     site = city["site"].rstrip("/") + "/"
-    lastmod = (data.get("generated") or now.isoformat())[:10]
-    urls = [""] + sorted(pages) + ["terms/"]
-    (out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-                                     + "".join(f"  <url><loc>{site}{u}</loc><lastmod>{lastmod}</lastmod><changefreq>weekly</changefreq></url>\n" for u in urls)
-                                     + "</urlset>\n")
-    (out / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {site}sitemap.xml\n")
-    print(f"seo: prerendered {min(len(up), 60)} listings, {len(pages)} pages, sitemap of {len(urls)} URLs, lastmod {lastmod}")
+    write_discovery(out, city, data, pages, up, now)
+    print(f"seo: prerendered {min(len(up), 60)} listings, {len(pages)} pages, sitemap of {len(pages) + 2} URLs, llms.txt and robots.txt")
 
 
 if __name__ == "__main__":

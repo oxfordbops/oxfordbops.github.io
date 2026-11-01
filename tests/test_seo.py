@@ -49,6 +49,39 @@ class TestSeo(unittest.TestCase):
             socs = {x["society"] for x in json.loads((ROOT / "docs" / "sources.json").read_text()).get("societies", [])}
             self.assertEqual(sitemap.count("<loc>"), 2 + 5 + len(CITY["colleges"]) + (1 + len(socs) if socs else 0))
 
+    def test_bots_and_llms_notes(self):
+        """robots.txt welcomes crawlers and states the credit; llms.txt and llms-full.txt carry the licence and credit; the sitemap is valid XML."""
+        import xml.dom.minidom
+        with tempfile.TemporaryDirectory() as tmp:
+            out = pathlib.Path(tmp)
+            for f in ("index.html", "events.json", "og.png"):
+                if (ROOT / "docs" / f).exists():
+                    shutil.copy(ROOT / "docs" / f, out / f)
+            r = subprocess.run([sys.executable, str(ROOT / "scripts" / "seo.py"), str(out)], capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            robots = (out / "robots.txt").read_text()
+            self.assertIn("User-agent: *\nAllow: /", robots)
+            self.assertIn("CC BY 4.0", robots)
+            self.assertIn(f"Sitemap: {CITY['site']}sitemap.xml", robots)
+            llms = (out / "llms.txt").read_text()
+            self.assertTrue(llms.startswith(f"# {CITY['name']} Bops"))
+            for must in ("CC BY 4.0", f"Source: {CITY['name']} Bops", "must credit", "not verified", f"{CITY['site']}events.json", f"{CITY['site']}terms/"):
+                self.assertIn(must, llms)
+            full = (out / "llms-full.txt").read_text()
+            self.assertIn("\n", full); self.assertNotIn("\\n", full)
+            self.assertIn(f"Source: {CITY['name']} Bops", full.splitlines()[2])
+            doc = xml.dom.minidom.parse(str(out / "sitemap.xml"))
+            locs = [n.firstChild.data for n in doc.getElementsByTagName("loc")]
+            self.assertEqual(locs[0], CITY["site"])
+            self.assertEqual(len(locs), len(set(locs)), "no duplicate URLs")
+            self.assertTrue(all(l.startswith(CITY["site"]) for l in locs))
+            self.assertEqual(len(doc.getElementsByTagName("lastmod")), len(locs))
+
+    def test_page_states_the_licence(self):
+        self.assertIn('<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">', PAGE)
+        self.assertIn('"@type": "Dataset"', PAGE)
+        self.assertIn('href="llms.txt"', PAGE)
+
     def test_share_image(self):
         self.assertTrue((ROOT / "docs" / "og.png").exists(), "run scripts/og_image.py once for this city")
         self.assertIn('og:image" content="' + CITY["site"] + 'og.png"', PAGE)

@@ -73,7 +73,7 @@
       "kind": "MCR events",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "ok": true,
-      "found": 7
+      "found": 6
     },
     {
       "slug": "brasenose-brasenose-hcr",
@@ -3034,16 +3034,6 @@
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "source": "christ-church-christ-church-formal-hall",
       "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "other",
-      "title": "Wine & Cheese at Jesus (Brasenose HCR)",
-      "starts_at": "2026-11-14T19:30:00+00:00",
-      "college": "Jesus",
-      "venue": "Jesus College",
-      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
-      "details": "Brasenose HCR event.",
-      "source": "brasenose-brasenose-hcr-term-card"
     },
     {
       "kind": "bop",

@@ -131,8 +131,9 @@ class Scanner:
                 out.append(("organiser", "the source is not in the registry"))
             elif reg.get("kind") == "Student press":
                 out.append(("organiser", "the student press reports events; it does not run them, so it cannot be the only source"))
-            elif reg.get("college") not in (b.get("college"), "All") and reg.get("college", "").lower() not in text:
-                out.append(("organiser", f"cited to a {reg.get('college')} page but listed at {b.get('college')} without naming {reg.get('college')}"))
+            elif reg.get("college") not in (b.get("college"), "All") and (reg.get("college", "").lower() not in text or not re.search(r"\baway\b", text)):
+                out.append(("organiser", f"cited to a {reg.get('college')} page but listed at {b.get('college')}: only the source's own away leg, "
+                                          f"named as such, may be listed at another college"))
             elif reg.get("college") == "All" and reg.get("kind") != "SU listings":
                 out.append(("organiser", "a university-wide source must be the students' union listing"))
         # Place.
