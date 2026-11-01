@@ -197,6 +197,15 @@ class TestShape(unittest.TestCase):
 
 
 
+class TestFeatures(unittest.TestCase):
+    def test_paused_kinds_are_not_listed(self):
+        """site/features.json can pause formals; while paused, no formal is listed."""
+        features = json.loads((ROOT / "site" / "features.json").read_text())
+        if not features.get("formals"):
+            formals = [b["title"] for b in load()["bops"] if b.get("kind") == "formal"]
+            self.assertEqual(formals, [], "formals are paused in site/features.json")
+
+
 class TestSocieties(unittest.TestCase):
     def test_society_events_cite_their_society(self):
         """A society event names a registered society and cites one of that society's sources (or an Instagram post a person added)."""

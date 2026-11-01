@@ -1,0 +1,4 @@
+{
+ "_about": "Shared feature switches. formals: list formal halls (tab, routine, collector, search pages). Set to true to bring them back.",
+ "formals": false
+}

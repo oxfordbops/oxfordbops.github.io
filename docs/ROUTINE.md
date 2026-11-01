@@ -12,6 +12,8 @@ You update `docs/events.json` for Oxford Bops (oxfordbops/oxfordbops.github.io, 
 - **society**: a one-off event of a university society in the registry's `societies` list: talks, debates, socials, shows, performances, parties, balls, workshops and trips. `society` is the registry's short name; `college` is the college it is held at, or null. Not routine weekly rehearsals, training, classes or AGMs.
 - **other**: any other event a registered source announces for its college's students: socials, quizzes, film nights, open mics, garden parties, welfare events, concerts, plays, talks and sports. Only from sources already in `docs/sources.json`; never search for them.
 
+**Formals are paused** (`site/features.json`): do not list any formal hall, formal dinner, feast, guest night or formal swap, under any kind. Ignore the formal rules below until they are switched back on.
+
 Never list admissions, outreach or open days, alumni or fundraising events, chapel services, academic seminars, private dinners (invitation only), ordinary catering (cafeteria meals, a free breakfast), or events outside a college (society events excepted). Bops, formals, society and other events must start today or in the next 21 days (UK calendar days); the site shows the next 14, and the routine runs once a week, on Sunday morning.
 
 ## 1. Collect

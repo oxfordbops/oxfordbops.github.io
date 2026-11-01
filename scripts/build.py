@@ -12,6 +12,8 @@ import json, pathlib, sys, urllib.parse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CITY = json.loads((ROOT / "city.json").read_text())
+FEATURES = json.loads((ROOT / "site" / "features.json").read_text())
+FORMALS = bool(FEATURES.get("formals"))
 
 TOKEN_ORDER = ["bg", "fg", "muted", "rule", "cam", "cam-ink", "cam-tint", "accent", "field", "pin-ring", "hl", "hl-line", "on-badge", "tile-filter"]
 
@@ -64,7 +66,12 @@ def render_page():
         "city": CITY["name"], "slug": CITY["slug"], "tagline": CITY["tagline"], "favicon": favicon(), "colleges_js": colleges_js(),
         "map_center": json.dumps(CITY["map_center"]), "map_zoom": str(CITY.get("map_zoom", 14)), "analytics": analytics(),
         "ball_tab": CITY["balls"]["tab"], "ball_one": CITY["balls"]["one"], "ball_many": CITY["balls"]["many"],
-        "tokens_light": tokens("light", "  "), "site": CITY["site"], "terms_version": TERMS_VERSION, "ball_slug": __import__("re").sub(r"[^a-z0-9]+", "-", CITY["balls"]["many"].lower()).strip("-"), "verification": verification(),
+        "tokens_light": tokens("light", "  "), "site": CITY["site"],
+        "formals_comma": "formals, " if FORMALS else "", "formal_or": "formal, " if FORMALS else "", "formal_hall_comma": "formal hall, " if FORMALS else "",
+        "kinds_js": json.dumps(["bop"] + (["formal"] if FORMALS else []) + ["ball", "society", "other"]),
+        "formal_tab": '<button type="button" data-kind="formal" aria-pressed="false">Formals<span class="n" hidden></span></button>' if FORMALS else "<!-- Formals are paused (site/features.json) -->",
+        "formals_nav": '<a href="formals/">Formals</a>' if FORMALS else "",
+        "formal_about": " Formal hall is the college's gowned dinner, from regular formal nights to themed formals, feasts and swaps." if FORMALS else "", "terms_version": TERMS_VERSION, "ball_slug": __import__("re").sub(r"[^a-z0-9]+", "-", CITY["balls"]["many"].lower()).strip("-"), "verification": verification(),
         "ld_dataset": json.dumps({"@context": "https://schema.org", "@type": "Dataset", "name": f"{CITY['name']} Bops student event listings",
                                   "description": f"Unofficial, automatically gathered listings of college bops, formal halls, balls, society events and other student events in {CITY['name']}, updated weekly from the organisers' own public pages. Not verified: confirm with the organiser.",
                                   "url": CITY["site"], "license": "https://creativecommons.org/licenses/by/4.0/", "isAccessibleForFree": True,
@@ -96,7 +103,8 @@ def render_routine():
         "common_rooms": r["common_rooms"], "su_name": r["su"]["name"], "su_url": r["su"]["url"], "press": press,
         "press_names": ", ".join(p["name"] for p in r["press"]), "js_rendered_examples": r["js_rendered_examples"],
         "college_count": str(len(CITY["colleges"])), "college_list": ", ".join(CITY["colleges"]),
-        "ball_routine": CITY["balls"]["routine"], "ball_many": CITY["balls"]["many"], "university_domain": CITY.get("university_domain", "the university domain"),
+        "ball_routine": CITY["balls"]["routine"], "ball_many": CITY["balls"]["many"],
+        "formals_paused": "" if FORMALS else "\n**Formals are paused** (`site/features.json`): do not list any formal hall, formal dinner, feast, guest night or formal swap, under any kind. Ignore the formal rules below until they are switched back on.\n", "university_domain": CITY.get("university_domain", "the university domain"),
         "source_count": str(CITY.get("source_count_hint", 150)),
     }
     for k, v in values.items():

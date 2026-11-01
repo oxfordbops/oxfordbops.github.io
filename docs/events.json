@@ -73,7 +73,7 @@
       "kind": "MCR events",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "ok": true,
-      "found": 6
+      "found": 3
     },
     {
       "slug": "brasenose-brasenose-hcr",
@@ -107,7 +107,7 @@
       "kind": "Formal hall",
       "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
       "ok": true,
-      "found": 15
+      "found": 0
     },
     {
       "slug": "christ-church-christ-church-entz-instagram",
@@ -192,7 +192,7 @@
       "kind": "Formal hall",
       "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
       "ok": true,
-      "found": 5
+      "found": 0
     },
     {
       "slug": "exeter-exeter-jcr-instagram",
@@ -242,7 +242,7 @@
       "kind": "Formal hall",
       "url": "https://www.gtc.ox.ac.uk/students/offerholders/student-college-handbook/domestic-life/",
       "ok": true,
-      "found": 2
+      "found": 0
     },
     {
       "slug": "green-templeton-green-templeton-gcr",
@@ -266,7 +266,7 @@
       "kind": "Formal hall",
       "url": "https://www.hmc.ox.ac.uk/facilities",
       "ok": true,
-      "found": 4
+      "found": 0
     },
     {
       "slug": "harris-manchester-harris-manchester-jcr-instagram",
@@ -309,7 +309,7 @@
       "kind": "Formal hall",
       "url": "https://www.hertford.ox.ac.uk/support-us/celebrating-your-generosity/donor-dining-rights/",
       "ok": true,
-      "found": 3
+      "found": 0
     },
     {
       "slug": "hertford-hertford-jcr-instagram",
@@ -386,7 +386,7 @@
       "kind": "MCR site",
       "url": "https://www.jesuscollegemcr.com/",
       "ok": true,
-      "found": 2,
+      "found": 0,
       "note": "rendered with headless Chromium"
     },
     {
@@ -420,7 +420,7 @@
       "kind": "MCR events",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "ok": true,
-      "found": 16
+      "found": 14
     },
     {
       "slug": "keble-keble-mcr",
@@ -444,7 +444,7 @@
       "kind": "College events",
       "url": "https://www.kellogg.ox.ac.uk/events/",
       "ok": true,
-      "found": 2
+      "found": 0
     },
     {
       "slug": "kellogg-kellogg-formal-dinners",
@@ -476,7 +476,7 @@
       "kind": "Formal hall",
       "url": "https://www.lmh.ox.ac.uk/alumni/alumni-benefits",
       "ok": true,
-      "found": 4
+      "found": 0
     },
     {
       "slug": "lady-margaret-hall-lmh-jcr-instagram",
@@ -526,7 +526,7 @@
       "kind": "Formal hall",
       "url": "https://www.linacre.ox.ac.uk/college-life/college-facilities/college-dining",
       "ok": true,
-      "found": 3
+      "found": 0
     },
     {
       "slug": "linacre-linacre-common-room",
@@ -542,7 +542,7 @@
       "kind": "Termcard",
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "ok": true,
-      "found": 6
+      "found": 5
     },
     {
       "slug": "lincoln-lincoln-college-events",
@@ -566,7 +566,7 @@
       "kind": "Formal hall",
       "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
       "ok": true,
-      "found": 10,
+      "found": 0,
       "note": "rendered with headless Chromium"
     },
     {
@@ -592,7 +592,7 @@
       "kind": "MCR site",
       "url": "https://lincolnmcr.weebly.com/",
       "ok": true,
-      "found": 10
+      "found": 7
     },
     {
       "slug": "lincoln-lincoln-mcr-term-card",
@@ -600,7 +600,7 @@
       "kind": "Termcard",
       "url": "https://lincolnmcr.weebly.com/term-card.html",
       "ok": true,
-      "found": 1
+      "found": 0
     },
     {
       "slug": "magdalen-magdalen-college-events",
@@ -616,7 +616,7 @@
       "kind": "Formal hall",
       "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
       "ok": true,
-      "found": 9
+      "found": 0
     },
     {
       "slug": "magdalen-magdalen-jcr",
@@ -681,7 +681,7 @@
       "kind": "Formal hall",
       "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
       "ok": true,
-      "found": 7
+      "found": 0
     },
     {
       "slug": "merton-merton-mcr-instagram",
@@ -723,7 +723,7 @@
       "kind": "Termcard",
       "url": "https://mertonmcr.co.uk/term-card",
       "ok": true,
-      "found": 5,
+      "found": 1,
       "note": "rendered with headless Chromium"
     },
     {
@@ -740,7 +740,7 @@
       "kind": "Formal hall",
       "url": "https://www.new.ox.ac.uk/student-meals",
       "ok": true,
-      "found": 6
+      "found": 0
     },
     {
       "slug": "new-college-new-college-jcr-instagram",
@@ -924,7 +924,7 @@
       "kind": "College events",
       "url": "https://www.reuben.ox.ac.uk/events",
       "ok": true,
-      "found": 1
+      "found": 0
     },
     {
       "slug": "reuben-reuben-college-instagram",
@@ -1032,7 +1032,7 @@
       "kind": "MCR site",
       "url": "https://st-annes-mcr.org.uk/",
       "ok": true,
-      "found": 1
+      "found": 0
     },
     {
       "slug": "st-antony-s-st-antony-s-college-events",
@@ -1122,7 +1122,7 @@
       "kind": "College events",
       "url": "https://www.stx.ox.ac.uk/events",
       "ok": true,
-      "found": 2
+      "found": 0
     },
     {
       "slug": "st-cross-st-cross-college-instagram",
@@ -1155,7 +1155,7 @@
       "kind": "College events",
       "url": "https://www.seh.ox.ac.uk/events",
       "ok": true,
-      "found": 5
+      "found": 0
     },
     {
       "slug": "st-edmund-hall-st-edmund-hall-formal-dinners",
@@ -1345,7 +1345,7 @@
       "kind": "Formal hall",
       "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
       "ok": true,
-      "found": 9
+      "found": 0
     },
     {
       "slug": "trinity-trinity-entz-instagram",
@@ -1446,7 +1446,7 @@
       "kind": "College events",
       "url": "https://www.wolfson.ox.ac.uk/event/",
       "ok": true,
-      "found": 2
+      "found": 0
     },
     {
       "slug": "wolfson-wolfson-bar",
@@ -1639,105 +1639,6 @@
       "source": "lincoln-lincoln-mcr"
     },
     {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-01T19:15:00+00:00",
-      "college": "New College",
-      "host": "New College",
-      "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-01T19:15:00+00:00",
-      "college": "Trinity",
-      "host": "Trinity College",
-      "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
-      "source": "trinity-trinity-formal-hall",
-      "details": "Sunday Chapel Formal Hall; sign-up required."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-01T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "title": "Formal Hall",
-      "starts_at": "2026-11-01T19:25:00+00:00",
-      "ends_at": "2026-11-01T21:00:00+00:00",
-      "college": "St Edmund Hall",
-      "venue": "Wolfson Hall",
-      "host": "St Edmund Hall",
-      "url": "https://www.seh.ox.ac.uk/events/formal-hall-michaelmas-2026?es=20261101",
-      "details": "Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
-      "source": "st-edmund-hall-st-edmund-hall-events",
-      "special": false
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Sunday Formal",
-      "starts_at": "2026-11-01T19:30:00+00:00",
-      "college": "Exeter",
-      "host": "Exeter College",
-      "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
-      "source": "exeter-exeter-formal-dinners",
-      "details": "On Exeter's formal hall menus list. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-01T19:30:00+00:00",
-      "college": "Hertford",
-      "host": "Hertford College",
-      "url": "https://www.hertford.ox.ac.uk/support-us/celebrating-your-generosity/donor-dining-rights/",
-      "source": "hertford-hertford-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-01T19:30:00+00:00",
-      "college": "Lincoln",
-      "host": "Lincoln College",
-      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-01T19:30:00+00:00",
-      "college": "Magdalen",
-      "host": "Magdalen College",
-      "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
-      "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-01T19:30:00+00:00",
-      "college": "Merton",
-      "host": "Merton College",
-      "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
-      "source": "merton-merton-formal-hall",
-      "details": "Time not stated."
-    },
-    {
       "kind": "other",
       "title": "Yoga",
       "starts_at": "2026-11-02T18:00:00+00:00",
@@ -1746,51 +1647,6 @@
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "details": "Brasenose HCR event.",
       "source": "brasenose-brasenose-hcr-term-card"
-    },
-    {
-      "kind": "formal",
-      "special": true,
-      "title": "BAME Formal",
-      "starts_at": "2026-11-02T19:00:00+00:00",
-      "college": "Lincoln",
-      "venue": "Hall",
-      "host": "Lincoln MCR",
-      "url": "https://lincolnmcr.weebly.com/",
-      "source": "lincoln-lincoln-mcr",
-      "details": "On the Lincoln MCR calendar."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-02T19:05:00+00:00",
-      "college": "Trinity",
-      "host": "Trinity College",
-      "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
-      "source": "trinity-trinity-formal-hall",
-      "details": "Sign-up required."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-02T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-02T19:30:00+00:00",
-      "college": "Harris Manchester",
-      "host": "Harris Manchester College",
-      "url": "https://www.hmc.ox.ac.uk/facilities",
-      "source": "harris-manchester-harris-manchester-formal-hall",
-      "details": "Gowns worn. Time not stated."
     },
     {
       "kind": "other",
@@ -1833,177 +1689,6 @@
       "source": "keble-keble-mcr-socials"
     },
     {
-      "kind": "formal",
-      "title": "Formal exchange with Jesus College MCR",
-      "starts_at": "2026-11-03T18:00:00+00:00",
-      "college": "Brasenose",
-      "venue": "Brasenose College",
-      "host": "Brasenose HCR",
-      "guests": "Brasenose HCR and Jesus MCR members on the exchange",
-      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
-      "details": "Home leg at Brasenose of the HCR's exchange with Jesus MCR; the Jesus MCR calendar gives 18:30.",
-      "source": "brasenose-brasenose-hcr-term-card",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "special": true,
-      "title": "Exchange Dinner with Kellogg (home)",
-      "starts_at": "2026-11-03T18:30:00+00:00",
-      "college": "Lincoln",
-      "venue": "Hall",
-      "host": "Lincoln MCR",
-      "url": "https://lincolnmcr.weebly.com/",
-      "source": "lincoln-lincoln-mcr",
-      "details": "Lincoln MCR exchange with Kellogg, home leg. On the Lincoln MCR calendar."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-03T19:15:00+00:00",
-      "college": "New College",
-      "host": "New College",
-      "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-03T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-03T19:30:00+00:00",
-      "college": "Lady Margaret Hall",
-      "host": "Lady Margaret Hall",
-      "url": "https://www.lmh.ox.ac.uk/alumni/alumni-benefits",
-      "source": "lady-margaret-hall-lady-margaret-hall-formal-hall",
-      "details": "Tuesday guest night (three courses). Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-03T19:30:00+00:00",
-      "college": "Linacre",
-      "host": "Linacre College",
-      "url": "https://www.linacre.ox.ac.uk/college-life/college-facilities/college-dining",
-      "source": "linacre-linacre-formal-hall",
-      "details": "Formal guest night, weeks 1 to 8. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-03T19:30:00+00:00",
-      "college": "Merton",
-      "host": "Merton College",
-      "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
-      "source": "merton-merton-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "title": "Guest Night Dinner",
-      "starts_at": "2026-11-04T18:45:00+00:00",
-      "ends_at": "2026-11-04T22:00:00+00:00",
-      "college": "Kellogg",
-      "venue": "Dining Hall",
-      "host": "Kellogg College",
-      "guests": "All college members and their guests; registration required",
-      "url": "https://www.kellogg.ox.ac.uk/event/guest-night-dinner-3/",
-      "details": "Drinks reception in the college bar at 18:45, dinner in the Dining Hall at 19:15.",
-      "source": "kellogg-kellogg-college-events",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-04T19:05:00+00:00",
-      "college": "Trinity",
-      "host": "Trinity College",
-      "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
-      "source": "trinity-trinity-formal-hall",
-      "details": "Sign-up required."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-04T19:15:00+00:00",
-      "college": "Lincoln",
-      "host": "Lincoln College",
-      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-04T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "special": true,
-      "title": "Wednesday Formal / MCR Exchange",
-      "starts_at": "2026-11-04T19:30:00+00:00",
-      "college": "Exeter",
-      "host": "Exeter College",
-      "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
-      "source": "exeter-exeter-formal-dinners",
-      "details": "On Exeter's formal hall menus list. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-04T19:30:00+00:00",
-      "college": "Harris Manchester",
-      "host": "Harris Manchester College",
-      "url": "https://www.hmc.ox.ac.uk/facilities",
-      "source": "harris-manchester-harris-manchester-formal-hall",
-      "details": "Gowns worn. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-04T19:30:00+00:00",
-      "college": "Magdalen",
-      "host": "Magdalen College",
-      "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
-      "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "title": "Formal exchange with Wadham (Merton MCR away leg)",
-      "starts_at": "2026-11-04T19:30:00+00:00",
-      "college": "Wadham",
-      "venue": "Wadham College",
-      "host": "Merton MCR",
-      "guests": "Merton MCR members on the exchange",
-      "url": "https://mertonmcr.co.uk/s/MT26.pdf",
-      "details": "Away leg of the Merton MCR exchange with Wadham. Time not stated.",
-      "source": "merton-merton-mcr-term-card",
-      "special": true
-    },
-    {
       "kind": "other",
       "title": "Craft and Cake",
       "starts_at": "2026-11-04T20:00:00+00:00",
@@ -2035,17 +1720,6 @@
       "source": "st-cross-st-cross-src-termcard"
     },
     {
-      "kind": "formal",
-      "title": "MCR Guest Night",
-      "starts_at": "2026-11-05T18:30:00+00:00",
-      "college": "Jesus",
-      "host": "Jesus MCR",
-      "url": "https://www.jesuscollegemcr.com/",
-      "details": "From the Jesus MCR Google Calendar.",
-      "source": "jesus-jesus-mcr",
-      "special": true
-    },
-    {
       "kind": "other",
       "title": "Festival of Lights CR Celebration",
       "starts_at": "2026-11-05T19:00:00+00:00",
@@ -2055,122 +1729,6 @@
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "details": "Linacre Common Room event. Paint your own diyas, with music and snacks.",
       "source": "linacre-linacre-michaelmas-2026-term-card"
-    },
-    {
-      "kind": "formal",
-      "title": "Guest Night",
-      "starts_at": "2026-11-05T19:00:00+00:00",
-      "ends_at": "2026-11-05T22:00:00+00:00",
-      "college": "Wolfson",
-      "venue": "Hall",
-      "host": "Wolfson College",
-      "guests": "Open to all members of College and Common Room and their guests; booking required",
-      "dress": "Smart, no gowns",
-      "url": "https://www.wolfson.ox.ac.uk/event/guest-night-33/",
-      "details": "Pre-dinner drinks 7pm, dinner 7.30pm; drinks included. Book on the Wolfson Gateway.",
-      "source": "wolfson-wolfson-events",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-05T19:15:00+00:00",
-      "college": "Lincoln",
-      "host": "Lincoln College",
-      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-05T19:15:00+00:00",
-      "college": "New College",
-      "host": "New College",
-      "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-05T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "title": "Go Green Formal Hall",
-      "starts_at": "2026-11-05T19:25:00+00:00",
-      "ends_at": "2026-11-05T21:00:00+00:00",
-      "college": "St Edmund Hall",
-      "venue": "Wolfson Hall",
-      "host": "St Edmund Hall",
-      "url": "https://www.seh.ox.ac.uk/events/green-formal-hall-2026?es=20261105",
-      "details": "Themed Thursday formal with locally sourced food and guest speakers from Oxfordshire farming. Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
-      "source": "st-edmund-hall-st-edmund-hall-events",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-05T19:30:00+00:00",
-      "college": "Green Templeton",
-      "host": "Green Templeton College",
-      "url": "https://www.gtc.ox.ac.uk/students/offerholders/student-college-handbook/domestic-life/",
-      "source": "green-templeton-green-templeton-formal-hall",
-      "details": "Smart dress. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-05T19:30:00+00:00",
-      "college": "Linacre",
-      "host": "Linacre College",
-      "url": "https://www.linacre.ox.ac.uk/college-life/college-facilities/college-dining",
-      "source": "linacre-linacre-formal-hall",
-      "details": "Formal guest night, weeks 1 to 8. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-05T19:30:00+00:00",
-      "college": "Magdalen",
-      "host": "Magdalen College",
-      "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
-      "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-05T19:30:00+00:00",
-      "college": "Merton",
-      "host": "Merton College",
-      "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
-      "source": "merton-merton-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "title": "Oriel and St Anne's formal exchange",
-      "starts_at": "2026-11-05T19:30:00+00:00",
-      "college": "St Anne's",
-      "venue": "St Anne's College",
-      "host": "St Anne's MCR",
-      "guests": "St Anne's and Oriel MCR members on the exchange",
-      "url": "https://st-annes-mcr.org.uk/",
-      "details": "MCR formal swap with Oriel, sold out (tickets were on Fixr). Time not stated.",
-      "source": "st-anne-s-st-anne-s-mcr",
-      "special": true
     },
     {
       "kind": "other",
@@ -2204,83 +1762,6 @@
       "source": "lincoln-lincoln-mcr"
     },
     {
-      "kind": "formal",
-      "title": "MCR Guest Night",
-      "starts_at": "2026-11-06T18:30:00+00:00",
-      "ends_at": "2026-11-06T22:00:00+00:00",
-      "college": "Merton",
-      "host": "Merton MCR",
-      "url": "https://mertonmcr.co.uk/s/MT26.pdf",
-      "details": "From the Merton MCR Michaelmas 2026 term card.",
-      "source": "merton-merton-mcr-term-card",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-06T19:05:00+00:00",
-      "college": "Trinity",
-      "host": "Trinity College",
-      "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
-      "source": "trinity-trinity-formal-hall",
-      "details": "JCR & MCR Guest Night; sign-up required."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-06T19:15:00+00:00",
-      "college": "Lincoln",
-      "host": "Lincoln College",
-      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-06T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-06T19:30:00+00:00",
-      "college": "Lady Margaret Hall",
-      "host": "Lady Margaret Hall",
-      "url": "https://www.lmh.ox.ac.uk/alumni/alumni-benefits",
-      "source": "lady-margaret-hall-lady-margaret-hall-formal-hall",
-      "details": "Friday special guest night (four courses plus dessert). Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-06T19:30:00+00:00",
-      "college": "Magdalen",
-      "host": "Magdalen College",
-      "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
-      "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "title": "Formal Dinner",
-      "starts_at": "2026-11-06T19:30:00+00:00",
-      "college": "St Cross",
-      "host": "St Cross College",
-      "url": "https://www.stx.ox.ac.uk/sitefiles/annual-calendar-2026-27-events.pdf",
-      "details": "Friday formal dinner on the St Cross annual events calendar; Time not stated.",
-      "source": "st-cross-st-cross-events",
-      "special": false
-    },
-    {
       "kind": "other",
       "title": "Wine & Cheese",
       "starts_at": "2026-11-06T20:00:00+00:00",
@@ -2289,17 +1770,6 @@
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
       "source": "lincoln-lincoln-mcr"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-07T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "other",
@@ -2342,106 +1812,6 @@
       "source": "lincoln-lincoln-mcr"
     },
     {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-08T19:15:00+00:00",
-      "college": "New College",
-      "host": "New College",
-      "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-08T19:15:00+00:00",
-      "college": "Trinity",
-      "host": "Trinity College",
-      "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
-      "source": "trinity-trinity-formal-hall",
-      "details": "Sunday Chapel Formal Hall; sign-up required."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-08T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "title": "Diwali Formal Hall",
-      "starts_at": "2026-11-08T19:25:00+00:00",
-      "ends_at": "2026-11-08T21:00:00+00:00",
-      "college": "St Edmund Hall",
-      "venue": "Wolfson Hall",
-      "host": "St Edmund Hall",
-      "url": "https://www.seh.ox.ac.uk/events/diwali-formal-hall-2026?es=20261108",
-      "details": "Themed Sunday formal for Diwali with a vegetarian menu. Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
-      "source": "st-edmund-hall-st-edmund-hall-events",
-      "dress": "Traditional dress or as you feel appropriate",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "special": true,
-      "title": "Diwali Formal",
-      "starts_at": "2026-11-08T19:30:00+00:00",
-      "college": "Exeter",
-      "host": "Exeter College",
-      "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
-      "source": "exeter-exeter-formal-dinners",
-      "details": "On Exeter's formal hall menus list. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-08T19:30:00+00:00",
-      "college": "Hertford",
-      "host": "Hertford College",
-      "url": "https://www.hertford.ox.ac.uk/support-us/celebrating-your-generosity/donor-dining-rights/",
-      "source": "hertford-hertford-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-08T19:30:00+00:00",
-      "college": "Lincoln",
-      "host": "Lincoln College",
-      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-08T19:30:00+00:00",
-      "college": "Magdalen",
-      "host": "Magdalen College",
-      "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
-      "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-08T19:30:00+00:00",
-      "college": "Merton",
-      "host": "Merton College",
-      "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
-      "source": "merton-merton-formal-hall",
-      "details": "Time not stated."
-    },
-    {
       "kind": "other",
       "title": "Diane's Cure for Fifth Week Blues",
       "starts_at": "2026-11-09T17:00:00+00:00",
@@ -2460,51 +1830,6 @@
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "details": "Brasenose HCR event.",
       "source": "brasenose-brasenose-hcr-term-card"
-    },
-    {
-      "kind": "formal",
-      "special": true,
-      "title": "Diwali Formal",
-      "starts_at": "2026-11-09T19:00:00+00:00",
-      "college": "Lincoln",
-      "venue": "Hall",
-      "host": "Lincoln MCR",
-      "url": "https://lincolnmcr.weebly.com/",
-      "source": "lincoln-lincoln-mcr",
-      "details": "On the Lincoln MCR calendar."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-09T19:05:00+00:00",
-      "college": "Trinity",
-      "host": "Trinity College",
-      "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
-      "source": "trinity-trinity-formal-hall",
-      "details": "Sign-up required."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-09T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-09T19:30:00+00:00",
-      "college": "Harris Manchester",
-      "host": "Harris Manchester College",
-      "url": "https://www.hmc.ox.ac.uk/facilities",
-      "source": "harris-manchester-harris-manchester-formal-hall",
-      "details": "Gowns worn. Time not stated."
     },
     {
       "kind": "other",
@@ -2527,94 +1852,6 @@
       "source": "keble-keble-mcr-socials"
     },
     {
-      "kind": "formal",
-      "title": "Balliol exchange dinner (Keble MCR away leg)",
-      "starts_at": "2026-11-10T18:00:00+00:00",
-      "college": "Balliol",
-      "venue": "Balliol College",
-      "host": "Keble MCR",
-      "guests": "Keble MCR members on the exchange; sign-up required",
-      "url": "https://mcr.keble.ox.ac.uk/social/",
-      "details": "Away leg of the Keble MCR exchange with Balliol MCR, from the Keble MCR term card calendar.",
-      "source": "keble-keble-mcr-socials",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "title": "EDI formal: Diwali",
-      "starts_at": "2026-11-10T19:00:00+00:00",
-      "college": "Brasenose",
-      "host": "Brasenose HCR",
-      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
-      "details": "Diwali formal on the Brasenose HCR term card calendar.",
-      "source": "brasenose-brasenose-hcr-term-card",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-10T19:15:00+00:00",
-      "college": "Lincoln",
-      "host": "Lincoln College",
-      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-10T19:15:00+00:00",
-      "college": "New College",
-      "host": "New College",
-      "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-10T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-10T19:30:00+00:00",
-      "college": "Lady Margaret Hall",
-      "host": "Lady Margaret Hall",
-      "url": "https://www.lmh.ox.ac.uk/alumni/alumni-benefits",
-      "source": "lady-margaret-hall-lady-margaret-hall-formal-hall",
-      "details": "Tuesday guest night (three courses). Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-10T19:30:00+00:00",
-      "college": "Linacre",
-      "host": "Linacre College",
-      "url": "https://www.linacre.ox.ac.uk/college-life/college-facilities/college-dining",
-      "source": "linacre-linacre-formal-hall",
-      "details": "Formal guest night, weeks 1 to 8. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": true,
-      "title": "Disability Formal",
-      "starts_at": "2026-11-10T19:30:00+00:00",
-      "college": "Merton",
-      "host": "Merton College",
-      "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
-      "source": "merton-merton-formal-hall",
-      "details": "Themed formal on the Merton food and drink page. Time not stated."
-    },
-    {
       "kind": "other",
       "title": "Board Game Night",
       "starts_at": "2026-11-11T18:00:00+00:00",
@@ -2624,96 +1861,6 @@
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "details": "St Cross SRC event.",
       "source": "st-cross-st-cross-src-termcard"
-    },
-    {
-      "kind": "formal",
-      "special": true,
-      "title": "Formal exchange with Kellogg (Lincoln MCR away leg)",
-      "starts_at": "2026-11-11T18:30:00+00:00",
-      "college": "Kellogg",
-      "host": "Lincoln MCR",
-      "url": "https://lincolnmcr.weebly.com/term-card.html",
-      "details": "Away leg of the Lincoln MCR exchange dinner with Kellogg, from the Lincoln MCR calendar.",
-      "source": "lincoln-lincoln-mcr-term-card"
-    },
-    {
-      "kind": "formal",
-      "title": "Guest Night Dinner",
-      "starts_at": "2026-11-11T18:45:00+00:00",
-      "ends_at": "2026-11-11T22:00:00+00:00",
-      "college": "Kellogg",
-      "venue": "Dining Hall",
-      "host": "Kellogg College",
-      "guests": "All college members and their guests; registration required",
-      "url": "https://www.kellogg.ox.ac.uk/event/guest-night-dinner-4/",
-      "details": "Drinks reception in the college bar at 18:45, dinner in the Dining Hall at 19:15. Lincoln MCR's exchange dinner with Kellogg (away leg) is at Kellogg this night.",
-      "source": "kellogg-kellogg-college-events",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-11T19:05:00+00:00",
-      "college": "Trinity",
-      "host": "Trinity College",
-      "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
-      "source": "trinity-trinity-formal-hall",
-      "details": "Sign-up required."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-11T19:15:00+00:00",
-      "college": "Lincoln",
-      "host": "Lincoln College",
-      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-11T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Wednesday Formal Hall",
-      "starts_at": "2026-11-11T19:30:00+00:00",
-      "college": "Exeter",
-      "host": "Exeter College",
-      "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
-      "source": "exeter-exeter-formal-dinners",
-      "details": "On Exeter's formal hall menus list. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-11T19:30:00+00:00",
-      "college": "Harris Manchester",
-      "host": "Harris Manchester College",
-      "url": "https://www.hmc.ox.ac.uk/facilities",
-      "source": "harris-manchester-harris-manchester-formal-hall",
-      "details": "Gowns worn. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-11T19:30:00+00:00",
-      "college": "Magdalen",
-      "host": "Magdalen College",
-      "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
-      "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not stated."
     },
     {
       "kind": "other",
@@ -2758,58 +1905,6 @@
       "source": "st-cross-st-cross-src-termcard"
     },
     {
-      "kind": "formal",
-      "title": "Formal exchange with Pembroke (Jesus MCR away leg)",
-      "starts_at": "2026-11-12T18:15:00+00:00",
-      "college": "Pembroke",
-      "venue": "Pembroke College",
-      "host": "Jesus MCR",
-      "guests": "Jesus MCR members on the exchange",
-      "url": "https://www.jesuscollegemcr.com/",
-      "details": "Away leg of the Jesus MCR formal exchange with Pembroke, from the Jesus MCR calendar.",
-      "source": "jesus-jesus-mcr",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "title": "Queen's formal exchange (home)",
-      "starts_at": "2026-11-12T18:30:00+00:00",
-      "ends_at": "2026-11-12T22:30:00+00:00",
-      "college": "Linacre",
-      "venue": "Small CR",
-      "host": "Linacre Common Room",
-      "guests": "Linacre and Queen's members on the exchange; 15 places, sign-up required",
-      "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
-      "details": "Home leg of the Linacre Common Room's formal exchange with Queen's.",
-      "source": "linacre-linacre-michaelmas-2026-term-card",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "title": "Cultural Dinner: Diwali",
-      "starts_at": "2026-11-12T18:45:00+00:00",
-      "college": "Reuben",
-      "venue": "Dining Hall",
-      "host": "Reuben College",
-      "guests": "Reuben members only; booking required",
-      "dress": "Bright colours and traditional attire welcome",
-      "url": "https://www.reuben.ox.ac.uk/events/cultural-dinner-diwali",
-      "details": "Diwali dinner with shared food and diyas.",
-      "source": "reuben-reuben-college-events",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "title": "MT26 Graduate Dinner",
-      "starts_at": "2026-11-12T19:00:00+00:00",
-      "college": "Brasenose",
-      "host": "Brasenose HCR",
-      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
-      "details": "Termly graduate dinner on the Brasenose HCR term card calendar.",
-      "source": "brasenose-brasenose-hcr-term-card",
-      "special": true
-    },
-    {
       "kind": "other",
       "title": "Trinity Bar Exchange (St Cross away leg)",
       "starts_at": "2026-11-12T19:00:00+00:00",
@@ -2818,157 +1913,6 @@
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "details": "St Cross SRC event. Karaoke or a pub quiz at Trinity. Time not stated.",
       "source": "st-cross-st-cross-src-termcard"
-    },
-    {
-      "kind": "formal",
-      "title": "Guest Night",
-      "starts_at": "2026-11-12T19:00:00+00:00",
-      "ends_at": "2026-11-12T22:00:00+00:00",
-      "college": "Wolfson",
-      "venue": "Hall",
-      "host": "Wolfson College",
-      "guests": "Open to all members of College and Common Room and their guests; booking required",
-      "dress": "Smart, no gowns",
-      "url": "https://www.wolfson.ox.ac.uk/event/guest-night-32/",
-      "details": "Pre-dinner drinks 7pm, dinner 7.30pm; drinks included. Book on the Wolfson Gateway.",
-      "source": "wolfson-wolfson-events",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-12T19:15:00+00:00",
-      "college": "Lincoln",
-      "host": "Lincoln College",
-      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-12T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "title": "Formal Hall",
-      "starts_at": "2026-11-12T19:25:00+00:00",
-      "ends_at": "2026-11-12T21:00:00+00:00",
-      "college": "St Edmund Hall",
-      "venue": "Wolfson Hall",
-      "host": "St Edmund Hall",
-      "url": "https://www.seh.ox.ac.uk/events/formal-hall-michaelmas-2026?es=20261112",
-      "details": "Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
-      "source": "st-edmund-hall-st-edmund-hall-events",
-      "special": false
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-12T19:30:00+00:00",
-      "college": "Green Templeton",
-      "host": "Green Templeton College",
-      "url": "https://www.gtc.ox.ac.uk/students/offerholders/student-college-handbook/domestic-life/",
-      "source": "green-templeton-green-templeton-formal-hall",
-      "details": "Smart dress. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-12T19:30:00+00:00",
-      "college": "Magdalen",
-      "host": "Magdalen College",
-      "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
-      "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-12T19:30:00+00:00",
-      "college": "Merton",
-      "host": "Merton College",
-      "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
-      "source": "merton-merton-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "title": "Formal exchange with New College (Merton MCR away leg)",
-      "starts_at": "2026-11-12T19:30:00+00:00",
-      "college": "New College",
-      "venue": "New College",
-      "host": "Merton MCR",
-      "guests": "Merton MCR members on the exchange",
-      "url": "https://mertonmcr.co.uk/s/MT26.pdf",
-      "details": "Away leg of the Merton MCR exchange with New College MCR. Time not stated.",
-      "source": "merton-merton-mcr-term-card",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "title": "Diwali Formal",
-      "starts_at": "2026-11-13T19:00:00+00:00",
-      "ends_at": "2026-11-13T20:30:00+00:00",
-      "college": "Keble",
-      "host": "Keble MCR",
-      "guests": "Sign-up required",
-      "url": "https://mcr.keble.ox.ac.uk/social/",
-      "details": "On the Keble MCR term card calendar (5th week).",
-      "source": "keble-keble-mcr-socials",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-13T19:05:00+00:00",
-      "college": "Trinity",
-      "host": "Trinity College",
-      "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
-      "source": "trinity-trinity-formal-hall",
-      "details": "JCR & MCR Guest Night; sign-up required."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-13T19:15:00+00:00",
-      "college": "Lincoln",
-      "host": "Lincoln College",
-      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-13T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-13T19:30:00+00:00",
-      "college": "Lady Margaret Hall",
-      "host": "Lady Margaret Hall",
-      "url": "https://www.lmh.ox.ac.uk/alumni/alumni-benefits",
-      "source": "lady-margaret-hall-lady-margaret-hall-formal-hall",
-      "details": "Friday special guest night (four courses plus dessert). Time not stated."
     },
     {
       "kind": "other",
@@ -2982,39 +1926,6 @@
       "source": "linacre-linacre-michaelmas-2026-term-card"
     },
     {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-13T19:30:00+00:00",
-      "college": "Magdalen",
-      "host": "Magdalen College",
-      "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
-      "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "title": "Charity Formal",
-      "starts_at": "2026-11-13T19:30:00+00:00",
-      "college": "Merton",
-      "host": "Merton MCR",
-      "url": "https://mertonmcr.co.uk/s/MT26.pdf",
-      "details": "On the Merton MCR Michaelmas 2026 term card. Time not stated.",
-      "source": "merton-merton-mcr-term-card",
-      "special": true
-    },
-    {
-      "kind": "formal",
-      "title": "Formal Dinner",
-      "starts_at": "2026-11-13T19:30:00+00:00",
-      "college": "St Cross",
-      "host": "St Cross College",
-      "url": "https://www.stx.ox.ac.uk/sitefiles/annual-calendar-2026-27-events.pdf",
-      "details": "Friday formal dinner on the St Cross annual events calendar; Time not stated.",
-      "source": "st-cross-st-cross-events",
-      "special": false
-    },
-    {
       "kind": "other",
       "title": "Wine & Cheese Exchange with St Anne's",
       "starts_at": "2026-11-13T20:00:00+00:00",
@@ -3023,17 +1934,6 @@
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
       "source": "lincoln-lincoln-mcr"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-14T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
     },
     {
       "kind": "bop",
@@ -3097,105 +1997,6 @@
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
       "source": "lincoln-lincoln-mcr"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-15T19:15:00+00:00",
-      "college": "New College",
-      "host": "New College",
-      "url": "https://www.new.ox.ac.uk/student-meals",
-      "source": "new-college-new-college-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-15T19:15:00+00:00",
-      "college": "Trinity",
-      "host": "Trinity College",
-      "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
-      "source": "trinity-trinity-formal-hall",
-      "details": "Sunday Chapel Formal Hall; sign-up required."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-15T19:20:00+00:00",
-      "college": "Christ Church",
-      "host": "Christ Church",
-      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
-      "source": "christ-church-christ-church-formal-hall",
-      "details": "Gowns worn; informal sitting at 6.20pm."
-    },
-    {
-      "kind": "formal",
-      "title": "Formal Hall",
-      "starts_at": "2026-11-15T19:25:00+00:00",
-      "ends_at": "2026-11-15T21:00:00+00:00",
-      "college": "St Edmund Hall",
-      "venue": "Wolfson Hall",
-      "host": "St Edmund Hall",
-      "url": "https://www.seh.ox.ac.uk/events/formal-hall-michaelmas-2026?es=20261115",
-      "details": "Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
-      "source": "st-edmund-hall-st-edmund-hall-events",
-      "special": false
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Sunday Formal",
-      "starts_at": "2026-11-15T19:30:00+00:00",
-      "college": "Exeter",
-      "host": "Exeter College",
-      "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
-      "source": "exeter-exeter-formal-dinners",
-      "details": "On Exeter's formal hall menus list. Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-15T19:30:00+00:00",
-      "college": "Hertford",
-      "host": "Hertford College",
-      "url": "https://www.hertford.ox.ac.uk/support-us/celebrating-your-generosity/donor-dining-rights/",
-      "source": "hertford-hertford-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-15T19:30:00+00:00",
-      "college": "Lincoln",
-      "host": "Lincoln College",
-      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
-      "source": "lincoln-lincoln-formal-hall"
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-15T19:30:00+00:00",
-      "college": "Magdalen",
-      "host": "Magdalen College",
-      "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
-      "source": "magdalen-magdalen-formal-hall",
-      "details": "Time not stated."
-    },
-    {
-      "kind": "formal",
-      "special": false,
-      "title": "Formal Hall",
-      "starts_at": "2026-11-15T19:30:00+00:00",
-      "college": "Merton",
-      "host": "Merton College",
-      "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
-      "source": "merton-merton-formal-hall",
-      "details": "Time not stated."
     }
   ]
 }

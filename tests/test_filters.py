@@ -10,6 +10,8 @@ import datetime as dt, functools, http.server, json, os, pathlib, re, socketserv
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SLUG = json.loads((ROOT / "city.json").read_text())["slug"]
 TERMS = re.search(r'TERMS_VERSION = "([^"]+)"', (ROOT / "scripts" / "build.py").read_text()).group(1)
+FORMALS = bool(json.loads((ROOT / "site" / "features.json").read_text()).get("formals"))
+KINDS_ON = ["bop"] + (["formal"] if FORMALS else []) + ["ball", "society", "other"]
 ACCEPTED = "try { localStorage.setItem(%r, %r); } catch (e) {}" % (SLUG + ".terms", TERMS)   # the filter tests start past the terms dialog
 try:
     from playwright.sync_api import sync_playwright
@@ -150,7 +152,7 @@ class TestFilters(unittest.TestCase):
     def test_every_combination(self):
         p, errors = self.open()
         checked = 0
-        for kind in ("bop", "formal", "ball", "society", "other"):
+        for kind in KINDS_ON:
             cols = ["all"] + (["Union", "Footlights", "Hindu Society"] if kind == "society" else self.colleges[:3]) + ["none"]
             self.click(p, f'#kind button[data-kind="{kind}"]')
             for ftype in (["all", "special"] if kind == "formal" else ["all"]):
@@ -179,11 +181,13 @@ class TestFilters(unittest.TestCase):
         self.click(p, '#when button[data-when="weekend"]')
         self.click(p, f'#chips [data-college="{col}"]')
         self.assert_view(p, "bop", "weekend", col, "all", "bops after filtering")
-        # Formals start clean, not with the bop filters.
-        self.click(p, '#kind button[data-kind="formal"]')
-        self.assert_view(p, "formal", "all", "all", "all", "formals after switching")
+        # The second tab starts clean, not with the bop filters.
+        second, ft = ("formal", "special") if FORMALS else ("society", "all")
+        self.click(p, f'#kind button[data-kind="{second}"]')
+        self.assert_view(p, second, "all", "all", "all", "second tab after switching")
         self.assertEqual(p.get_attribute('#when button[data-when="all"]', "aria-pressed"), "true")
-        self.click(p, '#ftype button[data-ftype="special"]')
+        if FORMALS:
+            self.click(p, '#ftype button[data-ftype="special"]')
         self.click(p, '#when button[data-when="today"]')
         # Balls start clean and hide the When row.
         self.click(p, '#kind button[data-kind="ball"]')
@@ -192,8 +196,8 @@ class TestFilters(unittest.TestCase):
         # Going back restores each tab's own filters.
         self.click(p, '#kind button[data-kind="bop"]')
         self.assert_view(p, "bop", "weekend", col, "all", "bops restored")
-        self.click(p, '#kind button[data-kind="formal"]')
-        self.assert_view(p, "formal", "today", "all", "special", "formals restored")
+        self.click(p, f'#kind button[data-kind="{second}"]')
+        self.assert_view(p, second, "today", "all", ft, "second tab restored")
         # Other events start clean too.
         self.click(p, '#kind button[data-kind="other"]')
         self.assertTrue(p.is_visible("#when-group"))
@@ -202,12 +206,18 @@ class TestFilters(unittest.TestCase):
 
     def test_links_and_clear(self):
         col = self.colleges[1]
-        p, errors = self.open(f"?kind=formal&formals=special&when=thisweek&college={col}")
-        self.assert_view(p, "formal", "thisweek", col, "special", "from link")
-        self.assertIn("formals=special", p.url)
-        self.click(p, "#clear")
-        self.assert_view(p, "formal", "all", "all", "all", "after clear")
-        self.assertEqual(p.get_attribute('#ftype button[data-ftype="all"]', "aria-pressed"), "true", "clear resets the formal type")
+        if FORMALS:
+            p, errors = self.open(f"?kind=formal&formals=special&when=thisweek&college={col}")
+            self.assert_view(p, "formal", "thisweek", col, "special", "from link")
+            self.assertIn("formals=special", p.url)
+            self.click(p, "#clear")
+            self.assert_view(p, "formal", "all", "all", "all", "after clear")
+            self.assertEqual(p.get_attribute('#ftype button[data-ftype="all"]', "aria-pressed"), "true", "clear resets the formal type")
+        else:
+            p, errors = self.open(f"?kind=other&when=weekend&college={self.colleges[0]}")
+            self.assert_view(p, "other", "weekend", self.colleges[0], "all", "from link")
+            self.click(p, "#clear")
+            self.assert_view(p, "other", "all", "all", "all", "after clear")
         # An option that belongs to another tab is ignored, not carried.
         p2, _ = self.open("?kind=ball&when=tonight")
         self.assert_view(p2, "ball", "all", "all", "all", "ball link with a bop-only when")
@@ -247,17 +257,31 @@ class TestFilters(unittest.TestCase):
         self.assertEqual(errors, [])
         ctx.close()
 
+    @unittest.skipIf(FORMALS, "formals are switched on")
+    def test_formals_paused(self):
+        """With formals paused there is no Formals tab, a formals link opens Bops, and no formal is listed anywhere."""
+        p, errors = self.open("?kind=formal&formals=special")
+        self.assertIsNone(p.query_selector('#kind button[data-kind="formal"]'))
+        self.assertEqual(p.get_attribute('#kind button[data-kind="bop"]', "aria-pressed"), "true")
+        for k in KINDS_ON:
+            self.click(p, f'#kind button[data-kind="{k}"]')
+            self.assertEqual(p.eval_on_selector_all('#list li[data-kind="formal"]', "e => e.length"), 0, k)
+            self.assertFalse(any(t.startswith("Formal ") for t in p.eval_on_selector_all("#list li .name", "e => e.map(x => x.textContent)")), k)
+        self.assertFalse(p.is_visible("#type-group"))
+        self.assertEqual(errors, [])
+
     def test_pagination(self):
         """A long list shows 25 at first; Show more adds 25; changing a filter starts again at 25."""
-        p, errors = self.open("?kind=formal")
-        total = len(expected(self.data, "formal", "all", "all", "all"))
+        pk = "formal" if FORMALS else "bop"
+        p, errors = self.open(f"?kind={pk}")
+        total = len(expected(self.data, pk, "all", "all", "all"))
         self.assertGreater(total, 25)
         self.assertEqual(p.eval_on_selector_all("#list li", "els => els.length"), 25)
         self.assertTrue(p.inner_text("#more").startswith(f"Show {min(25, total - 25)} more"), p.inner_text("#more"))
         self.click(p, "#more")
         self.assertEqual(p.eval_on_selector_all("#list li", "els => els.length"), min(50, total))
-        self.click(p, '#ftype button[data-ftype="special"]')
-        self.click(p, '#ftype button[data-ftype="all"]')
+        self.click(p, '#when button[data-when="tomorrow"]')
+        self.click(p, '#when button[data-when="all"]')
         self.assertEqual(p.eval_on_selector_all("#list li", "els => els.length"), 25)
         self.assertEqual(errors, [])
 
@@ -269,7 +293,7 @@ class TestFilters(unittest.TestCase):
         p = ctx.new_page(); errors = []
         p.on("pageerror", lambda e: errors.append(str(e)))
         p.goto(self.base + "?college=" + self.colleges[0]); p.wait_for_selector("#list li, #list .empty", timeout=10000)
-        for kind in ("bop", "formal", "ball", "society", "other"):
+        for kind in KINDS_ON:
             p.tap(f'#kind button[data-kind="{kind}"]'); p.wait_for_timeout(50)
             r = p.evaluate("""() => {
               const W = document.documentElement.clientWidth, out = {scroll: document.documentElement.scrollWidth - W, small: [], tiny: []};

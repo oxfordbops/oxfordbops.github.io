@@ -15,6 +15,7 @@ import datetime as dt, html, json, pathlib, re, sys
 from zoneinfo import ZoneInfo
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMALS = bool(json.loads((ROOT / "site" / "features.json").read_text()).get("formals"))   # formals paused: no formals page, no formal wording
 LONDON = ZoneInfo("Europe/London")
 MARK = '<p class="status" id="loading">Loading…</p>'
 DAYS = {"Mon": "Monday", "Tue": "Tuesday", "Wed": "Wednesday", "Thu": "Thursday", "Fri": "Friday", "Sat": "Saturday", "Sun": "Sunday"}
@@ -127,7 +128,7 @@ footer {{ margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid {pal['rul
 
 
 def nav_kinds(city):
-    return [("bops", "Bops"), ("formals", "Formals"), (slug(city["balls"]["many"]), city["balls"]["many"]), ("societies", "Societies"), ("other-events", "Other events")]
+    return [("bops", "Bops")] + ([("formals", "Formals")] if FORMALS else []) + [(slug(city["balls"]["many"]), city["balls"]["many"]), ("societies", "Societies"), ("other-events", "Other events")]
 
 
 def build(out, city, data, sources, now, societies=()):
@@ -166,6 +167,8 @@ def build(out, city, data, sources, now, societies=()):
          "No other college events are listed for the next fortnight."),
     ]
     for path, kind, title, desc, h1, lede, empty in kpages:
+        if kind == "formal" and not FORMALS:
+            continue
         body = (f'<p class="lede">{esc(lede)}</p><a class="cta" href="/?kind={kind}">Open the live list with filters and map</a>'
                 + listing(by_kind[kind], empty) + college_links(by_kind[kind]))
         pages[path + "/"] = page(city, path + "/", title, desc, h1, body, [(path + "/", h1)], updated)
@@ -182,14 +185,14 @@ def build(out, city, data, sources, now, societies=()):
         n_up = len(mine)
         idx.append(f'<li><a href="/colleges/{sl}/">{esc(fn)}</a>' + (f" ({n_up} upcoming)" if n_up else "") + "</li>")
         sec = []
-        for kind, label in (("bop", "Bops"), ("formal", "Formals"), ("ball", balls["one"]), ("other", "Other events")):
+        for kind, label in (("bop", "Bops"),) + ((("formal", "Formals"),) if FORMALS else ()) + (("ball", balls["one"]), ("other", "Other events")):
             ents = [e for e in mine if e.get("kind", "bop") == kind]
             if ents:
                 sec.append(f"<h2>{esc(label)}</h2>" + listing(ents, "", with_college=False))
         if not sec:
             sec.append(f'<p class="empty">Nothing is announced at {esc(fn)} for the next fortnight yet.</p>')
         fs = formal_src.get(c)
-        if fs:
+        if fs and FORMALS:
             days = fs.get("formal_days") or []
             sched = (f"Formal hall at {esc(fn)} runs on " + ", ".join(DAYS[d] for d in days) + " in Full Term" + (f" ({esc(fs['note'])})" if fs.get("note") else "") + ". "
                      if days else "")
@@ -198,12 +201,12 @@ def build(out, city, data, sources, now, societies=()):
         if where:
             sec.append("<h2>Where " + esc(fn) + " announces events</h2><ul>" + "".join(
                 f'<li><a href="{esc(s["url"])}" rel="noopener">{esc(s["name"])}</a> ({esc(s["kind"])})</li>' for s in where) + "</ul>")
-        title = f"{fn} bops, formals and events | {name} Bops"
-        desc = (f"Upcoming bops, formal halls and college events at {fn}, {name}: dates, times and links to the JCR, MCR and college pages, updated every Sunday."
+        title = f"{fn} bops and events | {name} Bops" if not FORMALS else f"{fn} bops, formals and events | {name} Bops"
+        desc = (f"Upcoming bops{', formal halls' if FORMALS else ''} and college events at {fn}, {name}: dates, times and links to the JCR, MCR and college pages, updated every Sunday."
                 + (f" {n_up} listed now." if n_up else ""))
-        body = (f'<p class="lede">Every bop, formal and event announced at {esc(fn)} for the next fortnight, and its {esc(balls["one"])} date when announced.</p>'
+        body = (f'<p class="lede">Every bop{', formal' if FORMALS else ''} and event announced at {esc(fn)} for the next fortnight, and its {esc(balls["one"])} date when announced.</p>'
                 f'<a class="cta" href="/?college={html.escape(c, quote=True)}">Open {esc(c)} in the live list</a>' + "".join(sec))
-        pages[f"colleges/{sl}/"] = page(city, f"colleges/{sl}/", title, desc, f"{fn}: bops, formals and events", body,
+        pages[f"colleges/{sl}/"] = page(city, f"colleges/{sl}/", title, desc, f"{fn}: bops{', formals' if FORMALS else ''} and events", body,
                                         [("colleges/", "Colleges"), (f"colleges/{sl}/", fn)], updated)
     # Societies: an index in order of popularity, and one page per society.
     ranked = {}
@@ -233,9 +236,9 @@ def build(out, city, data, sources, now, societies=()):
                                    f"Events of {name}'s most popular student societies in the next fortnight: talks, debates, socials, shows and parties, from the societies' own pages.",
                                    f"{name} society events", body, [("societies/", "Societies")], updated)
 
-    pages["colleges/"] = page(city, "colleges/", f"{name} colleges: bops, formals and events at each college | {name} Bops",
-                              f"Bops, formal halls and events at each of the {len(colleges)} {name} colleges, with where each college announces them.",
-                              f"Bops and formals at each {name} college", '<ul class="cols">' + "".join(idx) + "</ul>", [("colleges/", "Colleges")], updated)
+    pages["colleges/"] = page(city, "colleges/", f"{name} colleges: bops{', formals' if FORMALS else ''} and events at each college | {name} Bops",
+                              f"Bops{', formal halls' if FORMALS else ''} and events at each of the {len(colleges)} {name} colleges, with where each college announces them.",
+                              f"Bops{' and formals' if FORMALS else ' and events'} at each {name} college", '<ul class="cols">' + "".join(idx) + "</ul>", [("colleges/", "Colleges")], updated)
 
     for path, text in pages.items():
         f = out / path / "index.html"
@@ -274,7 +277,7 @@ def write_discovery(out, city, data, pages, up, now):
         return "0.2" if path == "terms/" else "0.6"
 
     def order(path):
-        top = ["", "bops/", "formals/", slug(city["balls"]["many"]) + "/", "societies/", "other-events/", "colleges/"]
+        top = ["", "bops/"] + (["formals/"] if FORMALS else []) + [ slug(city["balls"]["many"]) + "/", "societies/", "other-events/", "colleges/"]
         return (top.index(path), path) if path in top else (len(top) + (1 if path.startswith("societies/") else 0) + (5 if path == "terms/" else 0), path)
 
     paths = sorted([""] + list(pages) + ["terms/"], key=order)
@@ -300,12 +303,12 @@ Disallow: /ROUTINE.md
 Sitemap: {site}sitemap.xml
 """)
 
-    kinds = [("bops/", "Bops: college party nights"), ("formals/", "Formals: college formal hall dinners, regular and special"),
+    kinds = [("bops/", "Bops: college party nights")] + ([("formals/", "Formals: college formal hall dinners, regular and special")] if FORMALS else []) + [
              (slug(city["balls"]["many"]) + "/", f"{city['balls']['many']}: dates as announced"), ("societies/", "Societies: events of popular student societies"),
              ("other-events/", "Other college events: socials, quizzes, concerts, talks"), ("colleges/", "One page per college")]
     (out / "llms.txt").write_text(f"""# {name} Bops
 
-> An unofficial, automatically gathered list of student events in {name}: college bops, formal halls, {city['balls']['many']}, society events and other college events for the next fortnight, updated every Sunday from the colleges', common rooms' and societies' own public pages. Not affiliated with the University of {name}, its colleges or societies.
+> An unofficial, automatically gathered list of student events in {name}: college bops, {'formal halls, ' if FORMALS else ''}{city['balls']['many']}, society events and other college events for the next fortnight, updated every Sunday from the colleges', common rooms' and societies' own public pages. Not affiliated with the University of {name}, its colleges or societies.
 
 ## Using this information
 
@@ -317,7 +320,7 @@ Sitemap: {site}sitemap.xml
 
 ## Data
 
-- [Listings (JSON)]({site}events.json): `bops` holds every listing (`kind` is bop, formal, ball, society or other; times are ISO 8601 with the UK offset); `run.checked_at` says when the sources were read.
+- [Listings (JSON)]({site}events.json): `bops` holds every listing (`kind` is bop{', formal' if FORMALS else ''}, ball, society or other; times are ISO 8601 with the UK offset); `run.checked_at` says when the sources were read.
 - [Sources (JSON)]({site}sources.json): the vetted pages the listings come from, and the societies followed with their popularity rank.
 - [Upcoming listings as text]({site}llms-full.txt)
 
@@ -340,7 +343,7 @@ def prerender(entries, city, limit=60):
     rows = [item(e) for e in entries[:limit]]
     if not rows:
         return ""
-    return f'<div id="prerender"><h2>{esc(city)} bops, formals and college events coming up</h2><ul>' + "".join(rows) + "</ul></div>"
+    return f'<div id="prerender"><h2>{esc(city)} bops{', formals' if FORMALS else ''} and college events coming up</h2><ul>' + "".join(rows) + "</ul></div>"
 
 
 def main():

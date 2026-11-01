@@ -39,7 +39,7 @@ class TestSeo(unittest.TestCase):
             self.assertIn("Halloween &lt;Bop&gt;", college_page.read_text())
             sitemap = (out / "sitemap.xml").read_text()
             titles = set()
-            for f in [out / "bops" / "index.html", out / "formals" / "index.html", out / "colleges" / "index.html", college_page]:
+            for f in [out / "bops" / "index.html", out / "other-events" / "index.html", out / "colleges" / "index.html", college_page]:
                 t = f.read_text()
                 path = str(f.parent.relative_to(out)) + "/"
                 self.assertIn(f'<link rel="canonical" href="{CITY["site"]}{path}">', t)
@@ -47,7 +47,8 @@ class TestSeo(unittest.TestCase):
                 titles.add(t.split("<title>")[1].split("</title>")[0])
             self.assertEqual(len(titles), 4, "every page has its own title")
             socs = {x["society"] for x in json.loads((ROOT / "docs" / "sources.json").read_text()).get("societies", [])}
-            self.assertEqual(sitemap.count("<loc>"), 2 + 5 + len(CITY["colleges"]) + (1 + len(socs) if socs else 0))
+            formals_on = bool(json.loads((ROOT / "site" / "features.json").read_text()).get("formals"))
+            self.assertEqual(sitemap.count("<loc>"), 2 + 4 + formals_on + len(CITY["colleges"]) + (1 + len(socs) if socs else 0))
 
     def test_bots_and_llms_notes(self):
         """robots.txt welcomes crawlers and states the credit; llms.txt and llms-full.txt carry the licence and credit; the sitemap is valid XML."""

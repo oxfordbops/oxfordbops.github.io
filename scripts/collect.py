@@ -537,9 +537,10 @@ def main():
     names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     full = {"Mon": "monday", "Tue": "tuesday", "Wed": "wednesday", "Thu": "thursday", "Fri": "friday", "Sat": "saturday", "Sun": "sunday"}
     in_term = [d for d in sorted(window) if any(a_ <= d <= b_ for a_, b_, _ in terms)]
-    lines += ["## Regular formal halls (registry weekdays, Full Term only)", ""]
+    formals_on = json.loads((ROOT / "site" / "features.json").read_text()).get("formals", False)
+    lines += ["## Regular formal halls (registry weekdays, Full Term only)", ""] if formals_on else ["## Regular formal halls: paused (site/features.json), list no formals", ""]
     by_url = {r["url"]: r for r in recs}
-    for s in readable:
+    for s in (readable if formals_on else []):
         days = s.get("formal_days")
         if not days:
             continue

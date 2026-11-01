@@ -6,12 +6,12 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com https://*.goatcounter.com; connect-src 'self' https://*.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{{city}} Bops: college bops, formals and {{ball_many}} in {{city}}</title>
+<title>{{city}} Bops: college bops, {{formals_comma}}society events and {{ball_many}} in {{city}}</title>
 <link rel="canonical" href="{{site}}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{{city}} Bops">
 <meta property="og:title" content="{{city}} Bops">
-<meta property="og:description" content="Every {{city}} college bop, formal and {{ball_one}} in one list, updated every Sunday.">
+<meta property="og:description" content="Every {{city}} college bop, {{formal_or}}society event and {{ball_one}} in one list, updated every Sunday.">
 <meta property="og:url" content="{{site}}">
 <meta property="og:image" content="{{site}}og.png">
 <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 <script type="application/ld+json">{{ld_dataset}}</script>
 <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 <link rel="icon" href="{{favicon}}">
-<meta name="description" content="{{city}} bops tonight and this fortnight: every college bop, formal hall, society event and {{ball_one}} in {{city}}, with times, prices and dress codes, updated every week from the colleges' and societies' own pages.">
+<meta name="description" content="{{city}} bops tonight and this fortnight: every college bop, {{formal_hall_comma}}society event and {{ball_one}} in {{city}}, with times, prices and dress codes, updated every week from the colleges' and societies' own pages.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -195,7 +195,7 @@ footer a { display: inline-block; padding: .6rem 0; }
 
   <nav class="kinds" aria-label="What to show" id="kind">
     <button type="button" data-kind="bop" aria-pressed="true">Bops<span class="n" hidden></span></button>
-    <button type="button" data-kind="formal" aria-pressed="false">Formals<span class="n" hidden></span></button>
+    {{formal_tab}}
     <button type="button" data-kind="ball" aria-pressed="false">{{ball_tab}}<span class="n" hidden></span></button>
     <button type="button" data-kind="society" aria-pressed="false">Societies<span class="n" hidden></span></button>
     <button type="button" data-kind="other" aria-pressed="false">Other<span class="n" hidden></span></button>
@@ -235,8 +235,8 @@ footer a { display: inline-block; padding: .6rem 0; }
   </section>
 
   <section class="about" aria-label="About">
-    <p><strong>What is a bop?</strong> A bop is a college party night run by a JCR, MCR or ents committee: Halloween, Christmas, themed and super bops. Formal hall is the college's gowned dinner, from regular formal nights to themed formals, feasts and swaps. {{city}} Bops lists every one announced on the colleges' own pages for the next fortnight, the events of the most popular student societies, and the {{ball_many}} once their dates are out.</p>
-    <nav class="seo-nav" aria-label="Browse"><a href="bops/">{{city}} bops</a><a href="formals/">Formals</a><a href="{{ball_slug}}/">{{ball_many}}</a><a href="societies/">Societies</a><a href="other-events/">Other events</a><a href="colleges/">By college</a></nav>
+    <p><strong>What is a bop?</strong> A bop is a college party night run by a JCR, MCR or ents committee: Halloween, Christmas, themed and super bops.{{formal_about}} {{city}} Bops lists every one announced on the colleges' own pages for the next fortnight, the events of the most popular student societies, and the {{ball_many}} once their dates are out.</p>
+    <nav class="seo-nav" aria-label="Browse"><a href="bops/">{{city}} bops</a>{{formals_nav}}<a href="{{ball_slug}}/">{{ball_many}}</a><a href="societies/">Societies</a><a href="other-events/">Other events</a><a href="colleges/">By college</a></nav>
   </section>
 
   <footer>
@@ -280,7 +280,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   // Which "when" options each kind offers: bops are planned for tonight or the weekend, formals are booked days ahead
   // and run on weeknights, balls are listed for the whole season with no time filter.
   const WHEN_FOR = { bop: ["all", "tonight", "tomorrow", "weekend", "nextweek"], formal: ["all", "today", "tomorrow", "thisweek", "nextweek"], ball: ["all"], other: ["all", "today", "tomorrow", "weekend", "nextweek"], society: ["all", "today", "tomorrow", "weekend", "nextweek"] };
-  const KINDS = ["bop", "formal", "ball", "society", "other"];
+  const KINDS = {{kinds_js}};   // the kinds this site lists (site/features.json switches formals on and off)
   const NOUN = { bop: ["bop", "bops"], formal: ["formal", "formals"], ball: ["{{ball_one}}", "{{ball_many}}"], other: ["other event", "other events"], society: ["society event", "society events"] };
   const KEY = "{{slug}}.";
   // Each tab keeps its own filters: a college picked on Bops does not follow you to Formals or balls.
@@ -305,7 +305,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   if (q.has("when") || q.has("college") || q.has("society") || q.has("kind") || q.has("formals")) start = { when: q.get("when") || "all", college: q.get(kind === "society" ? "society" : "college") || "all", ftype: q.get("formals") || "all" };
   ({ when, college, ftype } = valid(kind, start));
   const tabState = {};   // filters of the tabs you left, for this page view
-  function kindOf(e) { return KINDS.includes(e.kind) ? e.kind : "bop"; }
+  function kindOf(e) { return e.kind === undefined ? "bop" : KINDS.includes(e.kind) ? e.kind : null; }   // a kind switched off is never shown
   function remember() {
     try { localStorage.setItem(KEY + kind + ".college", college); sessionStorage.setItem(KEY + kind + ".when", when); sessionStorage.setItem(KEY + kind + ".ftype", ftype); } catch (e) {}
     const u = new URL(location.href);
@@ -619,7 +619,7 @@ footer a { display: inline-block; padding: .6rem 0; }
       const data = await r.json();
       const srcs = Array.isArray(data.sources) ? data.sources : [];
       sourceIndex = new Map(srcs.filter(x => x.slug).map(x => [x.slug, x]));
-      events = (data.bops || []).filter(inWindow).sort((a, b) => Date.parse(a.starts_at) - Date.parse(b.starts_at));
+      events = (data.bops || []).filter(e => e && kindOf(e)).filter(inWindow).sort((a, b) => Date.parse(a.starts_at) - Date.parse(b.starts_at));
       render();
       fetch("sources.json", { cache: "no-cache" }).then(x => x.ok ? x.json() : null).then(reg => {
         const socs = reg && Array.isArray(reg.societies) ? reg.societies : [];
