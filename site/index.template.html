@@ -55,6 +55,16 @@ h1 { font-family: var(--display); font-weight: 400; font-size: 2.7rem; line-heig
 h1 em { font-style: italic; padding: 0 .12em; margin: 0 -.06em; background: linear-gradient(transparent 60%, var(--hl) 60%, var(--hl) 92%, transparent 92%); box-shadow: inset 0 -0.08em 0 var(--hl-line); }
 .tagline { color: var(--muted); margin: .5rem 0 0; max-width: 34rem; }
 .notice { font-size: .9rem; color: var(--muted); margin: .25rem 0 0; max-width: 34rem; }
+.notice.warn { color: var(--fg); background: var(--field); border-left: 4px solid var(--cam); border-radius: 0 8px 8px 0; padding: .5rem .75rem; margin-top: .75rem; }
+.terms-gate { position: fixed; inset: 0; z-index: 2000; background: rgba(22, 24, 28, .55); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.terms-gate[hidden] { display: none !important; }
+.terms-box { background: var(--bg); color: var(--fg); max-width: 30rem; width: 100%; border-radius: 16px; padding: 1.25rem 1.25rem 1rem; box-shadow: 0 12px 40px rgba(0,0,0,.25); max-height: calc(100vh - 32px); overflow: auto; }
+.terms-box h2 { margin: 0 0 .5rem; font-size: 1.5rem; }
+.terms-box ul { padding-left: 1.1rem; margin: .5rem 0; font-size: .92rem; }
+.terms-box label { display: flex; gap: .6rem; align-items: flex-start; margin: .75rem 0; font-size: .95rem; min-height: var(--ctl-h); }
+.terms-box input { width: 22px; height: 22px; margin-top: .1rem; flex: 0 0 auto; accent-color: var(--accent); }
+.terms-box button { width: 100%; min-height: var(--ctl-h); border: 0; border-radius: var(--ctl-radius); background: var(--cam); color: var(--cam-ink); font: inherit; font-weight: 600; cursor: pointer; }
+.terms-box button:disabled { opacity: .45; cursor: not-allowed; }
 
 
 [hidden] { display: none !important; }   /* the hidden attribute always wins over a display rule */
@@ -178,7 +188,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   <header>
     <h1><svg class="ball" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><defs><clipPath id="ballclip"><circle cx="20" cy="20" r="18"/></clipPath></defs><circle cx="20" cy="20" r="18" fill="var(--cam)"/><g clip-path="url(#ballclip)" stroke="var(--bg)" stroke-width="1.6"><path d="M2 8h36M2 14h36M2 20h36M2 26h36M2 32h36"/><path d="M8 2v36M14 2v36M20 2v36M26 2v36M32 2v36"/></g><rect x="18.5" y="0" width="3" height="3" fill="var(--cam-ink)"/></svg>{{city}} <em>Bops</em></h1>
     <p class="tagline">{{tagline}}</p>
-    <p class="notice">Details change. Check the link on each listing before you go.</p>
+    <p class="notice warn"><strong>Unofficial and unverified.</strong> Listings are gathered automatically from public pages and can be wrong, changed or cancelled, and many events are for members only. Always confirm with the organiser before you go. <a href="terms/">Terms of use</a></p>
   </header>
 
   <nav class="kinds" aria-label="What to show" id="kind">
@@ -229,9 +239,24 @@ footer a { display: inline-block; padding: .6rem 0; }
 
   <footer>
     <span id="lastrun">Updated every Sunday from college calendars, ents pages, society pages and student press.</span>
-    <span>From public announcements only. Check with the college before you go.</span>
+    <span>Unofficial; not affiliated with the University, its colleges or societies. Always check with the organiser before you go. <a href="terms/">Terms of use</a></span>
   </footer>
 </main>
+
+<div class="terms-gate" id="terms-gate" hidden role="dialog" aria-modal="true" aria-labelledby="terms-title" aria-describedby="terms-text">
+  <div class="terms-box">
+    <h2 id="terms-title">Before you use {{city}} Bops</h2>
+    <div id="terms-text">
+      <ul>
+        <li>This is an <strong>unofficial</strong> list, gathered automatically from public pages. The University, colleges and societies do not run or check it.</li>
+        <li>Listings can be <strong>wrong, changed or cancelled</strong>, and many events are for members only. <strong>Always confirm with the organiser</strong> before you go.</li>
+        <li>We sell no tickets. You are responsible for your own safety and for following the organiser's and your college's rules.</li>
+      </ul>
+    </div>
+    <label><input type="checkbox" id="terms-check"> <span>I have read and agree to the <a href="terms/" target="_blank" rel="noopener noreferrer">Terms of use</a>.</span></label>
+    <button type="button" id="terms-ok" disabled>Agree and continue</button>
+  </div>
+</div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -505,8 +530,8 @@ footer a { display: inline-block; padding: .6rem 0; }
     const href = safeUrl(e.url) || safeUrl(src && src.url);
     const host = hostOf(href || "");
     const where = /instagram\.com/.test(host) ? "Instagram post" : /facebook\.com/.test(host) ? "Facebook post" : host;
-    if (!href) return '<span class="src">via ' + esc(label) + "</span>";
-    return '<span class="src">via <a href="' + esc(href) + '" rel="noopener noreferrer" target="_blank" title="' + esc(label) + '">' + esc(where || label) + "</a></span>";
+    if (!href) return '<span class="src">check with ' + esc(label) + "</span>";
+    return '<span class="src">check at <a href="' + esc(href) + '" rel="noopener noreferrer" target="_blank" title="' + esc(label) + '">' + esc(where || label) + "</a></span>";
   }
 
   function facts(e) {
@@ -612,6 +637,25 @@ footer a { display: inline-block; padding: .6rem 0; }
       list.innerHTML = '<p class="status error">Could not load the listings. Try again in a minute.</p>';
     }
   }
+
+  // Terms: the page stays inert behind the dialog until this version is accepted; acceptance is remembered in this browser.
+  const TERMS = "{{terms_version}}";
+  (function termsGate() {
+    let ok = false;
+    try { ok = localStorage.getItem(KEY + "terms") === TERMS; } catch (e) {}
+    if (ok) return;
+    const gate = document.getElementById("terms-gate"), box = document.getElementById("terms-check"), btn = document.getElementById("terms-ok");
+    const main = document.querySelector("main");
+    gate.hidden = false; main.inert = true; main.setAttribute("aria-hidden", "true");
+    box.addEventListener("change", () => { btn.disabled = !box.checked; });
+    btn.addEventListener("click", () => {
+      if (!box.checked) return;
+      try { localStorage.setItem(KEY + "terms", TERMS); } catch (e) {}
+      gate.hidden = true; main.inert = false; main.removeAttribute("aria-hidden");
+      track("terms/agree");
+    });
+    setTimeout(() => box.focus(), 0);
+  })();
 
   load();
   // Keep an open page current: reload on a new London day or after an hour, when visible or coming back into view.

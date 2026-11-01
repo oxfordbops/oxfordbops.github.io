@@ -109,7 +109,8 @@ ul.ev strong a {{ color: inherit; }}
 .w, .d {{ color: {pal['muted']}; font-size: .9rem; }}
 .empty {{ color: {pal['muted']}; }}
 ul.cols {{ columns: 2; padding-left: 1.1rem; }}
-footer {{ margin-top: 3rem; padding-top: 1rem; border-top: 1px solid {pal['rule']}; color: {pal['muted']}; font-size: .85rem; }}
+.warn {{ margin-top: 2rem; background: {pal['field']}; border-left: 4px solid {pal['cam']}; padding: .6rem .8rem; font-size: .9rem; }}
+footer {{ margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid {pal['rule']}; color: {pal['muted']}; font-size: .85rem; }}
 </style>
 </head>
 <body>
@@ -117,7 +118,8 @@ footer {{ margin-top: 3rem; padding-top: 1rem; border-top: 1px solid {pal['rule'
 <p class="top"><a class="home" href="/">{esc(city['name'])} Bops</a> · {nav}</p>
 <h1>{esc(h1)}</h1>
 {body}
-<footer>Updated {esc(updated)} from the colleges', JCRs' and MCRs' own public pages. Details change: check the linked page before you go. <a href="/">All listings</a> · <a href="/colleges/">All colleges</a></footer>
+<p class="warn"><strong>Unofficial and unverified.</strong> Gathered automatically from public pages on {esc(updated)}; listings can be wrong, changed or cancelled, and many events are for members only. Always confirm with the organiser before you go.</p>
+<footer>Not affiliated with the University, its colleges or societies. <a href="/terms/">Terms of use</a> · <a href="/">All listings</a> · <a href="/colleges/">All colleges</a></footer>
 </main>
 </body>
 </html>
@@ -265,7 +267,7 @@ def main():
     pages = build(out, city, data, sources, now, societies)
     site = city["site"].rstrip("/") + "/"
     lastmod = (data.get("generated") or now.isoformat())[:10]
-    urls = [""] + sorted(pages)
+    urls = [""] + sorted(pages) + ["terms/"]
     (out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                      + "".join(f"  <url><loc>{site}{u}</loc><lastmod>{lastmod}</lastmod><changefreq>weekly</changefreq></url>\n" for u in urls)
                                      + "</urlset>\n")

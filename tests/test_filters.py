@@ -5,9 +5,12 @@ For each tab (bops, formals, balls), every When option the tab offers, both form
 it checks that the listed items are exactly the expected ones, that the count line agrees, and that switching tabs
 neither carries filters over nor loses them.
 """
-import datetime as dt, functools, http.server, json, os, pathlib, socketserver, tempfile, threading, unittest
+import datetime as dt, functools, http.server, json, os, pathlib, re, socketserver, tempfile, threading, unittest
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+SLUG = json.loads((ROOT / "city.json").read_text())["slug"]
+TERMS = re.search(r'TERMS_VERSION = "([^"]+)"', (ROOT / "scripts" / "build.py").read_text()).group(1)
+ACCEPTED = "try { localStorage.setItem(%r, %r); } catch (e) {}" % (SLUG + ".terms", TERMS)   # the filter tests start past the terms dialog
 try:
     from playwright.sync_api import sync_playwright
 except ImportError:
@@ -107,6 +110,7 @@ class TestFilters(unittest.TestCase):
             raise unittest.SkipTest(f"Chromium not available: {e}")
         # Map tiles are not needed and must not slow the test down.
         cls.ctx = cls.browser.new_context()
+        cls.ctx.add_init_script(ACCEPTED)
         cls.ctx.route("**/tile.openstreetmap.org/**", lambda r: r.abort())
         cls.ctx.route("**/gc.zgo.at/**", lambda r: r.abort())
 
@@ -224,6 +228,25 @@ class TestFilters(unittest.TestCase):
         self.assertEqual(p.text_content("#college-lbl"), "College")
         self.assertEqual(errors, [])
 
+    def test_terms_must_be_accepted(self):
+        """A first visit shows the terms dialog; the page is inert until the box is ticked and Agree pressed; the choice is remembered."""
+        ctx = self.browser.new_context(viewport={"width": 360, "height": 700}, is_mobile=True, has_touch=True)
+        ctx.route("**/tile.openstreetmap.org/**", lambda r: r.abort())
+        p = ctx.new_page(); errors = []
+        p.on("pageerror", lambda e: errors.append(str(e)))
+        p.goto(self.base); p.wait_for_selector("#list li, #list .empty", timeout=10000)
+        self.assertTrue(p.is_visible("#terms-gate"))
+        self.assertTrue(p.evaluate("document.querySelector('main').inert"), "the page is inert behind the dialog")
+        self.assertTrue(p.is_disabled("#terms-ok"))
+        self.assertIn("terms/", p.get_attribute("#terms-gate a", "href"))
+        p.tap("#terms-check"); p.tap("#terms-ok")
+        self.assertFalse(p.is_visible("#terms-gate"))
+        self.assertFalse(p.evaluate("document.querySelector('main').inert"))
+        p.reload(); p.wait_for_selector("#list li, #list .empty", timeout=10000)
+        self.assertFalse(p.is_visible("#terms-gate"), "accepted once, not asked again")
+        self.assertEqual(errors, [])
+        ctx.close()
+
     def test_pagination(self):
         """A long list shows 25 at first; Show more adds 25; changing a filter starts again at 25."""
         p, errors = self.open("?kind=formal")
@@ -241,6 +264,7 @@ class TestFilters(unittest.TestCase):
     def test_mobile(self):
         """On a 320px touch phone, in every tab: no sideways scroll, tap targets at least 40px tall, no text under 12px."""
         ctx = self.browser.new_context(viewport={"width": 320, "height": 640}, is_mobile=True, has_touch=True, device_scale_factor=2)
+        ctx.add_init_script(ACCEPTED)
         ctx.route("**/tile.openstreetmap.org/**", lambda r: r.abort())
         p = ctx.new_page(); errors = []
         p.on("pageerror", lambda e: errors.append(str(e)))

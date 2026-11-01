@@ -64,7 +64,7 @@ def render_page():
         "city": CITY["name"], "slug": CITY["slug"], "tagline": CITY["tagline"], "favicon": favicon(), "colleges_js": colleges_js(),
         "map_center": json.dumps(CITY["map_center"]), "map_zoom": str(CITY.get("map_zoom", 14)), "analytics": analytics(),
         "ball_tab": CITY["balls"]["tab"], "ball_one": CITY["balls"]["one"], "ball_many": CITY["balls"]["many"],
-        "tokens_light": tokens("light", "  "), "site": CITY["site"], "ball_slug": __import__("re").sub(r"[^a-z0-9]+", "-", CITY["balls"]["many"].lower()).strip("-"), "verification": verification(),
+        "tokens_light": tokens("light", "  "), "site": CITY["site"], "terms_version": TERMS_VERSION, "ball_slug": __import__("re").sub(r"[^a-z0-9]+", "-", CITY["balls"]["many"].lower()).strip("-"), "verification": verification(),
         "ld_site": json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": f"{CITY['name']} Bops", "url": CITY["site"],
                                "alternateName": [f"{CITY['name']} bops", f"{CITY['name']} college bops", f"{CITY['name']} formals"],
                                "description": CITY["tagline"]}, ensure_ascii=False).replace("</", "<\\/"),
@@ -97,8 +97,25 @@ def render_routine():
     return t
 
 
+TERMS_VERSION = "2026-11-01"   # change when the terms change: every visitor is asked to accept the new version
+
+
+def render_terms():
+    t = (ROOT / "site" / "terms.template.html").read_text()
+    pal = CITY["palette"]["light"]
+    values = {"city": CITY["name"], "site": CITY["site"], "repo": f"{CITY['org']}/{CITY['org']}.github.io", "terms_version": TERMS_VERSION,
+              "bg": pal["bg"], "fg": pal["fg"], "muted": pal["muted"], "accent": pal["accent"], "cam": pal["cam"], "field": pal["field"]}
+    for k, v in values.items():
+        t = t.replace("{{" + k + "}}", v)
+    left = __import__("re").findall(r"\{\{(\w+)\}\}", t)
+    if left:
+        sys.exit(f"unfilled placeholders in the terms template: {left}")
+    return t
+
+
 def main():
-    outputs = {ROOT / "docs" / "index.html": render_page(), ROOT / "docs" / "ROUTINE.md": render_routine()}
+    (ROOT / "docs" / "terms").mkdir(exist_ok=True)
+    outputs = {ROOT / "docs" / "index.html": render_page(), ROOT / "docs" / "ROUTINE.md": render_routine(), ROOT / "docs" / "terms" / "index.html": render_terms()}
     if "--check" in sys.argv:
         stale = [str(p.relative_to(ROOT)) for p, content in outputs.items() if not p.exists() or p.read_text() != content]
         if stale:
