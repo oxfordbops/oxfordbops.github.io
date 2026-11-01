@@ -40,7 +40,8 @@ class TestShape(unittest.TestCase):
         # so each field is checked against the rest of the file rather than trusted.
         d = load()
         run = d["run"]
-        self.assertEqual(set(run), {"checked_at", "window_from", "window_to", "sources_checked", "sources_ok"}, "run has exactly these five fields")
+        self.assertTrue({"checked_at", "window_from", "window_to", "sources_checked", "sources_ok"} <= set(run) <= {"version", "checked_at", "window_from", "window_to", "sources_checked", "sources_ok"},
+                        "run has these five fields, plus version")
         self.assertTrue(ISO.match(run["checked_at"]), run["checked_at"])
         checked = datetime.fromisoformat(run["checked_at"].replace("Z", "+00:00"))
         generated = datetime.fromisoformat(d["generated"].replace("Z", "+00:00"))
@@ -51,6 +52,8 @@ class TestShape(unittest.TestCase):
         start = date.fromisoformat(run["window_from"])
         span = (date.fromisoformat(run["window_to"]) - start).days
         self.assertIn(span, (14, 21), "window_to is 21 days after window_from (14 for runs before the weekly schedule)")
+        if span == 21:   # weekly runs (21-day window) write version 2, which turns on the evidence checks
+            self.assertEqual(run.get("version"), 2, "a weekly run records version 2")
         self.assertEqual(run["sources_checked"], len(d["sources"]), "sources_checked must equal the number of source entries")
         self.assertEqual(run["sources_ok"], sum(1 for s in d["sources"] if s.get("ok") is True), "sources_ok must equal the number of readable sources")
         for b in d["bops"]:

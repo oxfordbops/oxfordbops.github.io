@@ -64,7 +64,7 @@ class Scanner:
         q = quote.lower()
         mon = self.MONTHS[d.month - 1]
         pats = [d.isoformat(), d.strftime("%Y%m%d"), d.strftime("%d/%m"), f"{d.day}/{d.month}/",
-                rf"\b{d.day}(?:st|nd|rd|th)?(?: of)? {mon[:3]}", rf"\b{mon[:3]}\w* {d.day}(?:st|nd|rd|th)?\b"]
+                rf"\b0?{d.day}(?:st|nd|rd|th)?(?: of)? {mon[:3]}", rf"\b{mon[:3]}\w* 0?{d.day}(?:st|nd|rd|th)?\b", d.strftime("%d.%m.%Y")]
         if any(re.search(p, q) for p in pats):
             return True
         return weekly and re.search(rf"\b{self.DAYS[d.weekday()]}s?\b", q) is not None   # a regular schedule names the weekday

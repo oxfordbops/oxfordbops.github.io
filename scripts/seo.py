@@ -16,6 +16,10 @@ from zoneinfo import ZoneInfo
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FORMALS = bool(json.loads((ROOT / "site" / "features.json").read_text()).get("formals"))   # formals paused: no formals page, no formal wording
+# Wording that depends on the switch, kept out of f-string expressions so the script runs on Python 3.9 to 3.11 as well.
+W_FORMAL, W_FORMALS, W_FORMAL_HALLS = (", formal", ", formals", ", formal halls") if FORMALS else ("", "", "")
+W_AND_FORMALS = " and formals" if FORMALS else " and events"
+W_FORMAL_HALLS_LEAD = "formal halls, " if FORMALS else ""
 LONDON = ZoneInfo("Europe/London")
 MARK = '<p class="status" id="loading">Loading…</p>'
 DAYS = {"Mon": "Monday", "Tue": "Tuesday", "Wed": "Wednesday", "Thu": "Thursday", "Fri": "Friday", "Sat": "Saturday", "Sun": "Sunday"}
@@ -76,6 +80,7 @@ def page(city, path, title, description, h1, body, crumbs, updated):
     nav = " · ".join(f'<a href="/{p}/">{esc(n)}</a>' for p, n in kinds) + ' · <a href="/colleges/">Colleges</a>'
     ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "name": n, "item": site + p} for i, (p, n) in enumerate([("", f"{city['name']} Bops")] + crumbs)]}
+    ld_json = json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")   # outside the f-string: Python 3.11 allows no backslash in its expressions
     return f"""<!doctype html>
 <html lang="en-GB">
 <head>
@@ -92,7 +97,7 @@ def page(city, path, title, description, h1, body, crumbs, updated):
 <meta property="og:url" content="{esc(url)}">
 <meta property="og:image" content="{site}og.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")}</script>
+<script type="application/ld+json">{ld_json}</script>
 <style>
 body {{ margin: 0; background: {pal['bg']}; color: {pal['fg']}; font: 16px/1.55 "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; padding: 2rem 16px 3rem; }}
 main {{ max-width: 42rem; margin: 0 auto; }}
@@ -202,11 +207,11 @@ def build(out, city, data, sources, now, societies=()):
             sec.append("<h2>Where " + esc(fn) + " announces events</h2><ul>" + "".join(
                 f'<li><a href="{esc(s["url"])}" rel="noopener">{esc(s["name"])}</a> ({esc(s["kind"])})</li>' for s in where) + "</ul>")
         title = f"{fn} bops and events | {name} Bops" if not FORMALS else f"{fn} bops, formals and events | {name} Bops"
-        desc = (f"Upcoming bops{', formal halls' if FORMALS else ''} and college events at {fn}, {name}: dates, times and links to the JCR, MCR and college pages, updated every Sunday."
+        desc = (f"Upcoming bops{W_FORMAL_HALLS} and college events at {fn}, {name}: dates, times and links to the JCR, MCR and college pages, updated every Sunday."
                 + (f" {n_up} listed now." if n_up else ""))
-        body = (f'<p class="lede">Every bop{', formal' if FORMALS else ''} and event announced at {esc(fn)} for the next fortnight, and its {esc(balls["one"])} date when announced.</p>'
+        body = (f'<p class="lede">Every bop{W_FORMAL} and event announced at {esc(fn)} for the next fortnight, and its {esc(balls["one"])} date when announced.</p>'
                 f'<a class="cta" href="/?college={html.escape(c, quote=True)}">Open {esc(c)} in the live list</a>' + "".join(sec))
-        pages[f"colleges/{sl}/"] = page(city, f"colleges/{sl}/", title, desc, f"{fn}: bops{', formals' if FORMALS else ''} and events", body,
+        pages[f"colleges/{sl}/"] = page(city, f"colleges/{sl}/", title, desc, f"{fn}: bops{W_FORMALS} and events", body,
                                         [("colleges/", "Colleges"), (f"colleges/{sl}/", fn)], updated)
     # Societies: an index in order of popularity, and one page per society.
     ranked = {}
@@ -236,9 +241,9 @@ def build(out, city, data, sources, now, societies=()):
                                    f"Events of {name}'s most popular student societies in the next fortnight: talks, debates, socials, shows and parties, from the societies' own pages.",
                                    f"{name} society events", body, [("societies/", "Societies")], updated)
 
-    pages["colleges/"] = page(city, "colleges/", f"{name} colleges: bops{', formals' if FORMALS else ''} and events at each college | {name} Bops",
-                              f"Bops{', formal halls' if FORMALS else ''} and events at each of the {len(colleges)} {name} colleges, with where each college announces them.",
-                              f"Bops{' and formals' if FORMALS else ' and events'} at each {name} college", '<ul class="cols">' + "".join(idx) + "</ul>", [("colleges/", "Colleges")], updated)
+    pages["colleges/"] = page(city, "colleges/", f"{name} colleges: bops{W_FORMALS} and events at each college | {name} Bops",
+                              f"Bops{W_FORMAL_HALLS} and events at each of the {len(colleges)} {name} colleges, with where each college announces them.",
+                              f"Bops{W_AND_FORMALS} at each {name} college", '<ul class="cols">' + "".join(idx) + "</ul>", [("colleges/", "Colleges")], updated)
 
     for path, text in pages.items():
         f = out / path / "index.html"
@@ -262,6 +267,7 @@ def write_discovery(out, city, data, pages, up, now):
     import re as _re
     site = city["site"].rstrip("/") + "/"
     name = city["name"]
+    BALLS_MANY = city["balls"]["many"]
     generated = data.get("generated") or now.isoformat(timespec="seconds")
     build = (ROOT / "scripts" / "build.py").read_text()
     m = _re.search(r'TERMS_VERSION = "(\d{4}-\d{2}-\d{2})', build)
@@ -308,7 +314,7 @@ Sitemap: {site}sitemap.xml
              ("other-events/", "Other college events: socials, quizzes, concerts, talks"), ("colleges/", "One page per college")]
     (out / "llms.txt").write_text(f"""# {name} Bops
 
-> An unofficial, automatically gathered list of student events in {name}: college bops, {'formal halls, ' if FORMALS else ''}{city['balls']['many']}, society events and other college events for the next fortnight, updated every Sunday from the colleges', common rooms' and societies' own public pages. Not affiliated with the University of {name}, its colleges or societies.
+> An unofficial, automatically gathered list of student events in {name}: college bops, {W_FORMAL_HALLS_LEAD}{BALLS_MANY}, society events and other college events for the next fortnight, updated every Sunday from the colleges', common rooms' and societies' own public pages. Not affiliated with the University of {name}, its colleges or societies.
 
 ## Using this information
 
@@ -320,7 +326,7 @@ Sitemap: {site}sitemap.xml
 
 ## Data
 
-- [Listings (JSON)]({site}events.json): `bops` holds every listing (`kind` is bop{', formal' if FORMALS else ''}, ball, society or other; times are ISO 8601 with the UK offset); `run.checked_at` says when the sources were read.
+- [Listings (JSON)]({site}events.json): `bops` holds every listing (`kind` is bop{W_FORMAL}, ball, society or other; times are ISO 8601 with the UK offset); `run.checked_at` says when the sources were read.
 - [Sources (JSON)]({site}sources.json): the vetted pages the listings come from, and the societies followed with their popularity rank.
 - [Upcoming listings as text]({site}llms-full.txt)
 
@@ -343,7 +349,7 @@ def prerender(entries, city, limit=60):
     rows = [item(e) for e in entries[:limit]]
     if not rows:
         return ""
-    return f'<div id="prerender"><h2>{esc(city)} bops{', formals' if FORMALS else ''} and college events coming up</h2><ul>' + "".join(rows) + "</ul></div>"
+    return f'<div id="prerender"><h2>{esc(city)} bops{W_FORMALS} and college events coming up</h2><ul>' + "".join(rows) + "</ul></div>"
 
 
 def main():
