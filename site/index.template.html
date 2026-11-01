@@ -51,7 +51,9 @@ h1 em { font-style: italic; padding: 0 .12em; margin: 0 -.06em; background: line
 .notice { font-size: .9rem; color: var(--muted); margin: .25rem 0 0; max-width: 34rem; }
 
 
-/* Kind tabs: Bops or Formals, above the filters. */
+[hidden] { display: none !important; }   /* the hidden attribute always wins over a display rule */
+
+/* Kind tabs: Bops, Formals or balls, above the filters. */
 .kinds { display: flex; gap: 1.4rem; margin: 1.5rem 0 0; border-bottom: 1px solid var(--rule); }
 .kinds button { font: inherit; font-family: var(--display); font-size: 1.45rem; min-height: var(--ctl-h); padding: 0 .1rem .35rem; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; background: none; color: var(--muted); cursor: pointer; display: inline-flex; align-items: baseline; gap: .45rem; }
 .kinds button:hover { color: var(--fg); }
@@ -165,16 +167,19 @@ footer a { display: inline-block; padding: .6rem 0; }
   <nav class="kinds" aria-label="What to show" id="kind">
     <button type="button" data-kind="bop" aria-pressed="true">Bops<span class="n" hidden></span></button>
     <button type="button" data-kind="formal" aria-pressed="false">Formals<span class="n" hidden></span></button>
+    <button type="button" data-kind="ball" aria-pressed="false">{{ball_tab}}<span class="n" hidden></span></button>
   </nav>
 
   <div class="filters" role="region" aria-label="Filters">
-    <div class="group">
+    <div class="group" id="when-group">
       <span class="lbl" id="when-lbl">When</span>
       <div class="seg" role="group" aria-labelledby="when-lbl" id="when">
         <button type="button" data-when="all" aria-pressed="true">Next 14 days</button>
-        <button type="button" data-when="tonight" aria-pressed="false">Tonight</button>
+        <button type="button" data-when="tonight" aria-pressed="false" data-for="bop">Tonight</button>
+        <button type="button" data-when="today" aria-pressed="false" data-for="formal" hidden>Today</button>
         <button type="button" data-when="tomorrow" aria-pressed="false">Tomorrow</button>
-        <button type="button" data-when="weekend" aria-pressed="false">This weekend</button>
+        <button type="button" data-when="weekend" aria-pressed="false" data-for="bop">This weekend</button>
+        <button type="button" data-when="thisweek" aria-pressed="false" data-for="formal" hidden>This week</button>
         <button type="button" data-when="nextweek" aria-pressed="false">Next week</button>
       </div>
     </div>
@@ -212,9 +217,12 @@ footer a { display: inline-block; padding: .6rem 0; }
   const resultEl = document.getElementById("result");
   let events = [];
   let college = "all", when = "all", kind = "bop";
-  const WHENS = ["all", "tonight", "tomorrow", "weekend", "nextweek"];
-  const KINDS = ["bop", "formal"];
-  const NOUN = { bop: ["bop", "bops"], formal: ["formal", "formals"] };
+  const WHENS = ["all", "tonight", "today", "tomorrow", "weekend", "thisweek", "nextweek"];
+  // Which "when" options each kind offers: bops are planned for tonight or the weekend, formals are booked days ahead
+  // and run on weeknights, balls are listed for the whole season with no time filter.
+  const WHEN_FOR = { bop: ["all", "tonight", "tomorrow", "weekend", "nextweek"], formal: ["all", "today", "tomorrow", "thisweek", "nextweek"], ball: ["all"] };
+  const KINDS = ["bop", "formal", "ball"];
+  const NOUN = { bop: ["bop", "bops"], formal: ["formal", "formals"], ball: ["{{ball_one}}", "{{ball_many}}"] };
   const KEY = "{{slug}}.";
   // Filters live in the URL (?when=tonight&college=Jesus) so a link reproduces them; otherwise the remembered
   // college (across visits) and When (this session only) apply.
@@ -222,9 +230,9 @@ footer a { display: inline-block; padding: .6rem 0; }
   try { when = sessionStorage.getItem(KEY + "when") || "all"; } catch (e) {}   // the page always opens on Bops unless a link says ?kind=formal
   const q = new URLSearchParams(location.search);
   if (q.has("when") || q.has("college") || q.has("kind")) { when = q.get("when") || "all"; college = q.get("college") || "all"; kind = q.get("kind") || "bop"; }
-  if (!WHENS.includes(when)) when = "all";
   if (!KINDS.includes(kind)) kind = "bop";
-  function kindOf(e) { return e.kind === "formal" ? "formal" : "bop"; }
+  if (!WHENS.includes(when) || !WHEN_FOR[kind].includes(when)) when = "all";
+  function kindOf(e) { return KINDS.includes(e.kind) ? e.kind : "bop"; }
   function remember() {
     try { localStorage.setItem(KEY + "college", college); sessionStorage.setItem(KEY + "when", when); } catch (e) {}
     const u = new URL(location.href);
@@ -254,6 +262,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   // Every date is shown in UK time, whatever the visitor's zone.
   const dayKey = new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" });
   const dayLabel = new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", weekday: "long", day: "numeric", month: "long" }); // fed UTC noon of the London day
+  const dayLabelYear = new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", weekday: "long", day: "numeric", month: "long", year: "numeric" });
   const shortDay = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, weekday: "short" });
   const timeLabel = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false });
   function safeUrl(u) { return typeof u === "string" && /^https?:\/\//i.test(u) ? u : ""; }
@@ -270,8 +279,9 @@ footer a { display: inline-block; padding: .6rem 0; }
     if (!Number.isFinite(t) || t <= Date.now() - 5 * 3600e3) return false;
     const today = dayKey.format(new Date());
     const day = dayKey.format(new Date(t));
-    // Yesterday's bop stays while it is still running (ends_at in the future, or within the five-hour grace).
-    return (day >= today || (day === addDays(today, -1) && stillOn(e))) && day <= addDays(today, 14);
+    const horizon = kindOf(e) === "ball" ? 400 : 14;   // balls are listed for the whole season
+    // Yesterday's entry stays while it is still running (ends_at in the future, or within the five-hour grace).
+    return (day >= today || (day === addDays(today, -1) && stillOn(e))) && day <= addDays(today, horizon);
   }
   function stillOn(e) {
     const end = Date.parse(e.ends_at);
@@ -287,17 +297,19 @@ footer a { display: inline-block; padding: .6rem 0; }
     const today = dayKey.format(new Date());
     const dow = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].indexOf(WEEKDAY.format(new Date()));
     const toSun = 6 - dow;                                   // days until this Sunday
-    if (w === "tonight") return [today, today];
+    if (w === "tonight" || w === "today") return [today, today];
+    if (w === "thisweek") return [today, addDays(today, toSun)];
     if (w === "tomorrow") return [addDays(today, 1), addDays(today, 1)];
     if (w === "weekend") return [addDays(today, Math.max(0, toSun - 2)), addDays(today, toSun)];   // Fri to Sun, or the rest of it
     if (w === "nextweek") return [addDays(today, toSun + 1), addDays(today, toSun + 7)];
     return null;
   }
-  const WHEN_LABEL = { tonight: "tonight", tomorrow: "tomorrow", weekend: "this weekend", nextweek: "next week" };
+  const WHEN_LABEL = { tonight: "tonight", today: "today", tomorrow: "tomorrow", weekend: "this weekend", thisweek: "this week", nextweek: "next week" };
   function inWhen(e) {
+    if (kindOf(e) === "ball") return true;
     const r = whenRange(when); if (!r) return true;
     const k = dayKey.format(new Date(e.starts_at));
-    if (when === "tonight" && k === addDays(r[0], -1) && stillOn(e)) return true;   // started last night, still going
+    if ((when === "tonight" || when === "today") && k === addDays(r[0], -1) && stillOn(e)) return true;   // started last night, still going
     return k >= r[0] && k <= r[1];
   }
   document.querySelectorAll("#when button").forEach(b => {
@@ -307,8 +319,16 @@ footer a { display: inline-block; padding: .6rem 0; }
   const kindEl = document.getElementById("kind");
   kindEl.querySelectorAll("button").forEach(b => {
     b.setAttribute("aria-pressed", String(b.dataset.kind === kind));
-    b.addEventListener("click", () => { if (b.dataset.kind === kind) return; kind = b.dataset.kind; track("filter/kind/" + kind); remember(); kindEl.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.kind === kind))); render(); });
+    b.addEventListener("click", () => { if (b.dataset.kind === kind) return; kind = b.dataset.kind; if (!WHEN_FOR[kind].includes(when)) when = "all"; track("filter/kind/" + kind); remember(); kindEl.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.kind === kind))); syncWhen(); render(); });
   });
+  function syncWhen() {
+    document.getElementById("when-group").hidden = kind === "ball";
+    document.querySelectorAll("#when button").forEach(b => {
+      b.hidden = !WHEN_FOR[kind].includes(b.dataset.when);
+      b.setAttribute("aria-pressed", String(b.dataset.when === when));
+    });
+  }
+  syncWhen();
   function renderKindCounts() {
     for (const b of kindEl.querySelectorAll("button")) {
       const n = events.filter(e => kindOf(e) === b.dataset.kind).length;
@@ -438,7 +458,7 @@ footer a { display: inline-block; padding: .6rem 0; }
 
     if (!shown.length) {
       const where = college === "all" ? "" : college === "none" ? " outside the colleges" : " at " + esc(college);
-      const whenTxt = WHEN_LABEL[when] ? " " + WHEN_LABEL[when] : " in the next fortnight";
+      const whenTxt = kind === "ball" ? " yet" : WHEN_LABEL[when] ? " " + WHEN_LABEL[when] : " in the next fortnight";
       let alts = "";
       if (college !== "all") alts += '<button type="button" class="chip plain" data-alt="college">Any college' + esc(whenTxt) + '</button>';
       if (when !== "all") alts += '<button type="button" class="chip plain" data-alt="when">' + (college === "all" ? "Next 14 days" : esc(college === "none" ? "Elsewhere" : college) + " in the next 14 days") + '</button>';
@@ -454,8 +474,10 @@ footer a { display: inline-block; padding: .6rem 0; }
     let html = "";
     for (const [k, items] of groups) {
       const rel = relDay(k);
+      const relTxt = rel === "Tonight" && kind !== "bop" ? "Today" : rel;
       if (rel === "Tonight") html += '<div class="today">';
-      html += "<h2>" + esc(dayLabel.format(new Date(k + "T12:00:00Z"))) + (rel ? "<small>" + rel + "</small>" : "") + '</h2><ul class="bops">';
+      const label = (k.slice(0, 4) === dayKey.format(new Date()).slice(0, 4) ? dayLabel : dayLabelYear).format(new Date(k + "T12:00:00Z"));   // next year's dates carry the year
+      html += "<h2>" + esc(label) + (relTxt ? "<small>" + relTxt + "</small>" : "") + '</h2><ul class="bops">';
       for (const e of items) {
         const link = safeUrl(e.url);
         const name = link ? '<a href="' + esc(link) + '" rel="noopener" target="_blank">' + esc(e.title) + "</a>" : esc(e.title);

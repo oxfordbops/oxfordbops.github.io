@@ -48,7 +48,9 @@ class TestShape(unittest.TestCase):
         self.assertEqual(run["sources_ok"], sum(1 for s in d["sources"] if s.get("ok") is True), "sources_ok must equal the number of readable sources")
         for b in d["bops"]:
             day = datetime.fromisoformat(b["starts_at"].replace("Z", "+00:00")).astimezone(LONDON).date()
-            self.assertTrue(start <= day <= start + timedelta(days=14), f"{b['title']} on {day} is outside the run's window")
+            # Balls are listed for the whole season, up to a year ahead; bops and formals for the fortnight.
+            horizon = 400 if b.get("kind") == "ball" else 14
+            self.assertTrue(start <= day <= start + timedelta(days=horizon), f"{b['title']} on {day} is outside the run's window")
 
     def test_sources_entries(self):
         d = load()
@@ -64,6 +66,10 @@ class TestShape(unittest.TestCase):
             self.assertIn(s["ok"], (True, False))
             self.assertIsInstance(s["found"], int)
             self.assertGreaterEqual(s["found"], 0)
+            if s["kind"] == "Ball site":
+                # A ball's own website: the one source allowed outside the registry, cited only by ball entries.
+                self.assertTrue(all(b.get("kind") == "ball" for b in d["bops"] if b.get("source") == s["slug"]), f"{s['url']}: a Ball site may only be cited by balls")
+                continue
             self.assertIn(s["url"], reg, f"{s['url']} is not in the registry")
             self.assertEqual(s["kind"], reg[s["url"]]["kind"], f"{s['url']}: kind differs from the registry")
             if s["kind"] in ("Instagram", "Facebook"):
@@ -81,7 +87,7 @@ class TestShape(unittest.TestCase):
         for b in d["bops"]:
             with self.subTest(b.get("title")):
                 self.assertFalse(set(b) - ALLOWED, f"unknown fields {set(b) - ALLOWED}")
-                self.assertIn(b.get("kind"), ("bop", "formal"), "kind must be bop or formal")
+                self.assertIn(b.get("kind"), ("bop", "formal", "ball"), "kind must be bop, formal or ball")
                 self.assertTrue(2 <= len(b["title"]) <= 120)
                 if len(b["title"]) > 4:
                     self.assertNotEqual(b["title"], b["title"].upper(), "shouting capitals")

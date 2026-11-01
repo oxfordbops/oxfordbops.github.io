@@ -1,6 +1,6 @@
 # Bops
 
-A static page that lists and maps every college bop and formal in a university city for the next fortnight, in the spirit of talks.cam. Bops and formals are two tabs on one page. No backend and no submission form: a Claude Code cloud routine checks college calendars, ents pages and student press every morning, keeps only what it can verify, rewrites one JSON file and pushes it.
+A static page that lists and maps every college bop and formal in a university city for the next fortnight, in the spirit of talks.cam. Bops, formals and the season's balls (May Balls in Cambridge) are three tabs on one page; balls are listed until they happen, without the fortnight limit. No backend and no submission form: a Claude Code cloud routine checks college calendars, ents pages and student press every morning, keeps only what it can verify, rewrites one JSON file and pushes it.
 
 One template, one repository per city. This repository is the city named in `city.json`.
 
@@ -14,7 +14,7 @@ One template, one repository per city. This repository is the city named in `cit
 | Path | Role | City-specific? |
 |---|---|---|
 | `city.json` | Name, tagline, palette (light and dark tokens), favicon colours, colleges with coordinates, map centre, student press and SU for the routine, and the GoatCounter site code for analytics (empty for none). | yes |
-| `docs/events.json` | `{generated, sources, bops: [...]}`, rewritten daily by the routine. Fields per entry: kind (bop or formal), title, starts_at, ends_at, college, venue, host, price, guests, dress, url, details, source. | yes |
+| `docs/events.json` | `{generated, sources, bops: [...]}`, rewritten daily by the routine. Fields per entry: kind (bop, formal or ball), title, starts_at, ends_at, college, venue, host, price, guests, dress, url, details, source. | yes |
 | `docs/sources.json` | The registry of verified sources: common-room and ents sites, calendars, termcards, college events pages, SU listings, student press, and each college's Instagram. The routine reads only these. | yes |
 | `site/index.template.html` | The whole page: palette tokens, filter bar (When segmented control, college chips with counts), Leaflet map with a count per college, day-by-day list with the tinted "tonight" section, source link per bop. Placeholders are filled from `city.json`. | shared |
 | `site/ROUTINE.template.md` | The routine's instructions. | shared |

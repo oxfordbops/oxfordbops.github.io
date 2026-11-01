@@ -55,6 +55,7 @@ def render_page():
     values = {
         "city": CITY["name"], "slug": CITY["slug"], "tagline": CITY["tagline"], "favicon": favicon(), "colleges_js": colleges_js(),
         "map_center": json.dumps(CITY["map_center"]), "map_zoom": str(CITY.get("map_zoom", 14)), "analytics": analytics(),
+        "ball_tab": CITY["balls"]["tab"], "ball_one": CITY["balls"]["one"], "ball_many": CITY["balls"]["many"],
         "tokens_light": tokens("light", "  "), "tokens_dark": tokens("dark", "  "), "tokens_dark_indented": tokens("dark", "    "),
     }
     for k, v in values.items():
@@ -74,6 +75,7 @@ def render_routine():
         "common_rooms": r["common_rooms"], "su_name": r["su"]["name"], "su_url": r["su"]["url"], "press": press,
         "press_names": ", ".join(p["name"] for p in r["press"]), "js_rendered_examples": r["js_rendered_examples"],
         "college_count": str(len(CITY["colleges"])), "college_list": ", ".join(CITY["colleges"]),
+        "ball_routine": CITY["balls"]["routine"], "ball_many": CITY["balls"]["many"],
         "source_count": str(CITY.get("source_count_hint", 150)),
     }
     for k, v in values.items():
