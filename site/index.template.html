@@ -4,9 +4,17 @@
 <meta charset="utf-8">
 <meta name="color-scheme" content="light only">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{{city}} Bops</title>
+<title>{{city}} Bops: college bops, formals and {{ball_many}} in {{city}}</title>
+<link rel="canonical" href="{{site}}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{city}} Bops">
+<meta property="og:title" content="{{city}} Bops">
+<meta property="og:description" content="Every {{city}} college bop, formal and {{ball_one}} in one list, checked every morning.">
+<meta property="og:url" content="{{site}}">
+<meta name="twitter:card" content="summary">{{verification}}
+<script type="application/ld+json">{{ld_site}}</script>
 <link rel="icon" href="{{favicon}}">
-<meta name="description" content="Every college bop and formal in {{city}} in the next fortnight: when, where, what theme, how much. Updated every morning.">
+<meta name="description" content="{{city}} bops tonight and this fortnight: every college bop, formal hall and {{ball_one}} in {{city}}, with times, prices and dress codes, checked every morning from the colleges' own pages.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -47,13 +55,14 @@ h1 em { font-style: italic; padding: 0 .12em; margin: 0 -.06em; background: line
 [hidden] { display: none !important; }   /* the hidden attribute always wins over a display rule */
 
 /* Kind tabs: Bops, Formals or balls, above the filters. */
-.kinds { display: flex; gap: 1.4rem; margin: 1.5rem 0 0; border-bottom: 1px solid var(--rule); }
+.kinds { display: flex; flex-wrap: wrap; column-gap: 1.4rem; row-gap: 0; margin: 1.5rem 0 0; border-bottom: 1px solid var(--rule); }
 .kinds button { font: inherit; font-family: var(--display); font-size: 1.45rem; min-height: var(--ctl-h); padding: 0 .1rem .35rem; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; background: none; color: var(--muted); cursor: pointer; display: inline-flex; align-items: baseline; gap: .45rem; }
 .kinds button:hover { color: var(--fg); }
 .kinds button[aria-pressed="true"] { color: var(--fg); border-bottom-color: var(--cam); }
 .kinds button .n { font-family: var(--text, inherit); font-size: .78rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
 .kinds button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .kinds + .filters { margin-top: 0; border-top: 0; }
+@media (max-width: 420px) { .kinds { column-gap: .9rem; } .kinds button { font-size: 1.25rem; gap: .3rem; } }
 
 /* Filter system: one control height, one radius, one set of states (rest, hover, pressed, focus).
    Segmented "when" control, college chips with counts, and a result line. */
@@ -100,7 +109,6 @@ h1 em { font-style: italic; padding: 0 .12em; margin: 0 -.06em; background: line
 }
 .pin.dim span { opacity: .35; }
 .pin.active span { transform: scale(1.15); box-shadow: 0 0 0 2px var(--pin-ring), 0 0 0 4px var(--cam), 0 1px 3px rgba(0,0,0,.3); }
-.mapnote { color: var(--muted); font-size: .8rem; margin: .4rem 0 0; }
 
 /* Day sections; today's gets the accent wash so the first question is answered first */
 .today { background: var(--cam-tint); border-radius: 6px; margin: 1.75rem -0.9rem 0; padding: .1rem .9rem .6rem; }
@@ -110,26 +118,30 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 1.5rem; margin: 2
 h2 small { font-family: var(--body); font-size: .68rem; font-weight: 600; color: var(--cam-ink); background: var(--cam); border-radius: 999px; padding: .2em .6em; margin-left: .6rem; vertical-align: .3em; text-transform: uppercase; letter-spacing: .06em; }
 ul.bops { list-style: none; margin: 0; padding: 0; }
 ul.bops li {
-  display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); gap: .15rem 1rem;
-  padding: .75rem 0; border-top: 1px solid var(--rule);
+  display: grid; grid-template-columns: 3.6rem minmax(0, 1fr); gap: 0 .75rem;
+  padding: .55rem 0; border-top: 1px solid var(--rule);
 }
 ul.bops li:last-child { border-bottom: 1px solid var(--rule); }
 .time { font-variant-numeric: tabular-nums; color: var(--muted); padding-top: .1em; }
-.name { font-weight: 600; font-size: 1.05rem; line-height: 1.3; }
+.name { font-weight: 600; font-size: 1rem; line-height: 1.3; }
 .name a { color: inherit; }
 .name a::after { content: " ↗"; color: var(--muted); font-weight: 400; font-size: .85em; }
 .name a:hover::after { color: var(--accent); }
-.where { color: var(--muted); margin-top: .1rem; }
+.where { color: var(--muted); font-size: .9rem; line-height: 1.35; margin-top: .05rem; }
 .where .college { color: var(--fg); font-weight: 500; }
 .where .sep { margin: 0 .4em; }
-.facts { margin-top: .15rem; display: flex; flex-wrap: wrap; gap: .3rem .5rem; font-size: .85rem; }
-.facts span { border: 1px solid var(--rule); border-radius: 999px; padding: .05em .55em; color: var(--fg); }
+.facts { margin-top: .2rem; display: flex; flex-wrap: wrap; gap: .3rem .5rem; font-size: .85rem; }
+.facts span { border: 1px solid var(--rule); border-radius: 999px; padding: 0 .5em; font-size: .8rem; color: var(--fg); }
 .facts span.price { border-color: var(--cam); background: var(--cam-tint); }
-.details { font-size: .95rem; margin-top: .3rem; color: var(--fg); opacity: .9; }
-.src { font-size: .8rem; color: var(--muted); margin-top: .25rem; }
-.src a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+.details { font-size: .85rem; line-height: 1.35; margin-top: .15rem; color: var(--muted); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; cursor: pointer; }
+.details.open { display: block; }
+.where .src a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+.more { display: block; width: 100%; margin: 1rem 0 0; min-height: var(--ctl-h); font: inherit; font-weight: 500; color: var(--fg); background: var(--field); border: 1px solid var(--rule); border-radius: var(--ctl-radius); cursor: pointer; }
+.more:hover { border-color: var(--cam); }
 
 .empty, .status { color: var(--muted); padding: 1.5rem 0; }
+#prerender h2 { font-size: 1.2rem; margin-top: 0; }
+#prerender ul { padding-left: 1.1rem; color: var(--muted); font-size: .9rem; }
 .empty .alts { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
 .status.error { color: #B4432F; }
 
@@ -142,7 +154,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   .seg button { padding: 0 .7rem; font-size: .9rem; border-radius: 11px; }
   .seg button:last-child:nth-child(odd) { grid-column: 1 / -1; }   /* an odd fifth option spans the row instead of sitting alone */
   #map { height: 220px; }
-  ul.bops li { grid-template-columns: 3.8rem minmax(0, 1fr); }
+  ul.bops li { grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0 .6rem; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .pin span { transition: transform .12s ease-out, opacity .12s ease-out; }
@@ -161,6 +173,7 @@ footer a { display: inline-block; padding: .6rem 0; }
     <button type="button" data-kind="bop" aria-pressed="true">Bops<span class="n" hidden></span></button>
     <button type="button" data-kind="formal" aria-pressed="false">Formals<span class="n" hidden></span></button>
     <button type="button" data-kind="ball" aria-pressed="false">{{ball_tab}}<span class="n" hidden></span></button>
+    <button type="button" data-kind="other" aria-pressed="false">Other<span class="n" hidden></span></button>
   </nav>
 
   <div class="filters" role="region" aria-label="Filters">
@@ -191,7 +204,6 @@ footer a { display: inline-block; padding: .6rem 0; }
   </div>
 
   <div id="map" role="region" aria-label="Map of {{city}} colleges with listings"></div>
-  <p class="mapnote" id="mapnote">Numbers are listings in the selected period. Tap a college to filter the list.</p>
 
   <section id="list">
     <p class="status" id="loading">Loading…</p>
@@ -220,9 +232,9 @@ footer a { display: inline-block; padding: .6rem 0; }
   const WHENS = ["all", "tonight", "today", "tomorrow", "weekend", "thisweek", "nextweek"];
   // Which "when" options each kind offers: bops are planned for tonight or the weekend, formals are booked days ahead
   // and run on weeknights, balls are listed for the whole season with no time filter.
-  const WHEN_FOR = { bop: ["all", "tonight", "tomorrow", "weekend", "nextweek"], formal: ["all", "today", "tomorrow", "thisweek", "nextweek"], ball: ["all"] };
-  const KINDS = ["bop", "formal", "ball"];
-  const NOUN = { bop: ["bop", "bops"], formal: ["formal", "formals"], ball: ["{{ball_one}}", "{{ball_many}}"] };
+  const WHEN_FOR = { bop: ["all", "tonight", "tomorrow", "weekend", "nextweek"], formal: ["all", "today", "tomorrow", "thisweek", "nextweek"], ball: ["all"], other: ["all", "today", "tomorrow", "weekend", "nextweek"] };
+  const KINDS = ["bop", "formal", "ball", "other"];
+  const NOUN = { bop: ["bop", "bops"], formal: ["formal", "formals"], ball: ["{{ball_one}}", "{{ball_many}}"], other: ["other event", "other events"] };
   const KEY = "{{slug}}.";
   // Each tab keeps its own filters: a college picked on Bops does not follow you to Formals or balls.
   // Filters live in the URL (?kind=formal&when=today&college=Jesus) so a link reproduces them; otherwise each tab's
@@ -267,6 +279,9 @@ footer a { display: inline-block; padding: .6rem 0; }
   list.addEventListener("click", e => {
     const alt = e.target.closest("[data-alt]");
     if (alt) { if (alt.dataset.alt === "college") setCollege("all"); else setWhen("all"); return; }
+    if (e.target.closest("#more")) { pageLimit += PAGE; render(); track("more/" + kind); return; }
+    const det = e.target.closest(".details");
+    if (det) { det.classList.toggle("open"); return; }   // a clamped note opens in full on tap
     const a = e.target.closest("a[href]");
     if (!a || !list.contains(a)) return;
     const li = a.closest("li");
@@ -385,7 +400,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   try {
     map = L.map("map", { scrollWheelZoom: false }).setView({{map_center}}, {{map_zoom}});
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
-  } catch (e) { map = null; document.getElementById("map").hidden = true; document.getElementById("mapnote").hidden = true; }
+  } catch (e) { map = null; document.getElementById("map").hidden = true; }
   const markers = new Map();
   let fitted = false;
 
@@ -454,17 +469,20 @@ footer a { display: inline-block; padding: .6rem 0; }
     }
   }
 
+  const PAGE = 25;            // listings shown at first, and added by each "Show more"
+  let pageLimit = PAGE, pageView = "";
   let sourceIndex = new Map(); // slug -> {name, url, kind}
   function hostOf(u) { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return ""; } }
   function sourceLine(e) {
+    // A short provenance link: "via corpus.cam.ac.uk" or "via Instagram post"; the full source name is its tooltip.
     if (!e.source && !e.url) return "";
     const src = sourceIndex.get(e.source);
     const label = src ? src.name : (e.source || "").replace(/-/g, " ");
     const href = safeUrl(e.url) || safeUrl(src && src.url);
     const host = hostOf(href || "");
     const where = /instagram\.com/.test(host) ? "Instagram post" : /facebook\.com/.test(host) ? "Facebook post" : host;
-    const redundant = !where || label.toLowerCase().includes(where.split(" ")[0].toLowerCase());
-    return '<div class="src">' + (href ? 'Announced at <a href="' + esc(href) + '" rel="noopener" target="_blank">' + esc(label) + "</a>" + (redundant ? "" : " (" + esc(where) + ")") : "Source: " + esc(label)) + "</div>";
+    if (!href) return '<span class="src">via ' + esc(label) + "</span>";
+    return '<span class="src">via <a href="' + esc(href) + '" rel="noopener" target="_blank" title="' + esc(label) + '">' + esc(where || label) + "</a></span>";
   }
 
   function facts(e) {
@@ -491,6 +509,8 @@ footer a { display: inline-block; padding: .6rem 0; }
 
     const shown = inTime.filter(e => college === "all" || (college === "none" ? !knownCollege(e) : e.college === college));
     renderResult(shown.length);
+    const view = [kind, when, college, ftype].join("|");
+    if (view !== pageView) { pageView = view; pageLimit = PAGE; }
 
 
     if (!shown.length) {
@@ -503,7 +523,7 @@ footer a { display: inline-block; padding: .6rem 0; }
       return;
     }
     const groups = new Map();
-    for (const e of shown) {
+    for (const e of shown.slice(0, pageLimit)) {
       const k = dayKey.format(new Date(e.starts_at));
       if (!groups.has(k)) groups.set(k, []);
       groups.get(k).push(e);
@@ -524,12 +544,14 @@ footer a { display: inline-block; padding: .6rem 0; }
         if (e.host && e.host !== e.college) where.push(esc(e.host));
         html += '<li data-kind="' + kindOf(e) + '" data-college="' + esc(knownCollege(e) ? e.college : "none") + '" data-day="' + k + '"' + (kindOf(e) === "formal" ? ' data-special="' + isSpecial(e) + '"' : "") + '><span class="time">' + timeLabel.format(new Date(e.starts_at)) + '</span><div>' +
           '<div class="name">' + name + '</div>' +
-          '<div class="where">' + where.join('<span class="sep">·</span>') + "</div>" + facts(e) +
-          (e.details ? '<div class="details">' + esc(e.details) + "</div>" : "") + sourceLine(e) + "</div></li>";
+          '<div class="where">' + where.concat(sourceLine(e) || []).join('<span class="sep">·</span>') + "</div>" + facts(e) +
+          (e.details ? '<div class="details" title="' + esc(e.details) + '">' + esc(e.details) + "</div>" : "") + "</div></li>";
       }
       html += "</ul>";
       if (rel === "Tonight") html += "</div>";
     }
+    const left = shown.length - pageLimit;
+    if (left > 0) html += '<button type="button" class="more" id="more">Show ' + Math.min(PAGE, left) + ' more <span style="color:var(--muted)">· ' + left + ' left</span></button>';
     list.innerHTML = html;
   }
 

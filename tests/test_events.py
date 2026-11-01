@@ -87,7 +87,7 @@ class TestShape(unittest.TestCase):
         for b in d["bops"]:
             with self.subTest(b.get("title")):
                 self.assertFalse(set(b) - ALLOWED, f"unknown fields {set(b) - ALLOWED}")
-                self.assertIn(b.get("kind"), ("bop", "formal", "ball"), "kind must be bop, formal or ball")
+                self.assertIn(b.get("kind"), ("bop", "formal", "ball", "other"), "kind must be bop, formal, ball or other")
                 if b.get("kind") == "formal":
                     # The routine sets it on every formal; a missing flag reads as special on the page.
                     self.assertIn(b.get("special"), (True, False), "every formal says whether it is special")

@@ -33,6 +33,9 @@ def make_data(colleges):
                          "venue": "Bar", "url": "https://example.org/b", "source": "s"})
             bops.append({"kind": "formal", "special": bool(j % 2), "title": f"Formal {i}-{j}", "starts_at": f"{day}T19:30:00+00:00",
                          "college": col, "venue": "Hall", "url": "https://example.org/f", "source": "s"})
+            if (i + j) % 4 == 0:
+                bops.append({"kind": "other", "title": f"Quiz {i}-{j}", "starts_at": f"{day}T18:00:00+00:00",
+                             "college": col, "venue": "Bar", "url": "https://example.org/o", "source": "s"})
     for k, col in enumerate(cols):
         day = dt.date(2027, 6, 20 + k)
         bops.append({"kind": "ball", "title": f"Ball {k}", "starts_at": f"{day}T21:00:00+01:00", "college": col,
@@ -68,7 +71,8 @@ def expected(data, kind, when, college, ftype):
     return sorted(out)
 
 
-WHEN_FOR = {"bop": ["all", "tonight", "tomorrow", "weekend", "nextweek"], "formal": ["all", "today", "tomorrow", "thisweek", "nextweek"], "ball": ["all"]}
+WHEN_FOR = {"bop": ["all", "tonight", "tomorrow", "weekend", "nextweek"], "formal": ["all", "today", "tomorrow", "thisweek", "nextweek"], "ball": ["all"],
+            "other": ["all", "today", "tomorrow", "weekend", "nextweek"]}
 
 
 @unittest.skipIf(sync_playwright is None and not os.environ.get("CI"), "Python Playwright not installed")
@@ -120,8 +124,13 @@ class TestFilters(unittest.TestCase):
         p.click(selector)
         p.wait_for_timeout(30)
 
+    def show_all(self, p):
+        while p.is_visible("#more"):
+            p.click("#more"); p.wait_for_timeout(20)
+
     def assert_view(self, p, kind, when, college, ftype, msg):
         exp = expected(self.data, kind, when, college, ftype)
+        self.show_all(p)
         got = sorted(tuple(x) for x in p.eval_on_selector_all("#list li", "els => els.map(e => [e.dataset.college, e.dataset.day, e.dataset.kind])"))
         self.assertTrue(all(g[2] == kind for g in got), f"{msg}: another kind listed")
         self.assertEqual([g[:2] for g in got], exp, msg)
@@ -132,7 +141,7 @@ class TestFilters(unittest.TestCase):
         p, errors = self.open()
         cols = ["all"] + self.colleges[:3] + ["none"]
         checked = 0
-        for kind in ("bop", "formal", "ball"):
+        for kind in ("bop", "formal", "ball", "other"):
             self.click(p, f'#kind button[data-kind="{kind}"]')
             for ftype in (["all", "special"] if kind == "formal" else ["all"]):
                 if kind == "formal":
@@ -175,6 +184,10 @@ class TestFilters(unittest.TestCase):
         self.assert_view(p, "bop", "weekend", col, "all", "bops restored")
         self.click(p, '#kind button[data-kind="formal"]')
         self.assert_view(p, "formal", "today", "all", "special", "formals restored")
+        # Other events start clean too.
+        self.click(p, '#kind button[data-kind="other"]')
+        self.assertTrue(p.is_visible("#when-group"))
+        self.assert_view(p, "other", "all", "all", "all", "other after switching")
         self.assertEqual(errors, [])
 
     def test_links_and_clear(self):
@@ -192,6 +205,20 @@ class TestFilters(unittest.TestCase):
         self.assertEqual(p3.get_attribute('#kind button[data-kind="bop"]', "aria-pressed"), "true", "Bops is the default tab")
         self.assertEqual(errors, [])
 
+
+    def test_pagination(self):
+        """A long list shows 25 at first; Show more adds 25; changing a filter starts again at 25."""
+        p, errors = self.open("?kind=formal")
+        total = len(expected(self.data, "formal", "all", "all", "all"))
+        self.assertGreater(total, 25)
+        self.assertEqual(p.eval_on_selector_all("#list li", "els => els.length"), 25)
+        self.assertTrue(p.inner_text("#more").startswith(f"Show {min(25, total - 25)} more"), p.inner_text("#more"))
+        self.click(p, "#more")
+        self.assertEqual(p.eval_on_selector_all("#list li", "els => els.length"), min(50, total))
+        self.click(p, '#ftype button[data-ftype="special"]')
+        self.click(p, '#ftype button[data-ftype="all"]')
+        self.assertEqual(p.eval_on_selector_all("#list li", "els => els.length"), 25)
+        self.assertEqual(errors, [])
 
     def test_running_event_stays_until_its_end(self):
         """At 02:00 a ball that started at 21:00 and ends at 06:00 is still listed; one that ended at 01:00 is not."""

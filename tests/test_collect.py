@@ -96,6 +96,12 @@ class TestCollect(unittest.TestCase):
         url = b"https://calendar.google.com/calendar/embed?src=events@kcsu.org.uk&ctz=Europe/London"
         self.assertEqual(collect.calendar_ids(url), {"events@kcsu.org.uk"})
 
+    def test_other_lines_pair_date_and_title_and_skip_bops(self):
+        window = {LO + dt.timedelta(days=k) for k in range(15)}
+        text = "05/11/2026\nPub Quiz in the bar\n6 November: Halloween Bop\n30 November: Carol service\nFilm night on 9 November in the JCR\nFriday 30 October – Friday 6 November 2026\nMonday 9 November 2026 | Location"
+        got = collect.other_lines(text, window)
+        self.assertEqual(got, ["05/11/2026 | Pub Quiz in the bar", "Film night on 9 November in the JCR"])
+
     def test_html_to_text_drops_scripts(self):
         self.assertEqual(collect.to_text(b"<p>Bop<script>var x=1</script></p><p>Tonight</p>"), "Bop\nTonight")
 

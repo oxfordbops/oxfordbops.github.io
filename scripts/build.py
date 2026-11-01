@@ -50,13 +50,24 @@ def colleges_js():
     return "{\n" + ",\n".join(items) + "\n  }"
 
 
+def verification():
+    """Google Search Console ownership tag, from city.json "google_site_verification" (empty: no tag)."""
+    code = CITY.get("google_site_verification", "")
+    if code and not __import__("re").fullmatch(r"[A-Za-z0-9_-]{20,80}", code):
+        sys.exit(f"city.json google_site_verification looks wrong: {code!r}")
+    return f'\n<meta name="google-site-verification" content="{code}">' if code else ""
+
+
 def render_page():
     t = (ROOT / "site" / "index.template.html").read_text()
     values = {
         "city": CITY["name"], "slug": CITY["slug"], "tagline": CITY["tagline"], "favicon": favicon(), "colleges_js": colleges_js(),
         "map_center": json.dumps(CITY["map_center"]), "map_zoom": str(CITY.get("map_zoom", 14)), "analytics": analytics(),
         "ball_tab": CITY["balls"]["tab"], "ball_one": CITY["balls"]["one"], "ball_many": CITY["balls"]["many"],
-        "tokens_light": tokens("light", "  "),
+        "tokens_light": tokens("light", "  "), "site": CITY["site"], "verification": verification(),
+        "ld_site": json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": f"{CITY['name']} Bops", "url": CITY["site"],
+                               "alternateName": [f"{CITY['name']} bops", f"{CITY['name']} college bops", f"{CITY['name']} formals"],
+                               "description": CITY["tagline"]}, ensure_ascii=False).replace("</", "<\\/"),
     }
     for k, v in values.items():
         t = t.replace("{{" + k + "}}", v)

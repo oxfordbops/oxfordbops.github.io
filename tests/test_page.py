@@ -37,13 +37,13 @@ class TestPage(unittest.TestCase):
 
     def test_page_names_the_city(self):
         city = json.loads((ROOT / "city.json").read_text())
-        self.assertIn(f"<title>{city['name']} Bops</title>", PAGE)
+        self.assertIn(f"<title>{city['name']} Bops:", PAGE)
         self.assertIn(city["tagline"], PAGE)
 
     def test_external_resources_are_pinned_and_allowed(self):
         srcs = re.findall(r'(?:src|href)="(https://[^"]+)"', PAGE.split("<script>")[0])
         for u in srcs:
-            self.assertTrue(u.startswith(("https://fonts.googleapis.com", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/", "https://gc.zgo.at/count.js")), u)
+            self.assertTrue(u.startswith((json.loads((ROOT / "city.json").read_text())["site"], "https://fonts.googleapis.com", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/", "https://gc.zgo.at/count.js")), u)
         self.assertIn("tile.openstreetmap.org", SCRIPT)
         self.assertNotIn("cartocdn", SCRIPT)
 

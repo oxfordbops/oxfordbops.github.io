@@ -310,6 +310,32 @@ def snippets(text, window, limit=6, ball_until=None):
     return found
 
 
+FILLER = re.compile(r"\b(?:mon|tues?|wed(?:nes)?|thu(?:rs)?|fri|sat(?:ur)?|sun)(?:day)?\b|\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\b"
+                    r"|\b(?:location|events?|from|to|until|and|the|am|pm|st|nd|rd|th)\b|[^a-z]+", re.I)
+
+
+def other_lines(text, window, limit=5):
+    """Dated lines without bop, formal or ball words, for the "other" kind: a line naming a date in the window, plus the next line,
+    since listings often put the date and the title on separate lines."""
+    lo, hi = min(window), max(window)
+    rows = [" ".join(x.split()) for x in text.splitlines()]
+    rows = [x for x in rows if x]
+    found, seen = [], set()
+    for k, row in enumerate(rows):
+        if len(row) > 300 or not any(lo <= d <= hi for d in dates_in(row, {lo.year, hi.year})):
+            continue
+        bare = len(FILLER.sub(" ", row).split()) < 2   # the date line has no name of its own: take the next line too
+        chunk = (row + (" | " + rows[k + 1] if bare and k + 1 < len(rows) else ""))[:220]
+        if KEYWORDS.search(chunk) or SCHEDULE.search(chunk) or chunk[:60] in seen:
+            continue
+        if len(FILLER.sub(" ", chunk).split()) < 2:   # a bare date or date range, with no event name
+            continue
+        seen.add(chunk[:60]); found.append(chunk)
+        if len(found) >= limit:
+            break
+    return found
+
+
 # ---------- rendering ----------
 
 RENDER_JS = r"""const {chromium}=require('playwright');(async()=>{const b=await chromium.launch({headless:true});
@@ -396,7 +422,7 @@ def main():
         except Exception as e:   # one bad source never stops the run
             i, s = i_s
             return {"college": s["college"], "name": s["name"], "kind": s["kind"], "url": s["url"], "followed": [],
-                    "code": 0, "ok": False, "note": "collector error: " + type(e).__name__, "page_file": "", "snippets": [], "events": [], "datedless": False}
+                    "code": 0, "ok": False, "note": "collector error: " + type(e).__name__, "page_file": "", "snippets": [], "other": [], "events": [], "datedless": False}
 
     def one_inner(i_s):
         i, s = i_s
@@ -434,8 +460,11 @@ def main():
             rec["ok"], rec["note"] = True, "read as its iCal feed"
         (out / "pages" / f"{i:03d}.txt").write_text("\n\n".join(f"=== {u}\n{t}" for u, t in texts))
         rec["page_file"] = f"pages/{i:03d}.txt"
-        seen_sn, rec["snippets"] = set(), []
+        seen_sn, rec["snippets"], rec["other"] = set(), [], []
         for u, t in texts:
+            for x in other_lines(t, window):
+                if len(rec["other"]) < 5 and x[:60] not in seen_sn:
+                    seen_sn.add(x[:60]); rec["other"].append((u, x))
             for sn in snippets(t, window, ball_until=ball_hi):
                 if sn[:60] not in seen_sn:
                     seen_sn.add(sn[:60]); rec["snippets"].append((u, sn))
@@ -458,6 +487,7 @@ def main():
                     r["ok"], r["note"] = True, "rendered with headless Chromium"
                     pathlib.Path(out / r["page_file"]).write_text(f"=== {r['url']} (rendered)\n{t}")
                     r["snippets"] = [(r["url"], sn) for sn in snippets(t, window, ball_until=ball_hi)]
+                    r["other"] = [(r["url"], x) for x in other_lines(t, window)]
                     for cid in calendar_ids(h):
                         code, evs = calendar(cid)
                         r["events"] += [dict(e, calendar=cid) for e in evs]
@@ -526,6 +556,13 @@ def main():
         if r["snippets"]:
             lines.append(f"### {r['college']} | {r['name']} | {r['page_file']}")
             lines += [f"- {sn}  ({u})" for u, sn in r["snippets"]]
+    lines += ["", "## Other dated lines (candidates for kind other: no bop, formal or ball words)", ""]
+    seen_other = set()
+    for r in recs:
+        r["other"] = [(u, x) for u, x in r["other"] if x[:60] not in seen_other and not seen_other.add(x[:60])]
+        if r["other"]:
+            lines.append(f"### {r['college']} | {r['name']} | {r['page_file']}")
+            lines += [f"- {x}  ({u})" for u, x in r["other"]]
     (out / "digest.md").write_text("\n".join(lines) + "\n")
     size = (out / "digest.md").stat().st_size
     print(f"{ok}/{len(recs)} readable, {len(shown)} calendar events, {len(warnings)} warnings, digest {size // 1024} KB (about {size // 4000}k tokens) at {out / 'digest.md'}")
