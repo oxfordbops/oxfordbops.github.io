@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{city}} Bops</title>
 <link rel="icon" href="{{favicon}}">
-<meta name="description" content="Every college bop in {{city}} in the next fortnight: when, where, what theme, how much. Updated every morning.">
+<meta name="description" content="Every college bop and open formal in {{city}} in the next fortnight: when, where, what theme, how much. Updated every morning.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -50,6 +50,15 @@ h1 em { font-style: italic; padding: 0 .12em; margin: 0 -.06em; background: line
 .tagline { color: var(--muted); margin: .5rem 0 0; max-width: 34rem; }
 .notice { font-size: .9rem; color: var(--muted); margin: .25rem 0 0; max-width: 34rem; }
 
+
+/* Kind tabs: Bops or Formals, above the filters. */
+.kinds { display: flex; gap: 1.4rem; margin: 1.5rem 0 0; border-bottom: 1px solid var(--rule); }
+.kinds button { font: inherit; font-family: var(--display); font-size: 1.45rem; min-height: var(--ctl-h); padding: 0 .1rem .35rem; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; background: none; color: var(--muted); cursor: pointer; display: inline-flex; align-items: baseline; gap: .45rem; }
+.kinds button:hover { color: var(--fg); }
+.kinds button[aria-pressed="true"] { color: var(--fg); border-bottom-color: var(--cam); }
+.kinds button .n { font-family: var(--text, inherit); font-size: .78rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.kinds button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.kinds + .filters { margin-top: 0; border-top: 0; }
 
 /* Filter system: one control height, one radius, one set of states (rest, hover, pressed, focus).
    Segmented "when" control, college chips with counts, and a result line. */
@@ -150,8 +159,13 @@ footer a { display: inline-block; padding: .6rem 0; }
   <header>
     <h1><svg class="ball" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><defs><clipPath id="ballclip"><circle cx="20" cy="20" r="18"/></clipPath></defs><circle cx="20" cy="20" r="18" fill="var(--cam)"/><g clip-path="url(#ballclip)" stroke="var(--bg)" stroke-width="1.6"><path d="M2 8h36M2 14h36M2 20h36M2 26h36M2 32h36"/><path d="M8 2v36M14 2v36M20 2v36M26 2v36M32 2v36"/></g><rect x="18.5" y="0" width="3" height="3" fill="var(--cam-ink)"/></svg>{{city}} <em>Bops</em></h1>
     <p class="tagline">{{tagline}}</p>
-    <p class="notice">Details change. Check the link on each bop before you go.</p>
+    <p class="notice">Details change. Check the link on each listing before you go.</p>
   </header>
+
+  <nav class="kinds" aria-label="What to show" id="kind">
+    <button type="button" data-kind="bop" aria-pressed="true">Bops<span class="n" hidden></span></button>
+    <button type="button" data-kind="formal" aria-pressed="false">Formals<span class="n" hidden></span></button>
+  </nav>
 
   <div class="filters" role="region" aria-label="Filters">
     <div class="group">
@@ -171,7 +185,7 @@ footer a { display: inline-block; padding: .6rem 0; }
     <p class="result" id="result" aria-live="polite"></p>
   </div>
 
-  <div id="map" role="region" aria-label="Map of {{city}} colleges with bops"></div>
+  <div id="map" role="region" aria-label="Map of {{city}} colleges with listings"></div>
   <p class="mapnote" id="mapnote">Numbers are bops in the selected period. Tap a college to filter the list.</p>
 
   <section id="list">
@@ -197,20 +211,25 @@ footer a { display: inline-block; padding: .6rem 0; }
   const chipsEl = document.getElementById("chips");
   const resultEl = document.getElementById("result");
   let events = [];
-  let college = "all", when = "all";
+  let college = "all", when = "all", kind = "bop";
   const WHENS = ["all", "tonight", "tomorrow", "weekend", "nextweek"];
+  const KINDS = ["bop", "formal"];
+  const NOUN = { bop: ["bop", "bops"], formal: ["formal", "formals"] };
   const KEY = "{{slug}}.";
   // Filters live in the URL (?when=tonight&college=Jesus) so a link reproduces them; otherwise the remembered
   // college (across visits) and When (this session only) apply.
   try { college = localStorage.getItem(KEY + "college") || "all"; } catch (e) {}
-  try { when = sessionStorage.getItem(KEY + "when") || "all"; } catch (e) {}
+  try { when = sessionStorage.getItem(KEY + "when") || "all"; kind = sessionStorage.getItem(KEY + "kind") || "bop"; } catch (e) {}
   const q = new URLSearchParams(location.search);
-  if (q.has("when") || q.has("college")) { when = q.get("when") || "all"; college = q.get("college") || "all"; }
+  if (q.has("when") || q.has("college") || q.has("kind")) { when = q.get("when") || "all"; college = q.get("college") || "all"; kind = q.get("kind") || "bop"; }
   if (!WHENS.includes(when)) when = "all";
+  if (!KINDS.includes(kind)) kind = "bop";
+  function kindOf(e) { return e.kind === "formal" ? "formal" : "bop"; }
   function remember() {
-    try { localStorage.setItem(KEY + "college", college); sessionStorage.setItem(KEY + "when", when); } catch (e) {}
+    try { localStorage.setItem(KEY + "college", college); sessionStorage.setItem(KEY + "when", when); sessionStorage.setItem(KEY + "kind", kind); } catch (e) {}
     const u = new URL(location.href);
     u.search = "";
+    if (kind !== "bop") u.searchParams.set("kind", kind);
     if (when !== "all") u.searchParams.set("when", when);
     if (college !== "all") u.searchParams.set("college", college);
     try { history.replaceState(null, "", u.pathname + u.search + u.hash); } catch (e) {}
@@ -229,7 +248,7 @@ footer a { display: inline-block; padding: .6rem 0; }
     if (!a || !list.contains(a)) return;
     const li = a.closest("li");
     const title = li ? (li.querySelector(".name") || {}).textContent || "" : "";
-    track((a.closest(".src") ? "source/" : "bop/") + hostOf(a.href), title.trim());
+    track((a.closest(".src") ? "source/" : kind + "/") + hostOf(a.href), title.trim());
   });
 
   // Every date is shown in UK time, whatever the visitor's zone.
@@ -285,6 +304,17 @@ footer a { display: inline-block; padding: .6rem 0; }
     b.setAttribute("aria-pressed", String(b.dataset.when === when));
     b.addEventListener("click", () => setWhen(b.dataset.when));
   });
+  const kindEl = document.getElementById("kind");
+  kindEl.querySelectorAll("button").forEach(b => {
+    b.setAttribute("aria-pressed", String(b.dataset.kind === kind));
+    b.addEventListener("click", () => { if (b.dataset.kind === kind) return; kind = b.dataset.kind; track("filter/kind/" + kind); remember(); kindEl.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.kind === kind))); render(); });
+  });
+  function renderKindCounts() {
+    for (const b of kindEl.querySelectorAll("button")) {
+      const n = events.filter(e => kindOf(e) === b.dataset.kind).length;
+      const badge = b.querySelector(".n"); badge.textContent = n; badge.hidden = !n;
+    }
+  }
   function setWhen(value) {
     when = value;
     track("filter/when/" + when);
@@ -335,7 +365,7 @@ footer a { display: inline-block; padding: .6rem 0; }
     if (WHEN_LABEL[when]) parts.push(WHEN_LABEL[when]);
     const active = college !== "all" || when !== "all";
     resultEl.hidden = !n && !active;
-    resultEl.innerHTML = "<strong>" + n + (n === 1 ? " bop" : " bops") + "</strong> " + esc(parts.join(" ")) +
+    resultEl.innerHTML = "<strong>" + n + " " + NOUN[kind][n === 1 ? 0 : 1] + "</strong> " + esc(parts.join(" ")) +
       (active ? ' <button type="button" id="clear">Clear filters</button>' : "");
     const c = document.getElementById("clear");
     if (c) c.addEventListener("click", () => { clearFilters(); const w = document.querySelector('#when button[data-when="all"]'); if (w) w.focus(); });
@@ -391,7 +421,8 @@ footer a { display: inline-block; padding: .6rem 0; }
 
   function render() {
     // Counts on pins and chips follow the "when" filter, so both always agree with the list.
-    const inTime = events.filter(inWhen);
+    renderKindCounts();
+    const inTime = events.filter(e => kindOf(e) === kind).filter(inWhen);
     const byCollege = new Map();
     let elsewhere = 0;
     for (const e of inTime) {
@@ -411,7 +442,7 @@ footer a { display: inline-block; padding: .6rem 0; }
       let alts = "";
       if (college !== "all") alts += '<button type="button" class="chip plain" data-alt="college">Any college' + esc(whenTxt) + '</button>';
       if (when !== "all") alts += '<button type="button" class="chip plain" data-alt="when">' + (college === "all" ? "Next 14 days" : esc(college === "none" ? "Elsewhere" : college) + " in the next 14 days") + '</button>';
-      list.innerHTML = '<p class="empty">No bops listed' + where + whenTxt + '.' + (alts ? '<span class="alts">' + alts + '</span>' : '') + '</p>';
+      list.innerHTML = '<p class="empty">No ' + NOUN[kind][1] + ' listed' + where + whenTxt + '.' + (alts ? '<span class="alts">' + alts + '</span>' : '') + '</p>';
       return;
     }
     const groups = new Map();

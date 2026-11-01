@@ -10,7 +10,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 EVENTS = ROOT / "docs" / "events.json"
 SOURCES = ROOT / "docs" / "sources.json"
 ISO = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\+00:00|\+01:00|Z)$")
-ALLOWED = {"title", "starts_at", "ends_at", "college", "venue", "host", "price", "guests", "dress", "url", "details", "source"}
+ALLOWED = {"kind", "title", "starts_at", "ends_at", "college", "venue", "host", "price", "guests", "dress", "url", "details", "source"}
 
 
 def load():
@@ -81,6 +81,7 @@ class TestShape(unittest.TestCase):
         for b in d["bops"]:
             with self.subTest(b.get("title")):
                 self.assertFalse(set(b) - ALLOWED, f"unknown fields {set(b) - ALLOWED}")
+                self.assertIn(b.get("kind"), ("bop", "formal"), "kind must be bop or formal")
                 self.assertTrue(2 <= len(b["title"]) <= 120)
                 if len(b["title"]) > 4:
                     self.assertNotEqual(b["title"], b["title"].upper(), "shouting capitals")
@@ -110,11 +111,11 @@ class TestShape(unittest.TestCase):
         starts = [b["starts_at"] for b in bops]
         self.assertEqual(starts, sorted(starts, key=lambda s: datetime.fromisoformat(s.replace("Z", "+00:00"))))
         # Two entries are the same bop when college, day and title coincide; a JCR bop and an MCR party on one night are distinct.
-        keys = [(b.get("college"), b["starts_at"][:10], b["title"].strip().lower(), (b.get("host") or "").strip().lower()) for b in bops]
+        keys = [(b.get("kind"), b.get("college"), b["starts_at"][:10], b["title"].strip().lower(), (b.get("host") or "").strip().lower()) for b in bops]
         self.assertEqual(len(keys), len(set(keys)), "the same bop is listed twice")
         same_day = {}
         for b in bops:
-            same_day.setdefault((b.get("college"), b["starts_at"][:10]), []).append(b)
+            same_day.setdefault((b.get("kind"), b.get("college"), b["starts_at"][:10]), []).append(b)
         for k, group in same_day.items():
             if len(group) > 1:
                 hosts = {(g.get("host") or g["title"]).lower() for g in group}
