@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-01T06:12:29+00:00",
+  "generated": "2026-11-01T14:09:11+00:00",
   "run": {
-    "checked_at": "2026-11-01T06:12:29+00:00",
+    "checked_at": "2026-11-01T14:09:11+00:00",
     "window_from": "2026-11-01",
     "window_to": "2026-11-15",
     "sources_checked": 167,
-    "sources_ok": 133
+    "sources_ok": 128
   },
   "sources": [
     {
@@ -30,8 +30,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/ballioljcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "balliol-balliol-mcr-social-events",
@@ -63,8 +63,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/brasenosentz/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "brasenose-brasenose-hcr-term-card",
@@ -72,15 +72,15 @@
       "kind": "MCR events",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "ok": true,
-      "found": 0,
-      "note": "429 at first, read on retry with its Google Calendar"
+      "found": 3
     },
     {
       "slug": "brasenose-brasenose-hcr",
       "name": "Brasenose HCR",
       "kind": "MCR site",
       "url": "https://brasenosecollegehcr.weebly.com/",
-      "ok": true,
+      "ok": false,
+      "note": "Cloudflare challenge page; not bypassed (term card page read fine)",
       "found": 0
     },
     {
@@ -113,8 +113,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/chch.entzstagram/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "christ-church-christ-church-jcr-calendar",
@@ -186,8 +186,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/exeterjcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "exeter-exeter-mcr-calendar",
@@ -243,8 +243,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/hmcjcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "harris-manchester-harris-manchester-jcr-events",
@@ -260,6 +260,7 @@
       "kind": "JCR events",
       "url": "https://hmcjcr.co.uk/this-week",
       "ok": true,
+      "note": "stale: shows a Trinity term week",
       "found": 0
     },
     {
@@ -267,7 +268,8 @@
       "name": "Hertford JCR",
       "kind": "JCR site",
       "url": "https://hertfordjcr.org/",
-      "ok": true,
+      "ok": false,
+      "note": "HTTP 403",
       "found": 0
     },
     {
@@ -276,8 +278,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/hertfordjcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "hertford-hertford-mcr-events",
@@ -292,9 +294,8 @@
       "name": "Hertford MCR",
       "kind": "MCR site",
       "url": "https://www.hertfordmcr.com/",
-      "ok": false,
-      "found": 0,
-      "note": "HTTP 429 rate-limited, also on retry"
+      "ok": true,
+      "found": 0
     },
     {
       "slug": "jesus-jesus-jcr",
@@ -318,8 +319,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/jesuscollegejcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "jesus-jesus-jcr-wide-events",
@@ -335,7 +336,7 @@
       "kind": "MCR site",
       "url": "https://www.jesuscollegemcr.com/",
       "ok": true,
-      "found": 0
+      "found": 2
     },
     {
       "slug": "keble-keble-jcr",
@@ -351,8 +352,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/keblemcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "keble-keble-mcr-socials",
@@ -360,7 +361,7 @@
       "kind": "MCR events",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "ok": true,
-      "found": 0
+      "found": 2
     },
     {
       "slug": "keble-keble-mcr",
@@ -384,7 +385,7 @@
       "kind": "College events",
       "url": "https://www.kellogg.ox.ac.uk/events/",
       "ok": true,
-      "found": 0
+      "found": 2
     },
     {
       "slug": "kellogg-kellogg-mcr",
@@ -416,8 +417,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/lmhjcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "lady-margaret-hall-lmh-mcr-social-events",
@@ -457,7 +458,8 @@
       "kind": "Termcard",
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "ok": true,
-      "found": 0
+      "note": "PDF read with curl",
+      "found": 1
     },
     {
       "slug": "lincoln-lincoln-jcr",
@@ -489,8 +491,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/lincolnoxfordjcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "lincoln-lincoln-mcr",
@@ -505,9 +507,9 @@
       "name": "Lincoln MCR term card",
       "kind": "Termcard",
       "url": "https://lincolnmcr.weebly.com/term-card.html",
-      "ok": true,
-      "found": 0,
-      "note": "429 at first, read on retry with its Google Calendar"
+      "ok": false,
+      "note": "Cloudflare challenge page; not bypassed",
+      "found": 0
     },
     {
       "slug": "magdalen-magdalen-jcr",
@@ -555,8 +557,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/mansfieldoxford/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "mansfield-mansfield-mcr-college-page",
@@ -588,8 +590,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/mertonmcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "merton-merton-mcr",
@@ -613,7 +615,7 @@
       "kind": "Termcard",
       "url": "https://mertonmcr.co.uk/term-card",
       "ok": true,
-      "found": 0
+      "found": 5
     },
     {
       "slug": "new-college-new-college-students-voice-jcr-page",
@@ -637,8 +639,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/newcollegejcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "new-college-new-college-mcr-calendar",
@@ -661,7 +663,8 @@
       "name": "Nuffield JCR (college page)",
       "kind": "JCR site",
       "url": "https://www.nuffield.ox.ac.uk/study-here/junior-common-room/",
-      "ok": true,
+      "ok": false,
+      "note": "page rendered empty",
       "found": 0
     },
     {
@@ -702,8 +705,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/oriel.entz/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "oriel-oriel-mcr",
@@ -751,8 +754,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/pembrokentz/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "pembroke-pembroke-jcr-termcard",
@@ -760,6 +763,7 @@
       "kind": "Termcard",
       "url": "https://www.pembrokeoxfordjcr.org/termcard",
       "ok": true,
+      "note": "only HT25 and MT24 termcards",
       "found": 0
     },
     {
@@ -784,8 +788,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/queens_entz/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "queen-s-queen-s-mcr-college-page",
@@ -809,7 +813,7 @@
       "kind": "College events",
       "url": "https://www.reuben.ox.ac.uk/events",
       "ok": true,
-      "found": 0
+      "found": 1
     },
     {
       "slug": "reuben-reuben-college-instagram",
@@ -817,8 +821,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/reuben_college/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "reuben-reuben-termcard",
@@ -842,8 +846,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/st_annes_entz/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "st-anne-s-st-anne-s-mcr-events",
@@ -859,7 +863,7 @@
       "kind": "MCR site",
       "url": "https://st-annes-mcr.org.uk/",
       "ok": true,
-      "found": 0
+      "found": 1
     },
     {
       "slug": "st-antony-s-st-antony-s-college-events",
@@ -875,8 +879,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/stantonysgcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "st-antony-s-st-antony-s-gcr",
@@ -892,8 +896,8 @@
       "kind": "Termcard",
       "url": "https://www.stantonysgcr.com/term-card",
       "ok": true,
-      "found": 0,
-      "note": "429 at first, read on retry; no events listed"
+      "note": "still says Michaelmas 2025 term card coming soon",
+      "found": 0
     },
     {
       "slug": "st-catherine-s-st-catz-jcr",
@@ -925,8 +929,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/stcatzjcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "st-catherine-s-st-catz-mcr",
@@ -958,7 +962,7 @@
       "kind": "College events",
       "url": "https://www.stx.ox.ac.uk/events",
       "ok": true,
-      "found": 0
+      "found": 2
     },
     {
       "slug": "st-cross-st-cross-college-instagram",
@@ -966,8 +970,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/stcrosscollege/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "st-cross-st-cross-src-termcard",
@@ -975,6 +979,7 @@
       "kind": "Termcard",
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "ok": true,
+      "note": "PDF read with curl",
       "found": 0
     },
     {
@@ -991,7 +996,7 @@
       "kind": "College events",
       "url": "https://www.seh.ox.ac.uk/events",
       "ok": true,
-      "found": 0
+      "found": 5
     },
     {
       "slug": "st-edmund-hall-teddy-hall-jcr-instagram",
@@ -999,8 +1004,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/sehjcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "st-edmund-hall-teddy-hall-mcr-term-card",
@@ -1040,8 +1045,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/sthildasoxfordjcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "st-hilda-s-st-hilda-s-mcr-college-page",
@@ -1073,15 +1078,16 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/st.hughsjcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "st-hugh-s-st-hugh-s-mcr-socials",
       "name": "St Hugh's MCR socials",
       "kind": "MCR events",
       "url": "https://sthughsmcr.uk/socials/",
-      "ok": true,
+      "ok": false,
+      "note": "HTTP 403",
       "found": 0
     },
     {
@@ -1089,7 +1095,8 @@
       "name": "St Hugh's MCR",
       "kind": "MCR site",
       "url": "https://sthughsmcr.uk/",
-      "ok": true,
+      "ok": false,
+      "note": "HTTP 403",
       "found": 0
     },
     {
@@ -1106,8 +1113,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/sjc.entz/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "st-john-s-st-john-s-mcr-events",
@@ -1147,8 +1154,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/spc.entz/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "somerville-somerville-jcr",
@@ -1172,8 +1179,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/somervillejcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "somerville-somerville-jcr-events",
@@ -1213,8 +1220,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/trintztagram/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "trinity-trinity-mcr",
@@ -1246,8 +1253,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/univentz_/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "university-univ-wcr-events",
@@ -1287,8 +1294,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/wadhamsu/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "wolfson-wolfson-common-room",
@@ -1304,7 +1311,7 @@
       "kind": "College events",
       "url": "https://www.wolfson.ox.ac.uk/event/",
       "ok": true,
-      "found": 0
+      "found": 2
     },
     {
       "slug": "wolfson-wolfson-bar",
@@ -1320,8 +1327,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/wolfsoncollegeoxford/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "worcester-worcester-jcr",
@@ -1345,8 +1352,8 @@
       "kind": "Instagram",
       "url": "https://www.instagram.com/worcestercollegejcr/",
       "ok": false,
-      "found": 0,
-      "note": "not readable by the routine"
+      "note": "not readable by the routine",
+      "found": 0
     },
     {
       "slug": "all-oxford-su-events",
@@ -1354,8 +1361,8 @@
       "kind": "SU listings",
       "url": "https://www.oxfordsu.org/events/",
       "ok": false,
-      "found": 0,
-      "note": "HTTP 404; page moved, registry needs updating"
+      "note": "HTTP 404; page moved, registry needs updating",
+      "found": 0
     },
     {
       "slug": "all-cherwell",
@@ -1382,5 +1389,314 @@
       "found": 0
     }
   ],
-  "bops": []
+  "bops": [
+    {
+      "kind": "formal",
+      "title": "Formal Hall",
+      "starts_at": "2026-11-01T19:25:00+00:00",
+      "ends_at": "2026-11-01T21:00:00+00:00",
+      "college": "St Edmund Hall",
+      "venue": "Wolfson Hall",
+      "host": "St Edmund Hall",
+      "url": "https://www.seh.ox.ac.uk/events/formal-hall-michaelmas-2026?es=20261101",
+      "details": "Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
+      "source": "st-edmund-hall-st-edmund-hall-events"
+    },
+    {
+      "kind": "formal",
+      "title": "Formal exchange with Jesus College MCR",
+      "starts_at": "2026-11-03T18:00:00+00:00",
+      "college": "Brasenose",
+      "venue": "Brasenose College",
+      "host": "Brasenose HCR",
+      "guests": "Brasenose HCR and Jesus MCR members on the exchange",
+      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
+      "details": "Home leg at Brasenose of the HCR's exchange with Jesus MCR; the Jesus MCR calendar gives 18:30.",
+      "source": "brasenose-brasenose-hcr-term-card"
+    },
+    {
+      "kind": "formal",
+      "title": "Guest Night Dinner",
+      "starts_at": "2026-11-04T18:45:00+00:00",
+      "ends_at": "2026-11-04T22:00:00+00:00",
+      "college": "Kellogg",
+      "venue": "Dining Hall",
+      "host": "Kellogg College",
+      "guests": "All college members and their guests; registration required",
+      "url": "https://www.kellogg.ox.ac.uk/event/guest-night-dinner-3/",
+      "details": "Drinks reception in the college bar at 18:45, dinner in the Dining Hall at 19:15.",
+      "source": "kellogg-kellogg-college-events"
+    },
+    {
+      "kind": "formal",
+      "title": "Formal exchange with Wadham (Merton MCR away leg)",
+      "starts_at": "2026-11-04T21:00:00+00:00",
+      "college": "Wadham",
+      "venue": "Wadham College",
+      "host": "Merton MCR",
+      "guests": "Merton MCR members on the exchange",
+      "url": "https://mertonmcr.co.uk/s/MT26.pdf",
+      "details": "Away leg of the Merton MCR exchange with Wadham. Time not given (21:00 is a placeholder).",
+      "source": "merton-merton-mcr-term-card"
+    },
+    {
+      "kind": "formal",
+      "title": "MCR Guest Night",
+      "starts_at": "2026-11-05T18:30:00+00:00",
+      "college": "Jesus",
+      "host": "Jesus MCR",
+      "url": "https://www.jesuscollegemcr.com/",
+      "details": "From the Jesus MCR Google Calendar.",
+      "source": "jesus-jesus-mcr"
+    },
+    {
+      "kind": "formal",
+      "title": "Guest Night",
+      "starts_at": "2026-11-05T19:00:00+00:00",
+      "ends_at": "2026-11-05T22:00:00+00:00",
+      "college": "Wolfson",
+      "venue": "Hall",
+      "host": "Wolfson College",
+      "guests": "Open to all members of College and Common Room and their guests; booking required",
+      "dress": "Smart, no gowns",
+      "url": "https://www.wolfson.ox.ac.uk/event/guest-night-33/",
+      "details": "Pre-dinner drinks 7pm, dinner 7.30pm; drinks included. Book on the Wolfson Gateway.",
+      "source": "wolfson-wolfson-events"
+    },
+    {
+      "kind": "formal",
+      "title": "Go Green Formal Hall",
+      "starts_at": "2026-11-05T19:25:00+00:00",
+      "ends_at": "2026-11-05T21:00:00+00:00",
+      "college": "St Edmund Hall",
+      "venue": "Wolfson Hall",
+      "host": "St Edmund Hall",
+      "url": "https://www.seh.ox.ac.uk/events/green-formal-hall-2026?es=20261105",
+      "details": "Themed Thursday formal with locally sourced food and guest speakers from Oxfordshire farming. Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
+      "source": "st-edmund-hall-st-edmund-hall-events"
+    },
+    {
+      "kind": "formal",
+      "title": "Oriel and St Anne's formal exchange",
+      "starts_at": "2026-11-05T21:00:00+00:00",
+      "college": "St Anne's",
+      "venue": "St Anne's College",
+      "host": "St Anne's MCR",
+      "guests": "St Anne's and Oriel MCR members on the exchange",
+      "url": "https://fixr.co/event/oriel-and-annes-formal-exchange-tickets-914724148",
+      "details": "MCR formal swap with Oriel, sold out. Time not given on the MCR site (21:00 is a placeholder).",
+      "source": "st-anne-s-st-anne-s-mcr"
+    },
+    {
+      "kind": "formal",
+      "title": "MCR Guest Night",
+      "starts_at": "2026-11-06T18:30:00+00:00",
+      "ends_at": "2026-11-06T22:00:00+00:00",
+      "college": "Merton",
+      "host": "Merton MCR",
+      "url": "https://mertonmcr.co.uk/s/MT26.pdf",
+      "details": "From the Merton MCR Michaelmas 2026 term card.",
+      "source": "merton-merton-mcr-term-card"
+    },
+    {
+      "kind": "formal",
+      "title": "Formal Dinner",
+      "starts_at": "2026-11-06T21:00:00+00:00",
+      "college": "St Cross",
+      "host": "St Cross College",
+      "url": "https://www.stx.ox.ac.uk/sitefiles/annual-calendar-2026-27-events.pdf",
+      "details": "Friday formal dinner on the St Cross annual events calendar; time not given (21:00 is a placeholder).",
+      "source": "st-cross-st-cross-events"
+    },
+    {
+      "kind": "formal",
+      "title": "Diwali Formal Hall",
+      "starts_at": "2026-11-08T19:25:00+00:00",
+      "ends_at": "2026-11-08T21:00:00+00:00",
+      "college": "St Edmund Hall",
+      "venue": "Wolfson Hall",
+      "host": "St Edmund Hall",
+      "url": "https://www.seh.ox.ac.uk/events/diwali-formal-hall-2026?es=20261108",
+      "details": "Themed Sunday formal for Diwali with a vegetarian menu. Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
+      "source": "st-edmund-hall-st-edmund-hall-events",
+      "dress": "Traditional dress or as you feel appropriate"
+    },
+    {
+      "kind": "formal",
+      "title": "Balliol exchange dinner (Keble MCR away leg)",
+      "starts_at": "2026-11-10T18:00:00+00:00",
+      "college": "Balliol",
+      "venue": "Balliol College",
+      "host": "Keble MCR",
+      "guests": "Keble MCR members on the exchange; sign-up required",
+      "url": "https://mcr.keble.ox.ac.uk/social/",
+      "details": "Away leg of the Keble MCR exchange with Balliol MCR, from the Keble MCR term card calendar.",
+      "source": "keble-keble-mcr-socials"
+    },
+    {
+      "kind": "formal",
+      "title": "EDI formal: Diwali",
+      "starts_at": "2026-11-10T19:00:00+00:00",
+      "college": "Brasenose",
+      "host": "Brasenose HCR",
+      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
+      "details": "Diwali formal on the Brasenose HCR term card calendar.",
+      "source": "brasenose-brasenose-hcr-term-card"
+    },
+    {
+      "kind": "formal",
+      "title": "Guest Night Dinner",
+      "starts_at": "2026-11-11T18:45:00+00:00",
+      "ends_at": "2026-11-11T22:00:00+00:00",
+      "college": "Kellogg",
+      "venue": "Dining Hall",
+      "host": "Kellogg College",
+      "guests": "All college members and their guests; registration required",
+      "url": "https://www.kellogg.ox.ac.uk/event/guest-night-dinner-4/",
+      "details": "Drinks reception in the college bar at 18:45, dinner in the Dining Hall at 19:15.",
+      "source": "kellogg-kellogg-college-events"
+    },
+    {
+      "kind": "formal",
+      "title": "Formal exchange with Pembroke (Jesus MCR away leg)",
+      "starts_at": "2026-11-12T18:15:00+00:00",
+      "college": "Pembroke",
+      "venue": "Pembroke College",
+      "host": "Jesus MCR",
+      "guests": "Jesus MCR members on the exchange",
+      "url": "https://www.jesuscollegemcr.com/",
+      "details": "Away leg of the Jesus MCR formal exchange with Pembroke, from the Jesus MCR calendar.",
+      "source": "jesus-jesus-mcr"
+    },
+    {
+      "kind": "formal",
+      "title": "Queen's formal exchange (home)",
+      "starts_at": "2026-11-12T18:30:00+00:00",
+      "ends_at": "2026-11-12T22:30:00+00:00",
+      "college": "Linacre",
+      "venue": "Small CR",
+      "host": "Linacre Common Room",
+      "guests": "Linacre and Queen's members on the exchange; 15 places, sign-up required",
+      "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
+      "details": "Home leg of the Linacre Common Room's formal exchange with Queen's.",
+      "source": "linacre-linacre-michaelmas-2026-term-card"
+    },
+    {
+      "kind": "formal",
+      "title": "Cultural Dinner: Diwali",
+      "starts_at": "2026-11-12T18:45:00+00:00",
+      "college": "Reuben",
+      "venue": "Dining Hall",
+      "host": "Reuben College",
+      "guests": "Reuben members only; booking required",
+      "dress": "Bright colours and traditional attire welcome",
+      "url": "https://www.reuben.ox.ac.uk/events/cultural-dinner-diwali",
+      "details": "Diwali dinner with shared food and diyas.",
+      "source": "reuben-reuben-college-events"
+    },
+    {
+      "kind": "formal",
+      "title": "MT26 Graduate Dinner",
+      "starts_at": "2026-11-12T19:00:00+00:00",
+      "college": "Brasenose",
+      "host": "Brasenose HCR",
+      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
+      "details": "Termly graduate dinner on the Brasenose HCR term card calendar.",
+      "source": "brasenose-brasenose-hcr-term-card"
+    },
+    {
+      "kind": "formal",
+      "title": "Guest Night",
+      "starts_at": "2026-11-12T19:00:00+00:00",
+      "ends_at": "2026-11-12T22:00:00+00:00",
+      "college": "Wolfson",
+      "venue": "Hall",
+      "host": "Wolfson College",
+      "guests": "Open to all members of College and Common Room and their guests; booking required",
+      "dress": "Smart, no gowns",
+      "url": "https://www.wolfson.ox.ac.uk/event/guest-night-32/",
+      "details": "Pre-dinner drinks 7pm, dinner 7.30pm; drinks included. Book on the Wolfson Gateway.",
+      "source": "wolfson-wolfson-events"
+    },
+    {
+      "kind": "formal",
+      "title": "Formal Hall",
+      "starts_at": "2026-11-12T19:25:00+00:00",
+      "ends_at": "2026-11-12T21:00:00+00:00",
+      "college": "St Edmund Hall",
+      "venue": "Wolfson Hall",
+      "host": "St Edmund Hall",
+      "url": "https://www.seh.ox.ac.uk/events/formal-hall-michaelmas-2026?es=20261112",
+      "details": "Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
+      "source": "st-edmund-hall-st-edmund-hall-events"
+    },
+    {
+      "kind": "formal",
+      "title": "Formal exchange with New College (Merton MCR away leg)",
+      "starts_at": "2026-11-12T21:00:00+00:00",
+      "college": "New College",
+      "venue": "New College",
+      "host": "Merton MCR",
+      "guests": "Merton MCR members on the exchange",
+      "url": "https://mertonmcr.co.uk/s/MT26.pdf",
+      "details": "Away leg of the Merton MCR exchange with New College MCR. Time not given (21:00 is a placeholder).",
+      "source": "merton-merton-mcr-term-card"
+    },
+    {
+      "kind": "formal",
+      "title": "Diwali Formal",
+      "starts_at": "2026-11-13T19:00:00+00:00",
+      "ends_at": "2026-11-13T20:30:00+00:00",
+      "college": "Keble",
+      "host": "Keble MCR",
+      "guests": "Sign-up required",
+      "url": "https://mcr.keble.ox.ac.uk/social/",
+      "details": "On the Keble MCR term card calendar (5th week).",
+      "source": "keble-keble-mcr-socials"
+    },
+    {
+      "kind": "formal",
+      "title": "Charity Formal",
+      "starts_at": "2026-11-13T21:00:00+00:00",
+      "college": "Merton",
+      "host": "Merton MCR",
+      "url": "https://mertonmcr.co.uk/s/MT26.pdf",
+      "details": "On the Merton MCR Michaelmas 2026 term card. Time not given (21:00 is a placeholder).",
+      "source": "merton-merton-mcr-term-card"
+    },
+    {
+      "kind": "formal",
+      "title": "Formal Dinner",
+      "starts_at": "2026-11-13T21:00:00+00:00",
+      "college": "St Cross",
+      "host": "St Cross College",
+      "url": "https://www.stx.ox.ac.uk/sitefiles/annual-calendar-2026-27-events.pdf",
+      "details": "Friday formal dinner on the St Cross annual events calendar; time not given (21:00 is a placeholder).",
+      "source": "st-cross-st-cross-events"
+    },
+    {
+      "kind": "bop",
+      "title": "Bop",
+      "starts_at": "2026-11-14T23:00:00+00:00",
+      "ends_at": "2026-11-15T02:00:00+00:00",
+      "college": "Merton",
+      "venue": "Sports Pavilion",
+      "host": "Merton MCR",
+      "url": "https://mertonmcr.co.uk/s/MT26.pdf",
+      "details": "11pm to 2am at the Sports Pavilion, on the Merton MCR term card, which notes there is no pre-bop. Merton MCR-JCR bops are held there.",
+      "source": "merton-merton-mcr-term-card"
+    },
+    {
+      "kind": "formal",
+      "title": "Formal Hall",
+      "starts_at": "2026-11-15T19:25:00+00:00",
+      "ends_at": "2026-11-15T21:00:00+00:00",
+      "college": "St Edmund Hall",
+      "venue": "Wolfson Hall",
+      "host": "St Edmund Hall",
+      "url": "https://www.seh.ox.ac.uk/events/formal-hall-michaelmas-2026?es=20261115",
+      "details": "Bookings on the college Upay open 8am, 14 days before; they close 12pm Monday for Thursday and 12pm Wednesday for Sunday formals.",
+      "source": "st-edmund-hall-st-edmund-hall-events"
+    }
+  ]
 }
