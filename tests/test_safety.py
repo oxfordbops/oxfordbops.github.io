@@ -26,7 +26,7 @@ def entry(**kw):
 
 class TestCommittedData(unittest.TestCase):
     def test_every_listing_passes_the_scan(self):
-        sc = safety_scan.Scanner(CITY, REG, DATA.get("sources", []))
+        sc = safety_scan.Scanner(CITY, REG, DATA.get("sources", []), evidence_required=(DATA.get("run") or {}).get("version", 1) >= 2)
         bad = {b["title"]: sc.check(b) for b in DATA["bops"] if sc.check(b)}
         self.assertEqual(bad, {}, "run python3 scripts/safety_scan.py --fix and report what it removed")
 
@@ -52,19 +52,31 @@ class TestScanner(unittest.TestCase):
             self.assertIn("link", self.rules(url=u), u)
         self.assertNotIn("link", self.rules(url="https://www." + UNI + "/events"))
 
-    def test_places(self):
-        for v in ["The Jolly Farmers", "Revolution nightclub", "Slug and Lettuce pub", "a private house", "London Bridge", ""]:
-            self.assertIn("place", self.rules(venue=v), v)
-        for v in ["JCR", "Old Hall", "Fellows' Garden", "QBar", f"Langford Room, {COLLEGE}"]:
-            self.assertNotIn("place", self.rules(venue=v), v)
+    def test_place_structure(self):
         self.assertIn("place", self.rules(college=None))
 
-    def test_danger(self):
-        for t in ["MDMA night", "Initiation drinks", "Pub crawl", "Drinking games social", "Bottomless brunch", "Strip poker", "Knife skills",
-                  "Fight club", "Fake IDs welcome", "Boat race and chunder"]:
+    def test_backstop_catches_only_unambiguous_words(self):
+        for t in ["MDMA night", "Initiation drinks", "Drinking games social", "Strip poker", "Fight club", "Fake IDs welcome", "Ketamine"]:
             self.assertIn("danger", self.rules(title=t), t)
-        for t in ["Halloween Bop", "Diwali Formal", "Film night: Blade Runner", "Jazz night", "Wine and cheese", "Pub quiz in the JCR"]:
+        for t in ["Halloween Bop", "Diwali Formal", "Film night: Blade Runner", "Top Gun night", "Boat Race screening", "Pub quiz in the JCR", "Wine and cheese"]:
             self.assertNotIn("danger", self.rules(title=t), t)
+
+    def evidence_rules(self, **kw):
+        sc = scanner_with(); sc.evidence_required = True
+        return [w for r, w in sc.check(entry(**kw)) if r == "evidence"]
+
+    def test_evidence(self):
+        good = {"quote": "Friday 6th November: Halloween Bop, 9pm til late in the College Bar", "where": "in the College Bar"}
+        self.assertEqual(self.evidence_rules(evidence=good), [])
+        self.assertEqual(self.evidence_rules(evidence={"quote": "DTSTART:20261106T210000Z SUMMARY:Halloween Bop", "where": "LOCATION:College Bar"}), [])
+        self.assertTrue(self.evidence_rules(), "no evidence")
+        self.assertTrue(self.evidence_rules(evidence={"quote": "Saturday 7th November: Halloween Bop, 9pm", "where": "bar"}), "wrong date")
+        self.assertTrue(self.evidence_rules(evidence={"quote": "Friday 6th November: Halloween Bop, 8pm", "where": "bar"}), "wrong time")
+        self.assertTrue(self.evidence_rules(evidence={"quote": "Friday 6th November: Halloween Bop, 9pm"}), "no place quote")
+        self.assertEqual(self.evidence_rules(details="Time not stated.", evidence={"quote": "Halloween Bop on 6 November", "where": "College Bar"}), [])
+        weekly = {"quote": "Formal Hall is held on Tuesdays and Fridays during Full Term."}
+        self.assertEqual(self.evidence_rules(kind="formal", special=False, title="Formal Hall", venue=None, details="Time not stated.", evidence=weekly), [])
+        self.assertEqual(self.evidence_rules(evidence={"quote": "<script>x</script> 6 November 9pm", "where": "bar"}), ["the quote is too long or contains markup"])
 
     def test_personal_and_tampering(self):
         self.assertIn("personal", self.rules(details="Email jane.doe@gmail.com to book"))
@@ -73,13 +85,12 @@ class TestScanner(unittest.TestCase):
         self.assertIn("tampering", self.rules(title="Bop‮gnp.exe"))
         self.assertIn("tampering", self.rules(details="x" * 400))
 
-    def test_organiser(self):
-        other = next(s for s in REG["sources"] if s["college"] not in (COLLEGE, "All") and s["kind"] not in ("Instagram", "Facebook"))
-        sc = scanner_with([{"slug": "o", "name": "o", "kind": other["kind"], "url": other["url"], "ok": True, "found": 0}])
-        self.assertIn("organiser", {r for r, _ in sc.check(entry(source="o", url=other["url"]))}, "another college's page, not naming it")
-        self.assertIn("organiser", {r for r, _ in sc.check(entry(source="o", url=other["url"], title="Formal swap with " + other["college"] + " MCR"))}),
-        self.assertNotIn("organiser", {r for r, _ in sc.check(entry(source="o", url=other["url"], title="Formal exchange (" + other["college"] + " MCR away leg)"))})
+    def test_organiser_structure(self):
         self.assertIn("organiser", {r for r, _ in scanner_with().check(entry(source="missing"))})
+        press = next((x for x in REG["sources"] if x["kind"] == "Student press"), None)
+        if press:
+            sc = scanner_with([{"slug": "p", "name": "p", "kind": "Student press", "url": press["url"], "ok": True, "found": 0}])
+            self.assertIn("organiser", {r for r, _ in sc.check(entry(source="p", url=press["url"]))})
 
 
 if __name__ == "__main__":

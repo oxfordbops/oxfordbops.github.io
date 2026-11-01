@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-"""Safety scan of docs/events.json: every listing must be certainly run by a college or university body (or a registered
-society), certainly held in a college or university space, link only to vetted pages, and be completely safe.
+"""Mechanical safety scan of docs/events.json. Judgement (who runs an event, whether it is in a college or university space,
+whether it is safe, whether a cross-college listing is really that college's away leg) belongs to the language model in the
+weekly routine and the daily check, which must quote its evidence in each listing's `evidence`. This scan checks only what
+code can check reliably: links, structure, personal data, tampering, that the model's quotes state the listing's date and
+time, and a short backstop of unambiguous danger words.
 
     python3 scripts/safety_scan.py            # report violations as JSON lines; exit 1 if any
     python3 scripts/safety_scan.py --fix      # also remove every violating entry from docs/events.json (the routine runs this)
@@ -10,6 +13,9 @@ entries in its FLAGGED line, so a person sees them; nothing flagged is ever publ
 scan on the committed data and checks the scanner itself on known good and bad examples.
 """
 import ipaddress, json, pathlib, re, sys, unicodedata
+from zoneinfo import ZoneInfo
+
+LONDON = ZoneInfo("Europe/London")
 from urllib.parse import urlparse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -21,33 +27,14 @@ TICKETING = {"fixr.co", "ra.co", "eventbrite.co.uk", "eventbrite.com", "skiddle.
 FORMS = re.compile(r"docs\.google\.com/forms|forms\.office\.com|forms\.microsoft\.com|typeform\.com|jotform\.com|surveymonkey\.com|tally\.so", re.I)
 DOWNLOADS = re.compile(r"\.(exe|zip|rar|7z|dmg|apk|msi|bat|cmd|scr|js|jar|iso|ps1|sh|vbs|docm|xlsm)$", re.I)
 
-# Words that make an event unsafe to publish, by category. Matched on whole words, case-insensitively, in every text field.
-DANGER = {
-    "drugs": r"cocaine|coke|mdma|molly|ecstasy|ketamine|ket|lsd|acid trip|shrooms|magic mushrooms|psilocybin|weed|cannabis|marijuana|edibles|"
-             r"pills|nitrous|nos|balloons|poppers|spice|xanax|drugs?|420",
-    "weapons": r"weapons?|knife|knives|firearms?|guns? (?:range|club|night)|machetes?|pepper spray|tasers?|airsoft|paintball",
-    "hazing": r"initiations?|initiated|hazing|ragging|forfeits?|punishment drinks?|fines night",
-    "drinking": r"drinking games?|pint challenge|boat race|chunder(ing)?|spirit races?|downing contest|shot challenge|shotgun(ning)?|"
-                r"bottomless|free bar all night|unlimited drinks?|all you can drink|pub crawl|bar crawl|sesh(ing)?|piss(ed)? up|get(ting)? (smashed|wasted|hammered|plastered)|"
-                r"drink(ing)? society|drinking club|blackout",
-    "sexual": r"strip(per|ping|tease)?|lap ?dance|escorts?|nude|naked|nudity|porn|sex party|kink|fetish|onlyfans",
-    "gambling": r"betting|bookies|real[- ]money (poker|casino)|cash prizes? poker|gamble for money",
-    "harm": r"self[- ]harm|suicide challenge|fight club|bare[- ]knuckle|cage fight",
-    "extremism": r"extremis[mt]|terroris[mt]|jihad|nazi|white power|hate group",
-    "crime": r"illegal|trespass(ing)?|break[- ]in|vandalism|shoplift(ing)?|fake ids?|underage drinking",
-}
-DANGER_RE = {k: re.compile(r"\b(?:" + v + r")\b", re.I) for k, v in DANGER.items()}
+# Backstop only: words that are never part of a safe listing, whatever the context. Judging safety is the model's job.
+BACKSTOP = re.compile(r"\b(cocaine|mdma|ecstasy|ketamine|lsd|nitrous oxide|magic mushrooms|initiations?|hazing|drinking games?|"
+                      r"strip ?(club|tease|poker)|lap ?danc\w*|escorts?|fake ids?|underage drinking|fight club|weapons?)\b", re.I)
 EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
 PHONE = re.compile(r"(?:\+44\s?7\d{3}|\b07\d{3})\s?\d{3}\s?\d{3}\b|\+44\s?\(?0?\)?\s?[12]\d{2,3}\s?\d{3}\s?\d{3,4}\b|\b0[12]\d{2,3}\s?\d{3}\s?\d{3,4}\b")
 POSTCODE = re.compile(r"\b[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}\b")
 HIDDEN = re.compile("[​-‏‪-‮⁠-⁤⁦-⁩﻿]")
 MARKUP = re.compile(r"<\s*/?\s*[a-z!]|javascript:|data:text|on\w+\s*=", re.I)
-OFFSITE = re.compile(r"\b(nightclubs?|night clubs?|pubs?|inn|tavern|hotels?|wetherspoons?|airbnb|house party|private (?:house|flat|home)|"
-                     r"club (?:on|in) |london|cinema|bowling|karaoke bar|restaurants?)\b", re.I)
-# A named space inside a college: halls, bars, rooms, chapels, courts, gardens, theatres, sports grounds the college owns.
-COLLEGE_SPACE = re.compile(r"\b(hall|halls|\w*bar|buttery|cr|small cr|suite|kitchen|cellars?|jcr|mcr|scr|hcr|common room|combination room|chapel|court|quad|garden|gardens|lawn|"
-                           r"library|auditorium|theatre|lecture|room|rooms|lodge|caf[eé]|refectory|ballroom|marquee|crypt|studio|music|"
-                           r"pavilion|pav|sports ground|boathouse|playroom|terrace|hub|centre|building|wing|old court|new court|college)\b", re.I)
 TEXT_FIELDS = ("title", "details", "venue", "host", "price", "guests", "dress", "society")
 MAX_LEN = {"title": 160, "details": 320, "venue": 160, "host": 160, "price": 120, "guests": 200, "dress": 120, "society": 80}
 
@@ -57,7 +44,7 @@ def _host(u):
 
 
 class Scanner:
-    def __init__(self, city, registry, data_sources):
+    def __init__(self, city, registry, data_sources, evidence_required=False):
         self.city = city
         self.uni = city.get("university_domain", "")
         self.colleges = list(city["colleges"])
@@ -67,7 +54,48 @@ class Scanner:
         self.reg_by_url = {s["url"]: s for s in self.reg}
         self.vetted = {_host(s["url"]) for s in self.reg if s["kind"] not in ("Instagram", "Facebook")}
         self.src = {s["slug"]: s for s in data_sources} if isinstance(data_sources, list) else {}
+        self.evidence_required = evidence_required
         self.ball_hosts = {_host(s["url"]) for s in self.src.values() if s.get("kind") == "Ball site" and self._linked_ok(s)}
+
+    MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+    DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+
+    def states_date(self, quote, d, weekly):
+        q = quote.lower()
+        mon = self.MONTHS[d.month - 1]
+        pats = [d.isoformat(), d.strftime("%Y%m%d"), d.strftime("%d/%m"), f"{d.day}/{d.month}/",
+                rf"\b{d.day}(?:st|nd|rd|th)?(?: of)? {mon[:3]}", rf"\b{mon[:3]}\w* {d.day}(?:st|nd|rd|th)?\b"]
+        if any(re.search(p, q) for p in pats):
+            return True
+        return weekly and re.search(rf"\b{self.DAYS[d.weekday()]}s?\b", q) is not None   # a regular schedule names the weekday
+
+    def states_time(self, quote, t):
+        q = quote.lower().replace(" ", "")
+        h12 = t.hour % 12 or 12
+        pats = [f"{t.hour:02d}:{t.minute:02d}", f"{t.hour}:{t.minute:02d}", f"{t.hour:02d}.{t.minute:02d}", f"{t.hour:02d}{t.minute:02d}",
+                f"{h12}.{t.minute:02d}", f"{h12}:{t.minute:02d}"]
+        if t.minute == 0:
+            pats += [f"{h12}pm", f"{h12}am", f"{h12}-", f"{h12}–", f"{h12}to", f"{h12}p.m."]
+        return any(p in q for p in pats)
+
+    def evidence_problems(self, b):
+        import datetime as dt
+        ev = b.get("evidence")
+        if not isinstance(ev, dict) or not isinstance(ev.get("quote"), str) or len(ev["quote"].strip()) < 12:
+            return [("evidence", "no quote from the source stating the event")]
+        out = []
+        q = ev["quote"]
+        if len(q) > 400 or MARKUP.search(q) or HIDDEN.search(q):
+            out.append(("evidence", "the quote is too long or contains markup"))
+        start = dt.datetime.fromisoformat(b["starts_at"].replace("Z", "+00:00")).astimezone(LONDON)
+        weekly = b.get("kind") == "formal" and b.get("special") is False
+        if not self.states_date(q, start.date(), weekly):
+            out.append(("evidence", f"the quote does not state {start:%a %d %b}"))
+        if "time not stated" not in (b.get("details") or "").lower() and not self.states_time(q + " " + str(ev.get("time") or ""), start):
+            out.append(("evidence", f"the quote does not state {start:%H:%M}"))
+        if b.get("kind") not in ("formal", "ball") and not (isinstance(ev.get("where"), str) and ev["where"].strip()):
+            out.append(("evidence", "no quote saying where it is held"))
+        return out
 
     def on_uni(self, h):
         return bool(self.uni) and (h == self.uni or h.endswith("." + self.uni))
@@ -117,8 +145,8 @@ class Scanner:
                     or (h.endswith("instagram.com") and s.get("kind") == "Instagram")
                     or (kind == "ball" and h in self.ball_hosts)):
                 out.append(("link", f"{h} is neither the university's domain nor a vetted page"))
-        # Organiser: the cited source is a vetted page of this college, a registered society for society events, or a ball site for a ball.
-        text = " ".join(str(b.get(f) or "") for f in ("title", "host", "details")).lower()
+        # Organiser (structure only; the model judges who really runs it and quotes it in evidence): the source is in the registry,
+        # a society event cites its own society, a ball site is linked from an official page, and the press is never the only source.
         if kind == "society":
             if not reg or reg not in self.societies or reg["society"] != b.get("society"):
                 if not (s.get("kind") == "Instagram" and reg):
@@ -126,40 +154,21 @@ class Scanner:
         elif kind == "ball" and s.get("kind") == "Ball site":
             if not self._linked_ok(s):
                 out.append(("organiser", "ball site without an official page linking to it"))
-        else:
-            if not reg:
-                out.append(("organiser", "the source is not in the registry"))
-            elif reg.get("kind") == "Student press":
-                out.append(("organiser", "the student press reports events; it does not run them, so it cannot be the only source"))
-            elif reg.get("college") not in (b.get("college"), "All") and (reg.get("college", "").lower() not in text or not re.search(r"\baway\b", text)):
-                out.append(("organiser", f"cited to a {reg.get('college')} page but listed at {b.get('college')}: only the source's own away leg, "
-                                          f"named as such, may be listed at another college"))
-            elif reg.get("college") == "All" and reg.get("kind") != "SU listings":
-                out.append(("organiser", "a university-wide source must be the students' union listing"))
-        # Place.
-        venue = (b.get("venue") or "").strip()
-        if kind == "society":
-            if not venue:
-                out.append(("place", "a society event must name its venue"))
-            elif not (any(v in venue.lower() for v in self.venues) or any(c.lower() in venue.lower() for c in self.colleges)):
-                out.append(("place", f"venue {venue!r} is not a college or an approved university venue"))
-        else:
-            if b.get("college") not in self.colleges:
-                out.append(("place", "a college event must name its college"))
-            if not venue and kind not in ("formal", "ball"):
-                out.append(("place", "the source must say where in the college it is held"))
-            elif venue and not (COLLEGE_SPACE.search(venue) or any(c.lower() in venue.lower() for c in self.colleges)
-                                or any(v in venue.lower() for v in self.venues)):
-                out.append(("place", f"venue {venue!r} is not recognisably a college or university space"))
-        if OFFSITE.search(venue):
-            out.append(("place", f"venue {venue!r} looks off-site"))
+        elif not reg:
+            out.append(("organiser", "the source is not in the registry"))
+        elif reg.get("kind") == "Student press":
+            out.append(("organiser", "the student press reports events; it does not run them, so it cannot be the only source"))
+        if kind != "society" and b.get("college") not in self.colleges:
+            out.append(("place", "a college event must name its college"))
+        # Evidence: the model's own quotes from the source. Code checks only that they exist and state this date and time.
+        if self.evidence_required:
+            out += self.evidence_problems(b)
         # Content.
         for f in TEXT_FIELDS:
             v = str(b.get(f) or "")
-            for cat, rx in DANGER_RE.items():
-                m = rx.search(v)
-                if m:
-                    out.append(("danger", f"{cat}: {f} says {m.group(0)!r}"))
+            m = BACKSTOP.search(v)
+            if m:
+                out.append(("danger", f"{f} says {m.group(0)!r}"))
             if EMAIL.search(v):
                 out.append(("personal", f"{f} has an email address"))
             if PHONE.search(v):
@@ -186,7 +195,7 @@ def load():
 
 def main():
     city, registry, data = load()
-    sc = Scanner(city, registry, data.get("sources", []))
+    sc = Scanner(city, registry, data.get("sources", []), evidence_required=(data.get("run") or {}).get("version", 1) >= 2)
     keep, flagged = [], []
     for b in data.get("bops", []):
         v = sc.check(b)
