@@ -21,7 +21,7 @@ def tokens(theme, indent):
     missing = [k for k in TOKEN_ORDER if k not in pal]
     if missing:
         sys.exit(f"city.json palette.{theme} is missing {missing}")
-    return "\n".join(f"{indent}--{k}: {pal[k]};" for k in TOKEN_ORDER) + ("" if theme == "light" else f"\n{indent}color-scheme: dark;")
+    return "\n".join(f"{indent}--{k}: {pal[k]};" for k in TOKEN_ORDER)
 
 
 def favicon():
@@ -56,7 +56,7 @@ def render_page():
         "city": CITY["name"], "slug": CITY["slug"], "tagline": CITY["tagline"], "favicon": favicon(), "colleges_js": colleges_js(),
         "map_center": json.dumps(CITY["map_center"]), "map_zoom": str(CITY.get("map_zoom", 14)), "analytics": analytics(),
         "ball_tab": CITY["balls"]["tab"], "ball_one": CITY["balls"]["one"], "ball_many": CITY["balls"]["many"],
-        "tokens_light": tokens("light", "  "), "tokens_dark": tokens("dark", "  "), "tokens_dark_indented": tokens("dark", "    "),
+        "tokens_light": tokens("light", "  "),
     }
     for k, v in values.items():
         t = t.replace("{{" + k + "}}", v)

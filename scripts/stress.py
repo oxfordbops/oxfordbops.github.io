@@ -5,7 +5,7 @@
     scripts/stress.py check <report.json>  # (used by the shell driver) asserts on the collected results
 
 Each variant is docs/index.html with: the data file swapped for a generated JSON, an optional fake clock
-(so "Tonight", "This weekend" and "Next week" can be tested on known days), and an optional forced theme.
+(so "Tonight", "This weekend" and "Next week" can be tested on known days).
 """
 import json, pathlib, random, sys
 from datetime import datetime, timedelta, timezone
@@ -95,8 +95,6 @@ def build(out):
            {"title": "After the change", "starts_at": "2026-10-25T20:00:00+00:00", "college": "Clare", "venue": "x", "url": "https://example.org", "source": "s"}]
     cases["clock_dst"] = variant("clock_dst", {**gen, "generated": "2026-10-24T06:00:00+01:00", "bops": dst}, clock="2026-10-24T12:00:00Z")
 
-    # 7. dark theme with the many fixture
-    cases["dark"] = variant("dark", None, theme="dark", json_name="many")
 
     for name, (html, data) in cases.items():
         (out / f"{name}.html").write_text(html)

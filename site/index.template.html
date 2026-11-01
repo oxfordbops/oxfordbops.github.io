@@ -2,6 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="light only">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{city}} Bops</title>
 <link rel="icon" href="{{favicon}}">
@@ -21,14 +22,6 @@
   --display: "Instrument Serif", Georgia, "Times New Roman", serif;
   --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-{{tokens_dark_indented}}
-  }
-}
-:root[data-theme="dark"] {
-{{tokens_dark}}
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }

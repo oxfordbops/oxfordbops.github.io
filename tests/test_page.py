@@ -64,12 +64,15 @@ class TestPage(unittest.TestCase):
         self.assertIn("window.goatcounter && window.goatcounter.count", SCRIPT)
         self.assertNotIn("googletagmanager", PAGE.lower())
 
-    def test_theme_tokens_defined_in_both_themes(self):
-        tokens = set(re.findall(r"(--[a-z-]+):", PAGE.split("@media")[0]))
-        dark = PAGE.split(':root[data-theme="dark"]')[1].split("}")[0]
-        for t in ["--bg", "--fg", "--muted", "--rule", "--cam", "--cam-ink", "--cam-tint", "--accent", "--field"]:
-            self.assertIn(t, tokens)
-            self.assertIn(t + ":", dark, f"{t} missing in dark theme")
+    def test_always_light(self):
+        """The page has one light theme: no dark palette, whatever the visitor's system setting."""
+        self.assertNotIn("prefers-color-scheme: dark", PAGE)
+        self.assertNotIn('data-theme="dark"', PAGE)
+        self.assertIn('<meta name="color-scheme" content="light only">', PAGE)
+        root = PAGE.split(":root {")[1].split("}")[0]
+        for t in ("--bg", "--fg", "--muted", "--accent"):
+            self.assertIn(t + ":", root, f"{t} missing in the light theme")
+        self.assertIn("color-scheme: light", root)
 
     def test_links_and_entries_are_guarded(self):
         # Only http(s) URLs become hrefs, entries without a title or a parseable start are dropped,

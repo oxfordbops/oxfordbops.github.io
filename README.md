@@ -13,7 +13,7 @@ One template, one repository per city. This repository is the city named in `cit
 
 | Path | Role | City-specific? |
 |---|---|---|
-| `city.json` | Name, tagline, palette (light and dark tokens), favicon colours, colleges with coordinates, map centre, student press and SU for the routine, and the GoatCounter site code for analytics (empty for none). | yes |
+| `city.json` | Name, tagline, palette (light tokens; the page is always light), favicon colours, colleges with coordinates, map centre, student press and SU for the routine, and the GoatCounter site code for analytics (empty for none). | yes |
 | `docs/events.json` | `{generated, sources, bops: [...]}`, rewritten daily by the routine. Fields per entry: kind (bop, formal or ball), title, starts_at, ends_at, college, venue, host, price, guests, dress, url, details, source. | yes |
 | `docs/sources.json` | The registry of verified sources: common-room and ents sites, calendars, termcards, college events pages, SU listings, student press, and each college's Instagram. The routine reads only these. | yes |
 | `site/index.template.html` | The whole page: palette tokens, filter bar (When segmented control, college chips with counts), Leaflet map with a count per college, day-by-day list with the tinted "tonight" section, source link per bop. Placeholders are filled from `city.json`. | shared |
@@ -23,7 +23,7 @@ One template, one repository per city. This repository is the city named in `cit
 | `scripts/sync_template.sh` | Copies the shared parts into another city's repository and rebuilds there. | shared |
 | `scripts/collect.py` | What the daily routine runs first: fetches every source once, follows event links, reads Google Calendars and PDFs, renders JavaScript pages, expands registry formal-hall weekdays inside Full Term, and writes a compact digest. Stdlib only. | shared |
 | `scripts/check_sources.py` | Probes every registered URL and reports colleges without a working source. | shared |
-| `scripts/stress.py` | Builds stress-test variants of the page (empty, oversized, hostile data, fixed clocks, dark theme). | shared |
+| `scripts/stress.py` | Builds stress-test variants of the page (empty, oversized, hostile data, fixed clocks). | shared |
 | `tests/` | Data contract, registry, page and build freshness. All read `city.json`. | shared |
 | `.github/workflows/deploy.yml` | Checks the build, runs the tests, deploys `docs/` to GitHub Pages. | shared |
 
@@ -53,11 +53,7 @@ Pageviews, source-link clicks and filter use are counted by [GoatCounter](https:
 
 ## Audit
 
-`.github/workflows/audit.yml` is a second opinion that runs at 08:30 UTC, after the routine: it installs the OpenAI Codex CLI, gives it `scripts/audit_prompt.md`, and Codex independently re-reads every registered source and compares with `docs/events.json`, answering in the shape of `scripts/audit_schema.json`. Missing or mismatched bops open an issue labeled `audit` (or add to the open one), which notifies the repository's watchers, and fail the job, which emails on its own. Codex runs in its own sandbox and never edits the repository. It needs the repository secret `OPENAI_API_KEY`; set the repository variable `AUDIT_ENABLED` to `false` to pause it. To run it by hand:
-
-```bash
-codex exec -s workspace-write -c sandbox_workspace_write.network_access=true --output-schema scripts/audit_schema.json -o audit.json "$(cat scripts/audit_prompt.md)"
-```
+A second Claude Code cloud routine per city, "<City> Bops audit", runs on the 15th of every second month (February, April, June, August, October, December) at 08:30 UTC and follows `scripts/audit_prompt.md`. It re-reads the sources independently of the daily routine and checks six things: unreachable sources, missing or wrong listings, regular formal-hall schedules against their pages, official college pages missing from the registry, ball dates, and term dates against the university's own page. It writes its findings in the shape of `scripts/audit_schema.json`, and `scripts/audit_report.py` opens an issue labeled `audit` (or comments on the open one) and sends a push notification when something needs a person. It never edits the repository. Run it early from claude.ai/code/routines with "Run now". The daily freshness check (`.github/workflows/freshness.yml`) still runs every morning; it needs no model.
 
 ## Hosting
 
