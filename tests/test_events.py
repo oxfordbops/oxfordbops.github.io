@@ -10,7 +10,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 EVENTS = ROOT / "docs" / "events.json"
 SOURCES = ROOT / "docs" / "sources.json"
 ISO = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\+00:00|\+01:00|Z)$")
-ALLOWED = {"kind", "title", "starts_at", "ends_at", "college", "venue", "host", "price", "guests", "dress", "url", "details", "source"}
+ALLOWED = {"kind", "special", "title", "starts_at", "ends_at", "college", "venue", "host", "price", "guests", "dress", "url", "details", "source"}
 
 
 def load():
@@ -88,6 +88,11 @@ class TestShape(unittest.TestCase):
             with self.subTest(b.get("title")):
                 self.assertFalse(set(b) - ALLOWED, f"unknown fields {set(b) - ALLOWED}")
                 self.assertIn(b.get("kind"), ("bop", "formal", "ball"), "kind must be bop, formal or ball")
+                if b.get("kind") == "formal":
+                    # The routine sets it on every formal; a missing flag reads as special on the page.
+                    self.assertIn(b.get("special", True), (True, False), "special is true or false")
+                else:
+                    self.assertNotIn("special", b, "special belongs to formals only")
                 self.assertTrue(2 <= len(b["title"]) <= 120)
                 if len(b["title"]) > 4:
                     self.assertNotEqual(b["title"], b["title"].upper(), "shouting capitals")

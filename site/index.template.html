@@ -183,6 +183,13 @@ footer a { display: inline-block; padding: .6rem 0; }
         <button type="button" data-when="nextweek" aria-pressed="false">Next week</button>
       </div>
     </div>
+    <div class="group" id="type-group" hidden>
+      <span class="lbl" id="type-lbl">Formals</span>
+      <div class="seg" role="group" aria-labelledby="type-lbl" id="ftype">
+        <button type="button" data-ftype="all" aria-pressed="true">All formal halls</button>
+        <button type="button" data-ftype="special" aria-pressed="false">Special only</button>
+      </div>
+    </div>
     <div class="group" id="college-group">
       <span class="lbl" id="college-lbl">College</span>
       <div class="group chips" role="group" aria-labelledby="college-lbl" id="chips"></div>
@@ -216,7 +223,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   const chipsEl = document.getElementById("chips");
   const resultEl = document.getElementById("result");
   let events = [];
-  let college = "all", when = "all", kind = "bop";
+  let college = "all", when = "all", kind = "bop", ftype = "all";
   const WHENS = ["all", "tonight", "today", "tomorrow", "weekend", "thisweek", "nextweek"];
   // Which "when" options each kind offers: bops are planned for tonight or the weekend, formals are booked days ahead
   // and run on weeknights, balls are listed for the whole season with no time filter.
@@ -229,7 +236,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   try { college = localStorage.getItem(KEY + "college") || "all"; } catch (e) {}
   try { when = sessionStorage.getItem(KEY + "when") || "all"; } catch (e) {}   // the page always opens on Bops unless a link says ?kind=formal
   const q = new URLSearchParams(location.search);
-  if (q.has("when") || q.has("college") || q.has("kind")) { when = q.get("when") || "all"; college = q.get("college") || "all"; kind = q.get("kind") || "bop"; }
+  if (q.has("when") || q.has("college") || q.has("kind")) { when = q.get("when") || "all"; college = q.get("college") || "all"; kind = q.get("kind") || "bop"; ftype = q.get("formals") === "special" ? "special" : "all"; }
   if (!KINDS.includes(kind)) kind = "bop";
   if (!WHENS.includes(when) || !WHEN_FOR[kind].includes(when)) when = "all";
   function kindOf(e) { return KINDS.includes(e.kind) ? e.kind : "bop"; }
@@ -238,6 +245,7 @@ footer a { display: inline-block; padding: .6rem 0; }
     const u = new URL(location.href);
     u.search = "";
     if (kind !== "bop") u.searchParams.set("kind", kind);
+    if (kind === "formal" && ftype !== "all") u.searchParams.set("formals", ftype);
     if (when !== "all") u.searchParams.set("when", when);
     if (college !== "all") u.searchParams.set("college", college);
     try { history.replaceState(null, "", u.pathname + u.search + u.hash); } catch (e) {}
@@ -321,7 +329,15 @@ footer a { display: inline-block; padding: .6rem 0; }
     b.setAttribute("aria-pressed", String(b.dataset.kind === kind));
     b.addEventListener("click", () => { if (b.dataset.kind === kind) return; kind = b.dataset.kind; if (!WHEN_FOR[kind].includes(when)) when = "all"; track("filter/kind/" + kind); remember(); kindEl.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.kind === kind))); syncWhen(); render(); });
   });
+  // Formals: every formal hall, or only the special ones (themed, feasts, super halls, guest nights, swaps).
+  document.querySelectorAll("#ftype button").forEach(b => b.addEventListener("click", () => {
+    if (b.dataset.ftype === ftype) return;
+    ftype = b.dataset.ftype; track("filter/formals/" + ftype); remember(); syncWhen(); render();
+  }));
+  function isSpecial(e) { return e.special !== false; }   // unmarked formals count as special
   function syncWhen() {
+    document.getElementById("type-group").hidden = kind !== "formal";
+    document.querySelectorAll("#ftype button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.ftype === ftype)));
     document.getElementById("when-group").hidden = kind === "ball";
     document.querySelectorAll("#when button").forEach(b => {
       b.hidden = !WHEN_FOR[kind].includes(b.dataset.when);
@@ -442,7 +458,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   function render() {
     // Counts on pins and chips follow the "when" filter, so both always agree with the list.
     renderKindCounts();
-    const inTime = events.filter(e => kindOf(e) === kind).filter(inWhen);
+    const inTime = events.filter(e => kindOf(e) === kind && (kind !== "formal" || ftype === "all" || isSpecial(e))).filter(inWhen);
     const byCollege = new Map();
     let elsewhere = 0;
     for (const e of inTime) {
