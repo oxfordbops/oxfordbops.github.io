@@ -125,17 +125,17 @@ footer {{ margin-top: 3rem; padding-top: 1rem; border-top: 1px solid {pal['rule'
 
 
 def nav_kinds(city):
-    return [("bops", "Bops"), ("formals", "Formals"), (slug(city["balls"]["many"]), city["balls"]["many"]), ("other-events", "Other events")]
+    return [("bops", "Bops"), ("formals", "Formals"), (slug(city["balls"]["many"]), city["balls"]["many"]), ("societies", "Societies"), ("other-events", "Other events")]
 
 
-def build(out, city, data, sources, now):
+def build(out, city, data, sources, now, societies=()):
     today = now.astimezone(LONDON).date()
     up = upcoming(data.get("bops", []), today)
     updated = start({"starts_at": data.get("generated") or now.isoformat()}).strftime("%-d %B %Y")
     name, balls = city["name"], city["balls"]
     pages = {}
     colleges = list(city["colleges"])
-    by_kind = {k: [e for e in up if e.get("kind", "bop") == k] for k in ("bop", "formal", "ball", "other")}
+    by_kind = {k: [e for e in up if e.get("kind", "bop") == k] for k in ("bop", "formal", "ball", "society", "other")}
 
     def college_links(entries):
         cs = sorted({e["college"] for e in entries if e.get("college") in city["colleges"]})
@@ -143,7 +143,7 @@ def build(out, city, data, sources, now):
 
     kpages = [
         ("bops", "bop", f"{name} bops this week and next: every college bop | {name} Bops",
-         f"Every {name} college bop in the next fortnight: Halloween, Christmas, themed and super bops at each college, with times, prices and links, checked every morning.",
+         f"Every {name} college bop in the next fortnight: Halloween, Christmas, themed and super bops at each college, with times, prices and links, updated every Sunday.",
          f"{name} bops in the next fortnight",
          f"Bops are college party nights run by the JCR, MCR or ents committee. These are every bop announced on the colleges' own pages for the next 14 days.",
          "No bops have been announced for the next fortnight yet. Bops are usually announced a week or two ahead."),
@@ -197,12 +197,40 @@ def build(out, city, data, sources, now):
             sec.append("<h2>Where " + esc(fn) + " announces events</h2><ul>" + "".join(
                 f'<li><a href="{esc(s["url"])}" rel="noopener">{esc(s["name"])}</a> ({esc(s["kind"])})</li>' for s in where) + "</ul>")
         title = f"{fn} bops, formals and events | {name} Bops"
-        desc = (f"Upcoming bops, formal halls and college events at {fn}, {name}: dates, times and links to the JCR, MCR and college pages, checked every morning."
+        desc = (f"Upcoming bops, formal halls and college events at {fn}, {name}: dates, times and links to the JCR, MCR and college pages, updated every Sunday."
                 + (f" {n_up} listed now." if n_up else ""))
         body = (f'<p class="lede">Every bop, formal and event announced at {esc(fn)} for the next fortnight, and its {esc(balls["one"])} date when announced.</p>'
                 f'<a class="cta" href="/?college={html.escape(c, quote=True)}">Open {esc(c)} in the live list</a>' + "".join(sec))
         pages[f"colleges/{sl}/"] = page(city, f"colleges/{sl}/", title, desc, f"{fn}: bops, formals and events", body,
                                         [("colleges/", "Colleges"), (f"colleges/{sl}/", fn)], updated)
+    # Societies: an index in order of popularity, and one page per society.
+    ranked = {}
+    for x in sorted(societies, key=lambda x: x["rank"]):
+        ranked.setdefault(x["society"], []).append(x)
+    rows = []
+    for soc, regs in ranked.items():
+        mine = [e for e in by_kind["society"] if e.get("society") == soc]
+        sl = slug(soc)
+        rows.append(f'<li><a href="/societies/{sl}/">{esc(regs[0].get("name", soc))}</a>' + (f" ({len(mine)} upcoming)" if mine else "") + "</li>")
+        body = (f'<p class="lede">Every event {esc(soc)} announces for the next fortnight, from its own pages, updated every Sunday.</p>'
+                f'<a class="cta" href="/?kind=society&amp;society={html.escape(soc, quote=True)}">Open {esc(soc)} in the live list</a>'
+                + listing(mine, f"No {soc} events are announced for the next fortnight yet.")
+                + f"<h2>Where {esc(soc)} announces events</h2><ul>" + "".join(
+                    f'<li><a href="{esc(x["url"])}" rel="noopener">{esc(x["name"])}</a> ({esc(x["kind"])})</li>' for x in regs) + "</ul>")
+        pages[f"societies/{sl}/"] = page(city, f"societies/{sl}/", f"{soc} events in {name}: talks, socials and shows | {name} Bops",
+                                         f"Upcoming {soc} events in {name}: dates, times and links to the society's own pages, updated every Sunday."
+                                         + (f" {len(mine)} listed now." if mine else ""),
+                                         f"{soc} events", body, [("societies/", "Societies"), (f"societies/{sl}/", soc)], updated)
+    if ranked:
+        body = (f'<p class="lede">Events of {name}\'s most popular student societies for the next fortnight, most popular first. '
+                'Popularity is judged from membership, followers, press coverage and the size of their events, and reviewed every two months.</p>'
+                '<a class="cta" href="/?kind=society">Open societies in the live list</a>'
+                + listing(by_kind["society"], "No society events are announced for the next fortnight yet.")
+                + "<h2>Societies we follow</h2><ol>" + "".join(rows) + "</ol>")
+        pages["societies/"] = page(city, "societies/", f"{name} society events this fortnight: the most popular societies | {name} Bops",
+                                   f"Events of {name}'s most popular student societies in the next fortnight: talks, debates, socials, shows and parties, from the societies' own pages.",
+                                   f"{name} society events", body, [("societies/", "Societies")], updated)
+
     pages["colleges/"] = page(city, "colleges/", f"{name} colleges: bops, formals and events at each college | {name} Bops",
                               f"Bops, formal halls and events at each of the {len(colleges)} {name} colleges, with where each college announces them.",
                               f"Bops and formals at each {name} college", '<ul class="cols">' + "".join(idx) + "</ul>", [("colleges/", "Colleges")], updated)
@@ -233,12 +261,13 @@ def main():
     up = upcoming(data.get("bops", []), now.astimezone(LONDON).date())
     page_html = page_html.replace(MARK, MARK + prerender(up, city["name"]), 1)
     (out / "index.html").write_text(page_html)
-    pages = build(out, city, data, sources, now)
+    societies = json.loads((ROOT / "docs" / "sources.json").read_text()).get("societies", [])
+    pages = build(out, city, data, sources, now, societies)
     site = city["site"].rstrip("/") + "/"
     lastmod = (data.get("generated") or now.isoformat())[:10]
     urls = [""] + sorted(pages)
     (out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-                                     + "".join(f"  <url><loc>{site}{u}</loc><lastmod>{lastmod}</lastmod><changefreq>daily</changefreq></url>\n" for u in urls)
+                                     + "".join(f"  <url><loc>{site}{u}</loc><lastmod>{lastmod}</lastmod><changefreq>weekly</changefreq></url>\n" for u in urls)
                                      + "</urlset>\n")
     (out / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {site}sitemap.xml\n")
     print(f"seo: prerendered {min(len(up), 60)} listings, {len(pages)} pages, sitemap of {len(urls)} URLs, lastmod {lastmod}")

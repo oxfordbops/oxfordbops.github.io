@@ -46,7 +46,8 @@ class TestSeo(unittest.TestCase):
                 self.assertIn(f"<loc>{CITY['site']}{path}</loc>", sitemap)
                 titles.add(t.split("<title>")[1].split("</title>")[0])
             self.assertEqual(len(titles), 4, "every page has its own title")
-            self.assertEqual(sitemap.count("<loc>"), 1 + 5 + len(CITY["colleges"]))
+            socs = {x["society"] for x in json.loads((ROOT / "docs" / "sources.json").read_text()).get("societies", [])}
+            self.assertEqual(sitemap.count("<loc>"), 1 + 5 + len(CITY["colleges"]) + (1 + len(socs) if socs else 0))
 
     def test_share_image(self):
         self.assertTrue((ROOT / "docs" / "og.png").exists(), "run scripts/og_image.py once for this city")

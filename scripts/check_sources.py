@@ -2,7 +2,7 @@
 """Test that every registered source is reachable and that every college has at least one.
 
     scripts/check_sources.py            # human-readable report, exit 1 if a college has no reachable source
-    scripts/check_sources.py --json     # machine-readable results (used by the daily routine)
+    scripts/check_sources.py --json     # machine-readable results (used by the weekly routine)
 
 Reads docs/sources.json: {"colleges": [...31 names...], "sources": [{college, name, kind, url, ...}]}.
 Instagram and Facebook block plain HTTP clients, so those are reported as "social" and never fail the test;

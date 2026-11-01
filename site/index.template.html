@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{{city}} Bops">
 <meta property="og:title" content="{{city}} Bops">
-<meta property="og:description" content="Every {{city}} college bop, formal and {{ball_one}} in one list, checked every morning.">
+<meta property="og:description" content="Every {{city}} college bop, formal and {{ball_one}} in one list, updated every Sunday.">
 <meta property="og:url" content="{{site}}">
 <meta property="og:image" content="{{site}}og.png">
 <meta property="og:image:width" content="1200">
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary_large_image">{{verification}}
 <script type="application/ld+json">{{ld_site}}</script>
 <link rel="icon" href="{{favicon}}">
-<meta name="description" content="{{city}} bops tonight and this fortnight: every college bop, formal hall and {{ball_one}} in {{city}}, with times, prices and dress codes, checked every morning from the colleges' own pages.">
+<meta name="description" content="{{city}} bops tonight and this fortnight: every college bop, formal hall, society event and {{ball_one}} in {{city}}, with times, prices and dress codes, updated every week from the colleges' and societies' own pages.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -183,6 +183,7 @@ footer a { display: inline-block; padding: .6rem 0; }
     <button type="button" data-kind="bop" aria-pressed="true">Bops<span class="n" hidden></span></button>
     <button type="button" data-kind="formal" aria-pressed="false">Formals<span class="n" hidden></span></button>
     <button type="button" data-kind="ball" aria-pressed="false">{{ball_tab}}<span class="n" hidden></span></button>
+    <button type="button" data-kind="society" aria-pressed="false">Societies<span class="n" hidden></span></button>
     <button type="button" data-kind="other" aria-pressed="false">Other<span class="n" hidden></span></button>
   </nav>
 
@@ -220,12 +221,12 @@ footer a { display: inline-block; padding: .6rem 0; }
   </section>
 
   <section class="about" aria-label="About">
-    <p><strong>What is a bop?</strong> A bop is a college party night run by a JCR, MCR or ents committee: Halloween, Christmas, themed and super bops. Formal hall is the college's gowned dinner, from regular formal nights to themed formals, feasts and swaps. {{city}} Bops lists every one announced on the colleges' own pages for the next fortnight, and the {{ball_many}} once their dates are out.</p>
-    <nav class="seo-nav" aria-label="Browse"><a href="bops/">{{city}} bops</a><a href="formals/">Formals</a><a href="{{ball_slug}}/">{{ball_many}}</a><a href="other-events/">Other events</a><a href="colleges/">By college</a></nav>
+    <p><strong>What is a bop?</strong> A bop is a college party night run by a JCR, MCR or ents committee: Halloween, Christmas, themed and super bops. Formal hall is the college's gowned dinner, from regular formal nights to themed formals, feasts and swaps. {{city}} Bops lists every one announced on the colleges' own pages for the next fortnight, the events of the most popular student societies, and the {{ball_many}} once their dates are out.</p>
+    <nav class="seo-nav" aria-label="Browse"><a href="bops/">{{city}} bops</a><a href="formals/">Formals</a><a href="{{ball_slug}}/">{{ball_many}}</a><a href="societies/">Societies</a><a href="other-events/">Other events</a><a href="colleges/">By college</a></nav>
   </section>
 
   <footer>
-    <span id="lastrun">Checked every morning against college calendars, ents pages and student press.</span>
+    <span id="lastrun">Updated every Sunday from college calendars, ents pages, society pages and student press.</span>
     <span>From public announcements only. Check with the college before you go.</span>
   </footer>
 </main>
@@ -247,9 +248,9 @@ footer a { display: inline-block; padding: .6rem 0; }
   const WHENS = ["all", "tonight", "today", "tomorrow", "weekend", "thisweek", "nextweek"];
   // Which "when" options each kind offers: bops are planned for tonight or the weekend, formals are booked days ahead
   // and run on weeknights, balls are listed for the whole season with no time filter.
-  const WHEN_FOR = { bop: ["all", "tonight", "tomorrow", "weekend", "nextweek"], formal: ["all", "today", "tomorrow", "thisweek", "nextweek"], ball: ["all"], other: ["all", "today", "tomorrow", "weekend", "nextweek"] };
-  const KINDS = ["bop", "formal", "ball", "other"];
-  const NOUN = { bop: ["bop", "bops"], formal: ["formal", "formals"], ball: ["{{ball_one}}", "{{ball_many}}"], other: ["other event", "other events"] };
+  const WHEN_FOR = { bop: ["all", "tonight", "tomorrow", "weekend", "nextweek"], formal: ["all", "today", "tomorrow", "thisweek", "nextweek"], ball: ["all"], other: ["all", "today", "tomorrow", "weekend", "nextweek"], society: ["all", "today", "tomorrow", "weekend", "nextweek"] };
+  const KINDS = ["bop", "formal", "ball", "society", "other"];
+  const NOUN = { bop: ["bop", "bops"], formal: ["formal", "formals"], ball: ["{{ball_one}}", "{{ball_many}}"], other: ["other event", "other events"], society: ["society event", "society events"] };
   const KEY = "{{slug}}.";
   // Each tab keeps its own filters: a college picked on Bops does not follow you to Formals or balls.
   // Filters live in the URL (?kind=formal&when=today&college=Jesus) so a link reproduces them; otherwise each tab's
@@ -263,14 +264,14 @@ footer a { display: inline-block; padding: .6rem 0; }
   function valid(k, s) {
     return {
       when: WHENS.includes(s.when) && WHEN_FOR[k].includes(s.when) ? s.when : "all",
-      college: s.college === "all" || s.college === "none" || COLLEGES[s.college] ? s.college : "all",
+      college: s.college === "all" || s.college === "none" || (k === "society" ? typeof s.college === "string" && s.college.length < 80 : COLLEGES[s.college]) ? s.college : "all",
       ftype: k === "formal" && s.ftype === "special" ? "special" : "all",
     };
   }
   const q = new URLSearchParams(location.search);
   if (q.has("kind") && KINDS.includes(q.get("kind"))) kind = q.get("kind");
   let start = stored(kind);
-  if (q.has("when") || q.has("college") || q.has("kind") || q.has("formals")) start = { when: q.get("when") || "all", college: q.get("college") || "all", ftype: q.get("formals") || "all" };
+  if (q.has("when") || q.has("college") || q.has("society") || q.has("kind") || q.has("formals")) start = { when: q.get("when") || "all", college: q.get(kind === "society" ? "society" : "college") || "all", ftype: q.get("formals") || "all" };
   ({ when, college, ftype } = valid(kind, start));
   const tabState = {};   // filters of the tabs you left, for this page view
   function kindOf(e) { return KINDS.includes(e.kind) ? e.kind : "bop"; }
@@ -281,7 +282,7 @@ footer a { display: inline-block; padding: .6rem 0; }
     if (kind !== "bop") u.searchParams.set("kind", kind);
     if (kind === "formal" && ftype !== "all") u.searchParams.set("formals", ftype);
     if (when !== "all") u.searchParams.set("when", when);
-    if (college !== "all") u.searchParams.set("college", college);
+    if (college !== "all") u.searchParams.set(kind === "society" ? "society" : "college", college);
     try { history.replaceState(null, "", u.pathname + u.search + u.hash); } catch (e) {}
   }
 
@@ -336,8 +337,11 @@ footer a { display: inline-block; padding: .6rem 0; }
     return Number.isFinite(end) ? end > Date.now() : Date.parse(e.starts_at) > Date.now() - 5 * 3600e3;
   }
   function knownCollege(e) { return !!(e.college && COLLEGES[e.college]); }
+  // The chip filter groups by college, except on the Societies tab, where it groups by society.
+  function groupOf(e) { return kindOf(e) === "society" ? (typeof e.society === "string" && e.society ? e.society : null) : (knownCollege(e) ? e.college : null); }
+  let societyRank = new Map();   // society -> rank in the registry (1 = most popular), from sources.json
 
-  if (college !== "all" && college !== "none" && !COLLEGES[college]) college = "all";
+  if (kind !== "society" && college !== "all" && college !== "none" && !COLLEGES[college]) college = "all";
 
   // "When" ranges as London day keys: [from, to] inclusive.
   const WEEKDAY = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, weekday: "short" });
@@ -421,23 +425,26 @@ footer a { display: inline-block; padding: .6rem 0; }
 
   function setCollege(value) {
     college = value;
-    track("filter/college/" + college);
+    track((kind === "society" ? "filter/society/" : "filter/college/") + college);
     remember();
     render();
-    if (map && COLLEGES[college]) map.panTo(COLLEGES[college]);
+    if (map && kind !== "society" && COLLEGES[college]) map.panTo(COLLEGES[college]);
   }
 
   // College chips: only colleges with a bop in the window, most bops first, counts matching the map pins.
   function renderChips(byCollege, elsewhere) {
-    const entries = [...byCollege.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
-    if (COLLEGES[college] && !byCollege.has(college)) entries.push([college, []]);   // keep the chosen college visible at zero
+    // Colleges: most listings first. Societies: most popular first (registry rank), then most listings.
+    const rank = n => societyRank.has(n) ? societyRank.get(n) : 999;
+    const entries = [...byCollege.entries()].sort((a, b) => (kind === "society" ? rank(a[0]) - rank(b[0]) : 0) || b[1].length - a[1].length || a[0].localeCompare(b[0]));
+    if (college !== "all" && college !== "none" && !byCollege.has(college)) entries.push([college, []]);   // keep the chosen one visible at zero
+    document.getElementById("college-lbl").textContent = kind === "society" ? "Society" : "College";
     document.getElementById("college-group").hidden = !entries.length && !elsewhere && college !== "none";
     const focused = document.activeElement && chipsEl.contains(document.activeElement) ? document.activeElement.dataset.college : null;
-    let html = '<button type="button" class="chip plain" data-college="all" aria-pressed="' + (college === "all") + '">Any college</button>';
+    let html = '<button type="button" class="chip plain" data-college="all" aria-pressed="' + (college === "all") + '">' + (kind === "society" ? "Any society" : "Any college") + '</button>';
     for (const [name, items] of entries) {
       html += '<button type="button" class="chip" data-college="' + esc(name) + '" aria-pressed="' + (college === name) + '">' + esc(name) + '<span class="n">' + items.length + "</span></button>";
     }
-    if (elsewhere || college === "none") html += '<button type="button" class="chip" data-college="none" aria-pressed="' + (college === "none") + '">Elsewhere<span class="n">' + elsewhere + "</span></button>";
+    if (elsewhere || college === "none") html += '<button type="button" class="chip" data-college="none" aria-pressed="' + (college === "none") + '">' + (kind === "society" ? "Other" : "Elsewhere") + '<span class="n">' + elsewhere + "</span></button>";
     chipsEl.innerHTML = html;
     if (focused !== null) { const again = chipsEl.querySelector('[data-college="' + CSS.escape(focused) + '"]'); if (again) again.focus(); }
   }
@@ -448,7 +455,7 @@ footer a { display: inline-block; padding: .6rem 0; }
 
   function renderResult(n) {
     const parts = [];
-    if (college === "none") parts.push("outside the colleges"); else if (college !== "all") parts.push("at " + college);
+    if (college === "none") parts.push(kind === "society" ? "by other groups" : "outside the colleges"); else if (college !== "all") parts.push((kind === "society" ? "by " : "at ") + college);
     if (WHEN_LABEL[when]) parts.push(WHEN_LABEL[when]);
     const active = college !== "all" || when !== "all";
     resultEl.hidden = !n && !active;
@@ -516,23 +523,26 @@ footer a { display: inline-block; padding: .6rem 0; }
     const byCollege = new Map();
     let elsewhere = 0;
     for (const e of inTime) {
-      if (knownCollege(e)) { if (!byCollege.has(e.college)) byCollege.set(e.college, []); byCollege.get(e.college).push(e); }
+      const g = groupOf(e);
+      if (g) { if (!byCollege.has(g)) byCollege.set(g, []); byCollege.get(g).push(e); }
       else elsewhere++;
     }
-    try { renderMap(byCollege); } catch (e) { /* the list stands even if the map cannot be drawn */ }
+    const mapEl = document.getElementById("map");
+    if (mapEl && map) { const hide = kind === "society"; if (mapEl.hidden !== hide) { mapEl.hidden = hide; if (!hide) setTimeout(() => map.invalidateSize(), 0); } }
+    try { renderMap(kind === "society" ? new Map() : byCollege); } catch (e) { /* the list stands even if the map cannot be drawn */ }
     renderChips(byCollege, elsewhere);
 
-    const shown = inTime.filter(e => college === "all" || (college === "none" ? !knownCollege(e) : e.college === college));
+    const shown = inTime.filter(e => college === "all" || (college === "none" ? !groupOf(e) : groupOf(e) === college));
     renderResult(shown.length);
     const view = [kind, when, college, ftype].join("|");
     if (view !== pageView) { pageView = view; pageLimit = PAGE; }
 
 
     if (!shown.length) {
-      const where = college === "all" ? "" : college === "none" ? " outside the colleges" : " at " + esc(college);
+      const where = college === "all" ? "" : college === "none" ? (kind === "society" ? " by other groups" : " outside the colleges") : (kind === "society" ? " by " : " at ") + esc(college);
       const whenTxt = kind === "ball" ? " yet" : WHEN_LABEL[when] ? " " + WHEN_LABEL[when] : " in the next fortnight";
       let alts = "";
-      if (college !== "all") alts += '<button type="button" class="chip plain" data-alt="college">Any college' + esc(whenTxt) + '</button>';
+      if (college !== "all") alts += '<button type="button" class="chip plain" data-alt="college">' + (kind === "society" ? "Any society" : "Any college") + esc(whenTxt) + '</button>';
       if (when !== "all") alts += '<button type="button" class="chip plain" data-alt="when">' + (college === "all" ? "Next 14 days" : esc(college === "none" ? "Elsewhere" : college) + " in the next 14 days") + '</button>';
       list.innerHTML = '<p class="empty">No ' + NOUN[kind][1] + ' listed' + where + whenTxt + '.' + (alts ? '<span class="alts">' + alts + '</span>' : '') + '</p>';
       return;
@@ -554,10 +564,11 @@ footer a { display: inline-block; padding: .6rem 0; }
         const link = safeUrl(e.url);
         const name = link ? '<a href="' + esc(link) + '" rel="noopener" target="_blank">' + esc(e.title) + "</a>" : esc(e.title);
         const where = [];
-        if (knownCollege(e)) where.push('<span class="college">' + esc(e.college) + "</span>");
+        if (kindOf(e) === "society" && groupOf(e)) where.push('<span class="college">' + esc(e.society) + "</span>");
+        if (knownCollege(e)) where.push(kindOf(e) === "society" ? esc(e.college) : '<span class="college">' + esc(e.college) + "</span>");
         if (e.venue && e.venue !== e.college) where.push(esc(e.venue));
         if (e.host && e.host !== e.college) where.push(esc(e.host));
-        html += '<li data-kind="' + kindOf(e) + '" data-college="' + esc(knownCollege(e) ? e.college : "none") + '" data-day="' + k + '"' + (kindOf(e) === "formal" ? ' data-special="' + isSpecial(e) + '"' : "") + '><span class="time">' + timeLabel.format(new Date(e.starts_at)) + '</span><div>' +
+        html += '<li data-kind="' + kindOf(e) + '" data-college="' + esc(groupOf(e) || "none") + '" data-day="' + k + '"' + (kindOf(e) === "formal" ? ' data-special="' + isSpecial(e) + '"' : "") + '><span class="time">' + timeLabel.format(new Date(e.starts_at)) + '</span><div>' +
           '<div class="name">' + name + '</div>' +
           '<div class="where">' + where.concat(sourceLine(e) || []).join('<span class="sep">·</span>') + "</div>" + facts(e) +
           (e.details ? '<div class="details" title="' + esc(e.details) + '">' + esc(e.details) + "</div>" : "") + "</div></li>";
@@ -579,6 +590,11 @@ footer a { display: inline-block; padding: .6rem 0; }
       sourceIndex = new Map(srcs.filter(x => x.slug).map(x => [x.slug, x]));
       events = (data.bops || []).filter(inWindow).sort((a, b) => Date.parse(a.starts_at) - Date.parse(b.starts_at));
       render();
+      fetch("sources.json", { cache: "no-cache" }).then(x => x.ok ? x.json() : null).then(reg => {
+        const socs = reg && Array.isArray(reg.societies) ? reg.societies : [];
+        societyRank = new Map(socs.filter(x => x && x.society && Number.isFinite(x.rank)).map(x => [x.society, x.rank]));
+        if (kind === "society") render();
+      }).catch(() => {});
       const run = data.run && typeof data.run === "object" ? data.run : null;
       const checkedAt = run && run.checked_at ? run.checked_at : data.generated;
       if (checkedAt && Number.isFinite(Date.parse(checkedAt))) {

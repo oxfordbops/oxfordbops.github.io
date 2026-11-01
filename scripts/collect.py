@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch every readable registered source once and write a compact digest for the daily routine.
+"""Fetch every readable registered source once and write a compact digest for the weekly routine.
 
     python3 scripts/collect.py [--out /tmp/collect] [--render]
 
@@ -42,7 +42,9 @@ MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", 
 DAY_MONTH = re.compile(r"\b(\d{1,2})(?:st|nd|rd|th)?\s+(?:of\s+)?(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?(?:\s+(\d{4}))?|\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})(?:st|nd|rd|th)?\b(?:,?\s+(\d{4}))?", re.I)
 NUMERIC = re.compile(r"\b(\d{1,2})[/.](\d{1,2})[/.](\d{2,4})\b|\b(\d{4})-(\d{2})-(\d{2})\b")
 SCHEDULE = re.compile(r"\bformal(?:s| hall)?\b[^.\n]{0,80}\b(mondays|tuesdays|wednesdays|thursdays|fridays|saturdays|sundays|every (?:night|evening|day)|nights? a week|times a week)\b|\b(mondays|tuesdays|wednesdays|thursdays|fridays|saturdays|sundays)\b[^.\n]{0,60}\bformal", re.I)
-EVENTISH_KINDS = {"JCR events", "MCR events", "Termcard", "College events", "Ents site", "Formal hall"}
+AHEAD = 21   # days of listings each weekly run collects, so the site always has a full fortnight ahead until the next run
+EVENTISH_KINDS = {"JCR events", "MCR events", "Termcard", "College events", "Ents site", "Formal hall", "Society events", "Society termcard", "Ticketing page"}
+SOCIETY_KINDS = {"Society events", "Society calendar", "Society termcard", "Ticketing page"}
 
 
 # ---------- fetching ----------
@@ -389,11 +391,13 @@ def main():
     ap.add_argument("--render", action="store_true", help="render JavaScript-only pages with Playwright if available")
     a = ap.parse_args()
     out = pathlib.Path(a.out); shutil.rmtree(out, ignore_errors=True); (out / "pages").mkdir(parents=True)
-    reg = json.loads((ROOT / "docs" / "sources.json").read_text())["sources"]
+    registry = json.loads((ROOT / "docs" / "sources.json").read_text())
+    # Society pages are read like college pages; their "college" label is the society, so digest lines name it.
+    reg = registry["sources"] + [dict(s, college=f"Society: {s['society']}") for s in registry.get("societies", [])]
     today = dt.datetime.now(LONDON).date()
-    lo, hi, ball_hi = today - dt.timedelta(days=1), today + dt.timedelta(days=14), today + dt.timedelta(days=400)
+    lo, hi, ball_hi = today - dt.timedelta(days=1), today + dt.timedelta(days=AHEAD), today + dt.timedelta(days=400)
     readable = [s for s in reg if s["kind"] not in ("Instagram", "Facebook")]
-    window = {today + dt.timedelta(days=k) for k in range(15)}
+    window = {today + dt.timedelta(days=k) for k in range(AHEAD + 1)}
     city = json.loads((ROOT / "city.json").read_text())
     terms = [(dt.date.fromisoformat(t["from"]), dt.date.fromisoformat(t["to"]), t["name"]) for t in city.get("full_terms", [])]
     pdftotext = shutil.which("pdftotext")
@@ -478,8 +482,9 @@ def main():
         rec["page_file"] = f"pages/{i:03d}.txt"
         seen_sn, rec["snippets"], rec["other"] = set(), [], []
         for u, t in texts:
-            for x in other_lines(t, window):
-                if len(rec["other"]) < 5 and x[:60] not in seen_sn:
+            cap = 10 if s["kind"] in SOCIETY_KINDS else 5   # a society page is mostly its event list
+            for x in other_lines(t, window, limit=cap):
+                if len(rec["other"]) < cap and x[:60] not in seen_sn:
                     seen_sn.add(x[:60]); rec["other"].append((u, x))
             for sn in snippets(t, window, ball_until=ball_hi):
                 if sn[:60] not in seen_sn:
@@ -520,7 +525,7 @@ def main():
         warnings.append(f"the last Full Term in city.json ends {last_end}; add the next year's terms.")
 
     (out / "status.json").write_text(json.dumps([{k: r[k] for k in ("college", "name", "kind", "url", "ok", "code", "note", "followed", "page_file")} for r in recs], indent=1))
-    lines = [f"# Collected {dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds')}: window {today} to {today + dt.timedelta(days=14)}",
+    lines = [f"# Collected {dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds')}: window {today} to {today + dt.timedelta(days=AHEAD)}",
              f"{ok} of {len(recs)} readable sources read. Full text of each page is in the file named after it.", ""]
     if warnings:
         lines += ["## Warnings (report each in REGISTRY)", ""] + [f"- WARNING: {w}" for w in warnings] + [""]
@@ -587,7 +592,7 @@ def main():
         if r["snippets"]:
             lines.append(f"### {r['college']} | {r['name']} | {r['page_file']}")
             lines += [f"- {sn}  ({u})" for u, sn in r["snippets"]]
-    lines += ["", "## Other dated lines (candidates for kind other: no bop, formal or ball words)", ""]
+    lines += ["", "## Other dated lines (candidates for kind other, or society when the source is a society: no bop, formal or ball words)", ""]
     seen_other = set()
     for r in recs:
         r["other"] = [(u, x) for u, x in r["other"] if x[:60] not in seen_other and not seen_other.add(x[:60])]

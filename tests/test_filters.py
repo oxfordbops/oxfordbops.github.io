@@ -33,6 +33,11 @@ def make_data(colleges):
                          "venue": "Bar", "url": "https://example.org/b", "source": "s"})
             bops.append({"kind": "formal", "special": bool(j % 2), "title": f"Formal {i}-{j}", "starts_at": f"{day}T19:30:00+00:00",
                          "college": col, "venue": "Hall", "url": "https://example.org/f", "source": "s"})
+            if (i + j) % 3 == 0:
+                bops.append({"kind": "society", "society": ["Union", "Footlights", "Hindu Society", None][j], "title": f"Talk {i}-{j}",
+                             "starts_at": f"{day}T19:00:00+00:00", "college": None, "url": "https://example.org/s", "source": "s"})
+                if bops[-1]["society"] is None:
+                    del bops[-1]["society"]
             if (i + j) % 4 == 0:
                 bops.append({"kind": "other", "title": f"Quiz {i}-{j}", "starts_at": f"{day}T18:00:00+00:00",
                              "college": col, "venue": "Bar", "url": "https://example.org/o", "source": "s"})
@@ -64,7 +69,7 @@ def expected(data, kind, when, college, ftype):
                 continue
         if kind == "formal" and ftype == "special" and not b["special"]:
             continue
-        col = b["college"] or "none"
+        col = (b.get("society") if kind == "society" else b["college"]) or "none"
         if college != "all" and col != college:
             continue
         out.append((col, str(day)))
@@ -72,7 +77,7 @@ def expected(data, kind, when, college, ftype):
 
 
 WHEN_FOR = {"bop": ["all", "tonight", "tomorrow", "weekend", "nextweek"], "formal": ["all", "today", "tomorrow", "thisweek", "nextweek"], "ball": ["all"],
-            "other": ["all", "today", "tomorrow", "weekend", "nextweek"]}
+            "other": ["all", "today", "tomorrow", "weekend", "nextweek"], "society": ["all", "today", "tomorrow", "weekend", "nextweek"]}
 
 
 @unittest.skipIf(sync_playwright is None and not os.environ.get("CI"), "Python Playwright not installed")
@@ -139,9 +144,9 @@ class TestFilters(unittest.TestCase):
 
     def test_every_combination(self):
         p, errors = self.open()
-        cols = ["all"] + self.colleges[:3] + ["none"]
         checked = 0
-        for kind in ("bop", "formal", "ball", "other"):
+        for kind in ("bop", "formal", "ball", "society", "other"):
+            cols = ["all"] + (["Union", "Footlights", "Hindu Society"] if kind == "society" else self.colleges[:3]) + ["none"]
             self.click(p, f'#kind button[data-kind="{kind}"]')
             for ftype in (["all", "special"] if kind == "formal" else ["all"]):
                 if kind == "formal":
@@ -206,6 +211,18 @@ class TestFilters(unittest.TestCase):
         self.assertEqual(errors, [])
 
 
+    def test_society_tab(self):
+        """Societies group by society, hide the map, and a link with ?kind=society&society=X opens that society."""
+        p, errors = self.open("?kind=society&society=Footlights")
+        self.assert_view(p, "society", "all", "Footlights", "all", "society link")
+        self.assertIn("society=Footlights", p.url)
+        self.assertEqual(p.text_content("#college-lbl"), "Society")
+        self.assertFalse(p.is_visible("#map"))
+        self.click(p, '#kind button[data-kind="bop"]')
+        self.assertTrue(p.is_visible("#map"))
+        self.assertEqual(p.text_content("#college-lbl"), "College")
+        self.assertEqual(errors, [])
+
     def test_pagination(self):
         """A long list shows 25 at first; Show more adds 25; changing a filter starts again at 25."""
         p, errors = self.open("?kind=formal")
@@ -227,7 +244,7 @@ class TestFilters(unittest.TestCase):
         p = ctx.new_page(); errors = []
         p.on("pageerror", lambda e: errors.append(str(e)))
         p.goto(self.base + "?college=" + self.colleges[0]); p.wait_for_selector("#list li, #list .empty", timeout=10000)
-        for kind in ("bop", "formal", "ball", "other"):
+        for kind in ("bop", "formal", "ball", "society", "other"):
             p.tap(f'#kind button[data-kind="{kind}"]'); p.wait_for_timeout(50)
             r = p.evaluate("""() => {
               const W = document.documentElement.clientWidth, out = {scroll: document.documentElement.scrollWidth - W, small: [], tiny: []};

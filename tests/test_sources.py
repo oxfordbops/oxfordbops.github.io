@@ -4,6 +4,7 @@ import json, pathlib, unittest
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 REG = ROOT / "docs" / "sources.json"
 KINDS = {"JCR site", "JCR events", "MCR site", "MCR events", "Ents site", "Termcard", "Instagram", "Facebook", "College events", "SU listings", "Student press", "Formal hall"}
+SOCIETY_KINDS = {"Society events", "Society calendar", "Society termcard", "Ticketing page", "Instagram"}
 THE_31 = list(json.loads((ROOT / "city.json").read_text())["colleges"])  # every college of the city, from city.json
 
 
@@ -24,6 +25,28 @@ class TestRegistry(unittest.TestCase):
                 self.assertTrue(s["url"].startswith("https://"), s["url"])
                 self.assertNotIn(s["url"], urls, "duplicate url")
                 urls.add(s["url"])
+
+    def test_societies_are_well_formed(self):
+        """Societies: a short name, a verified page of a known kind, a popularity rank (1 = most popular) and the evidence for it."""
+        socs = self.reg.get("societies", [])
+        urls = {s["url"] for s in self.reg["sources"]}
+        ranks = []
+        for s in socs:
+            with self.subTest(s.get("society")):
+                self.assertTrue({"society", "name", "kind", "url", "rank", "popularity"} <= set(s))
+                self.assertIn(s["kind"], SOCIETY_KINDS)
+                self.assertTrue(s["url"].startswith("https://"), s["url"])
+                self.assertNotIn(s["url"], urls, "duplicate url")
+                urls.add(s["url"])
+                self.assertIsInstance(s["rank"], int)
+                self.assertGreater(len(s["popularity"]), 20, "say why it ranks where it does")
+                ranks.append((s["society"], s["rank"]))
+        by_soc = {}
+        for name, r in ranks:
+            by_soc.setdefault(name, set()).add(r)
+        self.assertTrue(all(len(v) == 1 for v in by_soc.values()), "one rank per society")
+        firsts = sorted(min(v) for v in by_soc.values())
+        self.assertEqual(firsts, sorted(set(firsts)), "no two societies share a rank")
 
     def test_formal_hall_schedule_fields(self):
         """formal_time is the page's own start time (HH:MM); day_notes name only the registry's formal days."""

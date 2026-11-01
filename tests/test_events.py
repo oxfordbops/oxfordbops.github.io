@@ -10,7 +10,13 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 EVENTS = ROOT / "docs" / "events.json"
 SOURCES = ROOT / "docs" / "sources.json"
 ISO = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\+00:00|\+01:00|Z)$")
-ALLOWED = {"kind", "special", "title", "starts_at", "ends_at", "college", "venue", "host", "price", "guests", "dress", "url", "details", "source"}
+ALLOWED = {"kind", "special", "society", "title", "starts_at", "ends_at", "college", "venue", "host", "price", "guests", "dress", "url", "details", "source"}
+
+
+def registry():
+    """Every registered source: the colleges' sources and the societies' (societies carry society instead of college)."""
+    reg = json.loads(SOURCES.read_text())
+    return reg["sources"] + reg.get("societies", [])
 
 
 def load():
@@ -43,13 +49,14 @@ class TestShape(unittest.TestCase):
         self.assertLess((checked - datetime.now(timezone.utc)).total_seconds(), 3600, "checked_at is in the future")
         self.assertEqual(run["window_from"], checked.astimezone(LONDON).date().isoformat(), "window_from is the run's date in UK time")
         start = date.fromisoformat(run["window_from"])
-        self.assertEqual(run["window_to"], (start + timedelta(days=14)).isoformat(), "window_to is 14 days after window_from")
+        span = (date.fromisoformat(run["window_to"]) - start).days
+        self.assertIn(span, (14, 21), "window_to is 21 days after window_from (14 for runs before the weekly schedule)")
         self.assertEqual(run["sources_checked"], len(d["sources"]), "sources_checked must equal the number of source entries")
         self.assertEqual(run["sources_ok"], sum(1 for s in d["sources"] if s.get("ok") is True), "sources_ok must equal the number of readable sources")
         for b in d["bops"]:
             day = datetime.fromisoformat(b["starts_at"].replace("Z", "+00:00")).astimezone(LONDON).date()
-            # Balls are listed for the whole season, up to a year ahead; bops and formals for the fortnight.
-            horizon = 400 if b.get("kind") == "ball" else 14
+            # Balls are listed for the whole season, up to a year ahead; everything else for the 21 days until a week after the next run.
+            horizon = 400 if b.get("kind") == "ball" else span
             self.assertTrue(start <= day <= start + timedelta(days=horizon), f"{b['title']} on {day} is outside the run's window")
 
     def test_unstated_times_use_the_fallback(self):
@@ -88,7 +95,7 @@ class TestShape(unittest.TestCase):
         if isinstance(d["sources"], int):
             return
         slugs = set()
-        reg = {r["url"]: r for r in json.loads(SOURCES.read_text())["sources"]}
+        reg = {r["url"]: r for r in registry()}
         for s in d["sources"]:
             self.assertTrue({"slug", "name", "kind", "url", "ok", "found"} <= set(s), f"source entry missing fields: {s}")
             self.assertNotIn(s["slug"], slugs, "duplicate source slug")
@@ -118,7 +125,11 @@ class TestShape(unittest.TestCase):
         for b in d["bops"]:
             with self.subTest(b.get("title")):
                 self.assertFalse(set(b) - ALLOWED, f"unknown fields {set(b) - ALLOWED}")
-                self.assertIn(b.get("kind"), ("bop", "formal", "ball", "other"), "kind must be bop, formal, ball or other")
+                self.assertIn(b.get("kind"), ("bop", "formal", "ball", "society", "other"), "kind must be bop, formal, ball, society or other")
+                if b.get("kind") == "society":
+                    self.assertTrue(isinstance(b.get("society"), str) and b["society"].strip(), "a society event names its society")
+                else:
+                    self.assertNotIn("society", b, "society belongs to society events only")
                 if b.get("kind") == "formal":
                     # The routine sets it on every formal; a missing flag reads as special on the page.
                     self.assertIn(b.get("special"), (True, False), "every formal says whether it is special")
@@ -166,9 +177,8 @@ class TestShape(unittest.TestCase):
         d = load()
         if not d["bops"] and not d["sources"]:
             self.skipTest("fresh city, no run yet")
-        reg = json.loads(SOURCES.read_text())
         # Every registered source, social ones included (recorded as not readable), so the run record's counts mean something.
-        registered = {s["url"] for s in reg["sources"]}
+        registered = {s["url"] for s in registry()}
         tried = {s["url"] for s in d["sources"]} if isinstance(d["sources"], list) else set()
         missing = sorted(registered - tried)
         self.assertEqual(missing, [], f"{len(missing)} registered sources were not recorded this run")
@@ -184,6 +194,29 @@ class TestShape(unittest.TestCase):
                 self.assertEqual(dt.utcoffset(), expected, f"{b['title']} {field}: offset {dt.utcoffset()} but London had {expected}")
 
 
+
+
+
+class TestSocieties(unittest.TestCase):
+    def test_society_events_cite_their_society(self):
+        """A society event names a registered society and cites one of that society's sources (or an Instagram post a person added)."""
+        d = load()
+        if isinstance(d["sources"], int):
+            return
+        socs = json.loads(SOURCES.read_text()).get("societies", [])
+        names = {x["society"] for x in socs}
+        by_url = {x["url"]: x for x in socs}
+        src = {s["slug"]: s for s in d["sources"]}
+        for b in d["bops"]:
+            if b.get("kind") != "society":
+                continue
+            self.assertIn(b["society"], names, f"{b['title']}: {b['society']} is not a registered society")
+            s = src.get(b.get("source"), {})
+            reg = by_url.get(s.get("url"))
+            if reg is None:
+                self.assertEqual(s.get("kind"), "Instagram", f"{b['title']}: society events cite the society's registered page")
+            else:
+                self.assertEqual(reg["society"], b["society"], f"{b['title']}: cites another society's page")
 
 if __name__ == "__main__":
     unittest.main()

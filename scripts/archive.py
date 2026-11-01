@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Move listings that have started before today (UK) out of docs/events.json into docs/archive/YYYY-MM.json.
 
-    python3 scripts/archive.py              # the daily routine runs this before reconciling
+    python3 scripts/archive.py              # the weekly routine runs this before reconciling
     python3 scripts/archive.py --from-git   # also recover every past entry ever committed (one-off backfill)
 
 One file per month of the event, sorted by start, each entry at most once (same kind, college, start and title).
