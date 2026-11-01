@@ -73,7 +73,7 @@ h1 em { font-style: italic; padding: 0 .12em; margin: 0 -.06em; background: line
 .filters .group { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; min-width: 0; }
 .filters .chips { flex: 1 1 100%; }
 .chip { flex: 0 0 auto; }
-.filters .lbl { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; flex: 1 1 100%; }   /* label always on its own line, so When and College read the same way */
+.filters .lbl { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; flex: 1 1 100%; }   /* label always on its own line, so When and College read the same way */
 .seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: var(--ctl-radius); padding: 0; background: var(--field); }
 .seg button { font: inherit; font-size: .9rem; height: var(--ctl-h); padding: 0 var(--ctl-pad); border: 0; border-radius: var(--ctl-radius); background: transparent; color: var(--fg); cursor: pointer; white-space: nowrap; }
 .seg button:hover { background: var(--cam-tint); }
@@ -87,7 +87,7 @@ h1 em { font-style: italic; padding: 0 .12em; margin: 0 -.06em; background: line
 .seg button:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .result { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .6rem; font-size: .9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .result strong { color: var(--fg); font-weight: 600; }
-.result button { font: inherit; font-size: .85rem; background: none; border: 0; color: var(--accent); cursor: pointer; padding: .2rem 0; text-decoration: underline; text-underline-offset: 2px; }
+.result button { font: inherit; font-size: .85rem; background: none; border: 0; color: var(--accent); cursor: pointer; padding: 0 .1rem; min-height: var(--ctl-h); text-decoration: underline; text-underline-offset: 2px; }
 @media (max-width: 480px) {
   .filters .lbl { min-width: 100%; }
 }
@@ -118,7 +118,7 @@ h1 em { font-style: italic; padding: 0 .12em; margin: 0 -.06em; background: line
 .today h2 { margin-top: .9rem; }
 .today ul.bops li:last-child { border-bottom: 0; }
 h2 { font-family: var(--display); font-weight: 400; font-size: 1.5rem; margin: 2rem 0 .4rem; }
-h2 small { font-family: var(--body); font-size: .68rem; font-weight: 600; color: var(--cam-ink); background: var(--cam); border-radius: 999px; padding: .2em .6em; margin-left: .6rem; vertical-align: .3em; text-transform: uppercase; letter-spacing: .06em; }
+h2 small { font-family: var(--body); font-size: .75rem; font-weight: 600; color: var(--cam-ink); background: var(--cam); border-radius: 999px; padding: .2em .6em; margin-left: .6rem; vertical-align: .3em; text-transform: uppercase; letter-spacing: .06em; }
 ul.bops { list-style: none; margin: 0; padding: 0; }
 ul.bops li {
   display: grid; grid-template-columns: 3.6rem minmax(0, 1fr); gap: 0 .75rem;
@@ -160,6 +160,9 @@ footer a { display: inline-block; padding: .6rem 0; }
   .seg { display: grid; grid-template-columns: 1fr 1fr; border-radius: 14px; width: 100%; }
   .seg button { padding: 0 .7rem; font-size: .9rem; border-radius: 11px; }
   .seg button:last-child:nth-child(odd) { grid-column: 1 / -1; }   /* an odd fifth option spans the row instead of sitting alone */
+  #when.seg { grid-template-columns: repeat(3, 1fr); }               /* five When options in two rows, not three */
+  #when.seg button { padding: 0 .2rem; font-size: .85rem; white-space: nowrap; }
+  #when.seg button:last-child:nth-child(odd) { grid-column: auto; }
   #map { height: 220px; }
   ul.bops li { grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0 .6rem; }
 }

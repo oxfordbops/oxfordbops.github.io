@@ -220,6 +220,30 @@ class TestFilters(unittest.TestCase):
         self.assertEqual(p.eval_on_selector_all("#list li", "els => els.length"), 25)
         self.assertEqual(errors, [])
 
+    def test_mobile(self):
+        """On a 320px touch phone, in every tab: no sideways scroll, tap targets at least 40px tall, no text under 12px."""
+        ctx = self.browser.new_context(viewport={"width": 320, "height": 640}, is_mobile=True, has_touch=True, device_scale_factor=2)
+        ctx.route("**/tile.openstreetmap.org/**", lambda r: r.abort())
+        p = ctx.new_page(); errors = []
+        p.on("pageerror", lambda e: errors.append(str(e)))
+        p.goto(self.base + "?college=" + self.colleges[0]); p.wait_for_selector("#list li, #list .empty", timeout=10000)
+        for kind in ("bop", "formal", "ball", "other"):
+            p.tap(f'#kind button[data-kind="{kind}"]'); p.wait_for_timeout(50)
+            r = p.evaluate("""() => {
+              const W = document.documentElement.clientWidth, out = {scroll: document.documentElement.scrollWidth - W, small: [], tiny: []};
+              for (const el of document.querySelectorAll('main *')) {
+                const b = el.getBoundingClientRect(), cs = getComputedStyle(el);
+                if (!b.width || el.closest('#map, .leaflet-container')) continue;
+                if (el.matches('button') && b.height < 40) out.small.push(el.textContent.trim().slice(0, 20) + ' ' + Math.round(b.height));
+                if ([...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim()) && parseFloat(cs.fontSize) < 12) out.tiny.push(el.textContent.trim().slice(0, 20));
+              }
+              return out; }""")
+            self.assertLessEqual(r["scroll"], 0, f"{kind}: page scrolls sideways")
+            self.assertEqual(r["small"], [], f"{kind}: tap targets under 40px")
+            self.assertEqual(r["tiny"], [], f"{kind}: text under 12px")
+        self.assertEqual(errors, [])
+        ctx.close()
+
     def test_running_event_stays_until_its_end(self):
         """At 02:00 a ball that started at 21:00 and ends at 06:00 is still listed; one that ended at 01:00 is not."""
         data = {"generated": "2026-11-05T02:00:00Z", "run": {}, "sources": [{"slug": "s", "name": "S", "kind": "JCR site", "url": "https://example.org/", "ok": True, "found": 0}],
