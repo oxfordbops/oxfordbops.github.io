@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-31T06:14:36+00:00",
+  "generated": "2026-11-01T06:12:29+00:00",
   "run": {
-    "checked_at": "2026-10-31T06:14:36+00:00",
-    "window_from": "2026-10-31",
-    "window_to": "2026-11-14",
+    "checked_at": "2026-11-01T06:12:29+00:00",
+    "window_from": "2026-11-01",
+    "window_to": "2026-11-15",
     "sources_checked": 167,
-    "sources_ok": 134
+    "sources_ok": 133
   },
   "sources": [
     {
@@ -72,7 +72,8 @@
       "kind": "MCR events",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "ok": true,
-      "found": 1
+      "found": 0,
+      "note": "429 at first, read on retry with its Google Calendar"
     },
     {
       "slug": "brasenose-brasenose-hcr",
@@ -291,8 +292,9 @@
       "name": "Hertford MCR",
       "kind": "MCR site",
       "url": "https://www.hertfordmcr.com/",
-      "ok": true,
-      "found": 0
+      "ok": false,
+      "found": 0,
+      "note": "HTTP 429 rate-limited, also on retry"
     },
     {
       "slug": "jesus-jesus-jcr",
@@ -504,7 +506,8 @@
       "kind": "Termcard",
       "url": "https://lincolnmcr.weebly.com/term-card.html",
       "ok": true,
-      "found": 0
+      "found": 0,
+      "note": "429 at first, read on retry with its Google Calendar"
     },
     {
       "slug": "magdalen-magdalen-jcr",
@@ -889,7 +892,8 @@
       "kind": "Termcard",
       "url": "https://www.stantonysgcr.com/term-card",
       "ok": true,
-      "found": 0
+      "found": 0,
+      "note": "429 at first, read on retry; no events listed"
     },
     {
       "slug": "st-catherine-s-st-catz-jcr",
@@ -1378,16 +1382,5 @@
       "found": 0
     }
   ],
-  "bops": [
-    {
-      "title": "Halloween Bop",
-      "starts_at": "2026-10-31T18:00:00+00:00",
-      "ends_at": "2026-10-31T22:30:00+00:00",
-      "college": "Brasenose",
-      "host": "Brasenose HCR",
-      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
-      "details": "Listed on the Hulme Common Room term-card Google Calendar.",
-      "source": "brasenose-brasenose-hcr-term-card"
-    }
-  ]
+  "bops": []
 }
