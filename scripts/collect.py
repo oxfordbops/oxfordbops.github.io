@@ -359,7 +359,7 @@ def main():
     if not pdftotext:
         warnings.append("pdftotext is not installed, so PDF termcards were not read (apt-get install poppler-utils).")
     if not rrulestr:
-        warnings.append("python-dateutil is not installed; recurring calendar events used a simpler expansion (pip install python-dateutil).")
+        warnings.append("python-dateutil is not installed; recurring calendar events used a simpler expansion (python3 -m pip install python-dateutil).")
 
     def page_text(r):
         try:

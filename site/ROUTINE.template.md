@@ -15,7 +15,7 @@ Nothing else: no talks, gigs, quizzes, theatre, club nights or society socials. 
 ## 1. Collect
 
 ```
-pip install -q python-dateutil 2>/dev/null; python3 scripts/collect.py --render --out /tmp/collect
+python3 -m pip install -q python-dateutil 2>/dev/null; python3 scripts/collect.py --render --out /tmp/collect
 ```
 
 It reads every readable source in `docs/sources.json` ({{source_count}} across {{college_count}} colleges), follows one level of event links, reads embedded Google Calendars and PDFs, renders JavaScript-only pages, and writes `/tmp/collect/digest.md` with five sections: warnings, sources it could not read, regular formal halls expanded from the registry's weekdays inside Full Term, calendar events in the window (balls up to a year ahead), and dated snippets. Read the digest. Open a page file (`/tmp/collect/pages/NNN.txt`, named in the digest) only to confirm a candidate's details. `/tmp/collect/status.json` has each source's `ok`, `code` and `note`.
