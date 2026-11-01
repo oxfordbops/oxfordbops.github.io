@@ -58,6 +58,10 @@ Pageviews, source-link clicks and filter use are counted by [GoatCounter](https:
 
 A second Claude Code cloud routine per city, "<City> Bops audit", runs on the 15th of every second month (February, April, June, August, October, December) at 08:30 UTC and follows `scripts/audit_prompt.md`. It re-reads the sources independently of the daily routine and checks seven things: unreachable sources, missing or wrong listings, regular formal-hall schedules against their pages, official college pages missing from the registry, ball dates, the society list and its popularity ranking, and term dates against the university's own page. It writes its findings in the shape of `scripts/audit_schema.json`, and `scripts/audit_report.py` opens an issue labeled `audit` (or comments on the open one) and sends a push notification when something needs a person. It never edits the repository. Run it early from claude.ai/code/routines with "Run now". The freshness check (`.github/workflows/freshness.yml`) runs every morning and fails if the last run is more than 8 days old; it needs no model.
 
+## Daily check (Codex)
+
+`scripts/codex_daily_check.md` is the prompt for a daily Codex cloud task (09:00 Europe/London) that re-reads the sources of every listing in the next 7 days and every recently changed one, runs `scripts/safety_scan.py --fix`, and removes anything cancelled, changed, off-site, unsafe or suspicious with `scripts/remove_listing.py`. It never adds or edits listings, and opens a pull request labelled `daily-check` with its report when it removes something. Setup steps are at the top of the file.
+
 ## Hosting
 
 Served by GitHub Pages at the organization address. Pushes to `main` check the build, run the tests and deploy `docs/`. The weekly routine commits to the same repository.
