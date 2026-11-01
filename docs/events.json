@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-01T18:40:44+00:00",
+  "generated": "2026-11-01T21:07:35+00:00",
   "run": {
-    "checked_at": "2026-11-01T18:40:44+00:00",
+    "checked_at": "2026-11-01T21:07:35+00:00",
     "window_from": "2026-11-01",
-    "window_to": "2026-11-15",
+    "window_to": "2026-11-22",
     "sources_checked": 189,
-    "sources_ok": 148
+    "sources_ok": 154
   },
   "sources": [
     {
@@ -73,7 +73,7 @@
       "kind": "MCR events",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "ok": true,
-      "found": 3
+      "found": 4
     },
     {
       "slug": "brasenose-brasenose-hcr",
@@ -350,9 +350,9 @@
       "name": "Jesus College JCR and MCR page",
       "kind": "College events",
       "url": "https://www.jesus.ox.ac.uk/study-here/life-at-jesus/jcr-mcr/",
-      "ok": false,
+      "ok": true,
       "found": 0,
-      "note": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "note": "rendered with headless Chromium"
     },
     {
       "slug": "jesus-jesus-jcr-instagram",
@@ -386,7 +386,7 @@
       "kind": "MCR site",
       "url": "https://www.jesuscollegemcr.com/",
       "ok": true,
-      "found": 0,
+      "found": 1,
       "note": "rendered with headless Chromium"
     },
     {
@@ -420,7 +420,7 @@
       "kind": "MCR events",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "ok": true,
-      "found": 14
+      "found": 19
     },
     {
       "slug": "keble-keble-mcr",
@@ -542,7 +542,7 @@
       "kind": "Termcard",
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "ok": true,
-      "found": 5
+      "found": 6
     },
     {
       "slug": "lincoln-lincoln-college-events",
@@ -592,7 +592,7 @@
       "kind": "MCR site",
       "url": "https://lincolnmcr.weebly.com/",
       "ok": true,
-      "found": 7
+      "found": 14
     },
     {
       "slug": "lincoln-lincoln-mcr-term-card",
@@ -765,8 +765,7 @@
       "kind": "MCR events",
       "url": "https://mcr.new.ox.ac.uk/calendar/",
       "ok": true,
-      "found": 0,
-      "note": "calendar feed unreadable: newcmcr@gmail.com"
+      "found": 0
     },
     {
       "slug": "new-college-new-college-mcr",
@@ -774,8 +773,7 @@
       "kind": "MCR site",
       "url": "https://mcr.new.ox.ac.uk/",
       "ok": true,
-      "found": 0,
-      "note": "calendar feed unreadable: newcmcr@gmail.com"
+      "found": 0
     },
     {
       "slug": "nuffield-nuffield-college-events",
@@ -1147,7 +1145,7 @@
       "kind": "Termcard",
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "ok": true,
-      "found": 7
+      "found": 9
     },
     {
       "slug": "st-edmund-hall-st-edmund-hall-events",
@@ -1288,7 +1286,7 @@
       "kind": "JCR site",
       "url": "https://jcr.sjc.ox.ac.uk/",
       "ok": true,
-      "found": 3
+      "found": 4
     },
     {
       "slug": "st-john-s-st-john-s-mcr-events",
@@ -1545,45 +1543,42 @@
       "name": "Oxford Union events",
       "kind": "Society events",
       "url": "https://www.oxford-union.org/events",
-      "ok": false,
-      "found": 0,
-      "note": "added to the registry; first read on the next weekly run"
+      "ok": true,
+      "found": 16
     },
     {
       "slug": "society-ouds",
       "name": "Oxford University Dramatic Society",
       "kind": "Society calendar",
       "url": "https://www.oxforduniversitydramaticsociety.com/#calendar",
-      "ok": false,
-      "found": 0,
-      "note": "added to the registry; first read on the next weekly run"
+      "ok": true,
+      "found": 0
     },
     {
       "slug": "society-oxford-labour-club",
       "name": "Oxford Labour Club events",
       "kind": "Society events",
       "url": "https://oxunilabour.com/events/",
-      "ok": false,
-      "found": 0,
-      "note": "added to the registry; first read on the next weekly run"
+      "ok": true,
+      "found": 0
     },
     {
       "slug": "society-oxford-climate-society",
       "name": "Oxford Climate Society events",
       "kind": "Society calendar",
       "url": "https://calendar.google.com/calendar/embed?src=info%40oxfordclimatesociety.com&ctz=Europe%2FLondon",
-      "ok": false,
+      "ok": true,
       "found": 0,
-      "note": "added to the registry; first read on the next weekly run"
+      "note": "read as its iCal feed"
     },
     {
       "slug": "society-oxford-compsoc",
       "name": "Oxford University Computing Society",
       "kind": "Society calendar",
       "url": "https://calendar.google.com/calendar/embed?src=oxfcompsoc%40gmail.com&ctz=Europe%2FLondon",
-      "ok": false,
+      "ok": true,
       "found": 0,
-      "note": "added to the registry; first read on the next weekly run"
+      "note": "read as its iCal feed"
     }
   ],
   "bops": [
@@ -1596,7 +1591,11 @@
       "venue": "Marquee",
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "details": "Linacre Common Room event.",
-      "source": "linacre-linacre-michaelmas-2026-term-card"
+      "source": "linacre-linacre-michaelmas-2026-term-card",
+      "evidence": {
+        "quote": "1 NOV Sun 4 NOV Wed CR Welfare Tea and Cakes 10:00 – 12:00 | Marquee",
+        "where": "Marquee"
+      }
     },
     {
       "kind": "other",
@@ -1606,7 +1605,11 @@
       "venue": "HBAC MCR",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-01T11:00+00:00 | MCR Brunch | HBAC MCR",
+        "where": "HBAC MCR"
+      }
     },
     {
       "kind": "other",
@@ -1616,7 +1619,11 @@
       "venue": "Glen Callater room, HBAC stair 5",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-01T14:00+00:00 | Yoga | Glen Callater rooom, HBAC stair 5",
+        "where": "Glen Callater rooom, HBAC stair 5"
+      }
     },
     {
       "kind": "other",
@@ -1626,7 +1633,11 @@
       "venue": "Larkin Room",
       "url": "https://jcr.sjc.ox.ac.uk/",
       "details": "St John's JCR event.",
-      "source": "st-john-s-st-john-s-jcr"
+      "source": "st-john-s-st-john-s-jcr",
+      "evidence": {
+        "quote": "2026-11-01T15:00+00:00 | Stitch 'n' Bitch | Larkin Room",
+        "where": "Larkin Room"
+      }
     },
     {
       "kind": "other",
@@ -1636,7 +1647,11 @@
       "venue": "MCR",
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
-      "source": "lincoln-lincoln-mcr"
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-01T16:00+00:00 | Welfare Tea: Meet & Greet with Kellogg | MCR",
+        "where": "MCR"
+      }
     },
     {
       "kind": "other",
@@ -1646,7 +1661,25 @@
       "venue": "Amersi Room",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "details": "Brasenose HCR event.",
-      "source": "brasenose-brasenose-hcr-term-card"
+      "source": "brasenose-brasenose-hcr-term-card",
+      "evidence": {
+        "quote": "2026-11-02T18:00+00:00 | Yoga | Amersi Room",
+        "where": "Amersi Room"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Yoga",
+      "starts_at": "2026-11-02T19:30:00+00:00",
+      "college": "Lincoln",
+      "venue": "Langford, Lincoln College",
+      "url": "https://lincolnmcr.weebly.com/",
+      "details": "Lincoln MCR event.",
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-02T19:30+00:00 | Yoga | Langford",
+        "where": "Langford"
+      }
     },
     {
       "kind": "other",
@@ -1656,7 +1689,11 @@
       "venue": "HBAC MCR",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-02T20:00+00:00 | Board Games Night | HBAC MCR",
+        "where": "HBAC MCR"
+      }
     },
     {
       "kind": "other",
@@ -1666,17 +1703,27 @@
       "venue": "University College",
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "details": "St Cross SRC event. St Cross SRC visits Univ; walk over together or meet there.",
-      "source": "st-cross-st-cross-src-termcard"
+      "source": "st-cross-st-cross-src-termcard",
+      "evidence": {
+        "quote": "Port, Wine, & Cheese with University College (Away Leg) Monday 2 November, 8 PM University College",
+        "where": "University College"
+      }
     },
     {
-      "kind": "other",
-      "title": "Drop-in Breakfast with Diane",
-      "starts_at": "2026-11-03T08:00:00+00:00",
-      "college": "Keble",
-      "venue": "HBAC Cafe",
-      "url": "https://mcr.keble.ox.ac.uk/social/",
-      "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Vikas Khanna",
+      "starts_at": "2026-11-03T11:30:00+00:00",
+      "ends_at": "2026-11-03T12:30:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Michelin-starred chef. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "VIKAS KHANNA Tuesday 3 November 2026, 11.30am",
+        "where": "Venue The Oxford Union"
+      }
     },
     {
       "kind": "other",
@@ -1686,7 +1733,43 @@
       "venue": "HBAC MCR",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-03T16:00+00:00 | Welfare Tea | HBAC MCR",
+        "where": "HBAC MCR"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Changpeng Zhao",
+      "starts_at": "2026-11-03T18:00:00+00:00",
+      "ends_at": "2026-11-03T19:00:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Founder of Binance. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "CZ ZHAO Tuesday 3 November 2026, 6pm",
+        "where": "Venue The Oxford Union"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Luca Sestak in concert",
+      "starts_at": "2026-11-04T18:30:00+00:00",
+      "ends_at": "2026-11-04T19:30:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Jazz-pop pianist; drinks reception at 6pm (£5, members and guests).",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "Luca Sestak in concert Tuesday 4 November 2026, 6.30pm",
+        "where": "Venue The Oxford Union"
+      }
     },
     {
       "kind": "other",
@@ -1696,17 +1779,11 @@
       "venue": "HBAC MCR",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
-    },
-    {
-      "kind": "other",
-      "title": "LGBTQ Grad Social",
-      "starts_at": "2026-11-04T20:00:00+00:00",
-      "college": "St Cross",
-      "venue": "St Cross Bar",
-      "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
-      "details": "St Cross SRC event. Hosted by the Oxford LGBTQ Society for graduates from all colleges; no ticket required.",
-      "source": "st-cross-st-cross-src-termcard"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-04T20:00+00:00 | Craft and Cake | HBAC MCR",
+        "where": "HBAC MCR"
+      }
     },
     {
       "kind": "other",
@@ -1717,7 +1794,25 @@
       "venue": "Saugman Common Room",
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "details": "St Cross SRC event.",
-      "source": "st-cross-st-cross-src-termcard"
+      "source": "st-cross-st-cross-src-termcard",
+      "evidence": {
+        "quote": "JD Welfare Tea & Cake Thursday 5 November, 5 - 6:30 PM Saugman Common Room",
+        "where": "Saugman Common Room"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Book Club with Diane Purkiss",
+      "starts_at": "2026-11-05T17:30:00+00:00",
+      "college": "Keble",
+      "venue": "Liddon 1802, Keble College",
+      "url": "https://mcr.keble.ox.ac.uk/social/",
+      "details": "Keble MCR event.",
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-05T17:30+00:00 | Book Club with Diane Purkiss | Liddon 1802, main site",
+        "where": "Liddon 1802, main site"
+      }
     },
     {
       "kind": "other",
@@ -1728,7 +1823,11 @@
       "venue": "CR, Marquee and Bar",
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "details": "Linacre Common Room event. Paint your own diyas, with music and snacks.",
-      "source": "linacre-linacre-michaelmas-2026-term-card"
+      "source": "linacre-linacre-michaelmas-2026-term-card",
+      "evidence": {
+        "quote": "5 NOV Thu Festival of Lights CR Celebration 19:00 - 23:00 | CR/Marquee and Bar",
+        "where": "CR/Marquee and Bar"
+      }
     },
     {
       "kind": "other",
@@ -1738,7 +1837,11 @@
       "venue": "Keble Main-Site MCR",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-05T20:00+00:00 | Cheese and Why? | Keble Main-Site MCR",
+        "where": "Keble Main-Site MCR"
+      }
     },
     {
       "kind": "other",
@@ -1749,7 +1852,27 @@
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "details": "St Cross SRC event. £1 entry per person; no sign-up needed.",
       "source": "st-cross-st-cross-src-termcard",
-      "price": "£1"
+      "price": "£1",
+      "evidence": {
+        "quote": "Phil’s Pub Quiz Thursday 5 November, 8 PM St Cross Bar",
+        "where": "St Cross Bar"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Debate: This House Can Fix Them",
+      "starts_at": "2026-11-05T20:30:00+00:00",
+      "ends_at": "2026-11-05T22:30:00+00:00",
+      "college": null,
+      "venue": "Debating Chamber, Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Week 4 debate with comedians and online creators.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "This House Can Fix Them When 5 Nov 2026 8:30 PM - 10:30 PM",
+        "where": "Where The Debating Chamber"
+      }
     },
     {
       "kind": "other",
@@ -1759,7 +1882,43 @@
       "venue": "MCR",
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
-      "source": "lincoln-lincoln-mcr"
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-06T16:00+00:00 | DisabiliTea | MCR",
+        "where": "MCR"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Prime Minister of Qatar",
+      "starts_at": "2026-11-06T16:00:00+00:00",
+      "ends_at": "2026-11-06T17:00:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Sheikh Mohammed bin Abdulrahman Al Thani. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "Friday 6th November 2026, 4pm",
+        "where": "Venue The Oxford Union"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Simon Squibb",
+      "starts_at": "2026-11-06T18:00:00+00:00",
+      "ends_at": "2026-11-06T19:00:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Entrepreneur and author. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "SIMON SQUIBB Friday 6 November 2026, 6pm",
+        "where": "Venue The Oxford Union"
+      }
     },
     {
       "kind": "other",
@@ -1769,7 +1928,11 @@
       "venue": "MCR",
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
-      "source": "lincoln-lincoln-mcr"
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-06T20:00+00:00 | Wine & Cheese | MCR",
+        "where": "MCR"
+      }
     },
     {
       "kind": "other",
@@ -1779,7 +1942,11 @@
       "venue": "Brasenose",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "details": "Brasenose HCR event.",
-      "source": "brasenose-brasenose-hcr-term-card"
+      "source": "brasenose-brasenose-hcr-term-card",
+      "evidence": {
+        "quote": "2026-11-07T20:00+00:00 | Wine&Cheese (at BNC)",
+        "where": "Wine&Cheese (at BNC)"
+      }
     },
     {
       "kind": "other",
@@ -1789,7 +1956,11 @@
       "venue": "HBAC MCR",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-08T11:00+00:00 | MCR Brunch | HBAC MCR",
+        "where": "HBAC MCR"
+      }
     },
     {
       "kind": "other",
@@ -1799,7 +1970,11 @@
       "venue": "Larkin Room",
       "url": "https://jcr.sjc.ox.ac.uk/",
       "details": "St John's JCR event.",
-      "source": "st-john-s-st-john-s-jcr"
+      "source": "st-john-s-st-john-s-jcr",
+      "evidence": {
+        "quote": "2026-11-08T15:00+00:00 | Stitch 'n' Bitch | Larkin Room",
+        "where": "Larkin Room"
+      }
     },
     {
       "kind": "other",
@@ -1809,7 +1984,11 @@
       "venue": "MCR",
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
-      "source": "lincoln-lincoln-mcr"
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-08T16:00+00:00 | Welfare Tea | MCR",
+        "where": "MCR"
+      }
     },
     {
       "kind": "other",
@@ -1819,7 +1998,11 @@
       "venue": "HBAC Cafe",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-09T17:00+00:00 | Diane's Cure for Fifth Week Blues | HBAC Cafe",
+        "where": "HBAC Cafe"
+      }
     },
     {
       "kind": "other",
@@ -1829,7 +2012,25 @@
       "venue": "Amersi Room",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "details": "Brasenose HCR event.",
-      "source": "brasenose-brasenose-hcr-term-card"
+      "source": "brasenose-brasenose-hcr-term-card",
+      "evidence": {
+        "quote": "2026-11-09T18:00+00:00 | Yoga | Amersi Room",
+        "where": "Amersi Room"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Yoga",
+      "starts_at": "2026-11-09T19:30:00+00:00",
+      "college": "Lincoln",
+      "venue": "Langford, Lincoln College",
+      "url": "https://lincolnmcr.weebly.com/",
+      "details": "Lincoln MCR event.",
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-09T19:30+00:00 | Yoga | Langford",
+        "where": "Langford"
+      }
     },
     {
       "kind": "other",
@@ -1839,17 +2040,41 @@
       "venue": "HBAC MCR",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-09T20:00+00:00 | Board Games Night | HBAC MCR",
+        "where": "HBAC MCR"
+      }
     },
     {
       "kind": "other",
-      "title": "Drop-in Breakfast with Diane",
-      "starts_at": "2026-11-10T08:00:00+00:00",
+      "title": "Diane's Unserious Debates",
+      "starts_at": "2026-11-10T12:30:00+00:00",
       "college": "Keble",
-      "venue": "HBAC Cafe",
+      "venue": "Liddon 1802, Keble College",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-10T12:30+00:00 | Diane's Unserious Debates | Liddon 1802, main site",
+        "where": "Liddon 1802, main site"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Martin Seligman",
+      "starts_at": "2026-11-10T18:00:00+00:00",
+      "ends_at": "2026-11-10T19:00:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Founder of positive psychology. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "MARTIN SELIGMAN Tuesday 10 November 2026, 6pm",
+        "where": "Venue The Oxford Union"
+      }
     },
     {
       "kind": "other",
@@ -1860,7 +2085,11 @@
       "venue": "St Cross Bar",
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "details": "St Cross SRC event.",
-      "source": "st-cross-st-cross-src-termcard"
+      "source": "st-cross-st-cross-src-termcard",
+      "evidence": {
+        "quote": "Board Game Night Wednesday, 11 November, 6 - 11 PM St Cross Bar",
+        "where": "St Cross Bar"
+      }
     },
     {
       "kind": "other",
@@ -1870,7 +2099,11 @@
       "venue": "HBAC MCR",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-11T20:00+00:00 | Craft and Cake | HBAC MCR",
+        "where": "HBAC MCR"
+      }
     },
     {
       "kind": "other",
@@ -1881,7 +2114,11 @@
       "venue": "CR",
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "details": "Linacre Common Room event. Open to all; no sign-up needed.",
-      "source": "linacre-linacre-michaelmas-2026-term-card"
+      "source": "linacre-linacre-michaelmas-2026-term-card",
+      "evidence": {
+        "quote": "11 NOV Wed LGBTQ+ Graduate Social 20:00 - 00:00 | CR",
+        "where": "CR"
+      }
     },
     {
       "kind": "other",
@@ -1891,7 +2128,27 @@
       "venue": "Hall",
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
-      "source": "lincoln-lincoln-mcr"
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-12T13:00+00:00 | MCR Lunch | Hall",
+        "where": "Hall"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Dr Lin Han",
+      "starts_at": "2026-11-12T15:30:00+00:00",
+      "ends_at": "2026-11-12T16:30:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Founder and CEO of Gate. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "DR LIN HAN Thursday 12 November 2026, 3:30PM",
+        "where": "Venue The Oxford Union"
+      }
     },
     {
       "kind": "other",
@@ -1902,7 +2159,41 @@
       "venue": "Saugman Common Room",
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "details": "St Cross SRC event.",
-      "source": "st-cross-st-cross-src-termcard"
+      "source": "st-cross-st-cross-src-termcard",
+      "evidence": {
+        "quote": "SRC Welfare Tea & Cake Thursday 12 Nov, 5 - 6:30 PM Saugman Common Room",
+        "where": "Saugman Common Room"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Dame Wendy Hall",
+      "starts_at": "2026-11-12T17:00:00+00:00",
+      "ends_at": "2026-11-12T18:00:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Computer scientist and AI policy adviser. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "WENDY HALL Thursday 12 November 2026, 5pm",
+        "where": "Venue The Oxford Union"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Book Club with Diane Purkiss",
+      "starts_at": "2026-11-12T17:30:00+00:00",
+      "college": "Keble",
+      "venue": "Liddon 1802, Keble College",
+      "url": "https://mcr.keble.ox.ac.uk/social/",
+      "details": "Keble MCR event.",
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-12T17:30+00:00 | Book Club with Diane Purkiss | Liddon 1802, main site",
+        "where": "Liddon 1802, main site"
+      }
     },
     {
       "kind": "other",
@@ -1912,7 +2203,59 @@
       "venue": "Trinity College Bar",
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "details": "St Cross SRC event. Karaoke or a pub quiz at Trinity. Time not stated.",
-      "source": "st-cross-st-cross-src-termcard"
+      "source": "st-cross-st-cross-src-termcard",
+      "evidence": {
+        "quote": "Trinity Bar Exchange (Away Leg) Thursday 12 November, Time TBD Trinity College Bar",
+        "where": "Trinity College Bar"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Debate: This House Fears Censorship More than Extremism",
+      "starts_at": "2026-11-12T20:30:00+00:00",
+      "ends_at": "2026-11-12T22:30:00+00:00",
+      "college": null,
+      "venue": "Debating Chamber, Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Week 5 debate.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "This House Fears Censorship More than Extremism When 12 Nov 2026 8:30 PM - 10:30 PM",
+        "where": "Where The Debating Chamber"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Matt Murray",
+      "starts_at": "2026-11-13T16:30:00+00:00",
+      "ends_at": "2026-11-13T17:30:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Executive Editor of The Washington Post. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "MATT MURRAY Friday 13 November 2026, 4.30pm",
+        "where": "Venue The Oxford Union"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Baroness White",
+      "starts_at": "2026-11-13T19:00:00+00:00",
+      "ends_at": "2026-11-13T20:00:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Former Ofcom chief executive. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "BARONESS WHITE Friday 13 November 2026, 7pm",
+        "where": "Venue The Oxford Union"
+      }
     },
     {
       "kind": "other",
@@ -1923,7 +2266,11 @@
       "venue": "Meeting Suite",
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "details": "Linacre Common Room event. Performed by Linacre's Postgraduate Orchestra.",
-      "source": "linacre-linacre-michaelmas-2026-term-card"
+      "source": "linacre-linacre-michaelmas-2026-term-card",
+      "evidence": {
+        "quote": "13 NOV Fri Chamber Concert 19:30 - 21:00 | Meeting Suite",
+        "where": "Meeting Suite"
+      }
     },
     {
       "kind": "other",
@@ -1933,7 +2280,42 @@
       "venue": "MCR",
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
-      "source": "lincoln-lincoln-mcr"
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-13T20:00+00:00 | Wine & Cheese Exchange with St Anne's | MCR",
+        "where": "MCR"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Lalit Modi",
+      "starts_at": "2026-11-14T13:30:00+00:00",
+      "ends_at": "2026-11-14T14:30:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Founder of the Indian Premier League. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "Lalit Modi Saturday 14 November 2026, 1:30PM",
+        "where": "Venue The Oxford Union"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Wine & Cheese with Brasenose",
+      "starts_at": "2026-11-14T20:00:00+00:00",
+      "college": "Jesus",
+      "venue": "Jesus College",
+      "url": "https://www.jesuscollegemcr.com/",
+      "details": "Jesus MCR hosts the Brasenose HCR for wine and cheese.",
+      "source": "jesus-jesus-mcr",
+      "evidence": {
+        "quote": "2026-11-14T20:00+00:00 | Wine & Cheese w/ Brasenose (Home)",
+        "where": "Wine & Cheese w/ Brasenose (Home)"
+      },
+      "host": "Jesus MCR"
     },
     {
       "kind": "bop",
@@ -1945,7 +2327,12 @@
       "host": "Merton MCR",
       "url": "https://mertonmcr.co.uk/s/MT26.pdf",
       "details": "11pm to 2am at the Sports Pavilion, on the Merton MCR term card, which notes there is no pre-bop. Merton MCR-JCR bops are held there.",
-      "source": "merton-merton-mcr-term-card"
+      "source": "merton-merton-mcr-term-card",
+      "evidence": {
+        "quote": "College BOPS Saturday, 10 October 2026 Saturday, 14 November 2026 Friday, 04 December 2026",
+        "time": "BOP 11pm-2am Sports Pav",
+        "where": "BOP 11pm-2am Sports Pav"
+      }
     },
     {
       "kind": "other",
@@ -1956,7 +2343,11 @@
       "venue": "Marquee",
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "details": "Linacre Common Room event.",
-      "source": "linacre-linacre-michaelmas-2026-term-card"
+      "source": "linacre-linacre-michaelmas-2026-term-card",
+      "evidence": {
+        "quote": "15 NOV Sun CR Welfare Tea and Cakes 10:00 – 12:00 | Marquee",
+        "where": "Marquee"
+      }
     },
     {
       "kind": "other",
@@ -1966,7 +2357,11 @@
       "venue": "HBAC MCR",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-15T11:00+00:00 | MCR Brunch | HBAC MCR",
+        "where": "HBAC MCR"
+      }
     },
     {
       "kind": "other",
@@ -1976,7 +2371,11 @@
       "venue": "Glen Callater room, HBAC stair 5",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-15T13:00+00:00 | Yoga | Glen Callater room, HBAC Stair 5",
+        "where": "Glen Callater room, HBAC Stair 5"
+      }
     },
     {
       "kind": "other",
@@ -1986,7 +2385,11 @@
       "venue": "Larkin Room",
       "url": "https://jcr.sjc.ox.ac.uk/",
       "details": "St John's JCR event.",
-      "source": "st-john-s-st-john-s-jcr"
+      "source": "st-john-s-st-john-s-jcr",
+      "evidence": {
+        "quote": "2026-11-15T15:00+00:00 | Stitch 'n' Bitch | Larkin Room",
+        "where": "Larkin Room"
+      }
     },
     {
       "kind": "other",
@@ -1996,7 +2399,272 @@
       "venue": "MCR",
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
-      "source": "lincoln-lincoln-mcr"
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-15T16:00+00:00 | Welfare Tea | MCR",
+        "where": "MCR"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Yoga",
+      "starts_at": "2026-11-16T18:00:00+00:00",
+      "college": "Brasenose",
+      "venue": "LRVII, Brasenose",
+      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
+      "details": "Brasenose HCR event.",
+      "source": "brasenose-brasenose-hcr-term-card",
+      "evidence": {
+        "quote": "2026-11-16T18:00+00:00 | Yoga | LRVII",
+        "where": "LRVII"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Yoga",
+      "starts_at": "2026-11-16T19:30:00+00:00",
+      "college": "Lincoln",
+      "venue": "Langford, Lincoln College",
+      "url": "https://lincolnmcr.weebly.com/",
+      "details": "Lincoln MCR event.",
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-16T19:30+00:00 | Yoga | Langford",
+        "where": "Langford"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Board Games Night",
+      "starts_at": "2026-11-16T20:00:00+00:00",
+      "college": "Keble",
+      "venue": "HBAC MCR",
+      "url": "https://mcr.keble.ox.ac.uk/social/",
+      "details": "Keble MCR event.",
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-16T20:00+00:00 | Board Games Night | HBAC MCR",
+        "where": "HBAC MCR"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Amir Khan",
+      "starts_at": "2026-11-17T18:00:00+00:00",
+      "ends_at": "2026-11-17T19:00:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Olympic medallist and former boxer. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "AMIR KHAN Tuesday 17 November 2026, 6pm",
+        "where": "Venue The Oxford Union"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Tuesgays",
+      "starts_at": "2026-11-17T20:00:00+00:00",
+      "ends_at": "2026-11-17T23:00:00+00:00",
+      "college": "Linacre",
+      "venue": "CR, Linacre College",
+      "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
+      "details": "Linacre Common Room LGBTQ+ social, open to students from across the University.",
+      "source": "linacre-linacre-michaelmas-2026-term-card",
+      "evidence": {
+        "quote": "17 NOV Tue 18 NOV Wed Tuesgays 20:00 - 23:00 | CR Open to students from across the University.",
+        "where": "Tuesgays 20:00 - 23:00 | CR"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Board Game Night",
+      "starts_at": "2026-11-18T18:00:00+00:00",
+      "college": "St Cross",
+      "venue": "St Cross Bar",
+      "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
+      "details": "St Cross SRC event.",
+      "source": "st-cross-st-cross-src-termcard",
+      "evidence": {
+        "quote": "Board Game Night Wednesday, 18 November, 6 - 11 PM St Cross Bar",
+        "where": "St Cross Bar"
+      },
+      "ends_at": "2026-11-18T23:00:00+00:00"
+    },
+    {
+      "kind": "other",
+      "title": "JD Welfare Tea & Cake",
+      "starts_at": "2026-11-19T17:00:00+00:00",
+      "college": "St Cross",
+      "venue": "Saugman Common Room",
+      "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
+      "details": "St Cross SRC event, hosted by the Junior Deans.",
+      "source": "st-cross-st-cross-src-termcard",
+      "evidence": {
+        "quote": "JD Welfare Tea & Cake Thursday 19 November, 5 - 6:30 PM Saugman Common Room",
+        "where": "Saugman Common Room"
+      },
+      "ends_at": "2026-11-19T18:30:00+00:00"
+    },
+    {
+      "kind": "other",
+      "title": "Book Club with Diane Purkiss",
+      "starts_at": "2026-11-19T17:30:00+00:00",
+      "college": "Keble",
+      "venue": "Liddon 1802, Keble College",
+      "url": "https://mcr.keble.ox.ac.uk/social/",
+      "details": "Keble MCR event.",
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-19T17:30+00:00 | Book Club with Diane Purkiss | Liddon 1802, main site",
+        "where": "Liddon 1802, main site"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Cheese and Why?",
+      "starts_at": "2026-11-19T20:00:00+00:00",
+      "college": "Keble",
+      "venue": "Keble Main-Site MCR",
+      "url": "https://mcr.keble.ox.ac.uk/social/",
+      "details": "Keble MCR event.",
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-19T20:00+00:00 | Cheese and Why? | Keble Main-Site MCR",
+        "where": "Keble Main-Site MCR"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Trinity Bar Exchange (home leg)",
+      "starts_at": "2026-11-19T20:00:00+00:00",
+      "college": "St Cross",
+      "venue": "St Cross Bar",
+      "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
+      "details": "St Cross SRC hosts Trinity for a joint mixology crash course in the bar.",
+      "source": "st-cross-st-cross-src-termcard",
+      "evidence": {
+        "quote": "Trinity Bar Exchange (Home Leg) Thursday 19 November, 8 PM St Cross Bar",
+        "where": "St Cross Bar"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Debate: This House Believes that the Church of England's Days are Numbered",
+      "starts_at": "2026-11-19T20:30:00+00:00",
+      "ends_at": "2026-11-19T22:30:00+00:00",
+      "college": null,
+      "venue": "Debating Chamber, Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Week 6 debate.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "This House Believes that the Church of England's Days are Numbered When 19 Nov 2026 8:30 PM - 10:30 PM",
+        "where": "Where The Debating Chamber"
+      }
+    },
+    {
+      "kind": "society",
+      "society": "Oxford Union",
+      "title": "Speaker: Rebel Wilson",
+      "starts_at": "2026-11-20T18:00:00+00:00",
+      "ends_at": "2026-11-20T19:00:00+00:00",
+      "college": null,
+      "venue": "Oxford Union",
+      "url": "https://www.oxford-union.org/events",
+      "details": "Actress and comedian. Registration does not guarantee entry.",
+      "source": "society-oxford-union",
+      "evidence": {
+        "quote": "REBEL WILSON Friday 20 November 2026, 6pm",
+        "where": "Venue The Oxford Union"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Wine & Cheese",
+      "starts_at": "2026-11-20T20:00:00+00:00",
+      "college": "Lincoln",
+      "venue": "MCR, Lincoln College",
+      "url": "https://lincolnmcr.weebly.com/",
+      "details": "Lincoln MCR event.",
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-20T20:00+00:00 | Wine & Cheese | MCR",
+        "where": "MCR"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Welfare Games Night",
+      "starts_at": "2026-11-21T20:00:00+00:00",
+      "college": "Lincoln",
+      "venue": "MCR, Lincoln College",
+      "url": "https://lincolnmcr.weebly.com/",
+      "details": "Lincoln MCR event.",
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-21T20:00+00:00 | Welfare Games Night | MCR",
+        "where": "MCR"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "MCR Brunch",
+      "starts_at": "2026-11-22T11:00:00+00:00",
+      "college": "Keble",
+      "venue": "HBAC MCR",
+      "url": "https://mcr.keble.ox.ac.uk/social/",
+      "details": "Keble MCR event.",
+      "source": "keble-keble-mcr-socials",
+      "evidence": {
+        "quote": "2026-11-22T11:00+00:00 | MCR Brunch | HBAC MCR",
+        "where": "HBAC MCR"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Welfare Special",
+      "starts_at": "2026-11-22T14:30:00+00:00",
+      "college": "Lincoln",
+      "venue": "MCR, Lincoln College",
+      "url": "https://lincolnmcr.weebly.com/",
+      "details": "Lincoln MCR event.",
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-22T14:30+00:00 | Welfare Special | MCR",
+        "where": "MCR"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Stitch 'n' Bitch",
+      "starts_at": "2026-11-22T15:00:00+00:00",
+      "college": "St John's",
+      "venue": "Larkin Room",
+      "url": "https://jcr.sjc.ox.ac.uk/",
+      "details": "St John's JCR event.",
+      "source": "st-john-s-st-john-s-jcr",
+      "evidence": {
+        "quote": "2026-11-22T15:00+00:00 | Stitch 'n' Bitch | Larkin Room",
+        "where": "Larkin Room"
+      }
+    },
+    {
+      "kind": "other",
+      "title": "Welfare Tea",
+      "starts_at": "2026-11-22T16:00:00+00:00",
+      "college": "Lincoln",
+      "venue": "MCR, Lincoln College",
+      "url": "https://lincolnmcr.weebly.com/",
+      "details": "Lincoln MCR event.",
+      "source": "lincoln-lincoln-mcr",
+      "evidence": {
+        "quote": "2026-11-22T16:00+00:00 | Welfare Tea | MCR",
+        "where": "MCR"
+      }
     }
   ]
 }
