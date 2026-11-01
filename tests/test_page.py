@@ -78,7 +78,7 @@ class TestPage(unittest.TestCase):
         # Only http(s) URLs become hrefs, entries without a title or a parseable start are dropped,
         # and every string from the data file passes through the escaper before reaching innerHTML.
         self.assertIn("function safeUrl(u)", SCRIPT)
-        self.assertIn('/^https?:\\/\\//i.test(u)', SCRIPT)
+        self.assertIn('/^https:\\/\\/[^\\s"\'<>]+$/i.test(u)', SCRIPT)   # https only
         self.assertIn('typeof e.title !== "string"', SCRIPT)
         self.assertNotIn("+ e.title +", SCRIPT)
         self.assertNotIn("+ e.venue +", SCRIPT)

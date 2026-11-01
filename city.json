@@ -7,6 +7,8 @@
   "goatcounter": "cambridgebops",
   "comment": "GoatCounter site code: pageviews, source-link clicks and filter use are sent to https://<code>.goatcounter.com, cookieless and without personal data. Oxford shares the Cambridge site for now; its views are counted under the path /oxfordbops. Set to \"\" to turn analytics off."
  },
+ "university_domain": "ox.ac.uk",
+ "university_venues": ["Oxford Union", "Sheldonian Theatre", "Examination Schools", "Ashmolean", "Pitt Rivers", "Museum of Natural History", "Bodleian", "Weston Library", "Radcliffe Camera", "University Church", "Holywell Music Room", "Jacqueline du Pré Music Building", "Schwarzman Centre", "Blavatnik School", "Saïd Business School", "Said Business School", "Mathematical Institute", "Andrew Wiles Building", "Iffley Road", "University Parks", "Oxford SU", "Students' Union", "O'Reilly Theatre", "Pichette Auditorium", "Simpkins Lee Theatre", "Faculty of", "Department of", "Institute of", "Centre for", "University of Oxford"],
  "tagline": "Oxford college bops, formals, balls and more, updated every Sunday.",
  "map_center": [
   51.7553,

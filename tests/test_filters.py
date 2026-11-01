@@ -118,6 +118,7 @@ class TestFilters(unittest.TestCase):
         p = self.ctx.new_page()
         errors = []
         p.on("pageerror", lambda e: errors.append(str(e)))
+        p.on("console", lambda m: errors.append(m.text) if m.type == "error" and "Content Security Policy" in m.text else None)
         p.goto(self.base + query)
         p.wait_for_selector("#list li, #list .empty", timeout=10000)
         return p, errors

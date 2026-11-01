@@ -86,7 +86,7 @@ def render_routine():
         "common_rooms": r["common_rooms"], "su_name": r["su"]["name"], "su_url": r["su"]["url"], "press": press,
         "press_names": ", ".join(p["name"] for p in r["press"]), "js_rendered_examples": r["js_rendered_examples"],
         "college_count": str(len(CITY["colleges"])), "college_list": ", ".join(CITY["colleges"]),
-        "ball_routine": CITY["balls"]["routine"], "ball_many": CITY["balls"]["many"],
+        "ball_routine": CITY["balls"]["routine"], "ball_many": CITY["balls"]["many"], "university_domain": CITY.get("university_domain", "the university domain"),
         "source_count": str(CITY.get("source_count_hint", 150)),
     }
     for k, v in values.items():

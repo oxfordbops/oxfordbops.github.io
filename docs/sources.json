@@ -1296,5 +1296,47 @@
    "kind": "Student press",
    "url": "https://www.oxfordstudent.com/"
   }
+ ],
+ "societies": [
+  {
+   "society": "Oxford Union",
+   "name": "Oxford Union events",
+   "kind": "Society events",
+   "url": "https://www.oxford-union.org/events",
+   "rank": 1,
+   "popularity": "Oxford's flagship debating society; its events page lists 37 upcoming speaker, debate and social events for November–December 2026 alone, and its termcards draw national press coverage (https://www.oxford-union.org/events; https://www.cherwell.org/tag/oxford-union-term-card/)."
+  },
+  {
+   "society": "OUDS",
+   "name": "Oxford University Dramatic Society",
+   "kind": "Society calendar",
+   "url": "https://www.oxforduniversitydramaticsociety.com/#calendar",
+   "rank": 2,
+   "popularity": "Describes itself as 'one of the UK's largest and most active student theatre communities', founded 1884, and is the umbrella funding body for student drama (https://www.oxforduniversitydramaticsociety.com/; https://en.wikipedia.org/wiki/Oxford_University_Dramatic_Society)."
+  },
+  {
+   "society": "Oxford Labour Club",
+   "name": "Oxford Labour Club events",
+   "kind": "Society events",
+   "url": "https://oxunilabour.com/events/",
+   "rank": 3,
+   "popularity": "States it is 'the largest and oldest university Labour club in the country' (https://oxunilabour.com/); one of Oxford's main political societies alongside OUCA (https://cherwell.org/tag/oulc)."
+  },
+  {
+   "society": "Oxford Climate Society",
+   "name": "Oxford Climate Society events",
+   "kind": "Society calendar",
+   "url": "https://calendar.google.com/calendar/embed?src=info%40oxfordclimatesociety.com&ctz=Europe%2FLondon",
+   "rank": 4,
+   "popularity": "Runs the School of Climate Change course and aggregates all Oxford climate-society events in one public calendar (https://oxfordclimatesociety.com/events)."
+  },
+  {
+   "society": "Oxford CompSoc",
+   "name": "Oxford University Computing Society",
+   "kind": "Society calendar",
+   "url": "https://calendar.google.com/calendar/embed?src=oxfcompsoc%40gmail.com&ctz=Europe%2FLondon",
+   "rank": 5,
+   "popularity": "Long-running computing society sponsored by Jane Street, Citadel, HRT and others, with weekly talks and socials (https://ox.compsoc.net/)."
+  }
  ]
 }

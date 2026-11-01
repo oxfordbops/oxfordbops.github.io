@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="light only">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://cdnjs.cloudflare.com https://*.goatcounter.com; connect-src 'self' https://*.goatcounter.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{city}} Bops: college bops, formals and {{ball_many}} in {{city}}</title>
 <link rel="canonical" href="{{site}}">
@@ -311,7 +313,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   const dayLabelYear = new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", weekday: "long", day: "numeric", month: "long", year: "numeric" });
   const shortDay = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, weekday: "short" });
   const timeLabel = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false });
-  function safeUrl(u) { return typeof u === "string" && /^https?:\/\//i.test(u) ? u : ""; }
+  function safeUrl(u) { return typeof u === "string" && /^https:\/\/[^\s"'<>]+$/i.test(u) ? u : ""; }   // https only, no stray quotes
   function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
   function addDays(key, n) { const d = new Date(key + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
   function relDay(key) {
@@ -504,7 +506,7 @@ footer a { display: inline-block; padding: .6rem 0; }
     const host = hostOf(href || "");
     const where = /instagram\.com/.test(host) ? "Instagram post" : /facebook\.com/.test(host) ? "Facebook post" : host;
     if (!href) return '<span class="src">via ' + esc(label) + "</span>";
-    return '<span class="src">via <a href="' + esc(href) + '" rel="noopener" target="_blank" title="' + esc(label) + '">' + esc(where || label) + "</a></span>";
+    return '<span class="src">via <a href="' + esc(href) + '" rel="noopener noreferrer" target="_blank" title="' + esc(label) + '">' + esc(where || label) + "</a></span>";
   }
 
   function facts(e) {
@@ -562,7 +564,7 @@ footer a { display: inline-block; padding: .6rem 0; }
       html += "<h2>" + esc(label) + (relTxt ? "<small>" + relTxt + "</small>" : "") + '</h2><ul class="bops">';
       for (const e of items) {
         const link = safeUrl(e.url);
-        const name = link ? '<a href="' + esc(link) + '" rel="noopener" target="_blank">' + esc(e.title) + "</a>" : esc(e.title);
+        const name = link ? '<a href="' + esc(link) + '" rel="noopener noreferrer" target="_blank">' + esc(e.title) + "</a>" : esc(e.title);
         const where = [];
         if (kindOf(e) === "society" && groupOf(e)) where.push('<span class="college">' + esc(e.society) + "</span>");
         if (knownCollege(e)) where.push(kindOf(e) === "society" ? esc(e.college) : '<span class="college">' + esc(e.college) + "</span>");

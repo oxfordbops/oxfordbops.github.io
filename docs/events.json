@@ -4,7 +4,7 @@
     "checked_at": "2026-11-01T18:40:44+00:00",
     "window_from": "2026-11-01",
     "window_to": "2026-11-15",
-    "sources_checked": 184,
+    "sources_checked": 189,
     "sources_ok": 148
   },
   "sources": [
@@ -1539,6 +1539,51 @@
       "url": "https://www.oxfordstudent.com/",
       "ok": true,
       "found": 0
+    },
+    {
+      "slug": "society-oxford-union",
+      "name": "Oxford Union events",
+      "kind": "Society events",
+      "url": "https://www.oxford-union.org/events",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next weekly run"
+    },
+    {
+      "slug": "society-ouds",
+      "name": "Oxford University Dramatic Society",
+      "kind": "Society calendar",
+      "url": "https://www.oxforduniversitydramaticsociety.com/#calendar",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next weekly run"
+    },
+    {
+      "slug": "society-oxford-labour-club",
+      "name": "Oxford Labour Club events",
+      "kind": "Society events",
+      "url": "https://oxunilabour.com/events/",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next weekly run"
+    },
+    {
+      "slug": "society-oxford-climate-society",
+      "name": "Oxford Climate Society events",
+      "kind": "Society calendar",
+      "url": "https://calendar.google.com/calendar/embed?src=info%40oxfordclimatesociety.com&ctz=Europe%2FLondon",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next weekly run"
+    },
+    {
+      "slug": "society-oxford-compsoc",
+      "name": "Oxford University Computing Society",
+      "kind": "Society calendar",
+      "url": "https://calendar.google.com/calendar/embed?src=oxfcompsoc%40gmail.com&ctz=Europe%2FLondon",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next weekly run"
     }
   ],
   "bops": [
@@ -2179,8 +2224,8 @@
       "venue": "St Anne's College",
       "host": "St Anne's MCR",
       "guests": "St Anne's and Oriel MCR members on the exchange",
-      "url": "https://fixr.co/event/oriel-and-annes-formal-exchange-tickets-914724148",
-      "details": "MCR formal swap with Oriel, sold out. Time not stated.",
+      "url": "https://st-annes-mcr.org.uk/",
+      "details": "MCR formal swap with Oriel, sold out (tickets were on Fixr). Time not stated.",
       "source": "st-anne-s-st-anne-s-mcr",
       "special": true
     },
