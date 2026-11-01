@@ -35,6 +35,14 @@ DATEISH = re.compile(r"\b(\d{1,2}(st|nd|rd|th)?\s+(jan|feb|mar|apr|may|jun|jul|a
 
 
 def fetch(url, timeout=20):
+    r = _fetch(url, timeout)
+    if r["code"] == 0:   # timeout or connection error: one retry, a little later
+        import time; time.sleep(2)
+        r = _fetch(url, timeout + 10)
+    return r
+
+
+def _fetch(url, timeout):
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,application/xhtml+xml,text/calendar,application/pdf;q=0.9,*/*;q=0.8", "Accept-Language": "en-GB,en;q=0.9"})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
@@ -248,9 +256,10 @@ def main():
         rec["code"] = r["code"]
         text = page_text(r) if r["code"] == 200 else ""
         rec["ok"] = r["code"] == 200 and len(text) > 200 and not re.search(r"(?i)raven|sign in to continue|log ?in required", text[:2000])
+        is_calendar = "calendar.google.com" in s["url"]
         rec["note"] = r.get("note") or ("" if rec["ok"] else ("empty or JavaScript-only page" if r["code"] == 200 else ""))
         texts = [(s["url"], text)]
-        cal = calendar_ids(r["body"]) if r["body"] else set()
+        cal = (calendar_ids(r["body"]) if r["body"] else set()) | calendar_ids(s["url"].encode())
         if r["code"] == 200 and r["body"]:
             host = urllib.parse.urlparse(r["final"]).hostname
             picked = []
@@ -266,6 +275,8 @@ def main():
                     cal |= calendar_ids(rr["body"])
                 rec["followed"].append(f"{url} {rr['code']}")
         events = [dict(e, calendar=cid) for cid in sorted(cal) for e in calendar(cid)]
+        if is_calendar and cal:   # the embed page is JavaScript, but its feed was read
+            rec["ok"], rec["note"] = True, "read as its iCal feed"
         (out / "pages" / f"{i:03d}.txt").write_text("\n\n".join(f"=== {u}\n{t}" for u, t in texts))
         rec["page_file"] = f"pages/{i:03d}.txt"
         seen_sn, rec["snippets"] = set(), []
@@ -276,7 +287,7 @@ def main():
         rec["events"] = events
         return rec
 
-    with cf.ThreadPoolExecutor(16) as ex:
+    with cf.ThreadPoolExecutor(8) as ex:
         recs = list(ex.map(one, enumerate(readable)))
 
     if a.render and shutil.which("node"):

@@ -55,6 +55,10 @@ class TestCollect(unittest.TestCase):
         got = collect.snippets("Formal Hall is held on Tuesdays and Fridays during Full Term.", window)
         self.assertTrue(got and got[0].startswith("SCHEDULE:"))
 
+    def test_calendar_embed_url_itself(self):
+        url = b"https://calendar.google.com/calendar/embed?src=events@kcsu.org.uk&ctz=Europe/London"
+        self.assertEqual(collect.calendar_ids(url), {"events@kcsu.org.uk"})
+
     def test_html_to_text_drops_scripts(self):
         self.assertEqual(collect.to_text(b"<p>Bop<script>var x=1</script></p><p>Tonight</p>"), "Bop\nTonight")
 
