@@ -73,7 +73,7 @@
       "kind": "MCR events",
       "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
       "ok": true,
-      "found": 12
+      "found": 7
     },
     {
       "slug": "brasenose-brasenose-hcr",
@@ -420,7 +420,7 @@
       "kind": "MCR events",
       "url": "https://mcr.keble.ox.ac.uk/social/",
       "ok": true,
-      "found": 23
+      "found": 16
     },
     {
       "slug": "keble-keble-mcr",
@@ -542,7 +542,7 @@
       "kind": "Termcard",
       "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
       "ok": true,
-      "found": 7
+      "found": 6
     },
     {
       "slug": "lincoln-lincoln-college-events",
@@ -592,7 +592,7 @@
       "kind": "MCR site",
       "url": "https://lincolnmcr.weebly.com/",
       "ok": true,
-      "found": 12
+      "found": 10
     },
     {
       "slug": "lincoln-lincoln-mcr-term-card",
@@ -1446,7 +1446,7 @@
       "kind": "College events",
       "url": "https://www.wolfson.ox.ac.uk/event/",
       "ok": true,
-      "found": 8
+      "found": 2
     },
     {
       "slug": "wolfson-wolfson-bar",
@@ -1639,15 +1639,6 @@
       "source": "lincoln-lincoln-mcr"
     },
     {
-      "kind": "other",
-      "title": "Keble Environment Mixer (drinks and dinner)",
-      "starts_at": "2026-11-01T18:00:00+00:00",
-      "college": "Keble",
-      "url": "https://mcr.keble.ox.ac.uk/social/",
-      "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
-    },
-    {
       "kind": "formal",
       "special": false,
       "title": "Formal Hall",
@@ -1757,15 +1748,6 @@
       "source": "brasenose-brasenose-hcr-term-card"
     },
     {
-      "kind": "other",
-      "title": "Film night: Twilight: Breaking Dawn parts 1 and 2",
-      "starts_at": "2026-11-02T19:00:00+00:00",
-      "college": "Brasenose",
-      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
-      "details": "Brasenose HCR event.",
-      "source": "brasenose-brasenose-hcr-term-card"
-    },
-    {
       "kind": "formal",
       "special": true,
       "title": "BAME Formal",
@@ -1809,26 +1791,6 @@
       "url": "https://www.hmc.ox.ac.uk/facilities",
       "source": "harris-manchester-harris-manchester-formal-hall",
       "details": "Gowns worn. Time not stated."
-    },
-    {
-      "kind": "other",
-      "title": "Yoga",
-      "starts_at": "2026-11-02T19:30:00+00:00",
-      "college": "Lincoln",
-      "venue": "Langford",
-      "url": "https://lincolnmcr.weebly.com/",
-      "details": "Lincoln MCR event.",
-      "source": "lincoln-lincoln-mcr"
-    },
-    {
-      "kind": "other",
-      "title": "Film Society: Blade Runner The Final Cut",
-      "starts_at": "2026-11-02T19:30:00+00:00",
-      "ends_at": "2026-11-02T22:00:00+00:00",
-      "college": "Wolfson",
-      "url": "https://www.wolfson.ox.ac.uk/event/",
-      "details": "Wolfson College Film Society event.",
-      "source": "wolfson-wolfson-events"
     },
     {
       "kind": "other",
@@ -2043,15 +2005,6 @@
     },
     {
       "kind": "other",
-      "title": "Wolfson Reading Group",
-      "starts_at": "2026-11-04T19:30:00+00:00",
-      "ends_at": "2026-11-04T20:30:00+00:00",
-      "college": "Wolfson",
-      "url": "https://www.wolfson.ox.ac.uk/event/",
-      "source": "wolfson-wolfson-events"
-    },
-    {
-      "kind": "other",
       "title": "Craft and Cake",
       "starts_at": "2026-11-04T20:00:00+00:00",
       "college": "Keble",
@@ -2080,16 +2033,6 @@
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "details": "St Cross SRC event.",
       "source": "st-cross-st-cross-src-termcard"
-    },
-    {
-      "kind": "other",
-      "title": "Book Club with Diane Purkiss",
-      "starts_at": "2026-11-05T17:30:00+00:00",
-      "college": "Keble",
-      "venue": "Liddon 1802, main site",
-      "url": "https://mcr.keble.ox.ac.uk/social/",
-      "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
     },
     {
       "kind": "formal",
@@ -2261,15 +2204,6 @@
       "source": "lincoln-lincoln-mcr"
     },
     {
-      "kind": "other",
-      "title": "Wolfson Fireworks Display",
-      "starts_at": "2026-11-06T18:00:00+00:00",
-      "ends_at": "2026-11-06T21:00:00+00:00",
-      "college": "Wolfson",
-      "url": "https://www.wolfson.ox.ac.uk/event/",
-      "source": "wolfson-wolfson-events"
-    },
-    {
       "kind": "formal",
       "title": "MCR Guest Night",
       "starts_at": "2026-11-06T18:30:00+00:00",
@@ -2280,35 +2214,6 @@
       "details": "From the Merton MCR Michaelmas 2026 term card.",
       "source": "merton-merton-mcr-term-card",
       "special": true
-    },
-    {
-      "kind": "other",
-      "title": "Diwali rangoli",
-      "starts_at": "2026-11-06T19:00:00+00:00",
-      "college": "Brasenose",
-      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
-      "details": "Brasenose HCR event.",
-      "source": "brasenose-brasenose-hcr-term-card"
-    },
-    {
-      "kind": "other",
-      "title": "Movie Night",
-      "starts_at": "2026-11-06T19:00:00+00:00",
-      "college": "Keble",
-      "url": "https://mcr.keble.ox.ac.uk/social/",
-      "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
-    },
-    {
-      "kind": "other",
-      "title": "Bonfire Night",
-      "starts_at": "2026-11-06T19:00:00+00:00",
-      "ends_at": "2026-11-06T22:00:00+00:00",
-      "college": "Linacre",
-      "venue": "Stoke House",
-      "url": "https://www.linacre.ox.ac.uk/wp-content/uploads/2026/10/Michaelmas-2026_Term-Card.pdf",
-      "details": "Linacre Common Room event. Bonfire, wine, s'mores and sparklers.",
-      "source": "linacre-linacre-michaelmas-2026-term-card"
     },
     {
       "kind": "formal",
@@ -2384,24 +2289,6 @@
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
       "source": "lincoln-lincoln-mcr"
-    },
-    {
-      "kind": "other",
-      "title": "Pastries",
-      "starts_at": "2026-11-07T10:00:00+00:00",
-      "college": "Brasenose",
-      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
-      "details": "Brasenose HCR event.",
-      "source": "brasenose-brasenose-hcr-term-card"
-    },
-    {
-      "kind": "other",
-      "title": "Welcoming Gym Hour for Women and Non-Binary People",
-      "starts_at": "2026-11-07T17:00:00+00:00",
-      "college": "Keble",
-      "url": "https://mcr.keble.ox.ac.uk/social/",
-      "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
     },
     {
       "kind": "formal",
@@ -2621,26 +2508,6 @@
     },
     {
       "kind": "other",
-      "title": "Yoga",
-      "starts_at": "2026-11-09T19:30:00+00:00",
-      "college": "Lincoln",
-      "venue": "Langford",
-      "url": "https://lincolnmcr.weebly.com/",
-      "details": "Lincoln MCR event.",
-      "source": "lincoln-lincoln-mcr"
-    },
-    {
-      "kind": "other",
-      "title": "Film Society: Blade Runner 2049",
-      "starts_at": "2026-11-09T19:30:00+00:00",
-      "ends_at": "2026-11-09T22:00:00+00:00",
-      "college": "Wolfson",
-      "url": "https://www.wolfson.ox.ac.uk/event/",
-      "details": "Wolfson College Film Society event.",
-      "source": "wolfson-wolfson-events"
-    },
-    {
-      "kind": "other",
       "title": "Board Games Night",
       "starts_at": "2026-11-09T20:00:00+00:00",
       "college": "Keble",
@@ -2660,16 +2527,6 @@
       "source": "keble-keble-mcr-socials"
     },
     {
-      "kind": "other",
-      "title": "Diane's Unserious Debates",
-      "starts_at": "2026-11-10T12:30:00+00:00",
-      "college": "Keble",
-      "venue": "Liddon 1802, main site",
-      "url": "https://mcr.keble.ox.ac.uk/social/",
-      "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
-    },
-    {
       "kind": "formal",
       "title": "Balliol exchange dinner (Keble MCR away leg)",
       "starts_at": "2026-11-10T18:00:00+00:00",
@@ -2681,15 +2538,6 @@
       "details": "Away leg of the Keble MCR exchange with Balliol MCR, from the Keble MCR term card calendar.",
       "source": "keble-keble-mcr-socials",
       "special": true
-    },
-    {
-      "kind": "other",
-      "title": "Life Drawing Class",
-      "starts_at": "2026-11-10T18:30:00+00:00",
-      "ends_at": "2026-11-10T20:30:00+00:00",
-      "college": "Wolfson",
-      "url": "https://www.wolfson.ox.ac.uk/event/",
-      "source": "wolfson-wolfson-events"
     },
     {
       "kind": "formal",
@@ -2765,15 +2613,6 @@
       "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
       "source": "merton-merton-formal-hall",
       "details": "Themed formal on the Merton food and drink page. Time not stated."
-    },
-    {
-      "kind": "other",
-      "title": "Diwali second desserts",
-      "starts_at": "2026-11-10T21:00:00+00:00",
-      "college": "Brasenose",
-      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
-      "details": "Brasenose HCR event.",
-      "source": "brasenose-brasenose-hcr-term-card"
     },
     {
       "kind": "other",
@@ -2917,16 +2756,6 @@
       "url": "https://www.stx.ox.ac.uk/sitefiles/src-termcard.pdf",
       "details": "St Cross SRC event.",
       "source": "st-cross-st-cross-src-termcard"
-    },
-    {
-      "kind": "other",
-      "title": "Book Club with Diane Purkiss",
-      "starts_at": "2026-11-12T17:30:00+00:00",
-      "college": "Keble",
-      "venue": "Liddon 1802, main site",
-      "url": "https://mcr.keble.ox.ac.uk/social/",
-      "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
     },
     {
       "kind": "formal",
@@ -3196,24 +3025,6 @@
       "source": "lincoln-lincoln-mcr"
     },
     {
-      "kind": "other",
-      "title": "Pastries",
-      "starts_at": "2026-11-14T10:00:00+00:00",
-      "college": "Brasenose",
-      "url": "https://brasenosecollegehcr.weebly.com/term-card.html",
-      "details": "Brasenose HCR event.",
-      "source": "brasenose-brasenose-hcr-term-card"
-    },
-    {
-      "kind": "other",
-      "title": "Welcoming Gym Hour for Women and Non-Binary People",
-      "starts_at": "2026-11-14T17:00:00+00:00",
-      "college": "Keble",
-      "url": "https://mcr.keble.ox.ac.uk/social/",
-      "details": "Keble MCR event.",
-      "source": "keble-keble-mcr-socials"
-    },
-    {
       "kind": "formal",
       "special": false,
       "title": "Formal Hall",
@@ -3296,16 +3107,6 @@
       "url": "https://lincolnmcr.weebly.com/",
       "details": "Lincoln MCR event.",
       "source": "lincoln-lincoln-mcr"
-    },
-    {
-      "kind": "other",
-      "title": "AMREF Health Africa Concert: four-hand piano recital",
-      "starts_at": "2026-11-15T17:00:00+00:00",
-      "ends_at": "2026-11-15T19:00:00+00:00",
-      "college": "Wolfson",
-      "url": "https://www.wolfson.ox.ac.uk/event/",
-      "details": "Patsy Toh and Mitra Alice Tham.",
-      "source": "wolfson-wolfson-events"
     },
     {
       "kind": "formal",

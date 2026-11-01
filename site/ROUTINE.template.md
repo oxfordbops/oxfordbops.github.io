@@ -33,8 +33,10 @@ Then decide:
 Safety (the tests in `tests/test_safety.py` enforce each rule; never weaken them to pass):
 - **Links**: `url` is https on {{university_domain}}, on a page in `docs/sources.json`, a Google Calendar of a registered page, or an Instagram post of a registered account. Never a ticketing or resale site, a link shortener, a form, a raw IP address or a file. If the only link is elsewhere, use the registered page that announced the event and mention the tickets in words.
 - **Ball sites**: record one only with `linked_from`, the official college or registry page that links to it.
-- **Places**: every event is at a college of {{city}}, or (society events) at a university building or a venue in `city.json` `university_venues`. Never list an event at a club, pub, bar outside a college, hotel, private house or anywhere outside the university.
-- **Content**: never list anything involving drugs, weapons, initiations or hazing, drinking games or challenges, or anything unsafe or illegal; never copy email addresses, phone numbers or other personal data.
+- **Organiser**: list only events certainly run by the college, its common room or a registered society, as stated on that body's own registered page. A newspaper or a third party mentioning an event is not enough.
+- **Places**: list only events certainly held in a college or university space: `venue` must name it as the source does (a named room that does not say it is in the college gets the college's name, e.g. "Langford Room, Lincoln College"). If the source does not say where, do not list it (regular formal halls excepted). Society events must be at a college or a venue in `city.json` `university_venues`. Never a club, pub, bar outside a college, hotel, restaurant, cinema, private house or anywhere outside the university.
+- **Content**: list only events that are completely safe. Never anything involving drugs, weapons, initiations or hazing, drinking games, crawls or unlimited drink offers, nudity or sexual content, gambling for money, violence, extremism, or anything illegal or unsafe; never copy email addresses, phone numbers, addresses or other personal data.
+- **Scan**: after writing the file, run `python3 scripts/safety_scan.py --fix`. It removes every entry that breaks a rule and prints it; list each in FLAGGED with its reason. Never re-add a flagged entry or edit it to slip past the scan.
 
 ## 2. Reconcile and write
 
@@ -88,7 +90,8 @@ CHANGED: <kind college date: what changed>; ...
 DROPPED: <kind college date title: why>; ...
 SOURCES: <r> of <n> readable
 REGISTRY: <source url: problem, for a person to fix>; ...
+FLAGGED: <kind college date title: rule broken>; ...
 NOTES: <anything a person must act on>
 ```
 
-Send a push notification only if STATUS is not "pushed" or REGISTRY is not "none", with the STATUS and REGISTRY lines as the message.
+Send a push notification only if STATUS is not "pushed", or REGISTRY or FLAGGED is not "none", with the STATUS, REGISTRY and FLAGGED lines as the message.

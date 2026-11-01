@@ -97,7 +97,7 @@ def render_routine():
     return t
 
 
-TERMS_VERSION = "2026-11-01"   # change when the terms change: every visitor is asked to accept the new version
+TERMS_VERSION = "2026-11-01.2"   # change when the terms change: every visitor is asked to accept the new version
 
 
 def render_terms():
