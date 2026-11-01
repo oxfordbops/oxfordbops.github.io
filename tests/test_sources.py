@@ -3,7 +3,7 @@ import json, pathlib, unittest
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 REG = ROOT / "docs" / "sources.json"
-KINDS = {"JCR site", "JCR events", "MCR site", "MCR events", "Ents site", "Termcard", "Instagram", "Facebook", "College events", "SU listings", "Student press"}
+KINDS = {"JCR site", "JCR events", "MCR site", "MCR events", "Ents site", "Termcard", "Instagram", "Facebook", "College events", "SU listings", "Student press", "Formal hall"}
 THE_31 = list(json.loads((ROOT / "city.json").read_text())["colleges"])  # every college of the city, from city.json
 
 

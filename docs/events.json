@@ -4,7 +4,7 @@
     "checked_at": "2026-11-01T14:09:11+00:00",
     "window_from": "2026-11-01",
     "window_to": "2026-11-15",
-    "sources_checked": 167,
+    "sources_checked": 184,
     "sources_ok": 128
   },
   "sources": [
@@ -1387,6 +1387,159 @@
       "url": "https://theoxfordblue.co.uk/",
       "ok": true,
       "found": 0
+    },
+    {
+      "slug": "christ-church-christ-church-formal-hall",
+      "name": "Christ Church formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.chch.ox.ac.uk/college/undergraduate/meals",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "exeter-exeter-formal-dinners",
+      "name": "Exeter formal dinners",
+      "kind": "Formal hall",
+      "url": "https://www.exeter.ox.ac.uk/students/catering/formal-hall-menus/",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "green-templeton-green-templeton-formal-hall",
+      "name": "Green Templeton formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.gtc.ox.ac.uk/students/offerholders/student-college-handbook/domestic-life/",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "harris-manchester-harris-manchester-formal-hall",
+      "name": "Harris Manchester formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.hmc.ox.ac.uk/facilities",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "hertford-hertford-formal-hall",
+      "name": "Hertford formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.hertford.ox.ac.uk/support-us/celebrating-your-generosity/donor-dining-rights/",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "keble-keble-formal-hall",
+      "name": "Keble formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.keble.ox.ac.uk/about/hall-meals/",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "kellogg-kellogg-formal-dinners",
+      "name": "Kellogg formal dinners",
+      "kind": "Formal hall",
+      "url": "https://www.kellogg.ox.ac.uk/venue/dining-hall/",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "lady-margaret-hall-lady-margaret-hall-formal-hall",
+      "name": "Lady Margaret Hall formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.lmh.ox.ac.uk/alumni/alumni-benefits",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "linacre-linacre-formal-hall",
+      "name": "Linacre formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.linacre.ox.ac.uk/college-life/college-facilities/college-dining",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "lincoln-lincoln-formal-hall",
+      "name": "Lincoln formal hall",
+      "kind": "Formal hall",
+      "url": "https://lincoln.ox.ac.uk/graduate-freshers-hub/meals/",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "magdalen-magdalen-formal-hall",
+      "name": "Magdalen formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.magd.ox.ac.uk/considering-magdalen/student-life/food-and-drink/",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "merton-merton-formal-hall",
+      "name": "Merton formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.merton.ox.ac.uk/college-life/food-and-drink",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "new-college-new-college-formal-hall",
+      "name": "New College formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.new.ox.ac.uk/student-meals",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "st-anne-s-st-anne-s-formal-dinners",
+      "name": "St Anne's formal dinners",
+      "kind": "Formal hall",
+      "url": "https://www.st-annes.ox.ac.uk/current-students/dining",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "st-edmund-hall-st-edmund-hall-formal-dinners",
+      "name": "St Edmund Hall formal dinners",
+      "kind": "Formal hall",
+      "url": "https://www.seh.ox.ac.uk/events/college",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "trinity-trinity-formal-hall",
+      "name": "Trinity formal hall",
+      "kind": "Formal hall",
+      "url": "https://www.trinity.ox.ac.uk/sites/default/files/inline-files/Catering%20Services%20Arrangements%20for%20MT%202026-%20Students%20and%20SCR.%2012.08.026_0.pdf",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
+    },
+    {
+      "slug": "wolfson-wolfson-formal-hall",
+      "name": "Wolfson formal hall",
+      "kind": "Formal hall",
+      "url": "https://wolfson.ox.ac.uk/guest-nights",
+      "ok": false,
+      "found": 0,
+      "note": "added to the registry; first read on the next run"
     }
   ],
   "bops": [

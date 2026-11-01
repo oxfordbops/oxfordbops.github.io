@@ -241,5 +241,12 @@
   "one": "ball",
   "many": "balls",
   "routine": "Oxford commemoration balls and college summer balls, mostly in Trinity term"
- }
+ },
+ "full_terms": [
+  {
+   "name": "Michaelmas 2026",
+   "from": "2026-10-11",
+   "to": "2026-12-05"
+  }
+ ]
 }

@@ -231,17 +231,31 @@ footer a { display: inline-block; padding: .6rem 0; }
   const KINDS = ["bop", "formal", "ball"];
   const NOUN = { bop: ["bop", "bops"], formal: ["formal", "formals"], ball: ["{{ball_one}}", "{{ball_many}}"] };
   const KEY = "{{slug}}.";
-  // Filters live in the URL (?when=tonight&college=Jesus) so a link reproduces them; otherwise the remembered
-  // college (across visits) and When (this session only) apply.
-  try { college = localStorage.getItem(KEY + "college") || "all"; } catch (e) {}
-  try { when = sessionStorage.getItem(KEY + "when") || "all"; } catch (e) {}   // the page always opens on Bops unless a link says ?kind=formal
+  // Each tab keeps its own filters: a college picked on Bops does not follow you to Formals or balls.
+  // Filters live in the URL (?kind=formal&when=today&college=Jesus) so a link reproduces them; otherwise each tab's
+  // remembered college (across visits) and When (this session only) apply. The page opens on Bops unless a link says otherwise.
+  function stored(k) {
+    const s = { when: "all", college: "all", ftype: "all" };
+    try { s.college = localStorage.getItem(KEY + k + ".college") || "all"; } catch (e) {}
+    try { s.when = sessionStorage.getItem(KEY + k + ".when") || "all"; s.ftype = sessionStorage.getItem(KEY + k + ".ftype") || "all"; } catch (e) {}
+    return s;
+  }
+  function valid(k, s) {
+    return {
+      when: WHENS.includes(s.when) && WHEN_FOR[k].includes(s.when) ? s.when : "all",
+      college: s.college === "all" || s.college === "none" || COLLEGES[s.college] ? s.college : "all",
+      ftype: k === "formal" && s.ftype === "special" ? "special" : "all",
+    };
+  }
   const q = new URLSearchParams(location.search);
-  if (q.has("when") || q.has("college") || q.has("kind")) { when = q.get("when") || "all"; college = q.get("college") || "all"; kind = q.get("kind") || "bop"; ftype = q.get("formals") === "special" ? "special" : "all"; }
-  if (!KINDS.includes(kind)) kind = "bop";
-  if (!WHENS.includes(when) || !WHEN_FOR[kind].includes(when)) when = "all";
+  if (q.has("kind") && KINDS.includes(q.get("kind"))) kind = q.get("kind");
+  let start = stored(kind);
+  if (q.has("when") || q.has("college") || q.has("kind") || q.has("formals")) start = { when: q.get("when") || "all", college: q.get("college") || "all", ftype: q.get("formals") || "all" };
+  ({ when, college, ftype } = valid(kind, start));
+  const tabState = {};   // filters of the tabs you left, for this page view
   function kindOf(e) { return KINDS.includes(e.kind) ? e.kind : "bop"; }
   function remember() {
-    try { localStorage.setItem(KEY + "college", college); sessionStorage.setItem(KEY + "when", when); } catch (e) {}
+    try { localStorage.setItem(KEY + kind + ".college", college); sessionStorage.setItem(KEY + kind + ".when", when); sessionStorage.setItem(KEY + kind + ".ftype", ftype); } catch (e) {}
     const u = new URL(location.href);
     u.search = "";
     if (kind !== "bop") u.searchParams.set("kind", kind);
@@ -327,7 +341,7 @@ footer a { display: inline-block; padding: .6rem 0; }
   const kindEl = document.getElementById("kind");
   kindEl.querySelectorAll("button").forEach(b => {
     b.setAttribute("aria-pressed", String(b.dataset.kind === kind));
-    b.addEventListener("click", () => { if (b.dataset.kind === kind) return; kind = b.dataset.kind; if (!WHEN_FOR[kind].includes(when)) when = "all"; track("filter/kind/" + kind); remember(); kindEl.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.kind === kind))); syncWhen(); render(); });
+    b.addEventListener("click", () => switchKind(b.dataset.kind));
   });
   // Formals: every formal hall, or only the special ones (themed, feasts, super halls, guest nights, swaps).
   document.querySelectorAll("#ftype button").forEach(b => b.addEventListener("click", () => {
@@ -335,6 +349,17 @@ footer a { display: inline-block; padding: .6rem 0; }
     ftype = b.dataset.ftype; track("filter/formals/" + ftype); remember(); syncWhen(); render();
   }));
   function isSpecial(e) { return e.special !== false; }   // unmarked formals count as special
+  function switchKind(k) {
+    if (k === kind || !KINDS.includes(k)) return;
+    tabState[kind] = { when, college, ftype };
+    kind = k;
+    ({ when, college, ftype } = valid(kind, tabState[kind] || stored(kind)));
+    track("filter/kind/" + kind);
+    remember();
+    kindEl.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.kind === kind)));
+    syncWhen();
+    render();
+  }
   function syncWhen() {
     document.getElementById("type-group").hidden = kind !== "formal";
     document.querySelectorAll("#ftype button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.ftype === ftype)));
@@ -407,8 +432,8 @@ footer a { display: inline-block; padding: .6rem 0; }
     if (c) c.addEventListener("click", () => { clearFilters(); const w = document.querySelector('#when button[data-when="all"]'); if (w) w.focus(); });
   }
   function clearFilters() {
-    college = "all"; when = "all"; remember();
-    document.querySelectorAll("#when button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.when === "all")));
+    college = "all"; when = "all"; ftype = "all"; remember();
+    syncWhen();
     render();
   }
 
@@ -501,7 +526,7 @@ footer a { display: inline-block; padding: .6rem 0; }
         if (knownCollege(e)) where.push('<span class="college">' + esc(e.college) + "</span>");
         if (e.venue && e.venue !== e.college) where.push(esc(e.venue));
         if (e.host && e.host !== e.college) where.push(esc(e.host));
-        html += '<li><span class="time">' + timeLabel.format(new Date(e.starts_at)) + '</span><div>' +
+        html += '<li data-kind="' + kindOf(e) + '" data-college="' + esc(knownCollege(e) ? e.college : "none") + '" data-day="' + k + '"' + (kindOf(e) === "formal" ? ' data-special="' + isSpecial(e) + '"' : "") + '><span class="time">' + timeLabel.format(new Date(e.starts_at)) + '</span><div>' +
           '<div class="name">' + name + '</div>' +
           '<div class="where">' + where.join('<span class="sep">·</span>') + "</div>" + facts(e) +
           (e.details ? '<div class="details">' + esc(e.details) + "</div>" : "") + sourceLine(e) + "</div></li>";
